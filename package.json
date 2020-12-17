@@ -1,0 +1,16 @@
+{
+  "name": "phuctm97.com",
+  "version": "0.0.0",
+  "description": "💁🏻‍♂️ My personal website.",
+  "repository": "https://github.com/phuctm97/phuctm97.com",
+  "author": "Minh-Phuc Tran <me@phuctm97.com> (https://phuctm97.com)",
+  "license": "UNLICENSED",
+  "private": false,
+  "scripts": {
+    "style:check": "prettier --check .",
+    "style:format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}

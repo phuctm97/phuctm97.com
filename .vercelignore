@@ -1,0 +1,4 @@
+# Everything except HTML and Vercel config
+*
+!vercel.json
+!*.html

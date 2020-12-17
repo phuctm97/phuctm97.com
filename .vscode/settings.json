@@ -1,0 +1,13 @@
+{
+  // Code style
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Misc
+  "files.exclude": {
+    "node_modules/": true,
+    "yarn.lock": true
+  }
+}
