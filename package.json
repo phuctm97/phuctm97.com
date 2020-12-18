@@ -7,8 +7,19 @@
   "license": "UNLICENSED",
   "private": false,
   "scripts": {
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
+  },
+  "resolutions": {
+    "webpack": "^5.11.0"
+  },
+  "dependencies": {
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "prettier": "^2.2.1"

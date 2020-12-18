@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="I finally started my blog, in plain HTML, no CSS, JS, inline style, whatsoever."
-    />
-    <title>
-      Hello, World! I Started My Blog In Plain HTML · Minh-Phuc Tran
-    </title>
-  </head>
-  <body>
+import Page from "~components/Page";
+
+const HelloWorldPage = () => (
+  <Page
+    title="Hello, World! I Started My Blog In Plain HTML · Minh-Phuc Tran"
+    description="I finally started my blog, in plain HTML, no CSS, JS, inline style, whatsoever."
+  >
     <article>
       <header>
         <h1>Hello, World! I Started My Blog In Plain HTML</h1>
@@ -51,8 +44,8 @@
       <p>
         This also answered one of my biggest unsolved question in programming -
         why on earth there're many different HTML tags that have the same
-        visualization and all the weird workaround-like positioning techniques
-        (<code>float</code>, <code>clear: fix</code>, etc). Coming from game and
+        visualization and all the weird workaround-like positioning techniques (
+        <code>float</code>, <code>clear: fix</code>, etc). Coming from game and
         desktop development, absolute position, flex, and grid were always
         obvious options when it comes to layout and positioning for me. Now, it
         all makes sense 🤯 and it's actually interesting to see how HTML - the
@@ -64,5 +57,7 @@
         time, gotta write it tomorrow then.
       </p>
     </article>
-  </body>
-</html>
+  </Page>
+);
+
+export default HelloWorldPage;
