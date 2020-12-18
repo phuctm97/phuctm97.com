@@ -9,8 +9,16 @@ const IndexPage = () => (
     <header>
       <h1>Hi, I'm Minh-Phuc Tran</h1>
       <p>
-        I'm a Software Engineer. I write and discuss coding tutorials,
-        programming guides, career, and life in tech.
+        I'm a Software Engineer. I share my learnings and opinions about
+        software development here. Hope it helps.
+      </p>
+      <p>
+        <em>
+          (I'm rebuilding my website, meanwhile you can checkout my blog at{" "}
+          <a href="https://blog.phuctm97.com">blog.phuctm97.com</a>,{" "}
+          <a href="https://phuctm97.medium.com">Medium</a>, and{" "}
+          <a href="https://dev.to/phuctm97">DEV.to</a>.
+        </em>
       </p>
     </header>
     <main>
