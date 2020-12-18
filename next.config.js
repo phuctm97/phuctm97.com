@@ -1,6 +1,8 @@
+const remarkA11yEmoji = require("@fec/remark-a11y-emoji");
+
 const withMDX = require("@next/mdx")({
   options: {
-    remarkPlugins: [],
+    remarkPlugins: [remarkA11yEmoji],
     rehypePlugins: [],
   },
 });
