@@ -8,6 +8,8 @@
   // Misc
   "files.exclude": {
     "node_modules/": true,
-    "yarn.lock": true
+    "yarn.lock": true,
+    ".next/": true,
+    "out/": true
   }
 }
