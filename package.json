@@ -4,7 +4,7 @@
   "description": "💁🏻‍♂️ My personal website.",
   "repository": "https://github.com/phuctm97/phuctm97.com",
   "author": "Minh-Phuc Tran <me@phuctm97.com> (https://phuctm97.com)",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": false,
   "scripts": {
     "dev": "next dev",
