@@ -18,7 +18,7 @@ const IndexPage = () => (
         <h2>Blog</h2>
         <ul>
           <li>
-            <Link href="/blog/1-hello-world">
+            <Link href="/blog/hello-world">
               Hello, World! I Started My Blog In Plain HTML
             </Link>
           </li>
