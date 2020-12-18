@@ -286,6 +286,15 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@fec/remark-a11y-emoji@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@fec/remark-a11y-emoji/-/remark-a11y-emoji-3.0.0.tgz#671a73f78ec72ad843cabaa79353a0d1de158b2f"
+  integrity sha512-zhiVTbNA16jqc4A0D87+PWE+JOJFvYg6HoYqTwh/u62ytNiwLcsd46hqMLBIdN/G1qQ+lO4zgii5a/u81qdQaQ==
+  dependencies:
+    emoji-regex "^9.2.0"
+    gemoji "^6.1.0"
+    mdast-util-find-and-replace "^1.0.0"
+
 "@hapi/accept@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.1.tgz#068553e867f0f63225a506ed74e899441af53e10"
@@ -1435,6 +1444,11 @@ elliptic@^6.5.3:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
+emoji-regex@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-9.2.0.tgz#a26da8e832b16a9753309f25e35e3c0efb9a066a"
+  integrity sha512-DNc3KFPK18bPdElMJnf/Pkv5TXhxFU3YFDEuGLDRtPmV4rkmCjBkCSEp22u6rBHdSN9Vlp/GK7k98prmE1Jgug==
+
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
@@ -1500,6 +1514,11 @@ escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
+
+escape-string-regexp@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
+  integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
 eslint-scope@^5.1.1:
   version "5.1.1"
@@ -1641,6 +1660,11 @@ gauge@~2.7.3:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
+
+gemoji@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/gemoji/-/gemoji-6.1.0.tgz#268fbb0c81d1a8c32a4bcc39bdfdd66080ba7ce9"
+  integrity sha512-MOlX3doQ1fsfzxQX8Y+u6bC5Ssc1pBUBIPVyrS69EzKt+5LIZAOm0G5XGVNhwXFgkBF3r+Yk88ONyrFHo8iNFA==
 
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.2"
@@ -2135,6 +2159,15 @@ mdast-util-definitions@^4.0.0:
   integrity sha512-k8AJ6aNnUkB7IE+5azR9h81O5EQ/cTDXtWdMq9Kk5KcEW/8ritU5CeLg/9HhOC++nALHBlaogJ5jz0Ybk3kPMQ==
   dependencies:
     unist-util-visit "^2.0.0"
+
+mdast-util-find-and-replace@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/mdast-util-find-and-replace/-/mdast-util-find-and-replace-1.0.0.tgz#ce33ca0e720ce6ba16cf49dea441cd5f277270a1"
+  integrity sha512-3ArHEP8jGEtgcAyM1kUDhsuZwEVfabBjAQz9ohRWKHkheaBFdOElA0uzHKYVpuh6flnDTkg7cqWBs0pHSfPLqQ==
+  dependencies:
+    escape-string-regexp "^4.0.0"
+    unist-util-is "^4.0.0"
+    unist-util-visit-parents "^3.0.0"
 
 mdast-util-to-hast@10.0.1:
   version "10.0.1"
