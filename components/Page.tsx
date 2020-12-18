@@ -1,6 +1,11 @@
 import Head from "next/head";
 
-const Page = ({ title, description, children }) => (
+type Props = React.PropsWithChildren<{
+  title: string;
+  description: string;
+}>;
+
+const Page = ({ title, description, children }: Props) => (
   <>
     <Head>
       <title>{title}</title>
