@@ -30,6 +30,9 @@ const IndexPage = () => (
               Hello, World! I Started My Blog In Plain HTML
             </Link>
           </li>
+          <li>
+            <Link href="/blog/use-next-and-mdx">Use Next.js and MDX</Link>
+          </li>
         </ul>
       </section>
     </main>
