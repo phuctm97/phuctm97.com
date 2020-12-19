@@ -26,6 +26,11 @@ const IndexPage = () => (
         </p>
         <ul>
           <li>
+            <Link href="/blog/my-custom-md-language">
+              Create an MDX Plugin To Have My Own Markdown Language
+            </Link>
+          </li>
+          <li>
             <Link href="/blog/switch-to-next-js-and-mdx">
               Switch to Next.js and MDX
             </Link>
