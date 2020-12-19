@@ -1,26 +1,33 @@
-import Head from "next/head";
+import { NextSeo } from "next-seo";
+import seoProps from "next-seo.config";
 
 type Props = {
+  path: string;
   title: string;
   description: string;
   publishedAt: Date;
 };
 
 const BlogPost: React.FC<Props> = ({
+  path,
   title,
   description,
   publishedAt,
   children,
 }) => (
   <>
-    <Head>
-      <title>{title} · Minh-Phuc Tran</title>
-      <meta name="description" content={description} />
-      <meta name="og:title" content={title} />
-      <meta name="og:description" content={description} />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:creator" content="@phuctm97" />
-    </Head>
+    <NextSeo
+      title={`${title} | Minh-Phuc Tran`}
+      description={description}
+      canonical={`${seoProps.canonical}/${path}`}
+      openGraph={{
+        type: "article",
+        url: `${seoProps.canonical}/${path}`,
+        article: { publishedTime: publishedAt.toISOString() },
+        title,
+        description,
+      }}
+    />
     <article>
       <header>
         <h1>{title}</h1>
