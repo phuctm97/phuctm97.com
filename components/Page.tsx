@@ -10,6 +10,10 @@ const Page = ({ title, description, children }: Props) => (
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="og:title" content={title} />
+      <meta name="og:description" content={description} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content="@phuctm97" />
     </Head>
     {children}
   </>
