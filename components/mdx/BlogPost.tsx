@@ -5,14 +5,14 @@ type Props = {
   path: string;
   title: string;
   description: string;
-  publishedAt: Date;
+  publishedTime: Date;
 };
 
 const BlogPost: React.FC<Props> = ({
   path,
   title,
   description,
-  publishedAt,
+  publishedTime,
   children,
 }) => (
   <>
@@ -23,7 +23,7 @@ const BlogPost: React.FC<Props> = ({
       openGraph={{
         type: "article",
         url: `${seoProps.canonical}/${path}`,
-        article: { publishedTime: publishedAt.toISOString() },
+        article: { publishedTime: publishedTime.toISOString() },
         title,
         description,
       }}
@@ -32,7 +32,7 @@ const BlogPost: React.FC<Props> = ({
       <header>
         <h1>{title}</h1>
         <sup>
-          <em>{publishedAt.toLocaleDateString()}</em>
+          <em>{publishedTime.toLocaleDateString()}</em>
         </sup>
       </header>
       <main>{children}</main>
