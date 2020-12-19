@@ -16,6 +16,10 @@ const BlogPost: React.FC<Props> = ({
     <Head>
       <title>{title} · Minh-Phuc Tran</title>
       <meta name="description" content={description} />
+      <meta name="og:title" content={title} />
+      <meta name="og:description" content={description} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content="@phuctm97" />
     </Head>
     <article>
       <header>
