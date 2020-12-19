@@ -40,14 +40,16 @@ const getRoute = (file) => {
 
 module.exports = () => (tree, file) => {
   const frontmatter = find(tree, { type: "yaml" });
-  const { title, description, publishedAt } = yaml.parse(frontmatter.value);
+  const { title, description, "published-time": publishedTime } = yaml.parse(
+    frontmatter.value
+  );
 
   const { path, Component } = getRoute(file);
   const props = `{
     path: "${path}",
     title: "${title}",
     description: "${description}",
-    publishedAt: new Date("${publishedAt}"),
+    publishedTime: new Date("${publishedTime}"),
   }`;
 
   tree.children.unshift(
