@@ -40,7 +40,7 @@ const getRoute = (file) => {
 
 module.exports = () => (tree, file) => {
   const frontmatter = find(tree, { type: "yaml" });
-  const { title, description, "published-time": publishedTime } = yaml.parse(
+  const { title, description, "published time": publishedTime } = yaml.parse(
     frontmatter.value
   );
 
