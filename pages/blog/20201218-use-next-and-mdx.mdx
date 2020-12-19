@@ -9,10 +9,9 @@ export default post({
 
 ## The problem
 
-To prevent myself from procrastinating, I
-[started my blog dead simple in plain HTML](hello-world). Although I had a fun
-time writing blog posts in HTML and had
-[an interesting Aha! movement](hello-world), writing plain HTML created quite a
+To prevent myself from procrastinating, I [started my blog dead simple in plain
+HTML][b20201217]. Although I had a fun time writing blog posts in HTML and had
+[an interesting Aha! movement][b20201217], writing plain HTML created quite a
 few boilerplates.
 
 ## React and Next.js
@@ -55,21 +54,22 @@ E.g. following Markdown and HTML produce the same result:
 ```md
 ## The problem
 
-To prevent myself from procrastinating, I
-[started my blog dead simple in plain HTML](hello-world). Although I had a fun
-time writing blog posts in `HTML` and had an
-[interesting Aha! movement](hello-world), writing plain `HTML` created quite a
-few boilerplates.
+To prevent myself from procrastinating, I [started my blog dead simple in plain
+HTML][blog]. Although I had a fun time writing blog posts in `HTML` and had an
+[interesting Aha! movement][blog], writing plain `HTML` created quite a few
+boilerplates.
+
+[blog]: https://link.to/a/blog
 ```
 
 ```html
 <h2>The problem</h2>
 <p>
   To prevent myself from procrastinating, I
-  <a href="hello-world">started my blog dead simple in plain HTML</a>. Although
-  I had a fun time writing blog posts in <code>HTML</code> and had
-  <a href="hello-world">an interesting Aha! movement</a>, writing plain
-  <code>HTML</code> creates quite a few boilerplates.
+  <a href="https://link.to/a/blog">started my blog dead simple in plain HTML</a
+  >. Although I had a fun time writing blog posts in <code>HTML</code> and had
+  <a href="https://link.to/a/blog">an interesting Aha! movement</a>, writing
+  plain <code>HTML</code> creates quite a few boilerplates.
 </p>
 ```
 
@@ -79,7 +79,7 @@ things: the simplicity of Markdown and the flexibility of React. Next.js also
 officially supports MDX, all MDX pages are built into static HTML pages, there's
 no performance sacrifice. So, there's no reason that I shouldn't use it.
 
-Checkout [the project's source code when I first migrated][source-code] to see
+Checkout [the project's source code when I first migrated][source code] to see
 how it's setup and work in practice.
 
 <!-- Links -->
@@ -89,5 +89,6 @@ how it's setup and work in practice.
 [react server-side rendering]:
   https://www.digitalocean.com/community/tutorials/react-server-side-rendering
 [mdx]: https://mdxjs.com
-[source-code]:
+[b20201217]: 20201217-hello-world
+[source code]:
   https://github.com/phuctm97/phuctm97.com/tree/bea56e9213511f72bd6ce0ed587956098c058161
