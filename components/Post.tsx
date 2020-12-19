@@ -3,10 +3,10 @@ import Head from "next/head";
 type Props = React.PropsWithChildren<{
   title: string;
   description: string;
-  createdAt: Date;
+  publishedAt: Date;
 }>;
 
-const Post = ({ title, description, createdAt, children }: Props) => (
+const Post = ({ title, description, publishedAt, children }: Props) => (
   <>
     <Head>
       <title>{title} · Minh-Phuc Tran</title>
@@ -16,7 +16,7 @@ const Post = ({ title, description, createdAt, children }: Props) => (
       <header>
         <h1>{title}</h1>
         <sup>
-          <em>{createdAt.toLocaleDateString()}</em>
+          <em>{publishedAt.toLocaleDateString()}</em>
         </sup>
       </header>
       <main>{children}</main>

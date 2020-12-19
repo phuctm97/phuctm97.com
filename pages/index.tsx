@@ -30,12 +30,12 @@ const IndexPage = () => (
         </p>
         <ul>
           <li>
-            <Link href="/blog/20201218-use-next-and-mdx">
-              Use Next.js and MDX
+            <Link href="/blog/switch-to-next-js-and-mdx">
+              Switch to Next.js and MDX
             </Link>
           </li>
           <li>
-            <Link href="/blog/20201217-hello-world">
+            <Link href="/blog/hello-world-start-blog-in-html">
               Hello, World! I Started My Blog In Plain HTML
             </Link>
           </li>
