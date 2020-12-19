@@ -3,34 +3,44 @@ const yaml = require("yaml");
 const find = require("unist-util-find");
 
 const Components = {
-  blog: "BlogPost",
+  blogx: "BlogPost",
+};
+
+const getSubpage = (file) => {
+  const pagesDir = path.join(file.cwd, "pages");
+
+  const baseDir = path.dirname(file.dirname);
+  if (baseDir !== pagesDir)
+    return file.fail(
+      `MDX pages must be in '${path.relative(process.cwd(), pagesDir)}/*'.`
+    );
+
+  return path.basename(file.dirname);
 };
 
 const getRoute = (file) => {
-  const pagesDir = path.join(file.cwd, "pages");
+  const sub = getSubpage(file);
+  if (!sub) return;
 
-  const fileGrandDir = path.dirname(file.dirname);
-  if (fileGrandDir !== pagesDir)
-    return file.fail(`MDX pages must be in 'pages/*' ('${pagesDir}/*').`);
-
-  const dir = path.basename(file.dirname);
-  const Component = Components[dir];
+  const Component = Components[sub];
   if (!Component)
     return file.fail(
-      `MDX pages must be in [${Object.keys(Components).join(",")}].`
+      `Subpage '${sub}' is invalid. Valid subpages: ${Object.keys(Components)
+        .map((it) => `'${it}'`)
+        .join(", ")}.`
     );
 
   const slug = file.stem;
   return {
     Component,
     slug,
-    path: `${dir}/${slug}`,
+    path: `${sub}/${slug}`,
   };
 };
 
 module.exports = () => (tree, file) => {
-  const yamlNode = find(tree, { type: "yaml" });
-  const { title, description, publishedAt } = yaml.parse(yamlNode.value);
+  const frontmatter = find(tree, { type: "yaml" });
+  const { title, description, publishedAt } = yaml.parse(frontmatter.value);
 
   const { path, Component } = getRoute(file);
   const props = `{
