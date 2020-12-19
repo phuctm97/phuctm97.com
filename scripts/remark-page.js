@@ -3,7 +3,7 @@ const yaml = require("yaml");
 const find = require("unist-util-find");
 
 const Components = {
-  blogx: "BlogPost",
+  blog: "BlogPost",
 };
 
 const getSubpage = (file) => {
