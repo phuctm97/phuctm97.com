@@ -1,7 +1,7 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { MDXProvider } from "@mdx-js/react";
-import * as MDXComponents from "~components/MDXComponents";
+import * as MDXComponents from "~components/mdx/Components";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>

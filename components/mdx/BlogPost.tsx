@@ -1,12 +1,17 @@
 import Head from "next/head";
 
-type Props = React.PropsWithChildren<{
+type Props = {
   title: string;
   description: string;
   publishedAt: Date;
-}>;
+};
 
-const Post = ({ title, description, publishedAt, children }: Props) => (
+const BlogPost: React.FC<Props> = ({
+  title,
+  description,
+  publishedAt,
+  children,
+}) => (
   <>
     <Head>
       <title>{title} · Minh-Phuc Tran</title>
@@ -24,4 +29,8 @@ const Post = ({ title, description, publishedAt, children }: Props) => (
   </>
 );
 
-export default Post;
+const createBlogPost = (props: Props): React.FC => ({ children }) => (
+  <BlogPost {...props}>{children}</BlogPost>
+);
+
+export default createBlogPost;
