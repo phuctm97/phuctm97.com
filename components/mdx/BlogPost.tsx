@@ -1,9 +1,36 @@
-import Post from "~components/Post";
+import Head from "next/head";
 
-type Metadata = Omit<React.ComponentProps<typeof Post>, "children">;
+type Props = {
+  title: string;
+  description: string;
+  publishedAt: Date;
+};
 
-const BlogPost = (metadata: Metadata): React.FC => ({ children }) => (
-  <Post {...metadata}>{children}</Post>
+const BlogPost: React.FC<Props> = ({
+  title,
+  description,
+  publishedAt,
+  children,
+}) => (
+  <>
+    <Head>
+      <title>{title} · Minh-Phuc Tran</title>
+      <meta name="description" content={description} />
+    </Head>
+    <article>
+      <header>
+        <h1>{title}</h1>
+        <sup>
+          <em>{publishedAt.toLocaleDateString()}</em>
+        </sup>
+      </header>
+      <main>{children}</main>
+    </article>
+  </>
 );
 
-export default BlogPost;
+const createBlogPost = (props: Props): React.FC => ({ children }) => (
+  <BlogPost {...props}>{children}</BlogPost>
+);
+
+export default createBlogPost;
