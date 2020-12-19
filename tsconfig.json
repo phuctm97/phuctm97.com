@@ -2,8 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~components/*": ["components/*"],
-      "~mdx/*": ["mdx/*"]
+      "~components/*": ["components/*"]
     },
     "allowJs": false,
     "strict": true,
