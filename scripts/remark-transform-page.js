@@ -38,14 +38,10 @@ const getPageProps = (file) => {
 module.exports = () => (tree, file) => {
   file.data.page = getPageProps(file);
 
-  const { grayMatter, page } = file.data;
-  if (!grayMatter || !grayMatter.data || !page) return;
+  const { frontmatter, page } = file.data;
+  if (!frontmatter || !page) return;
 
-  const {
-    title,
-    description,
-    "published time": publishedTime,
-  } = grayMatter.data;
+  const { title, description, "published time": publishedTime } = frontmatter;
   const { path: urlPath, Component } = page;
 
   const props = `{
