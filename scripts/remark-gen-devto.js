@@ -3,24 +3,17 @@ const fs = require("fs");
 const axios = require("axios");
 const matter = require("gray-matter");
 const toMarkdown = require("mdast-util-to-markdown");
+const { sleep } = require("./utils");
 
 const CanonicalURL = "https://phuctm97";
-const DEVToID = "dev.to id";
-const DEVToURL = "dev.to url";
 const DEVToAPIKey = process.env.DEVTO_API_KEY ?? "";
-const DEVToAPIAccessDelay = 10000;
 
-const readDEVToIdentifiers = (absname, relname) => {
-  const { data } = matter(fs.readFileSync(absname, "utf-8"));
+const readDEVToIdentifiers = (filename) => {
+  const { data } = matter(fs.readFileSync(filename, "utf-8"));
+  if (!data.id || !data.url)
+    throw new Error("Frontmatter must have 'id' and 'url'.");
 
-  const id = data[DEVToID];
-  const url = data[DEVToURL];
-  if (!id || !url)
-    return file.fail(
-      `'${relname}' must have frontmatter '${DEVToID}' and '${DEVToURL}'.`
-    );
-
-  return [id, url];
+  return data;
 };
 
 const beautifyAxiosErrorMessage = (err) => {
@@ -30,24 +23,18 @@ const beautifyAxiosErrorMessage = (err) => {
   return msg;
 };
 
-let devToAPILock = false;
-
-const createDEVToArticle = async (title, filename) => {
-  while (devToAPILock)
-    await new Promise((resolve) => setTimeout(resolve, DEVToAPIAccessDelay));
-
-  devToAPILock = true;
-  console.log(`Creating a DEV.to article for ${filename}.`);
+const createDEVToArticle = async (title, file) => {
+  file.info(`Creating a DEV.to article.`);
 
   try {
-    const res = await axios.post(
+    return await axios.post(
       "https://dev.to/api/articles",
       {
         article: {
           title,
           body_markdown: [
             `#${title}`,
-            `File: ${filename}`,
+            `File: ${path.basename(file.dirname)}/${file.basename}`,
             "Working in progress",
           ].join("\n\n"),
           published: false,
@@ -55,40 +42,44 @@ const createDEVToArticle = async (title, filename) => {
       },
       { headers: { "api-key": DEVToAPIKey } }
     );
-
-    return [res.id, res.url];
   } catch (err) {
     throw new Error(beautifyAxiosErrorMessage(err));
-  } finally {
-    devToAPILock = false;
   }
 };
+
+let lock = false;
 
 module.exports = () => async (_, file) => {
   const { frontmatter, page } = file.data;
   if (!frontmatter || !page) return;
 
-  const { title, description } = frontmatter;
-  const { subpage, slug, path: urlPath } = page;
+  while (lock) await sleep(10000);
+  lock = true;
 
-  const devToFilename = path.join("dev.to", subpage, slug + ".md");
-  const devToAbsname = path.join(process.cwd(), devToFilename);
+  try {
+    const { title, description } = frontmatter;
+    const { subpage, slug, path: urlPath } = page;
 
-  const [devToID, devToURL] = fs.existsSync(devToAbsname)
-    ? readDEVToIdentifiers(devToAbsname, devToFilename)
-    : await createDEVToArticle(title, devToFilename);
-  if (!devToID || !devToURL) return;
+    const filename = path.join(process.cwd(), "dev.to", subpage, slug + ".md");
+    const { id, url } = fs.existsSync(filename)
+      ? readDEVToIdentifiers(filename)
+      : await createDEVToArticle(title, file);
 
-  const devToFrontmatter = {
-    [DEVToID]: devToID,
-    [DEVToURL]: devToURL,
-    title,
-    description,
-    canonical_url: `${CanonicalURL}/${urlPath}`,
-  };
+    const devToFrontmatter = {
+      id,
+      url,
+      title,
+      description,
+      canonical_url: `${CanonicalURL}/${urlPath}`,
+    };
 
-  fs.writeFileSync(
-    devToAbsname,
-    matter.stringify(toMarkdown(tree), devToFrontmatter)
-  );
+    fs.writeFileSync(
+      filename,
+      matter.stringify(toMarkdown(tree), devToFrontmatter)
+    );
+  } catch (err) {
+    file.fail(err);
+  } finally {
+    lock = false;
+  }
 };
