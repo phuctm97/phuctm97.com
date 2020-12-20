@@ -1,0 +1,35 @@
+---
+title: Automate Distributing My Posts to DEV.to
+description: >-
+  To maximize distributions of my future posts with zero effort, I'm writing a
+  bot to distribute all my posts to DEV.to using their API.
+published time: 2020-12-20
+---
+
+To maximize distributions of my blog posts with zero effort, I'm writing a bot
+to distribute all my posts to [DEV.to] using [their API][dev.to api].
+
+## Requirements
+
+- Every article without a `dev.to id` attribute in its frontmatter should be
+  detected and automatically distributed in a schedulable manner.
+
+- After an article is distributed, a commit adding `dev.to id` and `dev.to url`
+  should be generated and pushed to the repo.
+
+- Every commit updating an article pushed to `master` should trigger an update
+  to the corresponding article on DEV.to.
+
+## How?
+
+Because I host my repository on Github, the obvious option is to use Github
+Actions. There is another option is to write a Github Bot, which gives me more
+control but gonna be more complicated and introduces some small cost. I decided
+to go with Github Actions because I don't need a lot of control now, just need
+to get things done in the cheapest way possible, Github Actions is also free
+(for open-source).
+
+<!-- Links -->
+
+[dev.to]: https://dev.to
+[dev.to api]: https://docs.dev.to/api
