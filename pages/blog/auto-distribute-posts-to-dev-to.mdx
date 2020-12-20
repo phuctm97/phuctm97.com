@@ -12,7 +12,7 @@ to distribute all my posts to [DEV.to] using [their API][dev.to api].
 ## Requirements
 
 - Every article without a `dev.to id` attribute in its frontmatter should be
-  detected and automatically distributed in a schedulable manner.
+  detected and automatically distributed in a timely manner.
 
 - After an article is distributed, a commit adding `dev.to id` and `dev.to url`
   should be generated and pushed to the repo.
@@ -22,14 +22,27 @@ to distribute all my posts to [DEV.to] using [their API][dev.to api].
 
 ## How?
 
-Because I host my repository on Github, the obvious option is to use Github
-Actions. There is another option is to write a Github Bot, which gives me more
-control but gonna be more complicated and introduces some small cost. I decided
-to go with Github Actions because I don't need a lot of control now, just need
-to get things done in the cheapest way possible, Github Actions is also free
-(for open-source).
+Because I host my repository on Github, the obvious option is to use [Github
+Actions]. There is another option is to write a [Github Bot], which gives me
+more control but gonna be more complicated and introduces some small cost. I
+decided to go with Github Actions because I don't need a lot of control now,
+just need to get things done in the cheapest way possible, Github Actions is
+also free (for open-source).
+
+### Workflow
+
+- Create a Github workflow called `DEV.to Distribution` runs daily.
+
+- The workflow checks if there's an article without `dev.to id` frontmatter.
+
+- For each article that doesn't have `dev.to id`, the workflow calls the DEV.to
+  API to create a corresponding article, retrieves resulted `dev.to id` and
+  `dev.to url`, updates the MDX's frontmatter, creates a commit, and pushes it
+  to `master`.
 
 <!-- Links -->
 
 [dev.to]: https://dev.to
 [dev.to api]: https://docs.dev.to/api
+[github actions]: https://github.com/features/actions
+[github bot]: https://probot.github.io
