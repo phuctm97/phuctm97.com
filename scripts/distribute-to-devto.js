@@ -24,8 +24,8 @@ const mdxc = createCompiler({
   remarkPlugins: [remarkFrontmatter, extractFrontmatter],
 });
 
-// Find non-distributed file.
-let result;
+// Find a file without 'dev.to id'.
+let filenameToBeDistributed;
 for (let filename of filenames) {
   const file = vfile.readSync(filename, "utf8");
 
@@ -34,10 +34,10 @@ for (let filename of filenames) {
     if (!file.data.frontmatter) return;
     if (file.data.frontmatter["dev.to id"]) return;
 
-    result = filename;
+    filenameToBeDistributed = filename;
   });
 
-  if (result) break;
+  if (filenameToBeDistributed) break;
 }
 
-console.log("Non distributed file:", result);
+console.log(filenameToBeDistributed);

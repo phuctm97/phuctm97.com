@@ -10,6 +10,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
+    "distribute:dev.to": "node scripts/distribute-to-devto.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
