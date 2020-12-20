@@ -7,20 +7,18 @@ const toMarkdown = require("mdast-util-to-markdown");
 const CanonicalURL = "https://phuctm97";
 const DEVToID = "dev.to id";
 const DEVToURL = "dev.to url";
-const DEVToDir = path.join(process.cwd(), "dev.to");
 const DEVToAPIKey = process.env.DEVTO_API_KEY ?? "";
+const DEVToAPIAccessDelay = 10000;
 
-const readDEVToIdentifiers = (filename) => {
-  const { data } = matter(fs.readFileSync(filename, "utf-8"));
+const readDEVToIdentifiers = (absname, relname) => {
+  const { data } = matter(fs.readFileSync(absname, "utf-8"));
 
   const id = data[DEVToID];
   const url = data[DEVToURL];
-  if (!id || !url) {
-    const relName = path.relative(DEVToDir, devToFilename);
+  if (!id || !url)
     return file.fail(
-      `'${relName}' must have frontmatter '${DEVToID}' and '${DEVToURL}'.`
+      `'${relname}' must have frontmatter '${DEVToID}' and '${DEVToURL}'.`
     );
-  }
 
   return [id, url];
 };
@@ -32,8 +30,14 @@ const beautifyAxiosErrorMessage = (err) => {
   return msg;
 };
 
+let devToAPILock = false;
+
 const createDEVToArticle = async (title, filename) => {
-  console.log("Creating article");
+  while (devToAPILock)
+    await new Promise((resolve) => setTimeout(resolve, DEVToAPIAccessDelay));
+
+  devToAPILock = true;
+  console.log(`Creating a DEV.to article for ${filename}...`);
 
   try {
     const res = await axios.post(
@@ -51,9 +55,12 @@ const createDEVToArticle = async (title, filename) => {
       },
       { headers: { "api-key": DEVToAPIKey } }
     );
+
     return [res.id, res.url];
   } catch (err) {
     throw new Error(beautifyAxiosErrorMessage(err));
+  } finally {
+    devToAPILock = false;
   }
 };
 
@@ -64,9 +71,11 @@ module.exports = () => async (_, file) => {
   const { title, description } = frontmatter;
   const { subpage, slug, path: urlPath } = page;
 
-  const devToFilename = path.join(DEVToDir, subpage, slug + ".md");
-  const [devToID, devToURL] = fs.existsSync(devToFilename)
-    ? readDEVToIdentifiers(devToFilename)
+  const devToFilename = path.join("dev.to", subpage, slug + ".md");
+  const devToAbsname = path.join(process.cwd(), devToFilename);
+
+  const [devToID, devToURL] = fs.existsSync(devToAbsname)
+    ? readDEVToIdentifiers(devToAbsname, devToFilename)
     : await createDEVToArticle(title, devToFilename);
   if (!devToID || !devToURL) return;
 
@@ -79,7 +88,7 @@ module.exports = () => async (_, file) => {
   };
 
   fs.writeFileSync(
-    devToFilename,
+    devToAbsname,
     matter.stringify(toMarkdown(tree), devToFrontmatter)
   );
 };
