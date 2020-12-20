@@ -40,6 +40,12 @@ also free (for open-source).
   `dev.to url`, updates the MDX's frontmatter, creates a commit, and pushes it
   to `master`.
 
+### Implementation
+
+To make scripting easier, I'll write everything in Node.js, the Github workflow
+simply run `yarn` and `yarn distribute:dev.to`. `yarn distribute:dev.to` calls
+`node scripts/distribute-devto.js`, where all the logic will be written.
+
 <!-- Links -->
 
 [dev.to]: https://dev.to
