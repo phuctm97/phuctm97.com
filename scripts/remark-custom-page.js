@@ -1,49 +1,47 @@
 const path = require("path");
 
+const PagesDir = path.join(process.cwd(), "pages");
+
 const Components = {
   blog: "BlogPost",
 };
 
-const getSubpage = (file) => {
-  const pagesDir = path.join(file.cwd, "pages");
+Components.toString = () =>
+  Object.keys(Components)
+    .filter((key) => key !== "toString")
+    .map((key) => `'${key}'`)
+    .join(", ");
 
-  const baseDir = path.dirname(file.dirname);
-  if (baseDir !== pagesDir)
+const isPage = (file) => path.dirname(file.dirname) === PagesDir;
+
+const getSubpage = (file) => path.basename(file.dirname);
+
+const getPageProps = (file) => {
+  const subpage = getSubpage(file);
+  const Component = Components[subpage];
+  if (typeof Component !== "string")
     return file.fail(
-      `MDX pages must be in '${path.relative(process.cwd(), pagesDir)}/*'.`
-    );
-
-  return path.basename(file.dirname);
-};
-
-const getRoute = (file) => {
-  const sub = getSubpage(file);
-  if (!sub) return;
-
-  const Component = Components[sub];
-  if (!Component)
-    return file.fail(
-      `Subpage '${sub}' is invalid. Valid subpages: ${Object.keys(Components)
-        .map((it) => `'${it}'`)
-        .join(", ")}.`
+      `Subpage '${subpage}' is invalid. Valid subpages: ${Components}.`
     );
 
   const slug = file.stem;
   return {
     Component,
     slug,
-    path: `${sub}/${slug}`,
+    path: `${subpage}/${slug}`,
   };
 };
 
 module.exports = () => (tree, file) => {
+  if (!isPage(file)) return;
+
   const {
     title,
     description,
     "published time": publishedTime,
   } = file.data.frontmatter;
 
-  const { path, Component } = getRoute(file);
+  const { path, Component } = getPageProps(file);
   const props = `{
     path: "${path}",
     title: "${title}",

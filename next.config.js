@@ -1,6 +1,6 @@
 const remarkYAMLFrontmatter = require("remark-frontmatter");
 const remarkDataFrontmatter = require("./scripts/remark-data-frontmatter");
-const remarkPage = require("./scripts/remark-page");
+const remarkCustomPage = require("./scripts/remark-custom-page");
 const remarkA11yEmoji = require("@fec/remark-a11y-emoji");
 
 const withMDX = require("@next/mdx")({
@@ -8,7 +8,7 @@ const withMDX = require("@next/mdx")({
     remarkPlugins: [
       remarkYAMLFrontmatter,
       remarkDataFrontmatter,
-      remarkPage,
+      remarkCustomPage,
       remarkA11yEmoji,
     ],
     rehypePlugins: [],
