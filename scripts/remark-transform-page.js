@@ -14,12 +14,12 @@ Components.toString = () =>
 
 const isPage = (file) => path.dirname(file.dirname) === PagesDir;
 
-const getSubpage = (file) => path.basename(file.dirname);
+const getSubpageName = (file) => path.basename(file.dirname);
 
 const getPageProps = (file) => {
   if (!isPage(file)) return;
 
-  const subpage = getSubpage(file);
+  const subpage = getSubpageName(file);
   const Component = Components[subpage];
   if (typeof Component !== "string")
     return file.fail(
