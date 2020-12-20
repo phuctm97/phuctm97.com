@@ -37,7 +37,7 @@ const createDEVToArticle = async (title, filename) => {
     await new Promise((resolve) => setTimeout(resolve, DEVToAPIAccessDelay));
 
   devToAPILock = true;
-  console.log(`Creating a DEV.to article for ${filename}...`);
+  console.log(`Creating a DEV.to article for ${filename}.`);
 
   try {
     const res = await axios.post(
@@ -49,7 +49,7 @@ const createDEVToArticle = async (title, filename) => {
             `#${title}`,
             `File: ${filename}`,
             "Working in progress",
-          ].join("\n"),
+          ].join("\n\n"),
           published: false,
         },
       },
