@@ -6,11 +6,9 @@ const Components = {
   blog: "BlogPost",
 };
 
-Components.toString = () =>
-  Object.keys(Components)
-    .filter((key) => key !== "toString")
-    .map((key) => `'${key}'`)
-    .join(", ");
+const Subpages = Object.keys(Components)
+  .map((key) => `'${key}'`)
+  .join(", ");
 
 const isPage = (file) => path.dirname(file.dirname) === PagesDir;
 
@@ -23,7 +21,7 @@ const getPageProps = (file) => {
   const Component = Components[subpage];
   if (typeof Component !== "string")
     return file.fail(
-      `Subpage '${subpage}' is invalid. Valid subpages: ${Components}.`
+      `Subpage '${subpage}' is invalid. Valid subpages: ${Subpages}.`
     );
 
   const slug = file.stem;
