@@ -1,6 +1,4 @@
 const path = require("path");
-const yaml = require("yaml");
-const find = require("unist-util-find");
 
 const Components = {
   blog: "BlogPost",
@@ -39,10 +37,11 @@ const getRoute = (file) => {
 };
 
 module.exports = () => (tree, file) => {
-  const frontmatter = find(tree, { type: "yaml" });
-  const { title, description, "published time": publishedTime } = yaml.parse(
-    frontmatter.value
-  );
+  const {
+    title,
+    description,
+    "published time": publishedTime,
+  } = file.data.frontmatter;
 
   const { path, Component } = getRoute(file);
   const props = `{
