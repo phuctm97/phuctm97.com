@@ -17,6 +17,8 @@ const isPage = (file) => path.dirname(file.dirname) === PagesDir;
 const getSubpage = (file) => path.basename(file.dirname);
 
 const getPageProps = (file) => {
+  if (!isPage(file)) return;
+
   const subpage = getSubpage(file);
   const Component = Components[subpage];
   if (typeof Component !== "string")
@@ -27,23 +29,27 @@ const getPageProps = (file) => {
   const slug = file.stem;
   return {
     Component,
+    subpage,
     slug,
     path: `${subpage}/${slug}`,
   };
 };
 
 module.exports = () => (tree, file) => {
-  if (!isPage(file)) return;
+  file.data.page = getPageProps(file);
+
+  const { grayMatter, page } = file.data;
+  if (!grayMatter || !grayMatter.data || !page) return;
 
   const {
     title,
     description,
     "published time": publishedTime,
-  } = file.data.frontmatter;
+  } = grayMatter.data;
+  const { path: urlPath, Component } = page;
 
-  const { path, Component } = getPageProps(file);
   const props = `{
-    path: "${path}",
+    path: "${urlPath}",
     title: "${title}",
     description: "${description}",
     publishedTime: new Date("${publishedTime}"),
