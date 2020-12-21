@@ -35,7 +35,7 @@ const run = async () => {
     });
     fs.writeFileSync(
       devtoAbspath,
-      matter.stringify(`\n${devtoContent}`, {
+      matter.stringify(content, {
         id: res.id,
         url: res.url,
       })
