@@ -10,7 +10,8 @@ jobs:
     name: Create an article
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Setup Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -18,11 +19,12 @@ jobs:
       - name: Get Yarn cache directory
         id: get-yarn-cache-dir
         run: echo "::set-output name=path::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
         with:
           path: ${{ steps.get-yarn-cache-dir.outputs.path }}
           key: "${{ runner.os }}-node-${{ env.node-version }}-yarn-\
             ${{ hashFiles('**/yarn.lock') }}"
           restore-keys: |
             ${{ runner.os }}-node-${{ env.node-version }}-yarn-
-      - run: yarn
+      - run: yarn install --frozen-lockfile
