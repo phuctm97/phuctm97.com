@@ -1,13 +1,15 @@
-name: DEV.to Distribution
+name: DEV.to Sync
 
-on: push
+on:
+  push:
+    branches: [master]
 
 env:
   node-version: 14
 
 jobs:
-  create-an-article:
-    name: Create an article
+  sync:
+    name: Sync
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
@@ -28,3 +30,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ env.node-version }}-yarn-
       - run: yarn install --frozen-lockfile
+      - run: yarn devto-sync
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "🤖 Sync DEV.to articles"
+          token: ${{ secrets.ADMIN_GH_TOKEN }}
