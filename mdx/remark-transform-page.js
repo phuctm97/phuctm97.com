@@ -1,4 +1,4 @@
-const pageUtils = require("../mdx/page-utils");
+const pageUtils = require("./page-utils");
 
 const Components = {
   blog: "BlogPost",
