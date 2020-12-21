@@ -19,12 +19,11 @@ jobs:
       - name: Get Yarn cache directory
         id: get-yarn-cache-dir
         run: echo "::set-output name=path::$(yarn cache dir)"
-      - name: Apply Yarn cache
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
           path: ${{ steps.get-yarn-cache-dir.outputs.path }}
-          key: "${{ runner.os }}-node-${{ env.node-version }}-yarn-\
+          key: "${{ runner.os }}-Node-${{ env.node-version }}-Yarn-\
             ${{ hashFiles('**/yarn.lock') }}"
           restore-keys: |
-            ${{ runner.os }}-node-${{ env.node-version }}-yarn-
-      - run: yarn install
+            ${{ runner.os }}-Node-${{ env.node-version }}-Yarn-
+      - run: yarn
