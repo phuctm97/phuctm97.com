@@ -36,7 +36,6 @@
     "chalk": "^4.1.0",
     "glob": "^7.1.6",
     "gray-matter": "^4.0.2",
-    "logplease": "^1.2.15",
     "md5": "^2.3.0",
     "mdast-util-to-markdown": "^0.6.1",
     "prettier": "^2.2.1",
