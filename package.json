@@ -10,7 +10,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "devto-sync": "node bin/devto-sync.js",
+    "sync": "node bin/sync.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
