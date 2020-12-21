@@ -1,15 +1,14 @@
 import { NextSeo } from "next-seo";
-import seoProps from "next-seo.config";
 
 type Props = {
-  path: string;
+  url: string;
   title: string;
   description: string;
   publishedTime: Date;
 };
 
 const BlogPost: React.FC<Props> = ({
-  path,
+  url,
   title,
   description,
   publishedTime,
@@ -19,10 +18,10 @@ const BlogPost: React.FC<Props> = ({
     <NextSeo
       title={`${title} | Minh-Phuc Tran`}
       description={description}
-      canonical={`${seoProps.canonical}/${path}`}
+      canonical={url}
       openGraph={{
         type: "article",
-        url: `${seoProps.canonical}/${path}`,
+        url,
         article: { publishedTime: publishedTime.toISOString() },
         title,
         description,

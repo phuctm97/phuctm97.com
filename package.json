@@ -10,6 +10,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
+    "gen:dev.to": "node scripts/devto-gen.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
@@ -18,9 +19,8 @@
     "webpack": "^5.11.0"
   },
   "dependencies": {
-    "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@next/mdx": "^10.0.3",
+    "axios": "^0.21.0",
     "next": "^10.0.3",
     "next-seo": "^4.17.0",
     "react": "^17.0.1",
@@ -28,13 +28,20 @@
   },
   "devDependencies": {
     "@fec/remark-a11y-emoji": "^3.0.0",
+    "@mdx-js/loader": "^1.6.22",
+    "@next/mdx": "^10.0.3",
     "@types/node": "^14.14.14",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "glob": "^7.1.6",
+    "gray-matter": "^4.0.2",
+    "logplease": "^1.2.15",
+    "mdast-util-to-markdown": "^0.6.1",
     "prettier": "^2.2.1",
     "remark-frontmatter": "^2.0.0",
     "typescript": "^4.1.3",
     "unist-util-find": "^1.0.2",
+    "unist-util-visit": "^2.0.3",
     "yaml": "^1.10.0"
   }
 }

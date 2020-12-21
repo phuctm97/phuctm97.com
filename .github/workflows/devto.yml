@@ -1,0 +1,30 @@
+name: DEV.to Distribution
+
+on: push
+
+env:
+  node-version: 14
+
+jobs:
+  create-an-article:
+    name: Create an article
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Get Yarn cache directory
+        id: get-yarn-cache-dir
+        run: echo "::set-output name=path::$(yarn cache dir)"
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.get-yarn-cache-dir.outputs.path }}
+          key: "${{ runner.os }}-node-${{ env.node-version }}-yarn-\
+            ${{ hashFiles('**/yarn.lock') }}"
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.node-version }}-yarn-
+      - run: yarn install --frozen-lockfile

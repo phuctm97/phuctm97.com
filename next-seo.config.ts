@@ -1,12 +1,11 @@
 import { DefaultSeoProps } from "next-seo";
+import metadata from "metadata.json";
 
-const title = "Minh-Phuc Tran - Software Engineer";
-const url = "https://phuctm97.com";
+const { title, description, url } = metadata;
 
 const seoProps: DefaultSeoProps = {
   title,
-  description:
-    "Hi, I'm Phuc. I write and discuss coding tutorials, programming guides, career, and life in tech",
+  description,
   canonical: url,
   openGraph: {
     type: "website",
