@@ -30,9 +30,17 @@ const getPageCanonicalURL = ({ subpage, slug }) =>
 const pagePath2CanonicalURL = (pagePath) =>
   getPageCanonicalURL(pagePath2URLParams(pagePath));
 
+const isPage = (pagePath) => {
+  const { subpage, slug } = pagePath2URLParams(pagePath);
+  return (
+    subpage.length > 0 && subpage.indexOf(path.sep) === -1 && slug.length > 0
+  );
+};
+
 module.exports = {
   getAllPagePaths,
   pagePath2URLParams,
   getPageCanonicalURL,
   pagePath2CanonicalURL,
+  isPage,
 };

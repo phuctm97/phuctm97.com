@@ -1,6 +1,8 @@
-const path = require("path");
-
-const PagesDir = path.join(process.cwd(), "pages");
+const {
+  isPage,
+  pagePath2URLParams,
+  getPageCanonicalURL,
+} = require("./page-utils");
 
 const Components = {
   blog: "BlogPost",
@@ -10,26 +12,21 @@ const Subpages = Object.keys(Components)
   .map((key) => `'${key}'`)
   .join(", ");
 
-const isPage = (file) => path.dirname(file.dirname) === PagesDir;
-
-const getSubpageName = (file) => path.basename(file.dirname);
-
 const getPageProps = (file) => {
-  if (!isPage(file)) return;
+  if (!isPage(file.path)) return;
 
-  const subpage = getSubpageName(file);
+  const { subpage, slug } = pagePath2URLParams(file.path);
   const Component = Components[subpage];
   if (typeof Component !== "string")
     return file.fail(
       `Subpage '${subpage}' is invalid. Valid subpages: ${Subpages}.`
     );
 
-  const slug = file.stem;
   return {
     Component,
     subpage,
     slug,
-    path: `${subpage}/${slug}`,
+    url: getPageCanonicalURL({ subpage, slug }),
   };
 };
 
@@ -40,10 +37,10 @@ module.exports = () => (tree, file) => {
   if (!frontmatter || !page) return;
 
   const { title, description, "published time": publishedTime } = frontmatter;
-  const { path: urlPath, Component } = page;
+  const { url, Component } = page;
 
   const props = `{
-    path: "${urlPath}",
+    url: "${url}",
     title: "${title}",
     description: "${description}",
     publishedTime: new Date("${publishedTime}"),
