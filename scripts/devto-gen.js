@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const matter = require("gray-matter");
+const logplease = require("logplease");
 const { getAllPagePaths, pagePath2URLParams } = require("./page-utils");
 const { createDEVtoArticle } = require("./devto-api");
 
@@ -20,7 +21,6 @@ const run = async () => {
 
     const content = [
       "<!-- This is an auto-generated file, don't change it directly. -->",
-      `# ${title}`,
       `File: \`${devtoPath}\`.`,
       `Created at: ${new Date().toUTCString()}.`,
       "(Working in progress)",
@@ -43,7 +43,8 @@ const run = async () => {
   }
 };
 
+const logger = logplease.create("DEV.to Gen");
 run().catch((err) => {
-  console.error(err);
+  logger.error(err);
   process.exit(1);
 });

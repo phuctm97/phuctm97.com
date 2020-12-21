@@ -1,7 +1,6 @@
 const path = require("path");
 const glob = require("glob");
-
-const baseCanonicalURL = "https://phuctm97.com";
+const metadata = require("../metadata.json");
 
 const getAllPagePaths = () =>
   glob.sync(`pages/**/*.mdx`).map((name) => path.join(process.cwd(), name));
@@ -26,7 +25,7 @@ const pagePath2URLParams = (pagePath) => {
 };
 
 const getPageCanonicalURL = ({ subpage, slug }) =>
-  `${baseCanonicalURL}/${subpage}/${slug}`;
+  `${metadata.url}/${subpage}/${slug}`;
 
 const pagePath2CanonicalURL = (pagePath) =>
   getPageCanonicalURL(pagePath2URLParams(pagePath));

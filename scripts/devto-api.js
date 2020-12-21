@@ -1,6 +1,9 @@
 const axios = require("axios").default;
+const logplease = require("logplease");
 const { getPageCanonicalURL } = require("./page-utils");
 const { beautifyAxiosErrorMessage, delay } = require("./async-utils");
+
+const logger = logplease.create("DEV.to API");
 
 const page2DEVtoAritcle = ({ title, description, subpage, slug, content }) => ({
   title,
@@ -11,7 +14,7 @@ const page2DEVtoAritcle = ({ title, description, subpage, slug, content }) => ({
 });
 
 const createDEVtoArticle = async (page) => {
-  console.log(`Creating a DEV.to article.`);
+  logger.debug(`Creating a DEV.to article.`);
 
   try {
     const { data } = await axios.post(
@@ -20,9 +23,12 @@ const createDEVtoArticle = async (page) => {
       { headers: { "api-key": process.env.DEVTO_API_KEY } }
     );
 
-    console.log(`Created DEV.to article: ${data.url}.`);
+    logger.info(`Created DEV.to article: ${data.url}.`);
     return data;
   } catch (err) {
+    logger.error(
+      `Failed to create DEV.to article for ${page.subpage}/${page.slug}.`
+    );
     throw new Error(beautifyAxiosErrorMessage(err));
   } finally {
     await delay(5000);
