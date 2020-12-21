@@ -3,7 +3,7 @@ const fs = require("fs");
 const md5 = require("md5");
 const axios = require("axios").default;
 const matter = require("gray-matter");
-const log = require("./log");
+const logger = require("./logger");
 const {
   getAllPagePaths,
   pagePath2URLParams,
@@ -82,17 +82,17 @@ const exec = async () => {
     const data = getPageData({ pagePath, subpage, slug });
 
     if (!syncJSON[id]) {
-      log.debug(`New article '${id}': Creating DEV.to article...`);
+      logger.debug(`New article '${id}': Creating DEV.to article...`);
       syncJSON[id] = await createArticle(data);
-      log.success(`Created DEV.to article '${syncJSON[id].url}'.`);
+      logger.success(`Created DEV.to article '${syncJSON[id].url}'.`);
     } else {
       const { md5: prev } = syncJSON[id];
       const { md5: curr } = data;
       if (prev === curr) continue;
 
-      log.debug(`Article '${id}' changed: Updating DEV.to article...`);
+      logger.debug(`Article '${id}' changed: Updating DEV.to article...`);
       syncJSON[id] = await updateArticle(syncJSON[id].id, data);
-      log.success(`Updated DEV.to article '${syncJSON[id].url}'.`);
+      logger.success(`Updated DEV.to article '${syncJSON[id].url}'.`);
     }
   }
 
@@ -100,10 +100,10 @@ const exec = async () => {
     path.resolve(__dirname, "../data/devto-sync.json"),
     JSON.stringify(syncJSON, null, 2)
   );
-  log.info("All DEV.to articles are up to date.");
+  logger.info("All DEV.to articles are up to date.");
 };
 
 exec().catch((err) => {
-  log.error(err);
+  logger.error(err);
   process.exit(1);
 });
