@@ -10,8 +10,7 @@ jobs:
     name: Create an article
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Setup Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -22,8 +21,8 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ${{ steps.get-yarn-cache-dir.outputs.path }}
-          key: "${{ runner.os }}-Node-${{ env.node-version }}-Yarn-\
+          key: "${{ runner.os }}-node-${{ env.node-version }}-yarn-\
             ${{ hashFiles('**/yarn.lock') }}"
           restore-keys: |
-            ${{ runner.os }}-Node-${{ env.node-version }}-Yarn-
+            ${{ runner.os }}-node-${{ env.node-version }}-yarn-
       - run: yarn
