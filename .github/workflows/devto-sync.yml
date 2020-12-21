@@ -1,13 +1,15 @@
-name: DEV.to Distribution
+name: DEV.to Sync
 
-on: push
+on:
+  push:
+    branches: [master]
 
 env:
   node-version: 14
 
 jobs:
-  create-an-article:
-    name: Create an article
+  sync:
+    name: Sync
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
@@ -28,3 +30,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ env.node-version }}-yarn-
       - run: yarn install --frozen-lockfile
+      - run: yarn devto-sync
