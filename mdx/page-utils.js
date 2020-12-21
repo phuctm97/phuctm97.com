@@ -19,6 +19,13 @@ const getURLParam = (pagePath) => {
 
 const getCanonicalURL = (subpage, slug) => `${metadata.url}/${subpage}/${slug}`;
 
+const isPage = (pagePath) => {
+  const { subpage, slug } = getURLParam(pagePath);
+  return (
+    subpage.length > 0 && subpage.indexOf(path.sep) === -1 && slug.length > 0
+  );
+};
+
 const all = () =>
   glob.sync(`pages/**/*.mdx`).map((name) => path.join(CWD, name));
 
@@ -39,6 +46,7 @@ const stringify = ({ frontmatter, content }) =>
 const pageUtils = {
   getURLParam,
   getCanonicalURL,
+  isPage,
   all,
   read,
   stringify,
