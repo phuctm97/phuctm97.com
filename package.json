@@ -10,6 +10,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
+    "gen:dev.to": "node scripts/devto-gen.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
