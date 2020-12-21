@@ -1,8 +1,4 @@
-const {
-  isPage,
-  pagePath2URLParams,
-  getPageCanonicalURL,
-} = require("./page-utils");
+const pageUtils = require("./page-utils");
 
 const Components = {
   blog: "BlogPost",
@@ -13,9 +9,9 @@ const Subpages = Object.keys(Components)
   .join(", ");
 
 const getPageProps = (file) => {
-  if (!isPage(file.path)) return;
+  if (!pageUtils.isPage(file.path)) return;
 
-  const { subpage, slug } = pagePath2URLParams(file.path);
+  const { subpage, slug } = pageUtils.getURLParam(file.path);
   const Component = Components[subpage];
   if (typeof Component !== "string")
     return file.fail(
@@ -26,7 +22,7 @@ const getPageProps = (file) => {
     Component,
     subpage,
     slug,
-    url: getPageCanonicalURL({ subpage, slug }),
+    url: pageUtils.getCanonicalURL(subpage, slug),
   };
 };
 

@@ -10,13 +10,14 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "devto-sync": "node bin/devto-sync.js",
+    "sync": "node bin/sync.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
   },
   "resolutions": {
-    "webpack": "^5.11.0"
+    "webpack": "^5.11.0",
+    "source-map-resolve": "^0.6.0"
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
@@ -37,7 +38,6 @@
     "glob": "^7.1.6",
     "gray-matter": "^4.0.2",
     "md5": "^2.3.0",
-    "mdast-util-to-markdown": "^0.6.1",
     "prettier": "^2.2.1",
     "remark-frontmatter": "^2.0.0",
     "typescript": "^4.1.3",

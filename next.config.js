@@ -1,6 +1,6 @@
 const remarkExtractFrontmatter = require("remark-frontmatter");
-const remarkParseFrontmatter = require("./scripts/remark-parse-frontmatter");
-const remarkTransformPage = require("./scripts/remark-transform-page");
+const remarkParseFrontmatter = require("./mdx/remark-parse-frontmatter");
+const remarkTransformPage = require("./mdx/remark-transform-page");
 const remarkA11yEmoji = require("@fec/remark-a11y-emoji");
 
 const withMDX = require("@next/mdx")({
