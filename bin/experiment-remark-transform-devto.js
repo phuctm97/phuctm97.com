@@ -2,15 +2,15 @@ const path = require("path");
 const remark = require("remark");
 const extractFrontmatter = require("remark-frontmatter");
 const parseFrontmatter = require("../mdx/remark-parse-frontmatter");
-const squeezeParas = require("remark-squeeze-paragraphs");
-const tranfromDEVto = require("../mdx/remark-transform-devto");
+const squeezeParagraphs = require("remark-squeeze-paragraphs");
+const trimTextBreaks = require("../mdx/remark-trim-text-breaks");
 const vfile = require("to-vfile");
 
 const remarkProcessor = remark()
   .use(extractFrontmatter)
   .use(parseFrontmatter)
-  .use(squeezeParas)
-  .use(tranfromDEVto)
+  .use(squeezeParagraphs)
+  .use(trimTextBreaks)
   .freeze();
 
 const getPath = (subpage, slug) =>
@@ -28,6 +28,5 @@ const read = (subpage, slug) => {
 
 const data = read("blog", "hello-world-start-blog-in-html");
 
-console.log(data.frontmatter);
-console.log("---");
-console.log(data.content);
+console.log("Frontmatter:", data.frontmatter);
+console.log("Content:", data.content);
