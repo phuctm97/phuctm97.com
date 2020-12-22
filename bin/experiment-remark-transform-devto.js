@@ -1,14 +1,16 @@
 const path = require("path");
 const remark = require("remark");
-const remarkExtractFrontmatter = require("remark-frontmatter");
-const remarkParseFrontmatter = require("../mdx/remark-parse-frontmatter");
-const remarkTransformDEVto = require("../mdx/remark-transform-devto");
+const extractFrontmatter = require("remark-frontmatter");
+const parseFrontmatter = require("../mdx/remark-parse-frontmatter");
+const squeezeParas = require("remark-squeeze-paragraphs");
+const tranfromDEVto = require("../mdx/remark-transform-devto");
 const vfile = require("to-vfile");
 
 const remarkProcessor = remark()
-  .use(remarkExtractFrontmatter)
-  .use(remarkParseFrontmatter)
-  .use(remarkTransformDEVto)
+  .use(extractFrontmatter)
+  .use(parseFrontmatter)
+  .use(squeezeParas)
+  .use(tranfromDEVto)
   .freeze();
 
 const getPath = (subpage, slug) =>
