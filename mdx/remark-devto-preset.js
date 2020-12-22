@@ -6,6 +6,6 @@ module.exports = {
     require("./remark-devto-frontmatter"),
     require("remark-squeeze-paragraphs"),
     require("./remark-trim-text-breaks"),
-    require("./remark-stringify-frontmatter"),
+    require("./remark-remove-frontmatter"),
   ],
 };
