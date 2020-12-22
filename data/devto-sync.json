@@ -1,22 +1,14 @@
 {
   "blog/auto-distribute-posts-to-dev-to": {
-    "id": 548400,
-    "url": "https://dev.to/phuctm97/automate-distributing-my-posts-to-dev-to-gmn-temp-slug-8615862",
-    "md5": "e8a38af2ed14b9e598d7bac3a3baa482"
+    "md5": "5b2f55756dd180b5c7244e2c706e8342"
   },
   "blog/hello-world-start-blog-in-html": {
-    "id": 548401,
-    "url": "https://dev.to/phuctm97/hello-world-i-started-my-blog-in-plain-html-19ii-temp-slug-8835697",
-    "md5": "8dd0146f31bafdf547ccf772aa7c24b1"
+    "md5": "cb2dde881df0b39195011a0b9d9bbb32"
   },
   "blog/my-custom-md-language": {
-    "id": 548402,
-    "url": "https://dev.to/phuctm97/create-an-mdx-plugin-to-have-my-own-markdown-language-502-temp-slug-1959146",
-    "md5": "b680a3792b4c48bb961f2b7741836494"
+    "md5": "d208874812ed2e525ae5a814958b1339"
   },
   "blog/switch-to-next-js-and-mdx": {
-    "id": 548403,
-    "url": "https://dev.to/phuctm97/switch-to-next-js-and-mdx-1214-temp-slug-8266681",
-    "md5": "c8f967cc72ab375a63183900da7e0935"
+    "md5": "61817b365de302ed6db5de5b64518258"
   }
 }
