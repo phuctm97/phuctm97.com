@@ -6,6 +6,7 @@ on:
 
 env:
   node-version: 14
+  FORCE_COLOR: 3
 
 jobs:
   sync:
