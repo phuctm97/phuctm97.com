@@ -11,6 +11,7 @@ jobs:
   sync:
     name: Sync
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -38,4 +39,4 @@ jobs:
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "🤖 Auto-sync articles to DEV.to"
+          commit_message: "🤖 Auto-sync articles to DEV.to [skip ci]"
