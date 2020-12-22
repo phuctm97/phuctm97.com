@@ -5,7 +5,7 @@ const md5 = require("md5");
 const logger = require("./logger");
 const pageUtils = require("../mdx/page-utils");
 
-const DEVto = require("./devto");
+const DEVtoAPI = require("./devto-api");
 const DEVtoSyncJSONPath = path.resolve(__dirname, "../data/devto-sync.json");
 
 const toDEVto = ({ frontmatter, content }) => ({
@@ -36,7 +36,7 @@ const sync = async () => {
       logger.debug(`New page '${pageID}': creating DEV.to article...`);
 
       devtoSync[pageID] = toDEVtoSyncJSON(
-        await DEVto.createArticle(devtoPage),
+        await DEVtoAPI.createArticle(devtoPage),
         devtoMD5
       );
 
@@ -49,7 +49,7 @@ const sync = async () => {
         );
 
         devtoSync[pageID] = toDEVtoSyncJSON(
-          await DEVto.updateArticle(id, devtoPage),
+          await DEVtoAPI.updateArticle(id, devtoPage),
           devtoMD5
         );
 
