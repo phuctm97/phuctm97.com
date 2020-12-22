@@ -42,7 +42,7 @@ const frontmatterSchema = {
 };
 
 /**
- * Extracts and validates a page's metadata from frontmatter, then assign to `file.data.page`.
+ * Extracts and validates a page's metadata from frontmatter, then assigns to `file.data.page`.
  */
 module.exports = () => (_, file) => {
   if (!isPage(file.path)) file.fail("Not a page.");
