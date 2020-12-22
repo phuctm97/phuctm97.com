@@ -10,7 +10,7 @@ const agent = axios.create({
 const throttleDuration = 5000;
 
 const throttle = (fn) => (...args) =>
-  Promise.all([fn(...args), delay(throttleDuration)]);
+  Promise.all([fn(...args), delay(throttleDuration)]).then(([fnRet]) => fnRet);
 
 const createArticle = throttle(({ frontmatter, content }) =>
   agent
