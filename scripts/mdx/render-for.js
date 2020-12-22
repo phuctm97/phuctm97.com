@@ -24,6 +24,12 @@ const presets = {
   },
 };
 
+/**
+ * Renders a page for distribution to other platforms. Currently supports: DEV.to.
+ *
+ * @param {*} filePath Absolute path to a page.
+ * @param {*} preset Name of the target platform: `devto`.
+ */
 const renderFor = (filePath, preset) => {
   const proc = remark().use(presets[preset]).freeze();
   const input = vfile.readSync(filePath);
