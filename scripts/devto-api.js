@@ -1,16 +1,11 @@
 const axios = require("axios");
-const { delay } = require("./utils");
+const { throttle } = require("./async-utils");
 
 const agent = axios.create({
   baseURL: "https://dev.to/api",
   headers: { "api-key": process.env.DEVTO_API_KEY },
   timeout: 10000,
 });
-
-const throttleDuration = 5000;
-
-const throttle = (fn) => (...args) =>
-  Promise.all([fn(...args), delay(throttleDuration)]).then(([fnRet]) => fnRet);
 
 const createArticle = throttle(({ frontmatter, content }) =>
   agent
@@ -28,7 +23,9 @@ const updateArticle = throttle((id, { frontmatter, content }) =>
     .then(({ data }) => data)
 );
 
-module.exports = {
+const devtoAPI = {
   createArticle,
   updateArticle,
 };
+
+module.exports = devtoAPI;

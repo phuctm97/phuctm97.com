@@ -1,49 +1,50 @@
 const path = require("path");
+const glob = require("glob");
 const fs = require("fs");
-const md5 = require("md5");
 
-const logger = require("./logger");
-const processMDX = require("./process-mdx");
-const pageUtils = require("../mdx/page-utils");
+const { rootDir } = require("../scripts/path-utils");
+const { logger } = require("../scripts/bin-utils");
+const { inferPageURLParams } = require("../scripts/page-utils");
 
-const DEVtoAPI = require("./devto-api");
-const DEVtoMDXPreset = require("../mdx/remark-devto-preset");
-const DEVtoSyncJSONPath = path.resolve(__dirname, "../data/devto-sync.json");
+const devtoAPI = require("../scripts/devto-api");
+const renderFor = require("../scripts/mdx/render-for");
 
-const toDEVtoSyncJSON = ({ id, url }, md5) => ({ id, url, md5 });
+const devtoSyncJSONPath = path.resolve(__dirname, "../data/devto-sync.json");
+const toDEVtoSync = ({ id, url }, md5) => ({ id, url, md5 });
 
 const sync = async () => {
-  const devtoSync = require(DEVtoSyncJSONPath);
+  const devtoSync = require(devtoSyncJSONPath);
 
-  const pagePaths = pageUtils.all();
-  for (let pagePath of pagePaths) {
-    const { subpage, slug } = pageUtils.getURLParam(pagePath);
+  const filePaths = glob.sync("pages/**/*.mdx", {
+    cwd: rootDir,
+    absolute: true,
+  });
+
+  for (let filePath of filePaths) {
+    const { subpage, slug } = inferPageURLParams(filePath);
     const pageID = `${subpage}/${slug}`;
 
-    const devtoPage = processMDX(pagePath, DEVtoMDXPreset);
-    const devtoMD5 = md5(
-      `${JSON.stringify(devtoPage.frontmatter)}\n${devtoPage.content}`
-    );
+    const devtoPage = renderFor(filePath, "devto");
 
     if (!devtoSync[pageID]) {
       logger.debug(`New page '${pageID}': creating DEV.to article...`);
 
-      devtoSync[pageID] = toDEVtoSyncJSON(
-        await DEVtoAPI.createArticle(devtoPage),
-        devtoMD5
+      devtoSync[pageID] = toDEVtoSync(
+        await devtoAPI.createArticle(devtoPage),
+        devtoPage.md5
       );
 
       logger.success(`Created DEV.to article '${devtoSync[pageID].url}'.`);
     } else {
       const { id, url, md5: prevMD5 } = devtoSync[pageID];
-      if (prevMD5 !== devtoMD5) {
+      if (prevMD5 !== devtoPage.md5) {
         logger.debug(
           `Page '${pageID}' changed: updating DEV.to article '${url}'...`
         );
 
-        devtoSync[pageID] = toDEVtoSyncJSON(
-          await DEVtoAPI.updateArticle(id, devtoPage),
-          devtoMD5
+        devtoSync[pageID] = toDEVtoSync(
+          await devtoAPI.updateArticle(id, devtoPage),
+          devtoPage.md5
         );
 
         logger.success(`Updated DEV.to article '${devtoSync[pageID].url}'.`);
@@ -51,7 +52,10 @@ const sync = async () => {
     }
   }
 
-  fs.writeFileSync(DEVtoSyncJSONPath, JSON.stringify(devtoSync, null, 2));
+  fs.writeFileSync(
+    devtoSyncJSONPath,
+    JSON.stringify(devtoSync, null, 2) + "\n"
+  );
   logger.info("DEV.to articles are up to date.");
 };
 
