@@ -1,3 +1,6 @@
+/**
+ * Automatically select and render layout for an MDX page based on its `subpage` metadata.
+ */
 module.exports = () => (tree, file) => {
   const { page } = file.data;
   if (!page) file.fail("Not a page.");

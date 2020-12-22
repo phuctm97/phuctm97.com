@@ -1,6 +1,7 @@
 const path = require("path");
-const { rootDir } = require("../path-utils");
+const revalidator = require("revalidator");
 
+const { rootDir } = require("../path-utils");
 const siteMetadata = require("../../metadata.json");
 const pagesDir = path.join(rootDir, "pages");
 
@@ -28,8 +29,20 @@ const isPage = (filePath) => {
   );
 };
 
+const frontmatterSchema = {
+  properties: {
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+    "published time": {
+      type: "string",
+      required: true,
+      format: "date",
+    },
+  },
+};
+
 /**
- * Extracts a page's metadata and assign to `file.data.page`.
+ * Extracts and validates a page's metadata from frontmatter, then assign to `file.data.page`.
  */
 module.exports = () => (_, file) => {
   if (!isPage(file.path)) file.fail("Not a page.");
@@ -39,8 +52,14 @@ module.exports = () => (_, file) => {
   const fullURL = `${siteMetadata.url}/${fullPath}`;
 
   const { frontmatter } = file.data;
-  const { title, description, "published time": publishedTime } = frontmatter;
 
+  // Validate frontmatter.
+  const result = revalidator.validate(frontmatter, frontmatterSchema);
+  if (!result.valid) {
+    file.fail("Invalid frontmatter: " + JSON.stringify(result.errors, null, 2));
+  }
+
+  const { title, description, "published time": publishedTime } = frontmatter;
   file.data.page = {
     title,
     description,
