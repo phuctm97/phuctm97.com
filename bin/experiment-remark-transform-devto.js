@@ -1,23 +1,9 @@
 const path = require("path");
 const remark = require("remark");
-const frontmatter = require("remark-frontmatter");
-const parseFrontmatter = require("../mdx/remark-parse-frontmatter");
-const pageMetadata = require("../mdx/remark-page-metadata");
-const devtoFrontmatter = require("../mdx/remark-devto-frontmatter");
-const squeezeParagraphs = require("remark-squeeze-paragraphs");
-const trimTextBreaks = require("../mdx/remark-trim-text-breaks");
-const stringifyFrontmatter = require("../mdx/remark-stringify-frontmatter");
+const preset = require("../mdx/remark-devto-preset");
 const vfile = require("to-vfile");
 
-const remarkProcessor = remark()
-  .use(frontmatter)
-  .use(parseFrontmatter)
-  .use(pageMetadata)
-  .use(devtoFrontmatter)
-  .use(squeezeParagraphs)
-  .use(trimTextBreaks)
-  .use(stringifyFrontmatter)
-  .freeze();
+const remarkProcessor = remark().use(preset).freeze();
 
 const getPath = (subpage, slug) =>
   path.resolve(__dirname, "..", "pages", subpage, `${slug}.mdx`);
