@@ -35,7 +35,6 @@
     "@types/react-dom": "^17.0.0",
     "chalk": "^4.1.0",
     "glob": "^7.1.6",
-    "gray-matter": "^4.0.2",
     "md5": "^2.3.0",
     "prettier": "^2.2.1",
     "rehype-accessible-emojis": "^0.3.2",
