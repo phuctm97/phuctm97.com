@@ -1,7 +1,7 @@
 const remarkExtractFrontmatter = require("remark-frontmatter");
 const remarkParseFrontmatter = require("./mdx/remark-parse-frontmatter");
 const remarkTransformPage = require("./mdx/remark-transform-page");
-const remarkA11yEmoji = require("@fec/remark-a11y-emoji");
+const { rehypeAccessibleEmojis } = require("rehype-accessible-emojis");
 
 const withMDX = require("@next/mdx")({
   options: {
@@ -9,9 +9,8 @@ const withMDX = require("@next/mdx")({
       remarkExtractFrontmatter,
       remarkParseFrontmatter,
       remarkTransformPage,
-      remarkA11yEmoji,
     ],
-    rehypePlugins: [],
+    rehypePlugins: [rehypeAccessibleEmojis],
   },
 });
 
