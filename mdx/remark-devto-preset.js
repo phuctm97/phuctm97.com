@@ -5,7 +5,7 @@ module.exports = {
     require("./remark-page-metadata"),
     require("./remark-devto-frontmatter"),
     require("remark-squeeze-paragraphs"),
-    require("./remark-trim-text-breaks"),
+    require("./remark-trim-text-newlines"),
     require("./remark-remove-frontmatter"),
   ],
 };
