@@ -1,16 +1,25 @@
-const remarkExtractFrontmatter = require("remark-frontmatter");
-const remarkParseFrontmatter = require("./mdx/remark-parse-frontmatter");
-const remarkTransformPage = require("./mdx/remark-transform-page");
-const { rehypeAccessibleEmojis } = require("rehype-accessible-emojis");
-
 const withMDX = require("@next/mdx")({
   options: {
     remarkPlugins: [
-      remarkExtractFrontmatter,
-      remarkParseFrontmatter,
-      remarkTransformPage,
+      require("remark-frontmatter"),
+      [
+        require("./scripts/mdx/remark-parse-frontmatter"),
+        {
+          properties: {
+            title: { type: "string", required: true },
+            description: { type: "string", required: true },
+            "published time": {
+              type: "string",
+              required: true,
+              format: "date",
+            },
+          },
+        },
+      ],
+      require("./scripts/mdx/remark-page-metadata"),
+      require("./scripts/mdx/remark-page-layout"),
     ],
-    rehypePlugins: [rehypeAccessibleEmojis],
+    rehypePlugins: [require("rehype-accessible-emojis").rehypeAccessibleEmojis],
   },
 });
 

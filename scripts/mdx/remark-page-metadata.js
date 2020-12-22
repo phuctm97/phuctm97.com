@@ -32,15 +32,19 @@ const isPage = (filePath) => {
  * Extracts a page's metadata and assign to `file.data.page`.
  */
 module.exports = () => (_, file) => {
-  if (!isPage(file.path)) return file.message("Not a page, skip.");
+  if (!isPage(file.path)) file.fail("Not a page.");
 
   const { subpage, slug } = inferURLParams(file.path);
   const fullPath = `${subpage}/${slug}`;
   const fullURL = `${siteMetadata.url}/${fullPath}`;
 
   const { frontmatter } = file.data;
+  const { title, description, "published time": publishedTime } = frontmatter;
+
   file.data.page = {
-    ...frontmatter,
+    title,
+    description,
+    publishedTime: new Date(publishedTime),
     url: fullURL,
     path: fullPath,
     subpage,
