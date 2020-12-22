@@ -3,19 +3,12 @@ const fs = require("fs");
 const md5 = require("md5");
 
 const logger = require("./logger");
+const processMDX = require("./process-mdx");
 const pageUtils = require("../mdx/page-utils");
 
-const DEVto = require("./devto");
+const DEVtoAPI = require("./devto-api");
+const DEVtoMDXPreset = require("../mdx/remark-devto-preset");
 const DEVtoSyncJSONPath = path.resolve(__dirname, "../data/devto-sync.json");
-
-const toDEVto = ({ frontmatter, content }) => ({
-  frontmatter: {
-    title: frontmatter.title,
-    description: frontmatter.description,
-    canonical_url: frontmatter.canonicalURL,
-  },
-  content,
-});
 
 const toDEVtoSyncJSON = ({ id, url }, md5) => ({ id, url, md5 });
 
@@ -27,16 +20,16 @@ const sync = async () => {
     const { subpage, slug } = pageUtils.getURLParam(pagePath);
     const pageID = `${subpage}/${slug}`;
 
-    const page = pageUtils.read(subpage, slug);
-
-    const devtoPage = toDEVto(page);
-    const devtoMD5 = md5(pageUtils.stringify(devtoPage));
+    const devtoPage = processMDX(pagePath, DEVtoMDXPreset);
+    const devtoMD5 = md5(
+      `${JSON.stringify(devtoPage.frontmatter)}\n${devtoPage.content}`
+    );
 
     if (!devtoSync[pageID]) {
       logger.debug(`New page '${pageID}': creating DEV.to article...`);
 
       devtoSync[pageID] = toDEVtoSyncJSON(
-        await DEVto.createArticle(devtoPage),
+        await DEVtoAPI.createArticle(devtoPage),
         devtoMD5
       );
 
@@ -49,7 +42,7 @@ const sync = async () => {
         );
 
         devtoSync[pageID] = toDEVtoSyncJSON(
-          await DEVto.updateArticle(id, devtoPage),
+          await DEVtoAPI.updateArticle(id, devtoPage),
           devtoMD5
         );
 
