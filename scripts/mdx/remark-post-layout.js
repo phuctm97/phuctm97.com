@@ -1,11 +1,13 @@
 /**
- * Automatically selects and renders layout for an MDX page based on its `subpage` metadata.
+ * Automatically selects and renders layout for a post based on its `folder`.
+ *
+ * Requires `remark-post-metadata`.
  */
 module.exports = () => (tree, file) => {
-  const { page } = file.data;
-  if (!page) file.fail("Not a page.");
+  const { post } = file.data;
+  if (!post) file.fail("Not a post.");
 
-  const { subpage, url, title, description, publishedTime } = page;
+  const { url, folder, title, description, publishedTime } = post;
   const props = `{
     url: "${url}",
     title: "${title}",
@@ -16,7 +18,7 @@ module.exports = () => (tree, file) => {
   tree.children.unshift(
     {
       type: "import",
-      value: `import layout from "~components/mdx/${subpage}";`,
+      value: `import layout from "~components/mdx/${folder}";`,
     },
     {
       type: "export",

@@ -1,7 +1,6 @@
 const revalidator = require("revalidator");
-
 const siteMetadata = require("../../metadata.json");
-const { isPage, inferPageURLParams } = require("../page-utils");
+const { isPost, inferPostURLParams } = require("../post-utils");
 
 const frontmatterSchema = {
   properties: {
@@ -16,14 +15,14 @@ const frontmatterSchema = {
 };
 
 /**
- * Extracts and validates a page's metadata from frontmatter, then assigns to `file.data.page`.
+ * Extracts and validates a post's metadata from frontmatter, assigns to `file.data.post`.
  */
 module.exports = () => (_, file) => {
-  if (!isPage(file.path)) file.fail("Not a page.");
+  if (!isPost(file.path)) file.fail("Not a post.");
 
-  const { subpage, slug } = inferPageURLParams(file.path);
-  const fullPath = `${subpage}/${slug}`;
-  const fullURL = `${siteMetadata.url}/${fullPath}`;
+  const { folder, slug } = inferPostURLParams(file.path);
+  const postPath = `${folder}/${slug}`;
+  const postURL = `${siteMetadata.url}/${postPath}`;
 
   const { frontmatter } = file.data;
 
@@ -34,13 +33,13 @@ module.exports = () => (_, file) => {
   }
 
   const { title, description, "published time": publishedTime } = frontmatter;
-  file.data.page = {
+  file.data.post = {
     title,
     description,
     publishedTime: new Date(publishedTime),
-    url: fullURL,
-    path: fullPath,
-    subpage,
+    url: postURL,
+    path: postPath,
+    folder,
     slug,
   };
 };

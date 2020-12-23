@@ -5,7 +5,7 @@ const md5 = require("md5");
 const startPlugins = [
   require("remark-frontmatter"),
   require("./remark-parse-frontmatter"),
-  require("./remark-page-metadata"),
+  require("./remark-post-metadata"),
 ];
 
 const endPlugins = [
@@ -24,23 +24,34 @@ const presets = {
   },
 };
 
+const validPresets = Object.keys(presets)
+  .map((name) => `'${name}'`)
+  .join(", ");
+
 /**
- * Renders a page for distribution to other platforms. Currently supports: DEV.to.
+ * Renders a post for distribution to other platforms. Currently supports: DEV.to.
  *
- * @param {*} filePath Absolute path to a page.
- * @param {*} preset Name of the target platform: `devto`.
+ * @param {string} filePath Absolute path to a post MDX file.
+ * @param {string} preset Name of the target platform: `devto`.
  */
 const renderFor = (filePath, preset) => {
-  const proc = remark().use(presets[preset]).freeze();
+  const config = presets[preset];
+  if (!config)
+    throw new Error(
+      `Preset '${preset}' is not supported. Valid presets: ${validPresets}.`
+    );
+
+  const proc = remark().use(config).freeze();
   const input = vfile.readSync(filePath);
   const output = proc.processSync(input);
 
   const { frontmatter } = output.data;
   const content = output.toString();
+  const blob = `${JSON.stringify(frontmatter)}\n${content}`;
   return {
     frontmatter,
     content,
-    md5: md5(`${JSON.stringify(frontmatter)}\n${content}`),
+    md5: md5(blob),
   };
 };
 

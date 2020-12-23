@@ -1,14 +1,14 @@
 /**
- * Converts `file.data.page` to DEV.to-equivalent frontmatter and writes to `file.data.frontmatter`.
- * Is useful to convert a page into DEV.to-equivalent format.
+ * Converts a post's metadata to DEV.to-equivalent frontmatter, assigns to `file.data.frontmatter`.
+ * Is useful to convert a post into DEV.to-equivalent format.
  *
- * Requires `remark-page-metadata`.
+ * Requires `remark-post-metadata`.
  */
 module.exports = () => (_, file) => {
-  const { page } = file.data;
-  if (!page) file.fail("Not a page.");
+  const { post } = file.data;
+  if (!post) file.fail("Not a post.");
 
-  const { title, description, url } = page;
+  const { title, description, url } = post;
   file.data.frontmatter = {
     title,
     description,
