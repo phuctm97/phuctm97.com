@@ -3,6 +3,10 @@ import Link from "next/link";
 const IndexPage = () => {
   const posts = [
     {
+      link: "/blog/being-ambitious-is-a-myth",
+      text: "Being Ambitious Is A Myth",
+    },
+    {
       link: "/blog/auto-distribute-posts-to-dev-to",
       text: "Automate Distributing My Posts to DEV.to",
     },
