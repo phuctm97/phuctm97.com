@@ -10,71 +10,71 @@ const { isPost, inferPostURLParams } = require("../scripts/post-utils");
 const devtoAPI = require("../scripts/devto-api");
 const renderFor = require("../scripts/mdx/render-for");
 
-const devtoSyncJSONPath = path.join(rootDir, "data", "devto-sync.json");
-const toDEVtoSync = (article, md5) => ({
+const crosspostJSONPath = path.join(rootDir, "data", "crosspost-devto.json");
+const toCrosspostEntry = (article, md5) => ({
   id: article.id,
   url: article.url,
   md5,
 });
 
-const parseSyncJSON = (filePath) => {
+const parseCrosspostJSON = (filePath) => {
   const errs = [];
 
-  const syncJSON = jsonc.parse(fs.readFileSync(filePath, "utf-8"), errs);
+  const json = jsonc.parse(fs.readFileSync(filePath, "utf-8"), errs);
   if (errs.length > 0)
     throw new Error("Invalid JSON: " + JSON.stringify(errs, null, 2));
 
-  return syncJSON;
+  return json;
 };
 
-const writeSyncJSON = (filePath, syncJSON) => {
-  fs.writeFileSync(filePath, JSON.stringify(syncJSON, null, 2) + "\n");
+const writeCrosspostJSON = (json, filePath) => {
+  fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + "\n");
 };
 
-const sync = async () => {
-  const devtoSync = parseSyncJSON(devtoSyncJSONPath);
+const crosspost = async () => {
+  const crosspost = parseCrosspostJSON(crosspostJSONPath);
 
-  const filePaths = glob.sync(`${relPagesDir}/**/*.mdx`, {
+  const paths = glob.sync(`${relPagesDir}/**/*.mdx`, {
     cwd: rootDir,
     absolute: true,
   });
 
-  for (let filePath of filePaths) {
+  for (let filePath of paths) {
     if (!isPost(filePath)) continue;
 
     const { folder, slug } = inferPostURLParams(filePath);
     const postID = `${folder}/${slug}`;
 
-    const devtoDat = renderFor(filePath, "devto");
+    const data = renderFor(filePath, "devto");
 
-    if (!devtoSync[postID]) {
+    if (!crosspost[postID]) {
       logger.debug(`New post '${postID}': creating DEV.to article...`);
 
-      const article = await devtoAPI.createArticle(devtoDat);
-      devtoSync[postID] = toDEVtoSync(article, devtoDat.md5);
+      const article = await devtoAPI.createArticle(data);
+      crosspost[postID] = toCrosspostEntry(article, data.md5);
 
       logger.success(`Created DEV.to article '${article.url}'.`);
     } else {
-      const { id, url, md5: prevMD5 } = devtoSync[postID];
+      const { id, url: prevURL, md5: prevMD5 } = crosspost[postID];
 
-      if (prevMD5 !== devtoDat.md5) {
+      if (prevMD5 !== data.md5) {
         logger.debug(
-          `Post '${postID}' changed: updating DEV.to article '${url}'...`
+          `Post '${postID}' changed: updating DEV.to article '${prevURL}'...`
         );
 
-        const article = await devtoAPI.updateArticle(id, devtoDat);
-        devtoSync[postID] = toDEVtoSync(article, devtoDat.md5);
+        const article = await devtoAPI.updateArticle(id, data);
+        crosspost[postID] = toCrosspostEntry(article, data.md5);
 
         logger.success(`Updated DEV.to article '${article.url}'.`);
       }
     }
   }
 
-  writeSyncJSON(devtoSyncJSONPath, devtoSync);
+  writeCrosspostJSON(crosspost, crosspostJSONPath);
   logger.info("DEV.to articles are up to date.");
 };
 
-sync().catch((err) => {
+crosspost().catch((err) => {
   logger.error(err);
   process.exit(1);
 });

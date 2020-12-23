@@ -15,14 +15,13 @@ const endPlugins = [
   require("./remark-remove-frontmatter"),
 ];
 
+const makePreset = (plugins) => ({
+  plugins: [...startPlugins, ...plugins, ...endPlugins],
+});
+
 const presets = {
-  devto: {
-    plugins: [
-      ...startPlugins,
-      require("./remark-devto-frontmatter"),
-      ...endPlugins,
-    ],
-  },
+  devto: makePreset([require("./remark-devto-frontmatter")]),
+  hashnode: makePreset([require("./remark-hashnode-frontmatter")]),
 };
 
 const validPresets = Object.keys(presets)
@@ -30,10 +29,10 @@ const validPresets = Object.keys(presets)
   .join(", ");
 
 /**
- * Renders a post for distribution to other platforms. Currently supports: DEV.to.
+ * Renders a post for distribution to other platforms. Currently supports: DEV.to, Hashnode.
  *
  * @param {string} filePath Absolute path to a post MDX file.
- * @param {string} preset Name of the target platform: `devto`.
+ * @param {string} preset Name of the target platform: `devto`, `hashnode`.
  */
 const renderFor = (filePath, preset) => {
   const config = presets[preset];
