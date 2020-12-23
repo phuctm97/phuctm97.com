@@ -34,17 +34,17 @@ const BlogPost: React.FC<Props> = ({
         <h1>{title}</h1>
         <sup>
           <em>{publishedTime.toLocaleDateString()}</em>
-          {tags.length > 0 && (
-            <p>
-              Tags:{" "}
-              {tags.map((tag, index) => (
-                <span key={index}>
-                  <code>{tag}</code>{" "}
-                </span>
-              ))}
-            </p>
-          )}
         </sup>
+        {tags.length > 0 && (
+          <p>
+            Tags:{" "}
+            {tags.map((tag, index) => (
+              <span key={index}>
+                <code>{tag}</code>{" "}
+              </span>
+            ))}
+          </p>
+        )}
       </header>
       <main>{children}</main>
     </article>
