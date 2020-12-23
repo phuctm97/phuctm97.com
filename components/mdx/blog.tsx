@@ -4,6 +4,7 @@ type Props = {
   url: string;
   title: string;
   description: string;
+  tags: string[];
   publishedTime: Date;
 };
 
@@ -11,6 +12,7 @@ const BlogPost: React.FC<Props> = ({
   url,
   title,
   description,
+  tags,
   publishedTime,
   children,
 }) => (
@@ -33,6 +35,16 @@ const BlogPost: React.FC<Props> = ({
         <sup>
           <em>{publishedTime.toLocaleDateString()}</em>
         </sup>
+        {tags.length > 0 && (
+          <p>
+            Tags:{" "}
+            {tags.map((tag, index) => (
+              <span key={index}>
+                <code>{tag}</code>{" "}
+              </span>
+            ))}
+          </p>
+        )}
       </header>
       <main>{children}</main>
     </article>

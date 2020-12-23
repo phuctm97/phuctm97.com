@@ -8,10 +8,11 @@ module.exports = () => (_, file) => {
   const { post } = file.data;
   if (!post) file.fail("Not a post.");
 
-  const { title, description, url } = post;
+  const { title, description, tags, url } = post;
   file.data.frontmatter = {
     title,
     description,
+    tags,
     canonical_url: url,
     published: true,
   };
