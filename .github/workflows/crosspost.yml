@@ -1,0 +1,99 @@
+name: Crosspost
+
+on:
+  push:
+    branches: [master]
+
+env:
+  NODE_VERSION: 14
+  FORCE_COLOR: 3
+
+jobs:
+  crosspost-to-devto:
+    name: Cross-post to DEV.to
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Get Yarn cache directory
+        id: get-yarn-cache-dir
+        run: echo "::set-output name=path::$(yarn cache dir)"
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.get-yarn-cache-dir.outputs.path }}
+          key: "${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-\
+            ${{ hashFiles('**/yarn.lock') }}"
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-
+      - run: yarn install --frozen-lockfile
+      - run: yarn crosspost:devto
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+      - name: Upload DEV.to crosspost metadata
+        uses: actions/upload-artifact@v2
+        with:
+          name: crosspost-devto
+          path: data/crosspost-devto.json
+
+  crosspost-to-hashnode:
+    name: Cross-post to Hashnode
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Get Yarn cache directory
+        id: get-yarn-cache-dir
+        run: echo "::set-output name=path::$(yarn cache dir)"
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.get-yarn-cache-dir.outputs.path }}
+          key: "${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-\
+            ${{ hashFiles('**/yarn.lock') }}"
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-
+      - run: yarn install --frozen-lockfile
+      - run: yarn crosspost:hashnode
+        env:
+          HASHNODE_API_KEY: ${{ secrets.HASHNODE_API_KEY }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+      - name: Upload Hashnode crosspost metadata
+        uses: actions/upload-artifact@v2
+        with:
+          name: crosspost-hashnode
+          path: data/crosspost-hashnode.json
+
+  persist-crosspost-metadata:
+    name: Persist Crosspost metadata
+    runs-on: ubuntu-18.04
+    needs: [crosspost-to-devto, crosspost-to-hashnode]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ADMIN_GH_TOKEN }}
+      - name: Download DEV.to crosspost metadata
+        uses: actions/download-artifact@v2
+        with:
+          name: crosspost-devto
+          path: data/crosspost-devto.json
+      - name: Download Hashnode crosspost metadata
+        uses: actions/download-artifact@v2
+        with:
+          name: crosspost-hashnode
+          path: data/crosspost-hashnode.json
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "🤖 Auto cross-post articles [skip ci]"

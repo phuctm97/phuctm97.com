@@ -10,11 +10,11 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "sync": "node bin/sync.js",
-    "sync:hashnode": "node bin/sync-hashnode.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
-    "style:format": "prettier --write ."
+    "style:format": "prettier --write .",
+    "crosspost:devto": "node bin/crosspost-devto.js",
+    "crosspost:hashnode": "node bin/crosspost-hashnode.js"
   },
   "resolutions": {
     "webpack": "^5.11.0",
