@@ -13,5 +13,6 @@ module.exports = () => (_, file) => {
     title,
     description,
     canonical_url: url,
+    published: true,
   };
 };
