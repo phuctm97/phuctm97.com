@@ -83,6 +83,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.ADMIN_GH_TOKEN }}
+      - name: Clean previous metadata
+        run: rm -rf data/crosspost-*
       - name: Download DEV.to crosspost metadata
         uses: actions/download-artifact@v2
         with:
