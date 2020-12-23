@@ -39,8 +39,8 @@ const BlogPost: React.FC<Props> = ({
   </>
 );
 
-const createBlogPost = (props: Props): React.FC => ({ children }) => (
+const layoutBlogPost = (props: Props): React.FC => ({ children }) => (
   <BlogPost {...props}>{children}</BlogPost>
 );
 
-export default createBlogPost;
+export default layoutBlogPost;

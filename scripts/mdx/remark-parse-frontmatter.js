@@ -22,7 +22,7 @@ module.exports = (schema) => (tree, file) => {
     const result = revalidator.validate(frontmatter, schema);
     if (!result.valid)
       file.fail(
-        "Invalid frontmatter:\n" + JSON.stringify(result.errors, null, 2),
+        "Invalid frontmatter: " + JSON.stringify(result.errors, null, 2),
         yamlNode
       );
   }
