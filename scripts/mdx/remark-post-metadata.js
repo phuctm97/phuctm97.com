@@ -43,7 +43,7 @@ module.exports = () => (_, file) => {
   file.data.post = {
     title,
     description,
-    tags: tags ?? [],
+    tags: tags || [],
     publishedTime: new Date(publishedTime),
     url: postURL,
     path: postPath,
