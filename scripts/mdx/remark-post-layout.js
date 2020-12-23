@@ -7,10 +7,11 @@ module.exports = () => (tree, file) => {
   const { post } = file.data;
   if (!post) file.fail("Not a post.");
 
-  const { url, folder, title, description, publishedTime } = post;
+  const { url, folder, title, description, tags, publishedTime } = post;
   const props = `{
     url: "${url}",
     title: "${title}",
+    tags: [${tags.map((tag) => `"${tag}"`).join(", ")}],
     description: "${description}",
     publishedTime: new Date("${publishedTime}"),
   }`;

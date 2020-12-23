@@ -6,6 +6,7 @@ const frontmatterSchema = {
   properties: {
     title: { type: "string", required: true },
     description: { type: "string", required: true },
+    tags: { type: "array", maxItems: 4, uniqueItems: true },
     "published time": {
       type: "string",
       required: true,
@@ -32,10 +33,17 @@ module.exports = () => (_, file) => {
     file.fail("Invalid frontmatter: " + JSON.stringify(result.errors, null, 2));
   }
 
-  const { title, description, "published time": publishedTime } = frontmatter;
+  const {
+    title,
+    description,
+    tags,
+    "published time": publishedTime,
+  } = frontmatter;
+
   file.data.post = {
     title,
     description,
+    tags: tags ?? [],
     publishedTime: new Date(publishedTime),
     url: postURL,
     path: postPath,
