@@ -32,7 +32,7 @@ const writeCrosspostJSON = (json, filePath) => {
   fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + "\n");
 };
 
-const sync = async () => {
+const crosspost = async () => {
   const crosspost = parseCrosspostJSON(crosspostJSONPath);
 
   const paths = glob.sync(`${relPagesDir}/**/*.mdx`, {
@@ -75,7 +75,7 @@ const sync = async () => {
   logger.info("Hashnode stories are up to date.");
 };
 
-sync().catch((err) => {
+crosspost().catch((err) => {
   logger.error(err);
   process.exit(1);
 });
