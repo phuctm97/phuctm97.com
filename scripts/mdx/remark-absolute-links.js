@@ -7,8 +7,12 @@ const siteMetadata = require("../../metadata.json");
  * Is useful when distributing a post to another platform.
  */
 module.exports = () => (tree) => {
-  visit(tree, "link", (node) => {
-    if (!node.url.startsWith("/")) return;
-    node.url = `${siteMetadata.url}${node.url}`;
-  });
+  visit(
+    tree,
+    ({ type }) => type === "link" || type === "definition",
+    (node) => {
+      if (!node.url.startsWith("/")) return;
+      node.url = `${siteMetadata.url}${node.url}`;
+    }
+  );
 };
