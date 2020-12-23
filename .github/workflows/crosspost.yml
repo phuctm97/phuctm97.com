@@ -89,12 +89,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: crosspost-devto
-          path: data/crosspost-devto.json
+          path: data
       - name: Download Hashnode crosspost metadata
         uses: actions/download-artifact@v2
         with:
           name: crosspost-hashnode
-          path: data/crosspost-hashnode.json
+          path: data
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
