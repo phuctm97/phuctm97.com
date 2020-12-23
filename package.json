@@ -11,6 +11,7 @@
     "start": "next start",
     "build": "next build",
     "sync": "node bin/sync.js",
+    "sync:hashnode": "node bin/sync-hashnode.js",
     "type:check": "tsc",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
