@@ -43,6 +43,7 @@
     "remark": "^12.0.1",
     "remark-frontmatter": "^2.0.0",
     "remark-squeeze-paragraphs": "^4.0.0",
+    "remark-unwrap-texts": "^0.0.6",
     "revalidator": "^0.3.1",
     "to-vfile": "^6.1.0",
     "typescript": "^4.1.3",

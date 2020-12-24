@@ -4,7 +4,7 @@ const withMDX = require("@next/mdx")({
       require("remark-frontmatter"),
       require("./scripts/mdx/remark-parse-frontmatter"),
       require("./scripts/mdx/remark-post-metadata"),
-      require("./scripts/mdx/remark-unwrap-texts"),
+      require("remark-unwrap-texts"),
       require("./scripts/mdx/remark-post-layout"),
     ],
     rehypePlugins: [require("rehype-accessible-emojis").rehypeAccessibleEmojis],

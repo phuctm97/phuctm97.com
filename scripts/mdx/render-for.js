@@ -11,7 +11,7 @@ const startPlugins = [
 const endPlugins = [
   require("remark-squeeze-paragraphs"),
   require("./remark-absolute-links"),
-  require("./remark-unwrap-texts"),
+  require("remark-unwrap-texts"),
   require("./remark-remove-frontmatter"),
 ];
 
