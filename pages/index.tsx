@@ -24,6 +24,10 @@ const IndexPage = () => {
     },
   ];
 
+  const onSubscribeNewsletter = () => {
+    window.open("https://buttondown.email/phuctm97", "popupwindow");
+  };
+
   return (
     <>
       <header>
@@ -53,6 +57,29 @@ const IndexPage = () => {
         </p>
       </header>
       <main>
+        <section>
+          <h2>Newsletter</h2>
+          <p>
+            In my newsletter, I share early and behind-the-scene look into what
+            I’m working on and learning about software development. Most
+            importantly, it's a way for you and me to establish a closer
+            relationship and hopefully can help each other in the future.
+          </p>
+          <form
+            action="https://buttondown.email/api/emails/embed-subscribe/phuctm97"
+            method="post"
+            target="popupwindow"
+            onSubmit={onSubscribeNewsletter}
+          >
+            <label htmlFor="bd-email">Enter your email: </label>
+            <input type="email" name="email" id="bd-email" />
+            <input type="hidden" value="1" name="embed" />
+            <input type="submit" value="Subscribe" />
+          </form>
+          <sup>
+            <em>(No spam, unsubscribe anytime)</em>
+          </sup>
+        </section>
         <section>
           <h2>Blog</h2>
           <p>
