@@ -50,10 +50,8 @@ const IndexPage = () => {
           </em>
         </p>
         <p>
-          <em>
-            Besides, <a href="https://twitter.com/phuctm97">DM me on Twitter</a>{" "}
-            if you have any question or need help.
-          </em>
+          Besides, <a href="https://twitter.com/phuctm97">DM me on Twitter</a>{" "}
+          if you have any question or need help.
         </p>
       </header>
       <main>
