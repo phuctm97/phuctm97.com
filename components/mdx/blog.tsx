@@ -1,4 +1,5 @@
 import { NextSeo } from "next-seo";
+import styles from "./blog.module.scss";
 
 type Props = {
   url: string;
@@ -29,7 +30,7 @@ const BlogPost: React.FC<Props> = ({
         description,
       }}
     />
-    <article>
+    <article className={styles.post}>
       <header>
         <h1>{title}</h1>
         <sup>

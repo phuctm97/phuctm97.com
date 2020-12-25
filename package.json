@@ -45,6 +45,7 @@
     "remark-squeeze-paragraphs": "^4.0.0",
     "remark-unwrap-texts": "^0.0.6",
     "revalidator": "^0.3.1",
+    "sass": "^1.30.0",
     "to-vfile": "^6.1.0",
     "typescript": "^4.1.3",
     "unist-util-find": "^1.0.2",
