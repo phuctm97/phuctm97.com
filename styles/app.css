@@ -3,7 +3,6 @@
   --bg-color: #fff;
   --text-color: #333;
   --heading-color: #000;
-  --accent-color: #d63369;
 }
 
 /* Box-sizing reset */
@@ -28,8 +27,4 @@ code,
 samp {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
-}
-a {
-  color: var(--accent-color);
-  text-decoration: underline;
 }
