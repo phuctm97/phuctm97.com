@@ -3,6 +3,10 @@ import Link from "next/link";
 const IndexPage = () => {
   const posts = [
     {
+      link: "/blog/parse-frontmatter-mdx-remark-unified",
+      text: "Parse Markdown Frontmatter In MDX, Remark, and Unified",
+    },
+    {
       link: "/blog/publish-first-npm-package",
       text: "Publish My First NPM TypeScript Package",
     },
