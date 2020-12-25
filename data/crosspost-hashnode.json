@@ -34,5 +34,11 @@
     "cuid": "ckj2vgorq0182o1s164efhsst",
     "slug": "publish-first-npm-package",
     "md5": "3f72a5aa7ce67f3b664f2abbf237c334"
+  },
+  "blog/parse-frontmatter-mdx-remark-unified": {
+    "id": "5fe5eb3c6a146422083cc527",
+    "cuid": "ckj4bldjj03ukq0s101f0hcre",
+    "slug": "parse-frontmatter-mdx-remark-unified",
+    "md5": "cd0bd05f0a7d7c84faa6c7301a0a9bd9"
   }
 }
