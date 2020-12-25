@@ -8,10 +8,12 @@ html {
   box-sizing: inherit;
 }
 
-/* Use system fonts */
+/* Apply system fonts and colors */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #333;
+  background: #fff;
 }
 pre,
 code,
