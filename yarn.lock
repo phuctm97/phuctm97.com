@@ -2969,6 +2969,16 @@ remark-mdx@1.6.22:
     remark-parse "8.0.3"
     unified "9.2.0"
 
+remark-parse-frontmatter@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/remark-parse-frontmatter/-/remark-parse-frontmatter-0.0.2.tgz#ef663379f37a03767df82868a9a41075f55261b5"
+  integrity sha512-OcdMEhaqMZ5JbpEypwyNvejVZcBqARv8EVLLDmJ6ZAyqQ1U7TSVTS9ZnIlcxaqv8WBj7uaq9jFcEF+v0Ksp1Hw==
+  dependencies:
+    revalidator "^0.3.1"
+    unist-util-find "^1.0.2"
+    vfile "^4.2.1"
+    yaml "^1.10.0"
+
 remark-parse@8.0.3, remark-parse@^8.0.0:
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-8.0.3.tgz#9c62aa3b35b79a486454c690472906075f40c7e1"
@@ -3751,7 +3761,7 @@ vfile-message@^2.0.0:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^2.0.0"
 
-vfile@^4.0.0:
+vfile@^4.0.0, vfile@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/vfile/-/vfile-4.2.1.tgz#03f1dce28fc625c625bc6514350fbdb00fa9e624"
   integrity sha512-O6AE4OskCG5S1emQ/4gl8zK586RqA3srz3nfK/Viy0UPToBc5Trp9BVFb1u0CjsKrAWwnpr4ifM/KBXPWwJbCA==

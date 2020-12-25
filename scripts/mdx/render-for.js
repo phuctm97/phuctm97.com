@@ -4,7 +4,7 @@ const md5 = require("md5");
 
 const startPlugins = [
   require("remark-frontmatter"),
-  require("./remark-parse-frontmatter"),
+  require("remark-parse-frontmatter"),
   require("./remark-post-metadata"),
 ];
 
