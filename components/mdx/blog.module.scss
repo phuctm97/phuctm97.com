@@ -1,4 +1,39 @@
 .post {
-  max-width: 48em;
-  margin: 0 auto;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 3rem;
+    line-height: 1.27;
+    font-weight: 500;
+    color: var(--heading-color);
+  }
+
+  h1 {
+    margin-bottom: 1.2rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.27rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  p {
+    margin-top: 1.5rem;
+    line-height: 1.5;
+  }
 }

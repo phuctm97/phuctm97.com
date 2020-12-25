@@ -1,4 +1,12 @@
-/* Reset box-sizing */
+/* Theme */
+:root {
+  --bg-color: #fff;
+  --text-color: #333;
+  --heading-color: #000;
+  --accent-color: #d63369;
+}
+
+/* Box-sizing reset */
 html {
   box-sizing: border-box;
 }
@@ -8,16 +16,20 @@ html {
   box-sizing: inherit;
 }
 
-/* Apply system fonts and colors */
+/* System fonts and base styles */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #333;
-  background: #fff;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 pre,
 code,
 samp {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
+}
+a {
+  color: var(--accent-color);
+  text-decoration: underline;
 }
