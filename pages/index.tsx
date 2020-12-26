@@ -3,6 +3,10 @@ import Link from "next/link";
 const IndexPage = () => {
   const posts = [
     {
+      link: "/blog/introducing-hashnode-sdk-js",
+      text: "Introducing Hashnode SDK for TypeScript/JavaScript",
+    },
+    {
       link: "/blog/parse-frontmatter-mdx-remark-unified",
       text: "Parse Markdown Frontmatter In MDX, Remark, and Unified",
     },
