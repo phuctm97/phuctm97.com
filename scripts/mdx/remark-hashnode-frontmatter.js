@@ -12,7 +12,6 @@ module.exports = () => (_, file) => {
   file.data.frontmatter = {
     title,
     slug,
-    tags: [], // Hashnode API currently don't support tags yet.
     canonicalURL: url,
   };
 };
