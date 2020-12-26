@@ -50,7 +50,7 @@ const crosspost = async () => {
     const data = renderFor(filePath, "hashnode");
 
     if (!crosspost[postID]) {
-      logger.debug(`New post '${postID}': creating Hashnode story...`);
+      logger.debug(`New post '${postID}': creating Hashnode article...`);
 
       const article = await hashnode.createPublicationArticle(
         user.publication.id,
@@ -61,7 +61,7 @@ const crosspost = async () => {
       );
       crosspost[postID] = toCrosspostEntry(article, data.md5);
 
-      logger.success(`Created Hashnode story '${article.url}'.`);
+      logger.success(`Created Hashnode article '${article.url}'.`);
     } else {
       const { id, url: prevURL, md5: prevMD5 } = crosspost[postID];
 
