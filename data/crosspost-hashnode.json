@@ -1,44 +1,37 @@
 {
   "blog/auto-distribute-posts-to-dev-to": {
     "id": "5fe30fb6b4b79006ffdac039",
-    "slug": "auto-distribute-posts-to-dev-to",
     "url": "https://blog.phuctm97.com/auto-distribute-posts-to-dev-to",
-    "md5": "60e2d703450c79b2a73f450ec93b9ec6"
+    "md5": "7ab7a131668a1ab5cc1079c3e5ef6ef7"
   },
   "blog/being-ambitious-is-a-myth": {
     "id": "5fe30fbbb4b79006ffdac03f",
-    "slug": "being-ambitious-is-a-myth",
     "url": "https://blog.phuctm97.com/being-ambitious-is-a-myth",
-    "md5": "4524f8a621e425c49c97022916215bb6"
+    "md5": "87a3fcf9c4d7c9de0ccb8f44a67953a8"
   },
   "blog/hello-world-start-blog-in-html": {
     "id": "5fe30fc0b4b79006ffdac045",
-    "slug": "hello-world-start-blog-in-html",
     "url": "https://blog.phuctm97.com/hello-world-start-blog-in-html",
-    "md5": "4d6b2d3e1e94b70d5fefee6613f55e13"
+    "md5": "80fe6f5016a85cbd75dc32d7c7872232"
   },
   "blog/my-custom-md-language": {
     "id": "5fe30fc5b4b79006ffdac04c",
-    "slug": "my-custom-md-language",
     "url": "https://blog.phuctm97.com/my-custom-md-language",
-    "md5": "272ed01f09f71e996b8fdcb3eab89554"
+    "md5": "f55e1b62b29b374964893c2bc63afc7b"
   },
   "blog/switch-to-next-js-and-mdx": {
     "id": "5fe30fcab4b79006ffdac053",
-    "slug": "switch-to-next-js-and-mdx",
     "url": "https://blog.phuctm97.com/switch-to-next-js-and-mdx",
-    "md5": "a1c671c00fbb9afe21f3bcc097c81524"
+    "md5": "56c597475a99f0f77ce9cf7f23ab0e08"
   },
   "blog/publish-first-npm-package": {
     "id": "5fe495354df02c17a14dccb2",
-    "slug": "publish-first-npm-package",
     "url": "https://blog.phuctm97.com/publish-first-npm-package",
-    "md5": "da3bf8526f03c00df6f066910c5f612c"
+    "md5": "b4108cdd9fd4d9be9b0a2060e69f3b15"
   },
   "blog/parse-frontmatter-mdx-remark-unified": {
     "id": "5fe71e5d999b3f21e315765a",
-    "slug": "parse-frontmatter-mdx-remark-unified-1",
     "url": "https://blog.phuctm97.com/parse-frontmatter-mdx-remark-unified-1",
-    "md5": "bd25f5c82599a3f38c4600052e46dc9b"
+    "md5": "19955adc0b7144acfd243f64c99d52c8"
   }
 }
