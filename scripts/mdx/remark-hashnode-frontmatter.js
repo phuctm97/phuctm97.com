@@ -13,8 +13,6 @@ module.exports = () => (_, file) => {
     title,
     slug,
     tags: [], // Hashnode API currently don't support tags yet.
-    isRepublished: {
-      originalArticleURL: url,
-    },
+    canonicalURL: url,
   };
 };
