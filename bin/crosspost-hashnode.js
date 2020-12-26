@@ -13,7 +13,6 @@ const renderFor = require("../scripts/mdx/render-for");
 const crosspostJSONPath = path.join(rootDir, "data", "crosspost-hashnode.json");
 const toCrosspostEntry = (article, md5) => ({
   id: article.id,
-  slug: article.slug,
   url: article.url,
   md5,
 });
