@@ -7,14 +7,13 @@ const { logger } = require("../scripts/bin-utils");
 const { rootDir, relPagesDir } = require("../scripts/path-utils");
 const { isPost, inferPostURLParams } = require("../scripts/post-utils");
 
-const hashnodeAPI = require("../scripts/hashnode-api");
+const hashnode = require("hashnode-sdk-js");
 const renderFor = require("../scripts/mdx/render-for");
 
 const crosspostJSONPath = path.join(rootDir, "data", "crosspost-hashnode.json");
-const toCrosspostEntry = (story, md5) => ({
-  id: story._id,
-  cuid: story.cuid,
-  slug: story.slug,
+const toCrosspostEntry = (article, md5) => ({
+  id: article.id,
+  url: article.url,
   md5,
 });
 
@@ -40,6 +39,8 @@ const crosspost = async () => {
     absolute: true,
   });
 
+  const user = await hashnode.findUser("phuctm97");
+
   for (let filePath of paths) {
     if (!isPost(filePath)) continue;
 
@@ -49,24 +50,37 @@ const crosspost = async () => {
     const data = renderFor(filePath, "hashnode");
 
     if (!crosspost[postID]) {
-      logger.debug(`New post '${postID}': creating Hashnode story...`);
+      logger.debug(`New post '${postID}': creating Hashnode article...`);
 
-      const story = await hashnodeAPI.createStory(data);
-      crosspost[postID] = toCrosspostEntry(story, data.md5);
+      const article = await hashnode.createPublicationArticle(
+        user.publication.id,
+        {
+          ...data.frontmatter,
+          contentMarkdown: data.content,
+        }
+      );
+      crosspost[postID] = toCrosspostEntry(article, data.md5);
 
-      logger.success(`Created Hashnode story '${story.slug}'.`);
+      logger.success(`Created Hashnode article '${article.url}'.`);
     } else {
-      const { id, slug: prevSlug, md5: prevMD5 } = crosspost[postID];
+      const { id, url: prevURL, md5: prevMD5 } = crosspost[postID];
 
       if (prevMD5 !== data.md5) {
         logger.debug(
-          `Post '${postID}' changed: updating Hashnode article '${prevSlug}'...`
+          `Post '${postID}' changed: updating Hashnode article '${prevURL}'...`
         );
 
-        const story = await hashnodeAPI.updateStory(id, data);
-        crosspost[postID] = toCrosspostEntry(story, data.md5);
+        const article = await hashnode.updatePublicationArticle(
+          user.publication.id,
+          {
+            ...data.frontmatter,
+            id,
+            contentMarkdown: data.content,
+          }
+        );
+        crosspost[postID] = toCrosspostEntry(article, data.md5);
 
-        logger.success(`Updated Hashnode article '${story.slug}'.`);
+        logger.success(`Updated Hashnode article '${article.url}'.`);
       }
     }
   }

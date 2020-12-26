@@ -1,44 +1,44 @@
 {
   "blog/auto-distribute-posts-to-dev-to": {
     "id": "5fe30fb6b4b79006ffdac039",
-    "cuid": "ckj183jb400m7drs12y6p2v88",
     "slug": "auto-distribute-posts-to-dev-to",
-    "md5": "daf6f0a9fcec8a84dae108070fb529a3"
+    "url": "https://blog.phuctm97.com/auto-distribute-posts-to-dev-to",
+    "md5": "60e2d703450c79b2a73f450ec93b9ec6"
   },
   "blog/being-ambitious-is-a-myth": {
     "id": "5fe30fbbb4b79006ffdac03f",
-    "cuid": "ckj183n6600madrs143phebux",
     "slug": "being-ambitious-is-a-myth",
-    "md5": "eb0bf0d0558eff1961016951043eb0c4"
+    "url": "https://blog.phuctm97.com/being-ambitious-is-a-myth",
+    "md5": "4524f8a621e425c49c97022916215bb6"
   },
   "blog/hello-world-start-blog-in-html": {
     "id": "5fe30fc0b4b79006ffdac045",
-    "cuid": "ckj183qsq00mbdrs1e2x1d0fm",
     "slug": "hello-world-start-blog-in-html",
-    "md5": "ae2ff4797bd1d48b9053afbac7a60a91"
+    "url": "https://blog.phuctm97.com/hello-world-start-blog-in-html",
+    "md5": "4d6b2d3e1e94b70d5fefee6613f55e13"
   },
   "blog/my-custom-md-language": {
     "id": "5fe30fc5b4b79006ffdac04c",
-    "cuid": "ckj183uue00mddrs15zfq04ux",
     "slug": "my-custom-md-language",
-    "md5": "439907ded5c0c8f97c5f8d039c860262"
+    "url": "https://blog.phuctm97.com/my-custom-md-language",
+    "md5": "272ed01f09f71e996b8fdcb3eab89554"
   },
   "blog/switch-to-next-js-and-mdx": {
     "id": "5fe30fcab4b79006ffdac053",
-    "cuid": "ckj183yj600mfdrs1gom26yqj",
     "slug": "switch-to-next-js-and-mdx",
-    "md5": "62b8a0ee23ed5fb908ff0a6cd4a90dab"
+    "url": "https://blog.phuctm97.com/switch-to-next-js-and-mdx",
+    "md5": "a1c671c00fbb9afe21f3bcc097c81524"
   },
   "blog/publish-first-npm-package": {
     "id": "5fe495354df02c17a14dccb2",
-    "cuid": "ckj2vgorq0182o1s164efhsst",
     "slug": "publish-first-npm-package",
-    "md5": "3f72a5aa7ce67f3b664f2abbf237c334"
+    "url": "https://blog.phuctm97.com/publish-first-npm-package",
+    "md5": "da3bf8526f03c00df6f066910c5f612c"
   },
   "blog/parse-frontmatter-mdx-remark-unified": {
-    "id": "5fe5eb3c6a146422083cc527",
-    "cuid": "ckj4bldjj03ukq0s101f0hcre",
-    "slug": "parse-frontmatter-mdx-remark-unified",
-    "md5": "cd0bd05f0a7d7c84faa6c7301a0a9bd9"
+    "id": "5fe71e5d999b3f21e315765a",
+    "slug": "parse-frontmatter-mdx-remark-unified-1",
+    "url": "https://blog.phuctm97.com/parse-frontmatter-mdx-remark-unified-1",
+    "md5": "bd25f5c82599a3f38c4600052e46dc9b"
   }
 }

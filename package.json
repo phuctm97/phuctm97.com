@@ -23,6 +23,7 @@
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
     "axios": "^0.21.0",
+    "hashnode-sdk-js": "^0.0.2",
     "next": "^10.0.3",
     "next-seo": "^4.17.0",
     "react": "^17.0.1",
