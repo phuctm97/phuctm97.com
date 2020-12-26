@@ -1,0 +1,147 @@
+---
+title: Introducing Hashnode SDK for TypeScript/JavaScript
+description: >-
+  I created a TypeScript/JavaScript library for working with Hashnode blogging
+  platform programmatically.
+tags: [javascript, typescript, sdk, hashnode]
+published time: 2020-12-26
+---
+
+In order to implement an [auto-crosspost workflow] for [my website], I created a
+TypeScript/JavaScript SDK for working with [Hashnode] blogging platform. It's
+built around [Hashnode API].
+
+There're several reasons for it:
+
+- Hashnode public API is still in alpha and subject to breaking changes.
+  Experience using is a bit messy (what to expect in an alpha API), I had to
+  write several workaround-like functions. To make my website implementation
+  more relevant and easier to maintain, I need a stable API as well as
+  separating as much non-relevant codebase as possible.
+
+- The [Hashnode Christmas hackathon].
+
+- It's gonna be interesting if Hashnode collaborate on this, use in their
+  product, make it official, as their first step open-sourcing their product.
+
+## Key concepts
+
+- Opinionated, has its own interfaces focusing on common blogging features, e.g.
+  CRUD articles, comments, etc (_what you usually do on Hashnode_).
+
+- Abstracts away Hashnode API, which is currently in alpha and subject to
+  breaking changes. Whereas, this SDK's API is **considerably stable**, its API
+  won't change without a major release. As soon as Hashnode API changes, it will
+  be updated to keep its API remain unchanged and function correctly.
+
+- **Not** flexible by design, you can't query less or more fields, these use
+  cases are covered by Hashnode GraphQL API.
+
+## How & why?
+
+I am actively using this SDK in [my website] to implement an [auto-crosspost
+workflow], which runs daily. Hence, as soon as something breaks, I'll recognize
+and try to fix as soon as possible. Check out [this workflow run] to see how it
+is used in practice.
+
+## Usage
+
+### Install
+
+```bash
+yarn add hashnode-sdk-js
+```
+
+### API
+
+#### Configure API key
+
+Go to Hashnode account settings, create an API key and set it as environment
+variable `HASHNODE_API_KEY` at where you run your application, the SDK will
+automatically use it.
+
+#### Find a user by username
+
+```js
+import hashnode from "hashnode-sdk-js";
+
+hashnode.findUser("phuctm97").then((data) => console.log(data));
+```
+
+```
+{
+  id: '5fa3f68b47631a19e811f076',
+  username: 'phuctm97',
+  name: 'Minh-Phuc Tran',
+  tagline: 'Engineer 👨🏻‍💻. Building open-source tools and tutorials ➡️ twitter.com/phuctm97',
+  publication: {
+    id: '5fa565080163314ab6d7deab',
+    name: "Minh-Phuc Tran's Blog",
+    domain: 'blog.phuctm97.com'
+  }
+}
+```
+
+#### Other examples
+
+See [more examples][sdk examples].
+
+#### Types
+
+```ts
+export type Publication = {
+  id: string;
+  name: string;
+  domain: string;
+};
+
+export type User = {
+  id: string;
+  username: string;
+  name: string;
+  tagline: string;
+  publication: Publication;
+};
+
+export type Article = {
+  id: string;
+  title: string;
+  slug: string;
+  url: string;
+  canonicalURL?: string;
+  contentMarkdown: string;
+};
+```
+
+## Features
+
+- Find user.
+
+- Get a user's publication.
+
+- Create an article in a publication.
+
+- Update an article in a publication.
+
+(Contributions are welcome)
+
+## Links
+
+Check out the SDK's [repository][sdk repo] and [NPM package][sdk package] for
+more details.
+
+<!-- Links -->
+
+[@phuctm97]: https://twitter.com/phuctm97
+[my website]: https://phuctm97.com
+[auto-crosspost workflow]:
+  https://github.com/phuctm97/phuctm97.com/actions/runs/445469015
+[this workflow run]:
+  https://github.com/phuctm97/phuctm97.com/runs/1611074422?check_suite_focus=true#step:7:9
+[hashnode api]: https://api.hashnode.com
+[hashnode]: https://hashnode.com
+[hashnode christmas hackathon]:
+  https://townhall.hashnode.com/hashnode-christmas-hackathon
+[sdk examples]: https://github.com/phuctm97/hashnode-sdk-js/tree/master/examples
+[sdk repo]: https://github.com/phuctm97/hashnode-sdk-js
+[sdk package]: https://www.npmjs.com/package/hashnode-sdk-js
