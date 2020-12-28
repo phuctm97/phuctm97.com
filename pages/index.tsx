@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { FiGithub } from "react-icons/fi";
+import styles from "./index.module.scss";
 
 const IndexPage = () => {
   const posts = [
@@ -42,6 +44,10 @@ const IndexPage = () => {
 
   return (
     <>
+      <nav className={styles.navbar}>
+        <h1>@phuctm97</h1>
+        <FiGithub />
+      </nav>
       <header>
         <h1>Hi, I'm Minh-Phuc Tran</h1>
         <p>
