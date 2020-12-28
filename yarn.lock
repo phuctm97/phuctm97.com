@@ -1786,10 +1786,10 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-hashnode-sdk-js@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/hashnode-sdk-js/-/hashnode-sdk-js-0.0.2.tgz#7706b961b28561d03c3bd18fa35a4ba29840cd3c"
-  integrity sha512-TrXQhxnIB/mgOY9GNUvHZPFPuKfJDlWXGY40jeeuLuiFsfEDFb/g72oPiwduayAeYZf1kvG9402gLGnJOgnOyA==
+hashnode-sdk-js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/hashnode-sdk-js/-/hashnode-sdk-js-1.0.1.tgz#25cc30e44b7b0fb2cbf88ca02422d338807c8e83"
+  integrity sha512-rKsVEyu1A8eWkQIXVgWglOypYaVegp+gjBBaXILjwvO7drsvtl5pXAL5kH7akKGy61UIUEnroOTKEY1zJ04nCw==
   dependencies:
     node-fetch "^2.6.1"
 
