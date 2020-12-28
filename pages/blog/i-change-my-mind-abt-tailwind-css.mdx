@@ -1,0 +1,79 @@
+---
+title: I Changed My Mind After 2nd Try Tailwind CSS
+description:
+  I tried TailwindCSS to add styles to my website but quit about an hour, then I
+  tried again, it is awesome!
+tags: [css, react, javascript, webdev]
+published time: 2020-12-28
+---
+
+> TL;DR: If you are skeptical about TailwindCSS, try it for 2 hours, you'll love
+> it.
+
+Because I wanted to give [my plain HTML website] a little style, I gave Tailwind
+CSS a shot yesterday. I spent about an hour to read through its documentation
+and try it on [its playground][tailwind play]. The first impression was _"meh"_.
+Tailwind is essentially a set of CSS classes mapping to a few CSS properties,
+so, in order to use Tailwind, you basically have to kinda learn CSS again, which
+I believe very few developers enjoy. Tailwind's creators actually knew that and
+put a very interesting note:
+
+> Now I know what you're thinking, "this is an atrocity, what a horrible mess!"
+> and you're right, it's kind of ugly. In fact it's just about impossible to
+> think this is a good idea the first time you see it — you have to actually try
+> it.
+>
+> - [Tailwind's documentation](https://tailwindcss.com/docs/utility-first).
+
+I gave it a try, but less than an hour was probably not enough for me to shift
+my mind from typical CSS properties to Tailwind classes. So, I didn't like it.
+
+## Use typcial CSS
+
+Because I didn't like Tailwind, today I decided to style my website using Sass
+while **keeping an eye on what better and worse compared to yesterday
+experience**. And, it took me almost 3 hours to finish simple styles and the
+experience wasn't fun either.
+
+##### So, what's wrong? 😠
+
+I spent **more than half of the time to think of which CSS properties should be
+grouped, which selectors I should do, what the class names should be**. Although
+I consciously tried to avoid that, it still consumed a lot of my energy. I
+couldn't really explain why, the biggest reason is probably because we always
+have so many options with CSS and they keep growing over time.
+
+## Switch back to Tailwind again
+
+So, I switched back to Tailwind again, not that I was convinced that Tailwind
+will work better, but to see again if Tailwind could solve the problems I
+mentioned above.
+
+And... yeah... it actually solved the problems:
+
+- Tailwind comes with a very complete set of utilities, I've never had to think
+  of grouping styles together. Almost every element can be styled with just
+  Tailwind classes.
+
+- I styled directly at element-level, in HTML, so I've rarely had to think of
+  CSS selectors.
+
+- Because I've never had to write CSS utilities myself, there wasn't any CSS
+  "codebase" growing. Most importantly, I had nothing about CSS to **keep in my
+  mind**. Now I knew it! When you write CSS, I believe "remembering its
+  existence" consumes a lot of energy!
+
+## Conclusion
+
+I had to say it was oddly interesting. Tailwind appears to be a _"CSS
+framework"_, so my expectation was _"I'll be able to write CSS faster and
+easier"_, but when looking at its documentation, it doesn't look faster and
+easier at all. It turned out, the problem Tailwind solved is somewhat a
+physiological problem when working with CSS.
+
+So, give it try if you've ever skeptical!
+
+<!-- Links -->
+
+[my plain html website]: /blog/hello-world-start-blog-in-html
+[tailwind play]: https://play.tailwindcss.com

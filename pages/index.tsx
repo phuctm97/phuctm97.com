@@ -5,6 +5,10 @@ import Main from "~components/main";
 const IndexPage = () => {
   const posts = [
     {
+      link: "/blog/i-change-my-mind-abt-tailwind-css",
+      text: "I Changed My Mind After 2nd Try TailwindCSS",
+    },
+    {
       link: "/blog/introducing-hashnode-sdk-js",
       text: "Introducing Hashnode SDK for TypeScript/JavaScript",
     },
