@@ -3023,10 +3023,10 @@ remark-stringify@^8.0.0:
     unherit "^1.0.4"
     xtend "^4.0.1"
 
-remark-unwrap-texts@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/remark-unwrap-texts/-/remark-unwrap-texts-0.0.6.tgz#ae9b6b71c9cb80328ec0537326d153a807af5e09"
-  integrity sha512-NfCNaIZI37PFlV+ZBwIhwL23jEDzaOCuuN7tIL8XfFuiewiVVxzWRlCXYuBlRpe5pYjmcBUI79Zsq988Ozqgrw==
+remark-unwrap-texts@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/remark-unwrap-texts/-/remark-unwrap-texts-1.0.2.tgz#be9ea4822a6318bc1279fb32327ee90f252bf801"
+  integrity sha512-fH/R0/ThcX3gvHMERwavsedUmRJR0q9PeWRZm1lFzT37IU+pr9ptVlLOrsPDTKMx0XNMB4x0CvmsbsH+0nxdgQ==
   dependencies:
     unist-util-visit "^2.0.3"
 
