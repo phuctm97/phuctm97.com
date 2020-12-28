@@ -1,0 +1,12 @@
+.page {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+}

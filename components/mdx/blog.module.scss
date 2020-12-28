@@ -1,4 +1,11 @@
-.post {
+.article {
+  margin-top: 2em;
+  margin-bottom: 4.5em;
+
+  > header {
+    margin-bottom: 3em;
+  }
+
   h1,
   h2,
   h3,
@@ -6,5 +13,115 @@
   h5,
   h6 {
     color: var(--heading-color);
+    margin-top: 3rem;
+    line-height: 1.27;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.27rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  p {
+    color: var(--text-color);
+    margin-top: 1.5em;
+    line-height: 1.5;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #eaeaea;
+    margin-top: 1.5rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li + li {
+    margin-top: 0.6rem;
+  }
+
+  ul li:before {
+    position: absolute;
+    margin-left: -1rem;
+    color: #aaa;
+  }
+
+  blockquote {
+    color: #666;
+    padding: 0.3rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 2px solid #ccc;
+
+    p {
+      margin: 0;
+    }
+    a {
+      box-shadow: none;
+    }
+  }
+}
+
+.title {
+  font-size: 3em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1em;
+  margin: 0;
+}
+
+.info {
+  color: #555;
+  font-weight: 300;
+  margin-top: 2em;
+  margin-bottom: 0.625em;
+
+  strong {
+    font-weight: 700;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--heading-color);
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+
+  p {
+    font-size: 0.9em;
+    margin: 0 0.5em 0 0;
+    padding: 0.5em;
+    border-radius: 0.1em;
+    color: var(--text-color);
+    background-color: #f1f4f8;
+  }
+
+  p:last-child {
+    margin: 0;
   }
 }

@@ -1,3 +1,5 @@
+@import "normalize.css";
+
 /* Theme */
 :root {
   --bg-color: #fff;
@@ -24,6 +26,7 @@ body {
 }
 pre,
 code,
+kbd,
 samp {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;

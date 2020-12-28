@@ -1,4 +1,6 @@
 import { NextSeo } from "next-seo";
+import Header from "~components/header";
+import Main from "~components/main";
 import styles from "./blog.module.scss";
 
 type Props = {
@@ -30,25 +32,34 @@ const BlogPost: React.FC<Props> = ({
         description,
       }}
     />
-    <article className={styles.post}>
-      <header>
-        <h1>{title}</h1>
-        <sup>
-          <em>{publishedTime.toLocaleDateString()}</em>
-        </sup>
-        {tags.length > 0 && (
-          <p>
-            Tags:{" "}
-            {tags.map((tag, index) => (
-              <span key={index}>
-                <code>{tag}</code>{" "}
-              </span>
-            ))}
+    <Header />
+    <Main>
+      <article className={styles.article}>
+        <header>
+          <h1 className={styles.title}>{title}</h1>
+          <p className={styles.info}>
+            By{" "}
+            <strong>
+              <a href="https://twitter.com/phuctm97">Minh-Phuc Tran</a>
+            </strong>{" "}
+            ·{" "}
+            {publishedTime.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
           </p>
-        )}
-      </header>
-      <main>{children}</main>
-    </article>
+          {tags.length > 0 && (
+            <div className={styles.tags}>
+              {tags.map((tag, index) => (
+                <p key={index}>{tag}</p>
+              ))}
+            </div>
+          )}
+        </header>
+        <main>{children}</main>
+      </article>
+    </Main>
   </>
 );
 
