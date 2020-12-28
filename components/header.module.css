@@ -4,7 +4,7 @@
 }
 
 .header > div {
-  @apply container max-w-3xl flex flex-row px-4;
+  @apply container max-w-3xl flex flex-row px-4 lg:px-0;
 }
 
 .header a {

@@ -1,0 +1,99 @@
+.article {
+  @apply mt-10 mb-16;
+}
+.article > header {
+  @apply mb-12;
+}
+#title {
+  @apply text-5xl font-bold mb-6;
+}
+#info {
+  @apply font-light mb-2 text-gray-600;
+}
+#info a {
+  @apply text-gray-900;
+}
+#info strong {
+  @apply font-bold;
+}
+#tags {
+  @apply flex flex-row;
+}
+#tags p {
+  @apply py-1 px-2 rounded-sm mt-0 mr-1 bg-gray-100 text-gray-800;
+}
+
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  @apply font-medium mt-8 text-black;
+}
+.article h1 {
+  @apply text-4xl;
+}
+.article h2 {
+  @apply text-3xl;
+}
+.article h3 {
+  @apply text-2xl;
+}
+.article h4 {
+  @apply text-xl;
+}
+.article h5 {
+  @apply text-lg;
+}
+.article h6 {
+  @apply text-base;
+}
+.article p {
+  @apply mt-5 text-gray-900;
+}
+.article a {
+  @apply text-blue-600 font-medium hover:text-blue-700;
+}
+.article code {
+  @apply bg-gray-100 text-sm font-mono font-bold p-1 rounded-sm;
+}
+
+.article code:before,
+.article code:after {
+  @apply font-normal text-xs;
+  content: "`";
+}
+
+.article pre {
+  @apply mt-4;
+}
+.article pre code {
+  @apply font-normal bg-transparent;
+}
+.article pre code:before,
+.article pre code::after {
+  content: none;
+}
+
+.article ol,
+.article ul {
+  @apply pl-4 mt-4;
+}
+.article ol {
+  @apply list-decimal;
+}
+.article ul li:before {
+  content: "-";
+  @apply absolute -ml-4 text-gray-500;
+}
+.article li + li p {
+  @apply mt-3;
+}
+
+.article blockquote {
+  @apply px-4 py-2 mt-4 border-l-2 border-gray-200;
+}
+.article blockquote p {
+  @apply m-0;
+}
