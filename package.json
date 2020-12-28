@@ -47,7 +47,7 @@
     "remark-frontmatter": "^2.0.0",
     "remark-parse-frontmatter": "^0.0.2",
     "remark-squeeze-paragraphs": "^4.0.0",
-    "remark-unwrap-texts": "^0.0.6",
+    "remark-unwrap-texts": "^1.0.2",
     "revalidator": "^0.3.1",
     "sass": "^1.30.0",
     "to-vfile": "^6.1.0",
