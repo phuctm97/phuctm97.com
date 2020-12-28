@@ -46,20 +46,23 @@ const IndexPage = () => {
     <>
       <Header />
       <Main>
-        <h1 className="text-black font-bold text-4xl mb-8">
+        <h1 className="text-black font-bold text-5xl mb-8">
           Hey, I'm Minh-Phuc Tran.
         </h1>
         <p className="text-gray-900 mb-8">
           I'm a Software Engineer. Growing as a developer can be lonely and
           challenging sometimes, I document my ups and downs here to hopefully
           motivate you. If you're looking for help or just a friend,{" "}
-          <a href="https://twitter.com/phuctm97">
+          <a
+            className="text-blue-600 font-medium underline hover:text-blue-700"
+            href="https://twitter.com/phuctm97"
+          >
             feel free to DM me on Twitter
           </a>
           , I'll reply as soon as possible.
         </p>
         <section className="mb-8">
-          <h2 className="text-black font-bold text-2xl mb-4">Newsletter</h2>
+          <h2 className="text-black font-bold text-3xl mb-4">Newsletter</h2>
           <p className="text-gray-900 mb-4">
             In my newsletter, I share early and behind-the-scene look into what
             I’m working on and learning about software development. Most
@@ -85,7 +88,7 @@ const IndexPage = () => {
             <input
               type="submit"
               value="Subscribe"
-              className="bg-gray-100 py-1 px-3 rounded-sm"
+              className="bg-gray-100 py-1 px-3 rounded-sm cursor-pointer hover:bg-gray-200"
             />
           </form>
           <p className="text-sm ml-28 text-gray-900">
@@ -93,7 +96,7 @@ const IndexPage = () => {
           </p>
         </section>
         <section>
-          <h2 className="text-black font-bold text-2xl mb-4">Blog</h2>
+          <h2 className="text-black font-bold text-3xl mb-4">Blog</h2>
           <p className="mb-4">
             My free-flowing thoughts and ideas: 100% authentic, good for
             inspiration, not always true.
