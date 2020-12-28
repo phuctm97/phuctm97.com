@@ -1,5 +1,6 @@
 .article {
-  margin: 2em 0;
+  margin-top: 2em;
+  margin-bottom: 4.5em;
 
   > header {
     margin-bottom: 3em;
@@ -12,6 +13,70 @@
   h5,
   h6 {
     color: var(--heading-color);
+    margin-top: 3rem;
+    line-height: 1.27;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.27rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  p {
+    color: var(--text-color);
+    margin-top: 1.5em;
+    line-height: 1.5;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #eaeaea;
+    margin-top: 1.5rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li + li {
+    margin-top: 0.6rem;
+  }
+
+  ul li:before {
+    position: absolute;
+    margin-left: -1rem;
+    color: #aaa;
+  }
+
+  blockquote {
+    color: #666;
+    padding: 0.3rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 2px solid #ccc;
+
+    p {
+      margin: 0;
+    }
+    a {
+      box-shadow: none;
+    }
   }
 }
 
