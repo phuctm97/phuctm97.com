@@ -10,7 +10,7 @@
   "files.exclude": {
     "node_modules/": true,
     "yarn.lock": true,
-    ".next/": true,
-    "out/": true
-  }
+    ".next/": true
+  },
+  "css.validate": false
 }
