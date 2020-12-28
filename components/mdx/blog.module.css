@@ -1,6 +1,3 @@
-.article {
-  @apply mt-10 mb-16;
-}
 .article > header {
   @apply mb-12;
 }
