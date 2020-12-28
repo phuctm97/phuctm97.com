@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import styles from "./main.module.scss";
+import styles from "./main.module.css";
 
 type Props = PropsWithChildren<{}>;
 
