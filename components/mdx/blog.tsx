@@ -34,21 +34,27 @@ const BlogPost: React.FC<Props> = ({
     />
     <Header />
     <Main>
-      <article className={styles.post}>
+      <article className={styles.article}>
         <header>
-          <h1>{title}</h1>
-          <sup>
-            <em>{publishedTime.toLocaleDateString()}</em>
-          </sup>
+          <h1 className={styles.title}>{title}</h1>
+          <p className={styles.info}>
+            By{" "}
+            <strong>
+              <a href="https://twitter.com/phuctm97">Minh-Phuc Tran</a>
+            </strong>{" "}
+            ·{" "}
+            {publishedTime.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
           {tags.length > 0 && (
-            <p>
-              Tags:{" "}
+            <div className={styles.tags}>
               {tags.map((tag, index) => (
-                <span key={index}>
-                  <code>{tag}</code>{" "}
-                </span>
+                <p key={index}>{tag}</p>
               ))}
-            </p>
+            </div>
           )}
         </header>
         <main>{children}</main>
