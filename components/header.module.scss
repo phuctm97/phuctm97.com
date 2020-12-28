@@ -1,0 +1,36 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: var(--bg-color), $alpha: 0.95);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  padding: 1.75em 0;
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-button {
+    svg {
+      color: var(--text-color);
+    }
+
+    &:hover svg {
+      color: var(--heading-color);
+    }
+  }
+
+  h1 {
+    font-size: 1em;
+    margin: 0;
+  }
+
+  nav {
+    margin-left: auto;
+  }
+}
