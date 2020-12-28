@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Header from "~components/header";
+import styles from "./index.module.scss";
 
 const IndexPage = () => {
   const posts = [
@@ -44,68 +45,56 @@ const IndexPage = () => {
   return (
     <>
       <Header />
-      <header>
-        <h1>Hi, I'm Minh-Phuc Tran</h1>
-        <p>
-          I'm a Software Engineer. I share my learnings and opinions about
-          software development here. Hope it helps.
-        </p>
-        <p>
-          <em>
-            My website is currently in just HTML, though it's good enough to
-            read, my articles are automatically distributed to{" "}
-            <a href="https://dev.to/phuctm97">
-              my DEV.to, feel free to go there
-            </a>{" "}
-            if you prefer more colorful format. There are also about 50+ other
-            blog posts on{" "}
-            <a href="https://blog.phuctm97.com">blog.phuctm97.com</a> and{" "}
-            <a href="https://phuctm97.medium.com">Medium</a>.
-          </em>
-        </p>
-        <p>
-          Besides, <a href="https://twitter.com/phuctm97">DM me on Twitter</a>{" "}
-          if you have any question or need help.
-        </p>
-      </header>
-      <main>
-        <section>
-          <h2>Newsletter</h2>
+      <main className={styles.page}>
+        <div className={styles.container}>
+          <h1>Hey, I'm Minh-Phuc Tran.</h1>
           <p>
-            In my newsletter, I share early and behind-the-scene look into what
-            I’m working on and learning about software development. Most
-            importantly, it's a way for you and me to establish a closer
-            relationship and hopefully can help each other in the future.
+            I'm a Software Engineer. Growing as a developer can be lonely and
+            challenging sometimes, I document my ups and downs here to hopefully
+            motivate you. If you're looking for help or just a friend,{" "}
+            <a href="https://twitter.com/phuctm97">
+              feel free to DM me on Twitter
+            </a>
+            , I'll reply as soon as possible.
           </p>
-          <form
-            action="https://buttondown.email/api/emails/embed-subscribe/phuctm97"
-            method="post"
-            target="popupwindow"
-            onSubmit={onSubscribeNewsletter}
-          >
-            <label htmlFor="bd-email">Enter your email: </label>
-            <input type="email" name="email" id="bd-email" />
-            <input type="hidden" value="1" name="embed" />
-            <input type="submit" value="Subscribe" />
-          </form>
-          <sup>
-            <em>(No spam, unsubscribe anytime)</em>
-          </sup>
-        </section>
-        <section>
-          <h2>Blog</h2>
-          <p>
-            My free-flowing thoughts and ideas: 100% authentic, good for
-            inspiration, not always true.
-          </p>
-          <ul>
-            {posts.map(({ link, text }) => (
-              <li key={link}>
-                <Link href={link}>{text}</Link>
-              </li>
-            ))}
-          </ul>
-        </section>
+          <section>
+            <h2>Newsletter</h2>
+            <p>
+              In my newsletter, I share early and behind-the-scene look into
+              what I’m working on and learning about software development. Most
+              importantly, it's a way for you and me to establish a closer
+              relationship and hopefully can help each other in the future.
+            </p>
+            <form
+              action="https://buttondown.email/api/emails/embed-subscribe/phuctm97"
+              method="post"
+              target="popupwindow"
+              onSubmit={onSubscribeNewsletter}
+            >
+              <label htmlFor="bd-email">Enter your email: </label>
+              <input type="email" name="email" id="bd-email" />
+              <input type="hidden" value="1" name="embed" />
+              <input type="submit" value="Subscribe" />
+            </form>
+            <sup>
+              <em>(No spam, unsubscribe anytime)</em>
+            </sup>
+          </section>
+          <section>
+            <h2>Blog</h2>
+            <p>
+              My free-flowing thoughts and ideas: 100% authentic, good for
+              inspiration, not always true.
+            </p>
+            <ul>
+              {posts.map(({ link, text }) => (
+                <li key={link}>
+                  <Link href={link}>{text}</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
       </main>
     </>
   );
