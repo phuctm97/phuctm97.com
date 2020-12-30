@@ -24,6 +24,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "exclude": ["node_modules", ".next", "out"],
+  "exclude": ["node_modules", ".next"],
   "include": ["**/*.ts", "**/*.tsx"]
 }
