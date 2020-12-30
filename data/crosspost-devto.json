@@ -7,41 +7,41 @@
   "blog/hello-world-start-blog-in-html": {
     "id": 548401,
     "url": "https://dev.to/phuctm97/hello-world-i-started-my-blog-in-plain-html-1nnm",
-    "md5": "9f7fa4a00d794d273960f0c4618a53dc"
+    "md5": "2568a0eadb601ef68d947a172ce589bf"
   },
   "blog/my-custom-md-language": {
     "id": 548402,
     "url": "https://dev.to/phuctm97/create-an-mdx-plugin-to-have-my-own-markdown-language-18bn",
-    "md5": "ca65ca4b1361d9bdc9b0c6c2f2d7b47b"
+    "md5": "73feba2ba4b1fc944023554499e1e160"
   },
   "blog/switch-to-next-js-and-mdx": {
     "id": 548403,
     "url": "https://dev.to/phuctm97/switch-to-next-js-and-mdx-3f3c",
-    "md5": "6b8619ffd57db110a91fa7037cbd53f2"
+    "md5": "fa98d62aeeccab098abd7c7e60a09ed4"
   },
   "blog/being-ambitious-is-a-myth": {
     "id": 550352,
     "url": "https://dev.to/phuctm97/being-ambitious-is-a-myth-3op",
-    "md5": "97769c5084edf2b6489e77964df7d56b"
+    "md5": "e3e64b9684e7b016878a7062299fd488"
   },
   "blog/publish-first-npm-package": {
     "id": 551759,
     "url": "https://dev.to/phuctm97/publish-my-first-npm-typescript-package-16c8",
-    "md5": "73640d9955f3514973ba7d9d84dd0f3d"
+    "md5": "7c773607d2985ea905d0f7fd52f440e6"
   },
   "blog/parse-frontmatter-mdx-remark-unified": {
     "id": 552451,
     "url": "https://dev.to/phuctm97/parse-markdown-frontmatter-in-mdx-remark-and-unified-1026",
-    "md5": "4f21f0d9abf88db9108794660cd98859"
+    "md5": "b47af3c8c65b4ae4d9fa62f5277f92cb"
   },
   "blog/introducing-hashnode-sdk-js": {
     "id": 553061,
     "url": "https://dev.to/phuctm97/introducing-hashnode-sdk-for-typescript-javascript-21a7",
-    "md5": "5e758ecba27f9a294c9622b76a34beb1"
+    "md5": "5c4a74d34ec9405976492c30e7215821"
   },
   "blog/i-change-my-mind-abt-tailwind-css": {
     "id": 554631,
     "url": "https://dev.to/phuctm97/i-changed-my-mind-after-2nd-try-tailwind-css-4oj4",
-    "md5": "401a2abae49146fbf565121444d9e633"
+    "md5": "aea5f1747df12cb5d800bb74a8be28e2"
   }
 }
