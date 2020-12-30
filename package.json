@@ -1,9 +1,12 @@
 {
   "name": "phuctm97.com",
   "version": "0.0.0",
-  "description": "💁🏻‍♂️ My personal website.",
   "repository": "https://github.com/phuctm97/phuctm97.com",
-  "author": "Minh-Phuc Tran <me@phuctm97.com> (https://phuctm97.com)",
+  "author": {
+    "name": "Minh-Phuc Tran",
+    "email": "me@phuctm97.com",
+    "url": "https://phuctm97.com"
+  },
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -16,9 +19,8 @@
     "crosspost:devto": "node bin/crosspost-devto.js",
     "crosspost:hashnode": "node bin/crosspost-hashnode.js"
   },
-  "resolutions": {
-    "webpack": "^5.11.0",
-    "source-map-resolve": "^0.6.0"
+  "engines": {
+    "node": "12.x"
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
