@@ -8,6 +8,7 @@ type Props = {
   title: string;
   description: string;
   tags: string[];
+  coverURL: string;
   publishedTime: Date;
 };
 
@@ -17,6 +18,7 @@ const BlogPost: React.FC<Props> = ({
   description,
   tags,
   publishedTime,
+  coverURL,
   children,
 }) => (
   <>
@@ -30,6 +32,7 @@ const BlogPost: React.FC<Props> = ({
         article: { publishedTime: publishedTime.toISOString() },
         title,
         description,
+        images: [{ url: coverURL, alt: title }],
       }}
     />
     <Header />
