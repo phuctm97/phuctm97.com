@@ -11,6 +11,27 @@ const inferPostURLParams = (filePath) => {
   return { folder, slug };
 };
 
+const getPostCoverURL = (post, target) => {
+  const { cover } = post;
+  if (typeof cover === "string") return cover;
+
+  let icons = [];
+  if (cover) {
+    if (typeof cover !== "object")
+      throw new Error("Invalid post cover: " + JSON.stringify(cover, null, 2));
+    icons = cover.icons;
+  }
+
+  const { title } = post;
+  const url = new URL(`${title}.jpg`, "https://img.phuctm97.com/api/v2/");
+
+  if (target) url.searchParams.append("target", target);
+  for (let icon of icons) {
+    url.searchParams.append("icons", icon);
+  }
+  return url.toString();
+};
+
 const validFolders = ["blog"];
 
 const isPost = (filePath) => {
@@ -22,5 +43,6 @@ const isPost = (filePath) => {
 
 module.exports = {
   inferPostURLParams,
+  getPostCoverURL,
   isPost,
 };

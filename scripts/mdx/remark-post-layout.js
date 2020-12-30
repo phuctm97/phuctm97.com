@@ -1,3 +1,5 @@
+const { getPostCoverURL } = require("../post-utils");
+
 /**
  * Automatically selects and renders layout for a post based on its `folder`.
  *
@@ -13,6 +15,7 @@ module.exports = () => (tree, file) => {
     title: "${title}",
     tags: [${tags.map((tag) => `"${tag}"`).join(", ")}],
     description: "${description}",
+    coverURL: "${getPostCoverURL(post)}",
     publishedTime: new Date("${publishedTime}"),
   }`;
 
