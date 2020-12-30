@@ -1,6 +1,5 @@
 # Next.js
 /.next/
-/out/
 
-# Auto-generated files.
+# Auto-generated files
 /data/

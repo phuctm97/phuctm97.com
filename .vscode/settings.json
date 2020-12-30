@@ -6,11 +6,13 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
 
+  // Tailwind CSS
+  "css.validate": false,
+
   // Misc
   "files.exclude": {
     "node_modules/": true,
     "yarn.lock": true,
     ".next/": true
-  },
-  "css.validate": false
+  }
 }
