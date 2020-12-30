@@ -7,6 +7,7 @@ const frontmatterSchema = {
     title: { type: "string", required: true },
     description: { type: "string", required: true },
     tags: { type: "array", maxItems: 4, uniqueItems: true },
+    cover: { type: ["string", "object"], required: false },
     "published time": {
       type: "string",
       required: true,
@@ -37,6 +38,7 @@ module.exports = () => (_, file) => {
     title,
     description,
     tags,
+    cover,
     "published time": publishedTime,
   } = frontmatter;
 
@@ -44,6 +46,7 @@ module.exports = () => (_, file) => {
     title,
     description,
     tags: tags || [],
+    cover,
     publishedTime: new Date(publishedTime),
     url: postURL,
     path: postPath,
