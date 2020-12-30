@@ -42,7 +42,7 @@ generate cover images for content distribution:
 
 - Twitter emojis.
 
-- Requires zero action from if you publish posts to DEV.to using [DEV.to API].
+- Requires zero action if you publish posts to DEV.to using [DEV.to API].
 
 - Easily share consistent styles between your content images, embed your
   name/trademark to all your content.
@@ -55,15 +55,16 @@ generate cover images for content distribution:
 
 - There are 2 deployment models:
 
-  - Node.js + Docker, which can be deployed to every cloud platform that
-    supports Docker deployment, e.g. DigitalOcean. The project is pre-configured
-    to deploy to DigitalOcean App Platform with a single click, too.
+  - [Node.js + Docker][github repo], which can be deployed to every cloud
+    platform that supports Docker deployment, e.g. DigitalOcean. The project is
+    pre-configured to deploy to DigitalOcean App Platform with a single click,
+    too.
 
-  - Next.js + Serverless functions, which can be deployed serverlessly to
-    platforms that support Next.js API routes as Serverless functions (only
-    Vercel currently supports).
+  - [Next.js + Serverless functions][next.js repo], which can be deployed
+    serverlessly to platforms that support Next.js API routes as Serverless
+    functions (only Vercel currently supports).
 
-### Category Submission:
+### Category Submission
 
 Well, frankly, it's _Random Roulette_. Nevertheless, I believe it can be very
 useful for personal site/portfolio (I use it on my website) and business blogs.
@@ -81,17 +82,23 @@ repository][github repo] with details documentation.
 Following are some examples of using this service's API, you can copy and paste
 each URL on your browser to see it yourself.
 
+#### With title and brands' logos
+
 ```
 https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean
 ```
 
 ![Image 1](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean)
 
+#### With Markdown and brands' logos
+
 ```
 https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to
 ```
 
 ![Image 2](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi!**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to)
+
+#### With Dark mode
 
 ```
 https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert
@@ -107,7 +114,7 @@ https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%8C%99%20**Dark%20mode*
 
 ### Permissive License
 
-The project is released under the _MIT license_ and is completely free for use.
+The project is released under the _MIT license_ and is completely free.
 
 ## Background
 
@@ -116,17 +123,17 @@ DigitalOcean didn't organize the hackathon because it was a part of [my
 website].
 
 My website is where I'll blog very often (currently one post per ~2 days) and
-document everything I did and learned as a software engineer and indie hacker.
-One thing I want to achieve building my website is to automatically distribute
-my content as much as possible, in order to maximize distribution in long term
-and at scale. It currently supported auto distribution to DEV.to and Hashnode
-(you're probably reading a distributed copy of [the original post]).
+document everything I did and learned as a software engineer. One thing I want
+to achieve building my website is to automatically distribute my content as much
+as possible, in order to maximize distribution in long term and at scale. It
+currently supported auto distribution to DEV.to and Hashnode (you're probably
+reading a distributed copy of [the original post]).
 
 One part of this automation is to generate cover images for posts and let people
-know where to find me, which is this service 🤓.
+know where to find me. ➡️ This service 🤓
 
-I believe automating all this is the most scalable way to grow an audience in
-the long term, while I can focus my energy on high leverage tasks.
+I believe automating all that is the a scalable way to grow an audience in the
+long term, while I can focus my energy on high leverage tasks.
 
 ### How I built it
 
@@ -139,13 +146,13 @@ both Node.js based and Next.js based versions. There are also more details in
 
 The purpose of this service is to **dynamically turn structured data into
 images**. An easy way to think about it is that it is like a React component
-that receives `props` then renders `visualization`, which is an `image` for this
-service.
+that receives `props` then renders `visualization`, which is an `image` in this
+case.
 
 Each API is a HTTP `GET` at `/api/{version}/{...props}`:
 
 - A `version` represents a component that requires a certain type of `props` and
-  defines how the image should look.
+  defines how an image should look.
 
 - `props` are constructed using HTTP path and query params.
 
@@ -160,7 +167,7 @@ See [img-nodejs#API](https://github.com/phuctm97/img-nodejs#api).
 
 ##### Generate images
 
-To be able to render dynamically images, I used [Puppeteer] to render HTML in a
+To be able to render dynamic images, I used [Puppeteer] to render HTML in a
 headless Chrome, then take screenshots and render them back to clients.
 
 ```ts
@@ -184,13 +191,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 ##### Configure Docker
 
-There're one tricky part with deployment of this, especially to DigitalOcean.
-When developing on a laptop, it's easy because Puppeteer will simply use your
-installed latest Chrome instance with all admin access and resources attached to
-it. When deploying to a cloud platform like DigitalOcean, you'll need to install
-and configure a Chrome instance yourself. So, to make it easier for others, I
-made a Docker image to prepare everything for you 🥳. Security was also taken
-care of.
+There're one tricky part with deployment of this service, especially to
+DigitalOcean. When developing on a laptop, it's easy because Puppeteer will
+simply use your installed Chrome instance with admin access and resources
+attached to it. When deploying to a cloud platform like DigitalOcean, you'll
+need to install and configure a Chrome instance yourself. So, to make it easier
+for others, I made a Docker image to prepare everything for you 🥳. Security was
+also taken care of.
 
 ```dockerfile
 FROM alpine:3.12
@@ -232,8 +239,7 @@ enable you to deploy the service to your account with a single click.
 
 One cool thing about deploying to DigitalOcean App Platform is that it will take
 care of setting up proxies, port binding, and SSL (HTTPS) certificates for you.
-It will also redeploy the service for you when you push changes to `master`
-branch.
+It will also redeploy the service when you push changes to `master` branch.
 
 ### Additional Resources/Info
 
