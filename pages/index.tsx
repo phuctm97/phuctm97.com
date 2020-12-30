@@ -5,6 +5,10 @@ import Main from "~components/main";
 const IndexPage = () => {
   const posts = [
     {
+      link: "/blog/imagegen-as-a-service-introduction",
+      text: "Imagegen as a Service (Free), All Bloggers Should Have One",
+    },
+    {
       link: "/blog/i-change-my-mind-abt-tailwind-css",
       text: "I Changed My Mind After 2nd Try TailwindCSS",
     },

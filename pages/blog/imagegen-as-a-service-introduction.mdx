@@ -1,0 +1,261 @@
+---
+title: Imagegen as a Service (Free), All Bloggers Should Have One
+description: >-
+  I built a Free Image Generator as a Service, is especially useful to generate
+  personalized/trademark covers for content distribution
+tags: [showdev, dohackathon, saas, javascript]
+cover:
+  icons: [Node.js, Next.js, DigitalOcean]
+published time: 2020-12-30
+---
+
+Hi folks, I've just built an _Imagegen (Image Generator) as a Service_. I
+originally built it as a feature of [my website], then DigitalOcean hackathon
+was announced, so here it is an introduction, a submission, as well as a quick
+tutorial how I built it. One cool thing about this service is that it is
+**open-sourced**, **easily to customize** for your needs, and can be deployed
+**completely free**.
+
+## What I built
+
+🌌 **Imagegen (Image Generator) as a Service**, which is a (REST) API service
+that can generate dynamic images for different purposes, is especially useful to
+generate cover images for content distribution:
+
+- Blogging & writing.
+
+- Videos' thumbnails.
+
+- Open-source repositories' social images.
+
+- etc.
+
+### Features:
+
+- Markdown support.
+
+- Dark mode enabled.
+
+- Easily display popular brands' icons by names.
+
+- Twitter emojis.
+
+- Requires zero action from if you publish posts to DEV.to using [DEV.to API].
+
+- Easily share consistent styles between your content images, embed your
+  name/trademark to all your content.
+
+- Update all images with a single code change.
+
+- Cached requests to improve performance and reduce loads.
+
+- Multiple API versions.
+
+- There are 2 deployment models:
+
+  - Node.js + Docker, which can be deployed to every cloud platform that
+    supports Docker deployment, e.g. DigitalOcean. The project is pre-configured
+    to deploy to DigitalOcean App Platform with a single click, too.
+
+  - Next.js + Serverless functions, which can be deployed serverlessly to
+    platforms that support Next.js API routes as Serverless functions (only
+    Vercel currently supports).
+
+### Category Submission:
+
+Well, frankly, it's _Random Roulette_. Nevertheless, I believe it can be very
+useful for personal site/portfolio (I use it on my website) and business blogs.
+
+### App Link
+
+[img-nodejs-dwkvo.ondigitalocean.app](https://img-nodejs-dwkvo.ondigitalocean.app)
+
+It's an API service, so there's no UI, the API is served at `/api/v1` and
+`/api/v2`, the URL above will redirect you to [the Github
+repository][github repo] with details documentation.
+
+### Screenshots
+
+Following are some examples of using this service's API, you can copy and paste
+each URL on your browser to see it yourself.
+
+```
+https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean
+```
+
+![Image 1](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean)
+
+```
+https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to
+```
+
+![Image 2](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi!**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to)
+
+```
+https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert
+```
+
+![Image 3](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert)
+
+### Link to Source Code
+
+[Node.js + DigitalOcean repository][github repo]
+
+[Next.js + Serverless repository][next.js repo]
+
+### Permissive License
+
+The project is released under the _MIT license_ and is completely free for use.
+
+## Background
+
+I'd actually still build this project and release it open-source even if
+DigitalOcean didn't organize the hackathon because it was a part of [my
+website].
+
+My website is where I'll blog very often (currently one post per ~2 days) and
+document everything I did and learned as a software engineer and indie hacker.
+One thing I want to achieve building my website is to automatically distribute
+my content as much as possible, in order to maximize distribution in long term
+and at scale. It currently supported auto distribution to DEV.to and Hashnode
+(you're probably reading a distributed copy of [the original post]).
+
+One part of this automation is to generate cover images for posts and let people
+know where to find me, which is this service 🤓.
+
+I believe automating all this is the most scalable way to grow an audience in
+the long term, while I can focus my energy on high leverage tasks.
+
+### How I built it
+
+This article is already fairly long (compared to typical dev posts), so I'll
+write a quick concept here and write complete tutorials in separate posts for
+both Node.js based and Next.js based versions. There are also more details in
+[the project's repository][github repo].
+
+#### Concept
+
+The purpose of this service is to **dynamically turn structured data into
+images**. An easy way to think about it is that it is like a React component
+that receives `props` then renders `visualization`, which is an `image` for this
+service.
+
+Each API is a HTTP `GET` at `/api/{version}/{...props}`:
+
+- A `version` represents a component that requires a certain type of `props` and
+  defines how the image should look.
+
+- `props` are constructed using HTTP path and query params.
+
+For example, `/api/v2/Hello, World!?theme=dark` will render an image in Dark
+mode with title `Hello, World!`.
+
+#### API spec
+
+See [img-nodejs#API](https://github.com/phuctm97/img-nodejs#api).
+
+#### Implementation
+
+##### Generate images
+
+To be able to render dynamically images, I used [Puppeteer] to render HTML in a
+headless Chrome, then take screenshots and render them back to clients.
+
+```ts
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const props = parseRequest(req);
+  const html = getHTML(props);
+  if (isHTMLDebug) {
+    res.setHeader("Content-Type", "text/html");
+    res.end(html);
+    return;
+  }
+
+  const { fileType } = props;
+  const screenshot = await getScreenshot(html, fileType, {
+    width: props.width,
+    height: props.height,
+  });
+  renderScreenshot(res, screenshot, fileType);
+};
+```
+
+##### Configure Docker
+
+There're one tricky part with deployment of this, especially to DigitalOcean.
+When developing on a laptop, it's easy because Puppeteer will simply use your
+installed latest Chrome instance with all admin access and resources attached to
+it. When deploying to a cloud platform like DigitalOcean, you'll need to install
+and configure a Chrome instance yourself. So, to make it easier for others, I
+made a Docker image to prepare everything for you 🥳. Security was also taken
+care of.
+
+```dockerfile
+FROM alpine:3.12
+
+# Install dependencies to run Puppeteer in Alpine.
+# See https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-on-alpine.
+RUN apk add --no-cache \
+        chromium \
+        nss \
+        freetype \
+        freetype-dev \
+        harfbuzz \
+        ca-certificates \
+        ttf-freefont \
+        nodejs \
+        yarn
+
+# Setup app's dependencies and configure envs.
+ENV CONTAINERIZED_BROWSER=/usr/bin/chromium-browser
+ADD . /app/
+WORKDIR /app/
+RUN yarn
+
+# Run everything as non-root user for security.
+RUN addgroup -S appuser && adduser -S -g appuser appuser \
+ && mkdir -p /home/appuser/Downloads /app/ \
+ && chown -R appuser:appuser /home/appuser/ \
+ && chown -R appuser:appuser /app/
+USER appuser
+CMD ["yarn", "start"]
+```
+
+##### Deploy to DigitalOcean
+
+To make deployment even easier, I also created a `Deploy to DO` button, which
+enable you to deploy the service to your account with a single click.
+
+[![Deploy to DO][do button]][do deploy url]
+
+One cool thing about deploying to DigitalOcean App Platform is that it will take
+care of setting up proxies, port binding, and SSL (HTTPS) certificates for you.
+It will also redeploy the service for you when you push changes to `master`
+branch.
+
+### Additional Resources/Info
+
+Special thanks to Vercel's [og-image], this project is heavily inspired by
+[og-image].
+
+Alright, I hope you like it and deploy an instance successfully for you, feel
+free to [DM me on Twitter][my twitter] if you have any questions. Also, if
+you're interested in my journey building my blog, open-source, and SaaS
+products, please consider subscribing to [my newsletter] or [following me on
+Twitter][my twitter].
+
+<!-- Links -->
+
+[my website]: /
+[the original post]: /blog/imagegen-as-a-service-introduction
+[github repo]: https://github.com/phuctm97/img-nodejs
+[next.js repo]: https://github.com/phuctm97/img
+[dev.to api]: https://docs.dev.to/api
+[og-image]: https://github.com/vercel/og-image.
+[puppeteer]: https://github.com/puppeteer/puppeteer
+[do button]:
+  https://mp-assets1.sfo2.digitaloceanspaces.com/deploy-to-do/do-btn-blue.svg
+[do deploy url]:
+  https://cloud.digitalocean.com/apps/new?repo=https://github.com/phuctm97/img-nodejs/tree/master
+[my twitter]: https://twitter.com/phuctm97
+[my newsletter]: https://buttondown.email/phuctm97
