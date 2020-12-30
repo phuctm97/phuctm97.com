@@ -16,22 +16,25 @@ const getPostCoverURL = (post, target) => {
   if (typeof cover === "string") return cover;
 
   let icons = [];
+  let { title } = post;
+
   if (cover) {
     if (typeof cover !== "object")
       throw new Error("Invalid post cover: " + JSON.stringify(cover, null, 2));
-    icons = cover.icons;
+
+    if (cover.icons) icons = cover.icons;
+    if (cover.title) title = cover.title;
   }
 
-  const { title } = post;
   const url = new URL(
     encodeURIComponent(`${title}.jpg`),
     "https://img.phuctm97.com/api/v2/"
   );
-
   if (target) url.searchParams.append("target", target);
   for (let icon of icons) {
     url.searchParams.append("icons", icon);
   }
+
   return url.toString();
 };
 
