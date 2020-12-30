@@ -23,7 +23,10 @@ const getPostCoverURL = (post, target) => {
   }
 
   const { title } = post;
-  const url = new URL(`${title}.jpg`, "https://img.phuctm97.com/api/v2/");
+  const url = new URL(
+    encodeURIComponent(`${title}.jpg`),
+    "https://img.phuctm97.com/api/v2/"
+  );
 
   if (target) url.searchParams.append("target", target);
   for (let icon of icons) {
