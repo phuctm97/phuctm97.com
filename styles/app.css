@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 /* Prismjs */
+code,
 code[class*="language-"],
+pre,
 pre[class*="language-"] {
   color: black;
   background: none;
@@ -18,37 +20,51 @@ pre[class*="language-"] {
   tab-size: 4;
   hyphens: none;
 }
+pre::-moz-selection,
 pre[class*="language-"]::-moz-selection,
+pre ::-moz-selection,
 pre[class*="language-"] ::-moz-selection,
+code::-moz-selection,
 code[class*="language-"]::-moz-selection,
+code ::-moz-selection,
 code[class*="language-"] ::-moz-selection {
   text-shadow: none;
   background: #b3d4fc;
 }
+pre::selection,
 pre[class*="language-"]::selection,
+pre ::selection,
 pre[class*="language-"] ::selection,
+code::selection,
 code[class*="language-"]::selection,
+code ::selection,
 code[class*="language-"] ::selection {
   text-shadow: none;
   background: #b3d4fc;
 }
 @media print {
+  code,
   code[class*="language-"],
+  pre,
   pre[class*="language-"] {
     text-shadow: none;
   }
 }
 /* Code blocks */
+pre,
 pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
 }
+:not(pre) > code,
 :not(pre) > code[class*="language-"],
+pre,
 pre[class*="language-"] {
   background: #f5f2f0;
 }
 /* Inline code */
+:not(pre) > code,
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;
   border-radius: 0.3em;
