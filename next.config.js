@@ -7,7 +7,10 @@ const withMDX = require("@next/mdx")({
       require("remark-unwrap-texts"),
       require("./scripts/mdx/remark-post-layout"),
     ],
-    rehypePlugins: [require("rehype-accessible-emojis").rehypeAccessibleEmojis],
+    rehypePlugins: [
+      require("rehype-accessible-emojis").rehypeAccessibleEmojis,
+      require("@mapbox/rehype-prism"),
+    ],
   },
 });
 
