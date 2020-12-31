@@ -5,6 +5,10 @@ import Main from "~components/main";
 const IndexPage = () => {
   const posts = [
     {
+      link: "/blog/a-quick-exploration-with-deno",
+      text: "A Quick Exploration With Deno",
+    },
+    {
       link: "/blog/imagegen-as-a-service-introduction",
       text: "Imagegen as a Service (Free), All Bloggers Should Have One",
     },
