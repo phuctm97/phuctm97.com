@@ -1,10 +1,11 @@
 import { PropsWithChildren } from "react";
-import styles from "./main.module.css";
 
 type Props = PropsWithChildren<{}>;
 
 const Main = ({ children }: Props) => (
-  <main className={styles.main}>{children}</main>
+  <main className="container max-w-2xl mx-auto px-4 mt-10 mb-14 lg:px-0">
+    {children}
+  </main>
 );
 
 export default Main;
