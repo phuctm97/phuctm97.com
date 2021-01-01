@@ -115,6 +115,26 @@ const StylesPage = () => (
       </li>
       <li>Fourth item</li>
     </ul>
+
+    <ul>
+      <li>This is the first list item.</li>
+      <li>
+        <p>Here’s the second list item.</p>
+
+        <p>I need to add another paragraph below the second list item.</p>
+      </li>
+      <li>And here’s the third list item.</li>
+    </ul>
+    <ul>
+      <li>This is the first list item.</li>
+      <li>
+        <p>Here’s the second list item.</p>
+        <blockquote>
+          <p>A blockquote would look great below the second list item.</p>
+        </blockquote>
+      </li>
+      <li>And here’s the third list item.</li>
+    </ul>
   </main>
 );
 
