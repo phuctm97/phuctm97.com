@@ -67,4 +67,8 @@
   a {
     @apply text-blue-500;
   }
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
 }
