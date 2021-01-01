@@ -33,7 +33,7 @@
     @apply font-normal text-base mb-4;
   }
   blockquote {
-    @apply bg-gray-100 my-6 pt-4 pb-0.5 px-3 border-l-8 border-gray-300;
+    @apply bg-gray-100 my-6 pt-4 pb-px px-3 border-l-8 border-gray-300;
   }
   ol,
   ul {
@@ -53,5 +53,8 @@
   }
   ul ul {
     list-style-type: circle;
+  }
+  pre {
+    @apply bg-gray-100 mb-4 p-5;
   }
 }
