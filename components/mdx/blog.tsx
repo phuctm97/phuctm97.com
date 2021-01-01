@@ -36,8 +36,8 @@ const BlogPost: React.FC<Props> = ({
     <Header />
     <main>
       <article>
-        <header className="mb-12">
-          <h1 className="text-5xl font-bold mb-6">{title}</h1>
+        <header className="mb-6">
+          <h1 className="text-5xl font-bold mb-6 p-0">{title}</h1>
           <p className="font-light mb-2 text-gray-600">
             By{" "}
             <strong className="font-medium">

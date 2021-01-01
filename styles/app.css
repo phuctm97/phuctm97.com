@@ -4,7 +4,7 @@
 
 @layer base {
   main {
-    @apply container max-w-2xl mx-auto my-6 px-4 lg:px-0;
+    @apply container max-w-2xl mx-auto my-10 px-4 lg:px-0;
   }
   h1,
   h2,
@@ -59,10 +59,22 @@
     list-style-type: circle;
   }
   pre {
-    @apply bg-gray-100 mb-4 p-5;
+    @apply bg-gray-100 mb-4 p-5 overflow-auto;
   }
   code {
-    @apply text-sm;
+    @apply bg-gray-100 text-sm font-bold p-1 rounded-sm;
+  }
+  code:before,
+  code:after {
+    @apply font-normal text-xs;
+    content: "`";
+  }
+  pre code {
+    @apply bg-transparent font-normal p-0;
+  }
+  pre code::before,
+  pre code:after {
+    content: none;
   }
   hr {
     @apply my-4;
