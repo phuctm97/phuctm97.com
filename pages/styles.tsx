@@ -151,6 +151,13 @@ const StylesPage = () => (
     <pre>
       <code>Inline `code` has `back-ticks around` it.</code>
     </pre>
+    <p>
+      At the command prompt, type <code>nano</code>.
+    </p>
+    <hr />
+    <p>
+      <code>Use `code` in your Markdown file.</code>
+    </p>
   </main>
 );
 

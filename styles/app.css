@@ -61,4 +61,7 @@
   code {
     @apply text-sm;
   }
+  hr {
+    @apply my-4;
+  }
 }
