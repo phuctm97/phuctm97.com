@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  main {
+    @apply container max-w-2xl mx-auto my-10 px-4 lg:px-0;
+  }
   h1,
   h2,
   h3,
@@ -70,5 +73,11 @@
   img {
     max-width: 100%;
     vertical-align: middle;
+  }
+}
+
+@layer utilities {
+  .backdrop-blur {
+    backdrop-filter: blur(6px);
   }
 }

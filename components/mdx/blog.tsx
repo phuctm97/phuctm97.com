@@ -1,7 +1,5 @@
 import { NextSeo } from "next-seo";
 import Header from "~components/header";
-import Main from "~components/main";
-import styles from "./blog.module.css";
 
 type Props = {
   url: string;
@@ -36,11 +34,11 @@ const BlogPost: React.FC<Props> = ({
       }}
     />
     <Header />
-    <Main>
-      <article className={styles.article}>
+    <main>
+      <article>
         <header>
-          <h1 id={styles.title}>{title}</h1>
-          <p id={styles.info}>
+          <h1>{title}</h1>
+          <p>
             By{" "}
             <strong>
               <a href="https://twitter.com/phuctm97">Minh-Phuc Tran</a>
@@ -53,7 +51,7 @@ const BlogPost: React.FC<Props> = ({
             })}
           </p>
           {tags.length > 0 && (
-            <div id={styles.tags}>
+            <div>
               {tags.map((tag, index) => (
                 <p key={index}>{tag}</p>
               ))}
@@ -62,7 +60,7 @@ const BlogPost: React.FC<Props> = ({
         </header>
         {children}
       </article>
-    </Main>
+    </main>
   </>
 );
 
