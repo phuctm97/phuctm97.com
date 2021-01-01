@@ -42,6 +42,12 @@ const StylesPage = () => (
       </strong>
       important text.
     </p>
+
+    <blockquote>
+      <p>
+        Dorothy followed her through many of the beautiful rooms in her castle.
+      </p>
+    </blockquote>
   </main>
 );
 

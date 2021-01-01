@@ -32,4 +32,7 @@
   p {
     @apply font-normal text-base mb-4;
   }
+  blockquote {
+    @apply bg-gray-100 my-6 pt-4 pb-0.5 px-2.5 border-l-8 border-gray-300;
+  }
 }
