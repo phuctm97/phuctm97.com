@@ -35,13 +35,23 @@
   blockquote {
     @apply bg-gray-100 my-6 pt-4 pb-0.5 px-3 border-l-8 border-gray-300;
   }
+  ol,
+  ul {
+    @apply mb-4 pl-8;
+  }
   ol {
-    @apply list-decimal mb-4 pl-8;
+    @apply list-decimal;
+  }
+  ul {
+    @apply list-disc;
   }
   ol ol,
   ol ul,
   ul ol,
   ul ul {
     @apply mb-0;
+  }
+  ul ul {
+    list-style-type: circle;
   }
 }
