@@ -154,10 +154,52 @@ const StylesPage = () => (
     <p>
       At the command prompt, type <code>nano</code>.
     </p>
-    <hr />
     <p>
       <code>Use `code` in your Markdown file.</code>
     </p>
+
+    <hr />
+
+    <p>
+      My favorite search engine is{" "}
+      <a href="https://duckduckgo.com">Duck Duck Go</a>.
+    </p>
+    <p>
+      <a href="https://www.markdownguide.org">https://www.markdownguide.org</a>
+      <br />
+      <a href="mailto:fake@example.com">fake@example.com</a>
+    </p>
+    <p>
+      I love supporting the{" "}
+      <strong>
+        <a href="https://eff.org">EFF</a>
+      </strong>
+      .<br />
+      This is the{" "}
+      <em>
+        <a href="https://www.markdownguide.org">Markdown Guide</a>
+      </em>
+      .<br />
+      See the section on{" "}
+      <a href="#code">
+        <code>code</code>
+      </a>
+      .
+    </p>
+    <blockquote>
+      <p>
+        In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet
+        hole, filled with the ends of worms and an oozy smell, nor yet a dry,
+        bare, sandy hole with nothing in it to sit down on or to eat: it was a{" "}
+        <a
+          href="https://en.wikipedia.org/wiki/Hobbit#Lifestyle"
+          title="Hobbit lifestyles"
+        >
+          hobbit-hole
+        </a>
+        , and that means comfort.
+      </p>
+    </blockquote>
   </main>
 );
 
