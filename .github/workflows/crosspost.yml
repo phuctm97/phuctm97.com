@@ -67,7 +67,6 @@ jobs:
       - run: yarn crosspost:hashnode
         env:
           HASHNODE_API_KEY: ${{ secrets.HASHNODE_API_KEY }}
-          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
       - name: Upload Hashnode crosspost metadata
         uses: actions/upload-artifact@v2
         with:
