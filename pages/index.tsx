@@ -115,7 +115,6 @@ const IndexPage = () => {
           <ul>
             {posts.map(({ link, text }) => (
               <li key={link} className="mt-2 ">
-                ·{"  "}
                 <Link href={link}>
                   <a className="text-blue-600 font-medium underline hover:text-blue-700">
                     {text}
