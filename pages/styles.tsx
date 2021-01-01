@@ -135,6 +135,18 @@ const StylesPage = () => (
       </li>
       <li>And here’s the third list item.</li>
     </ul>
+    <ol>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>
+        Third item
+        <ul>
+          <li>Indented item</li>
+          <li>Indented item</li>
+        </ul>
+      </li>
+      <li>Fourth item</li>
+    </ol>
 
     <pre>
       <code>Inline `code` has `back-ticks around` it.</code>

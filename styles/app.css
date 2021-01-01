@@ -51,10 +51,14 @@
   ul ul {
     @apply mb-0;
   }
-  ul ul {
+  ul ul,
+  ol ul {
     list-style-type: circle;
   }
   pre {
     @apply bg-gray-100 mb-4 p-5;
+  }
+  code {
+    @apply text-sm;
   }
 }
