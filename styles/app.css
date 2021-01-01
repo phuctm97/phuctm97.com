@@ -9,7 +9,7 @@
   h4,
   h5,
   h6 {
-    @apply font-medium;
+    @apply font-medium pt-5 mb-2;
   }
   h1 {
     @apply text-5xl;
@@ -28,5 +28,8 @@
   }
   h6 {
     @apply text-lg;
+  }
+  p {
+    @apply font-normal text-base mb-4;
   }
 }
