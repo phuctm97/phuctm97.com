@@ -59,7 +59,8 @@
     list-style-type: circle;
   }
   pre {
-    @apply bg-gray-100 mb-4 p-5 overflow-auto;
+    @apply mb-4 p-5 overflow-auto;
+    background: #f5f2f0;
   }
   code {
     @apply bg-gray-100 text-sm font-bold p-1 rounded-sm;
