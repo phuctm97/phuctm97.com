@@ -68,6 +68,34 @@ const StylesPage = () => (
         </p>
       </blockquote>
     </blockquote>
+    <blockquote>
+      <h4>The quarterly results look great!</h4>
+      <ul>
+        <li>Revenue was off the chart.</li>
+        <li>Profits were higher than ever.</li>
+      </ul>
+      <p>
+        <em>Everything</em> is going according to <strong>plan</strong>.
+      </p>
+    </blockquote>
+    <ol>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+      <li>Fourth item</li>
+    </ol>
+    <ol>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>
+        Third item
+        <ol>
+          <li>Indented item</li>
+          <li>Indented item</li>
+        </ol>
+      </li>
+      <li>Fourth item</li>
+    </ol>
   </main>
 );
 
