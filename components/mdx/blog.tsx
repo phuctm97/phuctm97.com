@@ -36,14 +36,19 @@ const BlogPost: React.FC<Props> = ({
     <Header />
     <main>
       <article>
-        <header>
-          <h1>{title}</h1>
-          <p>
+        <header className="mb-12">
+          <h1 className="text-5xl font-bold mb-6">{title}</h1>
+          <p className="font-light mb-2 text-gray-600">
             By{" "}
-            <strong>
-              <a href="https://twitter.com/phuctm97">Minh-Phuc Tran</a>
+            <strong className="font-medium">
+              <a
+                className="text-gray-900 hover:text-black"
+                href="https://twitter.com/phuctm97"
+              >
+                Minh-Phuc Tran
+              </a>
             </strong>{" "}
-            ·{" "}
+            -{" "}
             {publishedTime.toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
@@ -51,9 +56,14 @@ const BlogPost: React.FC<Props> = ({
             })}
           </p>
           {tags.length > 0 && (
-            <div>
+            <div className="flex flex-row">
               {tags.map((tag, index) => (
-                <p key={index}>{tag}</p>
+                <p
+                  className="py-1 px-2 rounded-sm mt-0 mr-1 bg-gray-100 text-gray-800"
+                  key={index}
+                >
+                  {tag}
+                </p>
               ))}
             </div>
           )}
