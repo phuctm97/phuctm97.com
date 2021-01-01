@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Header from "~components/header";
-import Main from "~components/main";
 
 const IndexPage = () => {
   const posts = [
@@ -57,7 +56,7 @@ const IndexPage = () => {
   return (
     <>
       <Header />
-      <Main>
+      <main>
         <h1 className="text-black font-bold text-5xl mb-8">
           Hey, I'm Minh-Phuc Tran.
         </h1>
@@ -116,7 +115,6 @@ const IndexPage = () => {
           <ul>
             {posts.map(({ link, text }) => (
               <li key={link} className="mt-2 ">
-                ·{"  "}
                 <Link href={link}>
                   <a className="text-blue-600 font-medium underline hover:text-blue-700">
                     {text}
@@ -126,7 +124,7 @@ const IndexPage = () => {
             ))}
           </ul>
         </section>
-      </Main>
+      </main>
     </>
   );
 };
