@@ -98,7 +98,7 @@ export default IndexPage;
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const blogPosts = glob
     .sync("**/*.mdx", {
-      root: path.join(process.cwd(), "pages", "blog"),
+      cwd: path.join(process.cwd(), "pages", "blog"),
       absolute: true,
     })
     .map((filename) => readPost(filename))
