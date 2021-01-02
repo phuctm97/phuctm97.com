@@ -3,9 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "~components/*": ["components/*"],
-      "~styles/*": ["styles/*"]
+      "~styles/*": ["styles/*"],
+      "~utils/*": ["utils/*"]
     },
-    "allowJs": false,
+    "allowJs": true,
     "strict": true,
     "alwaysStrict": true,
     "target": "esnext",
