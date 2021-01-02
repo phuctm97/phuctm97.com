@@ -1,0 +1,175 @@
+---
+title: Misunderstanding @tailwindcss/typography costs me 2 hours
+description: >-
+  I spent about 2 hours to style my static pages because Tailwind resets
+  everything, but then realized that @tailwindcss/typography did exactly the
+  job.
+tags: [tailwindcss, css, webdev, beginners]
+cover:
+  title: Misunderstanding `@tailwindcss/typography` costs me 2 hours
+  icons: [Tailwind CSS]
+published time: 2021-01-02
+---
+
+After [falling in love with Tailwind CSS][blog about tailwind], I incorporated
+it into [my website]. However, there's one thing that is both nice and annoying
+about Tailwind CSS is that it has a very opinionated CSS reset, which clears
+pretty much all default styles. I understand Tailwind creators' rationale for
+it, having everything reset to "no style" means all styles are consciously
+implemented by you, there's no surprise. So, I said "Okay, I guess I have to
+implement my own 'default style' then.".
+
+## Why having default style?
+
+There's a reason why browsers had default styles:
+
+> Imagine going back to the time when there was no CSS, only HTML.
+>
+> [HTML was first created to write and share stories][my first blog], that's why
+> we had `h1`, `h2`, `h3`, `p`, `strong`, `em`, etc, and because of their
+> meanings (heading, paragraphs, strong, emphasized, etc), there should visual
+> way to express these meanings to readers (who don't know HTML tags).
+
+This style of writing is still mainstream on the web, most contents on the web
+are still articles with headings, paragraphs, images, etc. Markdown was also
+created to make this type of writing easier, every Markdown token is basically a
+mapping to an HTML tag.
+
+So, for a blog, these default styles are a must.
+
+## What does the implementation look like?
+
+Implementing default styles isn't difficult, however it takes time to make
+things look good, especially for edge cases when these elements are stacked or
+nested together. Here is my very simple one that took me ~2 hours:
+
+```css
+@layer base {
+  main {
+    @apply container max-w-2xl mx-auto my-10 px-4 lg:px-0;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-medium pt-5 mb-2;
+  }
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+  h6 {
+    @apply text-lg;
+  }
+  p {
+    @apply font-normal text-base mb-4;
+  }
+  blockquote {
+    @apply bg-gray-100 my-6 pt-4 pb-px px-3 border-l-8 border-gray-300;
+  }
+  ol,
+  ul {
+    @apply mb-4 pl-8;
+  }
+  ol {
+    @apply list-decimal;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol ol,
+  ol ul,
+  ul ol,
+  ul ul {
+    @apply mb-0;
+  }
+  ul ul,
+  ol ul {
+    list-style-type: circle;
+  }
+  pre {
+    @apply mb-4 p-5 overflow-auto;
+    background: #f5f2f0; /* for consistency with Prismjs theme */
+  }
+  code {
+    @apply bg-gray-100 text-sm font-bold p-1 rounded-sm;
+  }
+  code:before,
+  code:after {
+    @apply font-normal text-xs;
+    content: "`";
+  }
+  pre code {
+    @apply bg-transparent font-normal p-0;
+  }
+  pre code::before,
+  pre code:after {
+    content: none;
+  }
+  hr {
+    @apply my-4;
+  }
+  a {
+    @apply text-blue-500;
+  }
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+}
+```
+
+## Tailwind's team implemented these styles 🤦🏻‍♂️. Surprise?
+
+After having implemented the above styles, I was okay but wasn't really happy
+about how it looked, so I went around to see what others did for some
+inspiration.
+
+And, I found people suggesting the official plugin `@tailwindcss/typography`.
+I'd already known that Tailwind CSS supported plugins and also knew it was the
+only official plugin. However, because of the name, I thought it was something
+for us to customize fonts, which wasn't my problem. But guess what,
+`@tailwindcss/typography` was built exactly for the above reason - to provide
+"good" default styles for typical writing HTML tags 🤦🏻‍♂️. All you need to do is
+install `@tailwindcss/typography`, put that into the
+`tailwindcss.config.js#plugins`, and add class `prose` to your document
+top-level tag.
+
+```html
+<article class="prose">
+  <h1>Heading 1</h1>
+  <p>Lorem ipsum</p>
+  <!-- ... All tags inside will by styled properly-->
+</article>
+```
+
+The plugin supports a good amount of common scenarios: nested lists, lists with
+paragraphs, code blocks, and even tables (which I didn't have time to
+implement). It also allows developers to extend and customize default styles
+quite easily.
+
+So, comparing `@tailwindcss/typography` with my implementation was a no-brainer.
+And I guess I've wasted 2 hours of my time because of the name. Anyway, I
+learned a hard lesson that I'll remember for the rest of my life:
+
+> Typography is not just about font styles. Typography is about making written
+> content legible, readable and appealing when displayed.
+
+<!-- Links -->
+
+[my website]: /
+[blog about tailwind]: /blog/i-change-my-mind-abt-tailwind-css
+[my first blog]: /blog/hello-world-start-blog-in-html
