@@ -414,6 +414,14 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
+"@types/glob@^7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"
+  integrity sha512-SEYeGAIQIQX8NN6LDKprLjbrd5dARM5EXsd8GI/A5l0apYI1fGMWgPHSe4ZKL4eozlAyI+doUE9XbYS4xCkQ1w==
+  dependencies:
+    "@types/minimatch" "*"
+    "@types/node" "*"
+
 "@types/hast@^2.0.0":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@types/hast/-/hast-2.3.1.tgz#b16872f2a6144c7025f296fb9636a667ebb79cd9"
@@ -432,6 +440,16 @@
   integrity sha512-SXPBMnFVQg1s00dlMCc/jCdvPqdE4mXaMMCeRlxLDmTAEoegHT53xKtkDnzDTOcmMHUfcjyf36/YYZ6SxRdnsw==
   dependencies:
     "@types/unist" "*"
+
+"@types/minimatch@*":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
+  integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
+
+"@types/node@*":
+  version "14.14.19"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.19.tgz#5135176a8330b88ece4e9ab1fdcfc0a545b4bab4"
+  integrity sha512-4nhBPStMK04rruRVtVc6cDqhu7S9GZai0fpXgPXrFpcPX6Xul8xnrjSdGB4KPBVYG/R5+fXWdCM8qBoiULWGPQ==
 
 "@types/node@^14.14.14":
   version "14.14.16"
@@ -4081,14 +4099,13 @@ remark-mdx@1.6.22:
     remark-parse "8.0.3"
     unified "9.2.0"
 
-remark-parse-frontmatter@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/remark-parse-frontmatter/-/remark-parse-frontmatter-1.0.1.tgz#9840670c912b0dd217eb110fff02f07441160adf"
-  integrity sha512-5ps8KgaEkaeulhm+RCpQwfXLTr3skQvNL8nGM1CH3L3hW7EW0sVX77icz2bUt9tqJqcRjbp41uDLF8oikTJZ4Q==
+remark-parse-frontmatter@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/remark-parse-frontmatter/-/remark-parse-frontmatter-1.0.2.tgz#f62e33ea77ef83495f30bd89f306324affb9900d"
+  integrity sha512-qvGOyGOM536ynaIjwFkIOj6zKVzKMEGuOu+86NOc27qYAalRWpv0Df4aaZx8+wkC1wgA1aWyyONb4+EdT1Jfbw==
   dependencies:
     revalidator "^0.3.1"
     unist-util-find "^1.0.2"
-    vfile "^4.2.1"
     yaml "^1.10.0"
 
 remark-parse@8.0.3, remark-parse@^8.0.0:

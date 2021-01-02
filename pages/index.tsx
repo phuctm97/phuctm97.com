@@ -1,54 +1,18 @@
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import Header from "~components/header";
+import path from "path";
+import glob from "glob";
+import readPost from "~utils/read-post";
 
-const IndexPage = () => {
-  const posts = [
-    {
-      link: "/blog/a-quick-exploration-with-deno",
-      text: "A Quick Exploration With Deno",
-    },
-    {
-      link: "/blog/imagegen-as-a-service-introduction",
-      text: "Imagegen as a Service (Free), All Bloggers Should Have One",
-    },
-    {
-      link: "/blog/i-change-my-mind-abt-tailwind-css",
-      text: "I Changed My Mind After 2nd Try TailwindCSS",
-    },
-    {
-      link: "/blog/introducing-hashnode-sdk-js",
-      text: "Introducing Hashnode SDK for TypeScript/JavaScript",
-    },
-    {
-      link: "/blog/parse-frontmatter-mdx-remark-unified",
-      text: "Parse Markdown Frontmatter In MDX, Remark, and Unified",
-    },
-    {
-      link: "/blog/publish-first-npm-package",
-      text: "Publish My First NPM TypeScript Package",
-    },
-    {
-      link: "/blog/being-ambitious-is-a-myth",
-      text: "Being Ambitious Is A Myth",
-    },
-    {
-      link: "/blog/auto-distribute-posts-to-dev-to",
-      text: "Automate Distributing My Posts to DEV.to",
-    },
-    {
-      link: "/blog/my-custom-md-language",
-      text: "Create an MDX Plugin To Have My Own Markdown Language",
-    },
-    {
-      link: "/blog/switch-to-next-js-and-mdx",
-      text: "Switch to Next.js and MDX",
-    },
-    {
-      link: "/blog/hello-world-start-blog-in-html",
-      text: "Hello, World!I Started My Blog In Plain HTML",
-    },
-  ];
+type Props = {
+  blogPosts: Array<{
+    title: string;
+    path: string;
+  }>;
+};
 
+const IndexPage = ({ blogPosts }: Props) => {
   const onSubscribeNewsletter = () => {
     window.open("https://buttondown.email/phuctm97", "popupwindow");
   };
@@ -113,11 +77,11 @@ const IndexPage = () => {
             inspiration, not always true.
           </p>
           <ul>
-            {posts.map(({ link, text }) => (
-              <li key={link} className="mt-2 ">
-                <Link href={link}>
+            {blogPosts.map(({ title, path }) => (
+              <li key={path} className="mt-2 ">
+                <Link href={`/${path}`}>
                   <a className="text-blue-600 font-medium underline hover:text-blue-700">
-                    {text}
+                    {title}
                   </a>
                 </Link>
               </li>
@@ -130,3 +94,18 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const blogPosts = glob
+    .sync("**/*.mdx", {
+      root: path.join(process.cwd(), "pages", "blog"),
+      absolute: true,
+    })
+    .map((filename) => readPost(filename))
+    .sort((a, b) => b.publishedTime - a.publishedTime)
+    .map((post) => ({ title: post.title, path: post.path }));
+
+  return {
+    props: { blogPosts },
+  };
+};
