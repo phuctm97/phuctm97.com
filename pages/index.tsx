@@ -15,7 +15,6 @@ type Props = {
 };
 
 const subscribeNewsletter = (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
   window.open("https://buttondown.email/phuctm97", "popupwindow");
 };
 
