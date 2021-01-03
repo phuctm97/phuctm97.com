@@ -85,12 +85,6 @@
   }
 }
 
-@layer utilities {
-  .backdrop-blur {
-    backdrop-filter: blur(6px);
-  }
-}
-
 @layer components {
   @import url(~styles/prism.css);
 }
