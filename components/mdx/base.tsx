@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Header from "~components/header-2";
+import Header from "~components/header";
 
 export const wrapper: React.FC = ({ children }) => (
   <>
