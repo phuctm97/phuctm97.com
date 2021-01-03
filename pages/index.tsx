@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import Header from "~components/header";
 import Footer from "~components/footer";
+import Subscribe from "~components/subscribe";
 
 import path from "path";
 import glob from "glob";
@@ -15,14 +16,10 @@ type Props = {
   }>;
 };
 
-const subscribeNewsletter = () => {
-  window.open("https://buttondown.email/phuctm97", "popupwindow");
-};
-
 const HomePage = ({ blogPosts }: Props) => (
   <>
     <Header />
-    <main className="container max-w-2xl mx-auto px-4 md:px-0">
+    <main className="container-custom mx-auto">
       <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">
         Hey, I’m Minh-Phuc Tran
       </h1>
@@ -39,32 +36,9 @@ const HomePage = ({ blogPosts }: Props) => (
           📧 Every Sunday, I sent out my latest tech discovery and nuances that
           is hardly found anywhere else.
         </h3>
-        <form
-          className="mt-4"
-          action="https://buttondown.email/api/emails/embed-subscribe/phuctm97"
-          method="post"
-          target="popupwindow"
-          onSubmit={subscribeNewsletter}
-        >
-          <label className="hidden" htmlFor="bd-email">
-            Enter your email:
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="bd-email"
-            className="border border-gray-300 py-1 px-4 rounded mr-2 mb-2"
-            placeholder="your@email.com"
-          />
-          <input className="hidden" type="hidden" value="1" name="embed" />
-          <button
-            className="bg-gray-200 border borderr-gray-200 py-1 px-4 mb-2 rounded font-semibold hover:bg-gray-300 transition-colors"
-            name="submit"
-            type="submit"
-          >
-            Subscribe
-          </button>
-        </form>
+        <div className="mt-4">
+          <Subscribe />
+        </div>
       </section>
       <section className="mt-10">
         <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Blog</h2>

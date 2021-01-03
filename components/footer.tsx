@@ -1,3 +1,3 @@
-const Footer = () => <footer className="py-10"></footer>;
+const Footer = () => <footer className="h-4"></footer>;
 
 export default Footer;
