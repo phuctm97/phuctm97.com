@@ -1,7 +1,7 @@
-import Link from "next/link";
+import NextLink from "next/link";
 import Header from "~components/header";
 
-export const wrapper: React.FC = ({ children }) => (
+const Wrapper: React.FC = ({ children }) => (
   <>
     <Header />
     <main className="container-custom mx-auto">
@@ -12,6 +12,9 @@ export const wrapper: React.FC = ({ children }) => (
   </>
 );
 
-export const a = ({ href, ...props }: React.ComponentProps<"a">) => (
-  <Link href={href ?? "#"} {...props} />
-);
+const Link = ({ href, ...props }: React.ComponentProps<"a">) => {
+  if (!href) return <a {...props} />;
+  return <NextLink href={href} {...props} />;
+};
+
+export { Wrapper as wrapper, Link as a };
