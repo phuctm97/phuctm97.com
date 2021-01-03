@@ -11,8 +11,7 @@ const seoProps: DefaultSeoProps = {
     type: "website",
     url,
     title,
-    description:
-      "Coding tutorials, programming guides, thoughts and ideas about software dev.",
+    description,
     locale: "en_US",
     images: [
       { url: `${url}/images/og.png`, alt: title, width: 1200, height: 628 },

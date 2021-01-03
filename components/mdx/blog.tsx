@@ -1,5 +1,7 @@
 import { NextSeo } from "next-seo";
 import Header from "~components/header";
+import Footer from "~components/footer";
+import styles from "./blog.module.css";
 
 type Props = {
   url: string;
@@ -34,43 +36,32 @@ const BlogPost: React.FC<Props> = ({
       }}
     />
     <Header />
-    <main>
-      <article>
-        <header className="mb-6">
-          <h1 className="text-5xl font-bold mb-6 p-0">{title}</h1>
-          <p className="font-light mb-2 text-gray-600">
-            By{" "}
-            <strong className="font-medium">
-              <a
-                className="text-gray-900 hover:text-black"
-                href="https://twitter.com/phuctm97"
-              >
-                Minh-Phuc Tran
-              </a>
-            </strong>{" "}
-            -{" "}
-            {publishedTime.toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
-          {tags.length > 0 && (
-            <div className="flex flex-row">
-              {tags.map((tag, index) => (
-                <p
-                  className="py-1 px-2 rounded-sm mt-0 mr-1 bg-gray-100 text-gray-800"
-                  key={index}
-                >
-                  {tag}
-                </p>
-              ))}
-            </div>
-          )}
-        </header>
+    <main className="container max-w-2xl mx-auto px-4 md:px-0">
+      <article className="prose">
+        <h1 id={styles.title}>{title}</h1>
+        <p id={styles.info}>
+          By{" "}
+          <strong>
+            <a href="https://twitter.com/phuctm97">Minh-Phuc Tran</a>
+          </strong>{" "}
+          -{" "}
+          {publishedTime.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+        {tags.length > 0 && (
+          <div id={styles.tags}>
+            {tags.map((tag, index) => (
+              <p key={index}>{tag}</p>
+            ))}
+          </div>
+        )}
         {children}
       </article>
     </main>
+    <Footer />
   </>
 );
 
