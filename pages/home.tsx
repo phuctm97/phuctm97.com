@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import path from "path";
@@ -12,6 +13,11 @@ type Props = {
   }>;
 };
 
+const subscribeNewsletter = (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  window.open("https://buttondown.email/phuctm97", "popupwindow");
+};
+
 const HomePage = ({ blogPosts }: Props) => (
   <>
     <header className="p-10"></header>
@@ -21,8 +27,8 @@ const HomePage = ({ blogPosts }: Props) => (
       </h1>
       <h2 className="text-gray-700 mt-4">
         ✌🏻 I'm a software engineer. On this site, I document my journey
-        learning, creating wealth, and living on my terms. You'll receive at
-        least <strong className="font-semibold">3 articles per week</strong>.
+        learning, creating wealth, and living on my terms. You'll see at least{" "}
+        <strong className="font-semibold">3 posts per week</strong>.
       </h2>
       <section className="mt-14">
         <h2 className="text-4xl font-bold tracking-tight">Newsletter</h2>
@@ -30,16 +36,24 @@ const HomePage = ({ blogPosts }: Props) => (
           📧 Every Sunday, I sent out my latest tech discovery and nuances that
           is hardly found anywhere else.
         </h3>
-        <form className="mt-4">
-          <label className="hidden" htmlFor="email">
+        <form
+          className="mt-4"
+          action="https://buttondown.email/api/emails/embed-subscribe/phuctm97"
+          method="post"
+          target="popupwindow"
+          onSubmit={subscribeNewsletter}
+        >
+          <label className="hidden" htmlFor="bd-email">
             Enter your email:
           </label>
           <input
-            className="border border-gray-300 py-1 px-4 rounded mr-2"
-            name="email"
             type="email"
+            name="email"
+            id="bd-email"
+            className="border border-gray-300 py-1 px-4 rounded mr-2"
             placeholder="your@email.com"
           />
+          <input className="hidden" type="hidden" value="1" name="embed" />
           <button
             className="bg-gray-200 border borderr-gray-200 py-1 px-4 rounded font-bold hover:bg-gray-300 transition-colors"
             name="submit"
