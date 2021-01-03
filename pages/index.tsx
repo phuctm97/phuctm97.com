@@ -1,10 +1,9 @@
 import { GetStaticProps } from "next";
-import Link from "next/link";
 import Header from "~components/header";
 import Footer from "~components/footer";
 import Prose from "~components/prose";
 import Subscribe from "~components/subscribe";
-import styles from "./index.module.css";
+import PostPreview from "~components/post-preview";
 
 import path from "path";
 import glob from "glob";
@@ -43,14 +42,7 @@ const HomePage = ({ blogPosts }: Props) => (
           evergreen.
         </p>
         {blogPosts.map((post) => (
-          <article key={post.path} className={styles.post}>
-            <Link href={`/${post.path}`}>
-              <a>
-                <h3>{post.title}</h3>
-                <p className="text-gray-600 font-normal">{post.description}</p>
-              </a>
-            </Link>
-          </article>
+          <PostPreview key={post.path} {...post} />
         ))}
       </section>
     </Prose>
