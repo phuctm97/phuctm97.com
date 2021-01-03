@@ -1,5 +1,18 @@
-import Link from "next/link";
+import Route from "next/link";
+import Header from "~components/header";
+import Footer from "~components/footer";
+import Prose from "~components/prose";
 
-export const a = ({ href, ...props }: React.ComponentProps<"a">) => (
-  <Link href={href ?? "#"} {...props} />
+const Wrapper: React.FC = ({ children }) => (
+  <>
+    <Header />
+    <Prose>{children}</Prose>
+    <Footer />
+  </>
 );
+
+const Link = ({ href, ...props }: React.ComponentProps<"a">) => (
+  <Route href={href || "#"} {...props} />
+);
+
+export { Wrapper as wrapper, Link as a };

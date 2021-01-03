@@ -2,23 +2,24 @@ import Link from "next/link";
 import { SiGithub } from "react-icons/si";
 
 const Header = () => (
-  <header className="sticky top-0 flex flex-col items-center py-8 md:py-10 bg-white bg-opacity-95 z-10 backdrop-blur">
-    <div className="container max-w-3xl flex flex-row px-4 md:px-0">
-      <Link href="/">
-        <a className="text-black">
-          <h1 className="text-base font-bold m-0 pt-0">@phuctm97</h1>
-        </a>
-      </Link>
-      <nav className="ml-auto flex flex-row items-center">
-        <a
-          aria-label="Source on Github"
-          href="https://github.com/phuctm97/phuctm97.com"
-        >
-          <SiGithub
-            className="fill-current text-gray-800 hover:text-black"
-            size="1.25em"
-          />
-        </a>
+  <header className="sticky top-0 z-10 bg-white bg-opacity-60 backdrop-blur">
+    <div className="container-custom py-6 mx-auto flex flex-row items-center transition-all md:py-8 lg:py-10">
+      <h1 className="font-bold text-black text-base sm:text-lg md:text-xl">
+        <Link href="/">@phuctm97</Link>
+      </h1>
+      <nav className="ml-auto">
+        <Link href="https://github.com/phuctm97/phuctm97.com">
+          <a
+            className="block w-5 transition-all sm:w-6 md:w-7"
+            aria-label="View on Github"
+          >
+            <SiGithub
+              className="fill-current text-gray-700 hover:text-black"
+              title="View on Github"
+              size="100%"
+            />
+          </a>
+        </Link>
       </nav>
     </div>
   </header>

@@ -20,7 +20,7 @@ const frontmatterSchema = {
  * Extracts and validates a post's metadata from frontmatter, assigns to `file.data.post`.
  */
 module.exports = () => (_, file) => {
-  if (!isPost(file.path)) file.fail("Not a post.");
+  if (!isPost(file.path)) return;
 
   const { folder, slug } = inferPostURLParams(file.path);
   const postPath = `${folder}/${slug}`;

@@ -1,0 +1,3 @@
+.post a {
+  @apply no-underline;
+}

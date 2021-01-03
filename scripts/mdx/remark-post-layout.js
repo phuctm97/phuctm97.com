@@ -7,7 +7,7 @@ const { getPostCoverURL } = require("../post-utils");
  */
 module.exports = () => (tree, file) => {
   const { post } = file.data;
-  if (!post) file.fail("Not a post.");
+  if (!post) return;
 
   const { url, folder, title, description, tags, publishedTime } = post;
   const props = `{
