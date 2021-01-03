@@ -8,7 +8,7 @@
   }
 }
 
-@layer base {
+@layer components {
   code[class*="language-"],
   pre[class*="language-"] {
     color: #ccc;
