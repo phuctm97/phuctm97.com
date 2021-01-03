@@ -1,4 +1,3 @@
-import { FormEvent } from "react";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Header from "~components/header";
@@ -14,7 +13,7 @@ type Props = {
   }>;
 };
 
-const subscribeNewsletter = (e: FormEvent<HTMLFormElement>) => {
+const subscribeNewsletter = () => {
   window.open("https://buttondown.email/phuctm97", "popupwindow");
 };
 
