@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SiGithub } from "react-icons/si";
 
 const Header = () => (
-  <header className="sticky top-0 flex flex-col items-center py-8 md:py-10 bg-white bg-opacity-95 backdrop-blur">
+  <header className="sticky top-0 flex flex-col items-center py-8 md:py-10 bg-white bg-opacity-95 z-10 backdrop-blur">
     <div className="container max-w-3xl flex flex-row px-4 md:px-0">
       <Link href="/">
         <a className="text-black">
