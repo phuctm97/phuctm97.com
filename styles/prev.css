@@ -1,0 +1,96 @@
+@layer base {
+  main {
+    @apply container max-w-2xl mx-auto my-10 px-4 lg:px-0;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-medium pt-5 mb-2;
+  }
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+  h6 {
+    @apply text-lg;
+  }
+  p {
+    @apply font-normal text-base mb-4;
+  }
+  blockquote {
+    @apply bg-gray-100 my-6 pt-4 pb-px px-3 border-l-8 border-gray-300;
+  }
+  ol,
+  ul {
+    @apply mb-4 pl-8;
+  }
+  ol {
+    @apply list-decimal;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol ol,
+  ol ul,
+  ul ol,
+  ul ul {
+    @apply mb-0;
+  }
+  ul ul,
+  ol ul {
+    list-style-type: circle;
+  }
+  pre {
+    @apply mb-4 p-5 overflow-auto;
+    background: #f5f2f0;
+  }
+  code {
+    @apply bg-gray-100 text-sm font-bold p-1 rounded-sm;
+  }
+  code:before,
+  code:after {
+    @apply font-normal text-xs;
+    content: "`";
+  }
+  pre code {
+    @apply bg-transparent font-normal p-0;
+  }
+  pre code::before,
+  pre code:after {
+    content: none;
+  }
+  hr {
+    @apply my-4;
+  }
+  a {
+    @apply text-blue-500;
+  }
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+}
+
+@layer utilities {
+  .backdrop-blur {
+    backdrop-filter: blur(6px);
+  }
+}
+
+@layer components {
+  @import url(~styles/prism.css);
+}
