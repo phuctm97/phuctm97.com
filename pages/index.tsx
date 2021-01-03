@@ -1,6 +1,8 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Header from "~components/header";
+import Footer from "~components/footer";
+
 import path from "path";
 import glob from "glob";
 import readPost from "~utils/read-post";
@@ -84,7 +86,7 @@ const HomePage = ({ blogPosts }: Props) => (
         ))}
       </section>
     </main>
-    <footer className="py-10"></footer>
+    <Footer />
   </>
 );
 
