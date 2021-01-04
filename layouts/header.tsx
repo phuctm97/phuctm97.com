@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import NavLink from "~components/nav-link";
 import { FiSun, FiMoon } from "react-icons/fi";
 import classNames from "classnames";
@@ -62,7 +63,9 @@ const Header = () => {
             {isDark ? <FiSun /> : <FiMoon className="fill-current" />}
           </button>
         )} */}
-        <h1 className="font-bold">@phuctm97</h1>
+        <h1 className="font-bold">
+          <Link href="/">@phuctm97</Link>
+        </h1>
         <nav className="ml-auto">
           {navLinks.map((item, index) => (
             <NavLink key={index} text={item[0]} href={item[1]} />
