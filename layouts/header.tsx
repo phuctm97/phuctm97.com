@@ -14,11 +14,11 @@ const Header = () => {
   const [isDark, toggleDark] = useDarkMode();
 
   return (
-    <header className="sticky top-0 z-10 bg-white bg-opacity-60 backdrop-blur p-8 transition dark:bg-black dark:text-white">
-      <div className="container flex flex-row items-center mx-auto">
+    <header className="sticky top-0 z-10 bg-white bg-opacity-60 backdrop-blur py-4 md:py-8 transition dark:bg-black dark:text-white">
+      <div className="container-custom flex flex-row items-center mx-auto">
         {isDark !== null && (
           <button
-            className="bg-gray-300 p-3 rounded dark:bg-gray-700"
+            className="bg-gray-300 p-2 md:p-3 rounded dark:bg-gray-700"
             title={labelToggleDark}
             aria-label={labelToggleDark}
             onClick={toggleDark}
