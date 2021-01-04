@@ -5,6 +5,7 @@
       "~components/*": ["components/*"],
       "~layouts/*": ["layouts/*"],
       "~styles/*": ["styles/*"],
+      "~hooks/*": ["hooks/*"],
       "~utils/*": ["utils/*"]
     },
     "allowJs": true,
