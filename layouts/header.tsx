@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import NavLink from "~components/nav-link";
-import { FiSun, FiMoon } from "react-icons/fi";
+// import { FiSun, FiMoon } from "react-icons/fi";
 import classNames from "classnames";
-import useDarkMode from "~hooks/dark-mode";
+// import useDarkMode from "~hooks/dark-mode";
 
-const labelToggleDark = "Toggle dark mode";
+// const labelToggleDark = "Toggle dark mode";
 
 const navLinks = [
   ["Twitter", "https://twitter.com/phuctm97"],
@@ -14,7 +14,7 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const [isDark, toggleDark] = useDarkMode();
+  // const [isDark, toggleDark] = useDarkMode();
 
   const [isShrunk, setShrunk] = useState(false);
   useEffect(() => {
