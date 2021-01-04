@@ -29,8 +29,8 @@ const Header = () => {
 
         if (
           isShrunk &&
-          document.body.scrollTop < 10 &&
-          document.documentElement.scrollTop < 10
+          document.body.scrollTop < 4 &&
+          document.documentElement.scrollTop < 4
         ) {
           return false;
         }
@@ -46,8 +46,8 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        "sticky top-0 z-10 bg-white bg-opacity-60 backdrop-blur transition-all duration-500 dark:bg-black dark:text-white",
-        { "py-4 md:py-8": !isShrunk, "py-2 md:py-3": isShrunk }
+        "sticky top-0 z-10 py-2 my-4 md:my-6 bg-white bg-opacity-80 border-b border-transparent transition duration-500 dark:bg-black dark:text-white",
+        { "border-gray-200 backdrop-blur": isShrunk }
       )}
     >
       <div className="container-custom flex flex-row items-center mx-auto">

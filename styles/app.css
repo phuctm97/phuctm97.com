@@ -10,7 +10,7 @@
 
 @layer utilities {
   .backdrop-blur {
-    backdrop-filter: blur(16px);
+    backdrop-filter: saturate(1.8) blur(5px);
   }
 }
 
