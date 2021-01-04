@@ -13,24 +13,21 @@ const inferPostURLParams = (filePath) => {
 
 const getPostCoverURL = (post, target) => {
   const { cover } = post;
+  if (!cover) return undefined;
   if (typeof cover === "string") return cover;
+  if (typeof cover !== "object")
+    throw new Error("Invalid post cover: " + JSON.stringify(cover, null, 2));
 
-  let icons = [];
-  let { title } = post;
-
-  if (cover) {
-    if (typeof cover !== "object")
-      throw new Error("Invalid post cover: " + JSON.stringify(cover, null, 2));
-
-    if (cover.icons) icons = cover.icons;
-    if (cover.title) title = cover.title;
-  }
+  let icons = cover.icons || [];
+  let title = cover.title || post.title;
 
   const url = new URL(
     encodeURIComponent(`${title}.jpg`),
     "https://img.phuctm97.com/api/v2/"
   );
+
   if (target) url.searchParams.append("target", target);
+
   for (let icon of icons) {
     url.searchParams.append("icons", icon);
   }
