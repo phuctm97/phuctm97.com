@@ -9,7 +9,7 @@ const labelToggleDark = "Toggle dark mode";
 const navLinks = [
   ["Twitter", "https://twitter.com/phuctm97"],
   ["Github", "https://github.com/phuctm97"],
-  ["Newsletter", "/newsletter"],
+  ["Home", "/"],
 ];
 
 const Header = () => {
@@ -47,10 +47,11 @@ const Header = () => {
     <header
       className={classNames(
         "sticky top-0 z-10 py-2 my-4 md:my-6 bg-white bg-opacity-80 border-b border-transparent transition duration-500 dark:bg-black dark:text-white",
-        { "border-gray-200 backdrop-blur": isShrunk }
+        { "border-gray-200 dark:border-gray-800 backdrop-blur": isShrunk }
       )}
     >
       <div className="container-custom flex flex-row items-center mx-auto">
+        {/* Enable dark mode later.
         {isDark !== null && (
           <button
             className="bg-gray-300 p-2 md:p-3 rounded dark:bg-gray-700"
@@ -60,7 +61,8 @@ const Header = () => {
           >
             {isDark ? <FiSun /> : <FiMoon className="fill-current" />}
           </button>
-        )}
+        )} */}
+        <h1 className="font-bold">@phuctm97</h1>
         <nav className="ml-auto">
           {navLinks.map((item, index) => (
             <NavLink key={index} text={item[0]} href={item[1]} />
