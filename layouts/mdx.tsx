@@ -1,16 +1,16 @@
 import Header from "~layouts/header";
 import Main from "~layouts/main";
+import Prose from "~layouts/prose";
 import Footer from "~layouts/footer";
-import Content from "./sample.mdx";
 
-const TestLayout = () => (
+const MDXDefaultLayout: React.FC = ({ children }) => (
   <>
     <Header />
     <Main>
-      <Content />
+      <Prose>{children}</Prose>
     </Main>
     <Footer />
   </>
 );
 
-export default TestLayout;
+export default MDXDefaultLayout;

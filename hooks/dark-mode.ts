@@ -13,6 +13,7 @@ const useDarkMode = (): [boolean | null, Toggle] => {
     setTheme(isDark ? "light" : "dark");
   };
 
+  // Only enable Dark mode when mounted to avoid unsafe hydration.
   return [isMounted ? isDark : null, toggle];
 };
 
