@@ -1,7 +1,8 @@
 import { GetStaticProps } from "next";
-import Header from "~components/header";
-import Footer from "~components/footer";
-import Prose from "~components/prose";
+import Header from "~layouts/header";
+import Footer from "~layouts/footer";
+import Main from "~layouts/main";
+import Prose from "~layouts/prose";
 import Subscribe from "~components/subscribe";
 import PostPreview from "~components/post-preview";
 
@@ -20,32 +21,34 @@ type Props = {
 const HomePage = ({ blogPosts }: Props) => (
   <>
     <Header />
-    <Prose>
-      <h1>Hey, I’m Minh-Phuc Tran</h1>
-      <p className="lead">
-        I'm a software engineer. On this site, I document my journey learning,
-        creating wealth, and living on my terms. You'll see at least{" "}
-        <strong>3 posts per week</strong>.
-      </p>
-      <section>
-        <h2>Newsletter</h2>
+    <Main>
+      <Prose>
+        <h1>Hey, I’m Minh-Phuc Tran</h1>
         <p className="lead">
-          Every Sunday, I sent out my latest tech discovery and nuances that is
-          hardly found anywhere else.
+          I'm a software engineer. On this site, I document my journey learning,
+          creating wealth, and living on my terms. You'll see at least{" "}
+          <strong>3 posts per week</strong>.
         </p>
-        <Subscribe />
-      </section>
-      <section>
-        <h2>Blog</h2>
-        <p className="lead">
-          My written documentary: 100% authentic, good for inspiration, not
-          evergreen.
-        </p>
-        {blogPosts.map((post) => (
-          <PostPreview key={post.path} {...post} />
-        ))}
-      </section>
-    </Prose>
+        <section>
+          <h2>Newsletter</h2>
+          <p className="lead">
+            Every Sunday, I sent out my latest tech discovery and nuances that
+            is hardly found anywhere else.
+          </p>
+          <Subscribe />
+        </section>
+        <section>
+          <h2>Blog</h2>
+          <p className="lead">
+            My written documentary: 100% authentic, good for inspiration, not
+            evergreen.
+          </p>
+          {blogPosts.map((post) => (
+            <PostPreview key={post.path} {...post} />
+          ))}
+        </section>
+      </Prose>
+    </Main>
     <Footer />
   </>
 );
