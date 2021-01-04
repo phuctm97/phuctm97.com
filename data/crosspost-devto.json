@@ -22,7 +22,7 @@
   "blog/being-ambitious-is-a-myth": {
     "id": 550352,
     "url": "https://dev.to/phuctm97/being-ambitious-is-a-myth-3op",
-    "md5": "e3e64b9684e7b016878a7062299fd488"
+    "md5": "97769c5084edf2b6489e77964df7d56b"
   },
   "blog/publish-first-npm-package": {
     "id": 551759,
@@ -58,5 +58,10 @@
     "id": 558986,
     "url": "https://dev.to/phuctm97/misunderstanding-tailwindcss-typography-costs-me-2-hours-mj7",
     "md5": "030a8c273f429bbc9f62ea7a2cc7254b"
+  },
+  "blog/auto-shrink-header-on-scroll": {
+    "id": 560892,
+    "url": "https://dev.to/phuctm97/auto-shrink-header-on-scroll-in-react-12a3",
+    "md5": "4f0714bb1dbc97edf785081d1e2e2a33"
   }
 }
