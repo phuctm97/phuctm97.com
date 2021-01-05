@@ -1,7 +1,15 @@
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import Emoji from "~components/emoji";
+import { getBlogFiles, readBlogPost } from "~lib/blog";
 
-const IndexPage = () => (
+type Props = {
+  blog: Array<{
+    path: string;
+  }>;
+};
+
+const IndexPage = ({ blog }: Props) => (
   <>
     <h1 className="font-black text-xl sm:text-3xl md:text-5xl tracking-tight">
       Hey, I’m Minh-Phuc Tran
@@ -23,21 +31,29 @@ const IndexPage = () => (
         Personal documentary: 100% authentic, not always well-researched, better
         gradually.
       </h3>
-      <article className="mt-8">
-        <Link href="/blog/a-quick-exploration-with-deno">
-          <a>
-            <h4 className="font-medium text-lg text-gray-900 sm:text-xl">
-              A Quick Exploration Into Deno
-            </h4>
-            <p className="mt-2 text-xs text-gray-600 sm:text-sm">
-              Deno v1 was released a couple of months ago and there were a lot
-              of different opinions about it.
-            </p>
-          </a>
-        </Link>
-      </article>
+      {blog.map(({ path }) => (
+        <article key={path} className="mt-8">
+          <Link href={path}>
+            <a>
+              <h4 className="font-medium text-lg leading-5 text-gray-900 sm:text-xl">
+                {path}
+              </h4>
+              <p className="mt-2 text-xs text-gray-600 sm:text-sm">
+                no v1 was released a couple of months ago and there were a lot
+                of different opinions about it.
+              </p>
+            </a>
+          </Link>
+        </article>
+      ))}
     </section>
   </>
 );
 
 export default IndexPage;
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  return {
+    props: { blog: getBlogFiles().map(readBlogPost) },
+  };
+};
