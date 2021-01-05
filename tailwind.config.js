@@ -10,6 +10,12 @@ module.exports = {
           css: {
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
+            pre: {
+              backgroundColor: theme("colors.gray.50"),
+              borderWidth: 1,
+              borderStyle: "solid",
+              borderColor: theme("colors.gray.200"),
+            },
           },
         },
         dark: {
@@ -38,6 +44,10 @@ module.exports = {
             blockquote: {
               color: theme("colors.gray.500"),
               borderLeftColor: theme("colors.gray.700"),
+            },
+            pre: {
+              backgroundColor: theme("colors.gray.900"),
+              borderColor: theme("colors.gray.700"),
             },
           },
         },

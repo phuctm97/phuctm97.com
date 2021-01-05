@@ -1,10 +1,11 @@
 const frontmatter = require("remark-frontmatter");
-const parseFrontmatter = require("remark-parse-frontmatter");
+const frontmatterParser = require("remark-parse-frontmatter");
+const prism = require("@mapbox/rehype-prism");
 
 const withMDX = require("@next/mdx")({
   options: {
-    remarkPlugins: [frontmatter, parseFrontmatter],
-    rehypePlugins: [],
+    remarkPlugins: [frontmatter, frontmatterParser],
+    rehypePlugins: [prism],
   },
 });
 

@@ -9,11 +9,11 @@ type Props = {
 
 const IndexPage = ({ blog }: Props) => (
   <>
-    <h1 className="font-black text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
+    <h1 className="font-extrabold text-2xl tracking-tighter text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
       Hey, I’m Minh-Phuc Tran
     </h1>
-    <h2 className="mt-4 text-base sm:text-lg">
-      I'm a Software Engineer. Welcome to my digital garden{" "}
+    <h2 className="mt-4 md:mt-6 text-base sm:text-lg">
+      I'm a software engineer. Welcome to my digital garden{" "}
       <Emoji label="Waving hand">👋🏻</Emoji>
     </h2>
     <h3 className="mt-2 text-base sm:text-lg">
@@ -21,13 +21,13 @@ const IndexPage = ({ blog }: Props) => (
       pursuing freedom. You may expect to see{" "}
       <strong>3 articles per week</strong>.
     </h3>
-    <section className="mt-10">
+    <section className="mt-10 md:mt-12">
       <h2 className="font-bold tracking-tight text-2xl text-gray-900 dark:text-gray-100 sm:text-3xl">
         Blog
       </h2>
-      <h3 className="mt-2 text-base sm:text-lg">
-        Personal documentary: 100% authentic, not always well-researched, better
-        gradually.
+      <h3 className="mt-2 md:mt-3 text-base sm:text-lg">
+        Personal documentary: 100% authentic, good for inspiration, not
+        evergreen.
       </h3>
       {blog.map(({ title, description, path }) => (
         <article key={path} className="mt-8">
