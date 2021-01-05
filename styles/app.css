@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply antialiased;
+  html {
     scroll-behavior: smooth;
+  }
+  body {
+    @apply antialiased bg-white text-gray-700;
+  }
+  strong {
+    @apply font-semibold;
   }
 }
 
