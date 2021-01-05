@@ -1,14 +1,14 @@
-type Props = Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> & {
+interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   label?: string;
   children: string;
-};
+}
 
-const Emoji = ({ label, children, ...spanAttrs }: Props) => (
+const Emoji = ({ label, children, ...htmlAttrs }: Props) => (
   <span
-    {...spanAttrs}
+    {...htmlAttrs}
     role="img"
+    aria-label={label}
     aria-hidden={label ? undefined : true}
-    aria-label={label ? label : undefined}
   >
     {children}
   </span>
