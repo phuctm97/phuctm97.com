@@ -34,20 +34,22 @@ export const readBlogPost = (absPath: string): BlogPost => {
   const { folder, slug } = getBlogPathSegs(absPath);
 
   let title = "";
+  let description = "";
 
   const contents = fs.readFileSync(absPath);
   remark()
     .use(() => (tree) => {
       const h1 = select("heading[depth=1]", tree);
-      if (!h1) return;
+      if (h1) title = mdToString(h1);
 
-      title = mdToString(h1);
+      const p = select("paragraph", tree);
+      if (p) description = mdToString(p);
     })
     .processSync({ contents });
 
   return {
     title,
-    description: "",
+    description,
     folder,
     slug,
     path: `/${folder}/${slug}`,
