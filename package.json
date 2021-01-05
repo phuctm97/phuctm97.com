@@ -35,10 +35,11 @@
     "postcss": "^8.2.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "remark": "^12.0.1",
     "remark-frontmatter": "^2.0.0",
+    "remark-parse": "^8.0.3",
     "remark-parse-frontmatter": "^1.0.2",
     "tailwindcss": "^2.0.2",
+    "unified": "^9.2.0",
     "unist-util-select": "^3.0.4",
     "unist-util-visit": "^2.0.3",
     "vfile": "^4.2.1"
