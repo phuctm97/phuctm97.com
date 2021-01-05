@@ -1,5 +1,9 @@
 import path from "path";
 import glob from "glob";
+import fs from "fs";
+import remark from "remark";
+import { select } from "unist-util-select";
+import mdToString from "mdast-util-to-string";
 
 export type BlogPost = {
   title: string;
@@ -17,7 +21,7 @@ export const getBlogFiles = () =>
     absolute: true,
   });
 
-const getPathEls = (absPath: string) => {
+export const getBlogPathSegs = (absPath: string) => {
   let relPath = absPath.substr(pagesDir.length + 1); // Trim '../pages/'
   relPath = relPath.substring(0, relPath.length - 4); // Trim '.mdx'
 
@@ -27,10 +31,22 @@ const getPathEls = (absPath: string) => {
 };
 
 export const readBlogPost = (absPath: string): BlogPost => {
-  const { folder, slug } = getPathEls(absPath);
+  const { folder, slug } = getBlogPathSegs(absPath);
+
+  let title = "";
+
+  const contents = fs.readFileSync(absPath);
+  remark()
+    .use(() => (tree) => {
+      const h1 = select("heading[depth=1]", tree);
+      if (!h1) return;
+
+      title = mdToString(h1);
+    })
+    .processSync({ contents });
 
   return {
-    title: "",
+    title,
     description: "",
     folder,
     slug,

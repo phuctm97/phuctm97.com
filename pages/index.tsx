@@ -1,12 +1,10 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Emoji from "~components/emoji";
-import { getBlogFiles, readBlogPost } from "~lib/blog";
+import { BlogPost, getBlogFiles, readBlogPost } from "~lib/blog";
 
 type Props = {
-  blog: Array<{
-    path: string;
-  }>;
+  blog: Array<BlogPost>;
 };
 
 const IndexPage = ({ blog }: Props) => (
@@ -31,12 +29,12 @@ const IndexPage = ({ blog }: Props) => (
         Personal documentary: 100% authentic, not always well-researched, better
         gradually.
       </h3>
-      {blog.map(({ path }) => (
+      {blog.map(({ title, path }) => (
         <article key={path} className="mt-8">
           <Link href={path}>
             <a>
               <h4 className="font-medium text-lg leading-5 text-gray-900 sm:text-xl">
-                {path}
+                {title}
               </h4>
               <p className="mt-2 text-xs text-gray-600 sm:text-sm">
                 no v1 was released a couple of months ago and there were a lot
