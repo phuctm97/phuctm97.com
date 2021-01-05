@@ -1,0 +1,192 @@
+---
+title: Create an MDX Plugin To Have My Own Markdown Language
+description: >-
+  I created my own Markdown syntax to minimize duplications while maximizing
+  writing speed, flexibility, and readiness.
+tags: [react, webdev, automation, blog]
+cover:
+  icons: [Markdown, React]
+published time: 2020-12-19
+---
+
+Yesterday, I [migrated my website from plain HTML to Next.js +
+MDX][html to next mdx], to solve the problem of duplications and boilerplates
+when writing in HTML. However, using Next.js + MDX isn't just about that, it
+opened a door for me to customize my writing framework with technically no limit
+(which is why I migrated from Medium/DEV.to/Hashnode to my own website in the
+first place).
+
+## How?
+
+> TL;DR: Intercept Next.js and MDX pipeline, parse our custom syntax and write
+> into supported syntax.
+
+Next.js and MDX are designed and created with customization and flexibility in
+mind.
+
+- Next.js creates a pipeline to build React server-rendered pages. As long as we
+  are able to convert something into JSX (and JavaScript functions), we can
+  technically use anything (MDX is an example). Next.js is also built on top of
+  Webpack and Babel, which enable you access to the even bigger plugin
+  ecosystems.
+
+- MDX creates a pipeline to convert Markdown-based syntax into JSX. It is
+  designed and built to work with existing [unifiedjs], [remark], and [rehype]
+  ecosystems, which are about compiling content (natural language, Markdown,
+  etc) into structured data. The structured data then can be processed,
+  modified, and written into any existing languages (JSX, MDX, etc).
+
+The combined pipeline looks like this:
+
+- You define and write custom Markdown documents.
+
+- Next.js reads the documents as pages, send to MDX.
+
+- _(You intercept and customize here)_
+
+- MDX sends the documents into Remark and Rehype.
+
+- Remark converts the documents into a data structure called MDXAST.
+
+- _(You intercept and customize here)_
+
+- Rehype converts MDXAST into its data structure called MDXHAST.
+
+- _(You intercept and customize here)_
+
+- Rehype writes final structured data into JSX pages.
+
+- Next.js statically generates HTML pages.
+
+Some examples of what you can do:
+
+- Get when a file was first commited into Git and use that as the published
+  date.
+
+- Based on a file's location and name, determine its layout components.
+
+- Write your own Github-flavored Markdown syntax that have posts rendered
+  beautifully on both Github and your website.
+
+- Write a generator that converts your Markdown into formats that are suitable
+  for distributions to different platforms like DEV.to, Hashnode, Medium.
+
+## What I did?
+
+Previously, every MDX pages in `blog/` directory has to import and export
+`BlogPost` component with manually-written JSX props, which have following
+shortcomings:
+
+- Being in `blog` directory should be enough to indicate which layout the MDX
+  pages should use. The import and export are boilerplates.
+
+- I had to write a `path` prop to every page so that the canonical and Open
+  Graph URL can be rendered correctly. However, the file location should be
+  sufficient instead of having to write a manually-written prop.
+
+- The import and export statements are rendered very ugly on Github because
+  Github don't support MDX.
+
+To solve the above problems, I designed the following concept:
+
+- `path`, `slug`, and layout will be infered from the file location. There's no
+  import and duplicated props.
+
+- Intercept the pipeline after Remark processed Markdown syntax and dynamically
+  add a line `import`ing a coressponding layout component and an
+  `export default` statement with proper props pre-populated.
+
+- All other information like SEO `description` and `published time` are written
+  in YAML frontmatter so that Github can render properly.
+
+### How an article looks in MDX
+
+See [full source code][switch to next source]:
+
+```md
+---
+title: Switch to Next.js and MDX
+description: >-
+  I switched from plain HTML to using Next.js and MDX to have better ease of
+  writing and extensibility.
+published time: 2020-12-18
+---
+
+## The Problem
+
+To prevent myself from procrastinating, I [started my blog dead simple in plain
+HTML][start blog].
+```
+
+### How the custom plugin was written (conceptually)
+
+See [full source code][plugin source]:
+
+```js
+const path = require("path");
+const yaml = require("yaml");
+const find = require("unist-util-find");
+
+const Components = {
+  blog: "BlogPost",
+};
+
+const getSubpage = (file) => path.basename(file.dirname);
+
+const getRoute = (file) => {
+  const sub = getSubpage(file);
+
+  const Component = Components[sub];
+  if (!Component)
+    return file.fail(
+      `Subpage '${sub}' is invalid. Valid subpages: ${Object.keys(Components)
+        .map((it) => `'${it}'`)
+        .join(", ")}.`
+    );
+
+  const slug = file.stem;
+  return {
+    Component,
+    slug,
+    path: `${sub}/${slug}`,
+  };
+};
+
+module.exports = () => (tree, file) => {
+  const frontmatter = find(tree, { type: "yaml" });
+  const { title, description, "published time": publishedTime } = yaml.parse(
+    frontmatter.value
+  );
+
+  const { path, Component } = getRoute(file);
+  const props = `{
+    path: "${path}",
+    title: "${title}",
+    description: "${description}",
+    publishedTime: new Date("${publishedTime}"),
+  }`;
+
+  tree.children.unshift(
+    {
+      type: "import",
+      value: `import ${Component} from "~components/mdx/${Component}";`,
+    },
+    {
+      type: "export",
+      default: true,
+      value: `export default ${Component}(${props});`,
+    }
+  );
+};
+```
+
+<!-- Links -->
+
+[unifiedjs]: https://unifiedjs.com
+[remark]: https://remark.js.org
+[rehype]: https://github.com/rehypejs/rehype
+[html to next mdx]: /blog/switch-to-next-js-and-mdx
+[switch to next source]:
+  https://github.com/phuctm97/phuctm97.com/blob/00b083ef8e8f252c60f61aa1fd4bf0aeefe15027/pages/blog/switch-to-next-js-and-mdx.mdx
+[plugin source]:
+  https://github.com/phuctm97/phuctm97.com/blob/00b083ef8e8f252c60f61aa1fd4bf0aeefe15027/scripts/remark-page.js

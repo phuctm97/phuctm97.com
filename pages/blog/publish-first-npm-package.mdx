@@ -1,0 +1,283 @@
+---
+title: Publish My First NPM TypeScript Package
+description: >-
+  I published my first NPM package (TypeScript), here is how I did it.
+tags: [javascript, npm, opensource, typescript]
+cover:
+  icons: [NPM, TypeScript]
+published time: 2020-12-24
+---
+
+While I'm building [my website/blog][my website], there are a few things that I
+see can be useful to separate and publish as 3rd packages - the biggest
+motivation is to tear down my codebase and avoid maintaining as much irrelevant
+code as possible.
+
+So, I decided it's a good chance to learn, create, publish my first NPM package
+ever, and finally share to motivate and help others 🎉. Let's jump into it.
+
+## Requirements
+
+It is coming in 2021, I wanted to publish my NPM package in a modern-ish way so
+that I can re-apply later and my packages stay relevant as long as possible, so
+I put down some requirements:
+
+- TypeScript: it has to support TypeScript. Using a package without TypeScript
+  support in 2020 always feels not right for me.
+
+- Concise documentation.
+
+- Release workflow: takes less than 1 min. I don't want to completely automate
+  this as I don't think I'll release that many times, automating seems to
+  overkill a quick simple command.
+
+- Auto-upgrade dependencies: stay up-to-date with all dependencies to avoid
+  security issues, I don't want to take care of this.
+
+- Prettier code style: standardized, zero configuration.
+
+- Call to action. It's always good to put a note to the end of what you created
+  and redirect it back to your primary online presence, I believe.
+
+## What the package is about?
+
+To build an automatic crosspost to DEV.to (this post you're reading is
+automatically cross-posted to DEV.to when I pushed it to my website), I need to
+convert my Markdown posts into a Markdown variant that renders properly on
+DEV.to. One of these features is that every _wrap_ (virtual newline in a
+paragraph to make it readable on code editor) is rendered as a newline character
+on DEV.to, aka, DEV.to unexpectedly breaks a paragraph into multiple paragraphs.
+To solve it, I wrote a Remark plugin to replace all _wraps_ by _spaces_.
+
+```js
+module.exports = () => (tree) => {
+  visit(tree, "text", (text) => {
+    text.value = text.value.replace(/\n/g, " ");
+  });
+};
+```
+
+The code is as simple as that but is quite re-usable, so I decided to make it an
+NPM package. (It's my first package, it should be simple right?)
+
+I called it `remark-unwrap-texts`.
+
+## Create a TypeScript repo
+
+Initialize a Git repo:
+
+```bash
+mkdir remark-unwrap-texts
+cd remark-unwrap-texts
+git init
+```
+
+Create a Github repo for it:
+
+```bash
+gh repo create phuctm97/remark-unwrap-texts --public
+```
+
+Initialize Yarn/NPM:
+
+```bash
+yarn init
+name: "remark-unwrap-texts"
+version: "0.0.0"
+author: "Minh-Phuc Tran"
+license: "MIT"
+private: false
+```
+
+Add TypeScript and Prettier (as dev dependencies):
+
+```bash
+yarn add -D typescript prettier @tsconfig/recommended
+```
+
+`@tsconfig/recommended` is a base TypeScript configuration that helps you
+configure your TypeScript project with minimal code.
+
+Create a `tsconfig.json`:
+
+```json
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+Done ✨! I got a base TypeScript project.
+
+## Write the logic
+
+My package logic requires one library and a type definition package.
+
+- Install the library:
+
+  ```bash
+  yarn add unist-util-visit
+  ```
+
+- Install the _type definition as dev dependencies_:
+
+  ```bash
+  yarn add -D @types/mdast
+  ```
+
+Write the code, with a little nice documentation:
+
+```ts
+import { Parent, Text } from "mdast";
+import visit from "unist-util-visit";
+
+/**
+ * Unwraps `text` nodes in Markdown.
+ *
+ * Is useful when publishing to platforms like DEV.to, Medium, Hashnode, etc.
+ * These platforms may not support text wraps and generate unexpected newlines.
+ */
+const plugin = () => (tree: Parent) => {
+  visit(tree, "text", (text: Text) => {
+    text.value = text.value.replace(/\n/g, " ");
+  });
+};
+
+export = plugin;
+```
+
+## Add build information to package.json
+
+Now I got the code, I need to build it into JavaScript as well as a type
+declaration file. I update my `package.json` to include these:
+
+```json
+{
+  // Other attributes.
+  "main": "dist/index.js", // for module import/require
+  "types": "dist/index.d.ts", // for TypeScript support
+  "files": ["dist/**/*"], // includes only build output in the NPM package
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "yarn build", // Make sure output is up-to-date before publishing
+    "type:check": "tsc --noEmit"
+  }
+}
+```
+
+## Publish the first version
+
+Publishing with `yarn` is surprisingly simple:
+
+- Configure an NPM account to publish to:
+
+  ```bash
+  yarn login
+  username: "<npm username>"
+  email: "<npm email>"
+  ```
+
+- Publish a new version:
+
+  ```bash
+  yarn publish
+  New version: "0.0.1"
+  password: "<npm password>"
+  ... build
+  ... publish
+  ... Revoked token
+  ```
+
+- Yarn automatically update `package.json` with the new version, create a commit
+  and a tag. All you need to do is to push them:
+
+  ```bash
+  git push && git push --tags
+  ```
+
+Done ✨! I got my first NPM package ever published.
+
+## Add documentation and tools
+
+- Create a README:
+
+  - Explain shortly what the package is about.
+
+  - How-to install and use it.
+
+  - Badges from shields.io to show the latest NPM version and the repo's license
+    (also helps add a little character to the repo/package).
+
+  - A _Build with 💙 by @phuctm97_ at the end.
+
+- Add a license and code of conduct using Github UI, it helps auto-fill the
+  files for you.
+
+- Update `package.json` to update `description` and `keywords` displayed on NPM.
+
+  ```json
+  {
+    // Other attributes.
+    "description": "📋 Unwraps text nodes in Markdown, is useful when publishing to platforms like DEV.to, Medium, Hashnode, etc.",
+    "keywords": [
+      "markdown",
+      "remark",
+      "commonmark",
+      "unified",
+      "remark-plugin",
+      "unified-plugin",
+      "plugin",
+      "extension"
+    ]
+  }
+  ```
+
+- `yarn publish` again to push the updated documentation to NPM.
+
+- Add `.github/dependabot.yml` to auto-grade dependencies:
+
+  ```yaml
+  version: 2
+  updates:
+    - package-ecosystem: npm
+      directory: /
+      schedule:
+        interval: weekly
+  ```
+
+- Commit and push ⬆️.
+
+## Test and release v1
+
+I've almost done, just gotta test the package in [my website implementation] to
+make sure it works:
+
+- `yarn add remark-unwrap-texts`.
+
+- Delete my previous code and replace by `require('remark-unwrap-texts')`.
+
+- Bump. Everything works correctly!
+
+Go back to `remark-unwrap-texts`:
+
+- `yarn publish` with version `1.0.0`.
+
+- `git push && git push --tags`.
+
+I got my first NPM package released 🎉!
+
+Hope it helps you publish your first NPM package soon, too. For more details in
+practice, you can [checkout the repository][package repo] and [the NPM
+package][package on npm].
+
+<!-- Links -->
+
+[my website]: /
+[my website implementation]: https://github.com/phuctm97/phuctm97.com
+[package repo]: https://github.com/phuctm97/remark-unwrap-texts
+[package on npm]: https://www.npmjs.com/package/remark-unwrap-texts

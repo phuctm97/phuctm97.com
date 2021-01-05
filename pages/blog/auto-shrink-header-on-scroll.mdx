@@ -1,0 +1,114 @@
+---
+title: Auto Shrink Header On Scroll in React
+description:
+  I've just implemented a feature to keep my header sticky and auto-shrink when
+  users scroll to maximize readibility and call to action.
+tags: [react, javascript, webdev, beginners]
+published time: 2021-01-04
+---
+
+I've always liked this effect: keep the header of your website sticky then
+auto-shrink and blur when users scroll down.
+
+![Demo][demo]
+
+Today, I finally got some free time to implement it for [my website], so I'm
+writing this article hopefully to help you do the same for yours if you also
+like it 😉.
+
+## Motivations
+
+There're 2 primary motivations that makes me love this effect:
+
+- You can put a couple of calls to action (CTAs), then as your users are reading
+  content on your website, they keep seeing these CTAs, which can increase the
+  odds that they'll click them. I like to keep links to [my
+  newsletter][my website] and [Twitter][my twitter] here. _(An extra tip that I
+  like to do here is to make a little animation or transition that occasionally
+  runs to remind the user's the CTAs)_
+
+- I want to optimize for CTAs but I don't want users on my website to have bad
+  experience, which is actually even more important. To avoid bad UX, the header
+  shouldn't take too much space, especially when users are reading the main
+  content.
+
+## How-to
+
+### Basic idea
+
+The basic idea is to subscribe to `onscroll` event of the browser, then check if
+the user scrolls pass a certain offset and update CSS of the header component
+arcordingly.
+
+### Subscribe to `onscroll` using hook
+
+```ts
+const Header = () => {
+  useEffect(() => {
+    const handler = () => {
+      // Check and update component here.
+    };
+
+    window.addEventListener("scroll", handler);
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // return <Component ... />
+};
+```
+
+Use `useEffect` hook to subscribe to event `onscroll` when the component is
+mounted (notice the last parameter `[]`), also remember to return an unsubscribe
+function when the component is unmounted to avoid memory leaks.
+
+### Check for scroll position
+
+```ts
+const Header = () => {
+  const [isShrunk, setShrunk] = useState(false);
+
+  useEffect(() => {
+    const handler = () => {
+      setShrunk((isShrunk) => {
+        if (
+          !isShrunk &&
+          (document.body.scrollTop > 20 ||
+            document.documentElement.scrollTop > 20)
+        ) {
+          return true;
+        }
+
+        if (
+          isShrunk &&
+          document.body.scrollTop < 4 &&
+          document.documentElement.scrollTop < 4
+        ) {
+          return false;
+        }
+
+        return isShrunk;
+      });
+    };
+
+    // Previous logic.
+  }, []);
+
+  // return <Component isShrunk={isShrunk} />
+};
+```
+
+Notice `setShrunk` is called with a function instead of just pure value, this
+pattern helps ensure we are checking against the lastest previous value. Also,
+there are a _gap_ between offsets to shrink and to expand (`20` and `4`), this
+helps avoid flashing of changed styles.
+
+That's it. I hope it helps. [Check out the full source code][header src] to see
+more details.
+
+<!-- Links -->
+
+[my website]: /
+[my twitter]: https://twitter.com/phuctm97
+[header src]:
+  https://github.com/phuctm97/phuctm97.com/blob/f10f3a558ae34528c8b9363a79e69a31c2e2b41c/layouts/header.tsx
+[demo]: /images/b/auto-shrink.gif
