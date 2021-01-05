@@ -15,6 +15,14 @@
 }
 
 @layer utilities {
+  .backdrop-blur {
+    backdrop-filter: saturate(1.8) blur(5px);
+  }
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
