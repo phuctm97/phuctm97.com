@@ -2,8 +2,11 @@ import path from "path";
 import glob from "glob";
 import fs from "fs";
 import remark from "remark";
+import frontmatter from "remark-frontmatter";
+import parseFrontmatter from "remark-parse-frontmatter";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
+import { getData } from "~lib/unist";
 
 export type BlogPost = {
   title: string;
@@ -38,12 +41,24 @@ export const readBlogPost = (absPath: string): BlogPost => {
 
   const contents = fs.readFileSync(absPath);
   remark()
-    .use(() => (tree) => {
-      const h1 = select("heading[depth=1]", tree);
-      if (h1) title = mdToString(h1);
+    .use(frontmatter)
+    .use(parseFrontmatter)
+    .use(() => (tree, file) => {
+      const { frontmatter } = getData(file);
 
-      const p = select("paragraph", tree);
-      if (p) description = mdToString(p);
+      if (frontmatter && typeof frontmatter.title === "string") {
+        title = frontmatter.title;
+      } else {
+        const h1 = select("heading[depth=1]", tree);
+        if (h1) title = mdToString(h1);
+      }
+
+      if (frontmatter && typeof frontmatter.description === "string") {
+        description = frontmatter.description;
+      } else {
+        const p = select("paragraph", tree);
+        if (p) description = mdToString(p);
+      }
     })
     .processSync({ contents });
 
