@@ -12,7 +12,12 @@ export function fakeCompiler<P = Settings>(this: Processor<P>) {
 export const parser = unified()
   .use(mdParser)
   .use(frontmatter)
-  .use(frontmatterParser)
+  .use(frontmatterParser, {
+    properties: {
+      title: { type: "string" },
+      date: { type: "string", format: "date", required: true },
+    },
+  })
   .freeze();
 
 export const reader = parser().use(fakeCompiler).freeze();

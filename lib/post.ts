@@ -9,6 +9,7 @@ import { MayHaveFrontmatter, reader, toVFile, getVFileData } from "~lib/remark";
 export type Post = {
   title: string;
   description: string;
+  date: string;
   path: string;
   folder: string;
   slug: string;
@@ -38,9 +39,14 @@ export const postExtracter: Plugin = () => (tree, file) => {
 
   let title = "";
   let description = "";
+  let date = "";
 
   const data = getVFileData<MayHaveFrontmatter & MayHavePost>(file);
   const { frontmatter } = data;
+
+  if (frontmatter) {
+    date = frontmatter.date;
+  }
 
   if (frontmatter && typeof frontmatter.title === "string") {
     title = frontmatter.title;
@@ -59,6 +65,7 @@ export const postExtracter: Plugin = () => (tree, file) => {
   data.post = {
     title,
     description,
+    date,
     path: relURL,
     folder,
     slug,
@@ -80,4 +87,7 @@ export const getBlogFiles = () =>
 export const postIsntNil = (val: Post | undefined | null): val is Post => !!val;
 
 export const readBlog = (): Post[] =>
-  getBlogFiles().map(readPost).filter(postIsntNil);
+  getBlogFiles()
+    .map(readPost)
+    .filter(postIsntNil)
+    .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
