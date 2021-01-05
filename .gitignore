@@ -7,11 +7,9 @@ yarn-error.log*
 # Next.js
 /.next/
 
-# Logs
-logs
-*.log
-
 # Misc
 .DS_Store
 .AppleDouble
 .LSOverride
+logs
+*.log

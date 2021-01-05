@@ -1,5 +1,5 @@
-# 💁🏻‍♂️ phuctm97.com
+# 👔 phuctm97.com
 
-My personal website.
+Personal website, blog, and thingy.
 
 > 🚧 Working in progress.
