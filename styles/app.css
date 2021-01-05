@@ -7,7 +7,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply antialiased bg-white text-gray-700;
+    @apply antialiased bg-white dark:bg-black text-gray-700 dark:text-gray-300;
   }
   strong {
     @apply font-semibold;

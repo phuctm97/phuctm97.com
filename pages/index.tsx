@@ -9,7 +9,7 @@ type Props = {
 
 const IndexPage = ({ blog }: Props) => (
   <>
-    <h1 className="font-black text-2xl tracking-tight text-gray-900 sm:text-3xl md:text-5xl">
+    <h1 className="font-black text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
       Hey, I’m Minh-Phuc Tran
     </h1>
     <h2 className="mt-4 text-base sm:text-lg">
@@ -22,7 +22,7 @@ const IndexPage = ({ blog }: Props) => (
       <strong>3 articles per week</strong>.
     </h3>
     <section className="mt-10">
-      <h2 className="font-bold tracking-tight text-2xl text-gray-900 sm:text-3xl">
+      <h2 className="font-bold tracking-tight text-2xl text-gray-900 dark:text-gray-100 sm:text-3xl">
         Blog
       </h2>
       <h3 className="mt-2 text-base sm:text-lg">
@@ -37,7 +37,7 @@ const IndexPage = ({ blog }: Props) => (
                 {title}
               </h4>
               <div className="overflow-hidden">
-                <p className="mt-2 text-sm line-clamp-2 text-gray-500 sm:text-base">
+                <p className="mt-2 text-sm line-clamp-2 text-gray-500 dark:text-gray-400 sm:text-base">
                   {description}
                 </p>
               </div>

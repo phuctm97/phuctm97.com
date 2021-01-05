@@ -1,5 +1,5 @@
 const Wrapper: React.FC = ({ children }) => (
-  <article className="prose">{children}</article>
+  <article className="prose dark:prose-dark">{children}</article>
 );
 
 export { Wrapper as wrapper };

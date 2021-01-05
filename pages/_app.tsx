@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { ThemeProvider } from "next-themes";
 
 import Header from "~layouts/header";
 import Main from "~layouts/main";
@@ -14,12 +15,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
-    <MDXProvider components={MDXComponents}>
-      <Header />
-      <Main>
-        <Component {...pageProps} />
-      </Main>
-    </MDXProvider>
+    <ThemeProvider attribute="class" enableSystem={false}>
+      <MDXProvider components={MDXComponents}>
+        <Header />
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+      </MDXProvider>
+    </ThemeProvider>
   </>
 );
 
