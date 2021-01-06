@@ -20,6 +20,7 @@ module.exports = {
               fontSize: theme("fontSize.2xl"),
               fontWeight: theme("fontWeight.extrabold"),
               letterSpacing: theme("letterSpacing.tight"),
+              marginBottom: theme("spacing.8"),
             },
             "h1 strong, h2 strong, h3 strong, h4 strong, h5 strong": {
               fontWeight: theme("fontWeight.extrabold"),
@@ -29,6 +30,17 @@ module.exports = {
               borderWidth: 1,
               borderStyle: "solid",
               borderColor: theme("colors.gray.200"),
+            },
+            ".info img, .info p": {
+              marginTop: 0,
+              marginBottom: 0,
+            },
+            ".info p": {
+              color: theme("colors.gray.600"),
+              fontWeight: theme("fontWeight.light"),
+            },
+            ".info a": {
+              textDecoration: "none",
             },
           },
         },
@@ -80,6 +92,9 @@ module.exports = {
             pre: {
               backgroundColor: theme("colors.gray.900"),
               borderColor: theme("colors.gray.700"),
+            },
+            ".info p": {
+              color: theme("colors.gray.500"),
             },
           },
         },
