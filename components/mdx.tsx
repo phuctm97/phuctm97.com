@@ -2,14 +2,22 @@ import { Children } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Info from "~components/info";
+import Tags from "~components/tags";
 import { Post } from "~lib/post";
 import packageJSON from "~package.json";
 
+const { homepage } = packageJSON;
+const me = {
+  ...packageJSON.author,
+  avatarURL: "/static/avatar.jpg",
+  twitter: packageJSON.site.twitter.handle.substr(1),
+};
+
 const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
-  const title = `${post.title} | ${packageJSON.author.name}`;
-  const url = `${packageJSON.homepage}${post.path}`;
+  const { description, tags, path } = post;
+  const title = `${post.title} | ${me.name}`;
+  const url = `${homepage}${path}`;
   const date = new Date(post.date);
-  const { description } = post;
 
   const [h1, ...content] = Children.toArray(children);
   return (
@@ -25,8 +33,8 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
           description,
           article: {
             publishedTime: date.toISOString(),
-            authors: [packageJSON.author.url],
-            tags: post.tags,
+            authors: [me.url],
+            tags: tags,
           },
           images: [{ ...post.cover, alt: title }],
         }}
@@ -34,13 +42,10 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
       <article className="prose prose-sm sm:prose md:prose-md dark:prose-dark">
         {h1}
         <Info
-          author={{
-            name: packageJSON.author.name,
-            url: `https://twitter.com/${packageJSON.site.twitter.handle}`,
-            avatarURL: "/static/avatar.jpg",
-          }}
+          author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
           date={date}
         />
+        <Tags tags={tags} />
         {content}
       </article>
     </>
