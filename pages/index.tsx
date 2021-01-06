@@ -22,7 +22,7 @@ const IndexPage = ({ blog }: Props) => (
       to see <strong>3 articles per week</strong>.
     </h3>
     <Subscribe className="mt-8" />
-    <section className="mt-10 md:mt-12">
+    <section className="mt-10 md:mt-12 lg:mb-24">
       <h2 className="font-bold tracking-tight text-2xl text-gray-900 dark:text-gray-100 sm:text-3xl">
         Blog
       </h2>
