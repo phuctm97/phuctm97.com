@@ -61,6 +61,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "rehype-accessible-emojis": "^0.3.2",
     "remark-frontmatter": "^2.0.0",
     "remark-parse": "^8.0.3",
     "remark-parse-frontmatter": "^1.0.2",
