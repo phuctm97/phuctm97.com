@@ -1,6 +1,10 @@
 import { FiMail } from "react-icons/fi";
 import classNames from "classnames";
 
+const submitThroughPopup = () => {
+  window.open("https://buttondown.email/phuctm97", "popupwindow");
+};
+
 const Subscribe = ({
   className,
   ...htmlAttrs
@@ -19,7 +23,13 @@ const Subscribe = ({
       Every Sunday, I write an email summarizing lessons I've learned that week
       and practical advices for you.
     </p>
-    <form className="relative mt-4 mb-2 text-sm sm:text-base">
+    <form
+      className="relative mt-4 mb-2 text-sm sm:text-base"
+      action="https://buttondown.email/api/emails/embed-subscribe/phuctm97"
+      method="post"
+      target="popupwindow"
+      onSubmit={submitThroughPopup}
+    >
       <label className="hidden" htmlFor="email">
         Email for newsletter
       </label>
@@ -31,7 +41,12 @@ const Subscribe = ({
         autoComplete="email"
         required
       />
-      <button className="flex items-center justify-center absolute right-1 top-1 px-4 font-bold h-7 sm:h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28">
+      <input className="hidden" type="hidden" value="1" name="embed" />
+      <button
+        className="flex items-center justify-center absolute right-1 top-1 px-4 font-bold h-7 sm:h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
+        name="submit"
+        type="submit"
+      >
         Subscribe
       </button>
     </form>
