@@ -1,16 +1,17 @@
 import path from "path";
 import glob from "glob";
+import { URL } from "url";
 import { Plugin } from "unified";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
+import revalidator from "revalidator";
 import dir from "~lib/dir";
 import {
   HasFrontmatter,
   toVFile,
   getVFileData,
   isParent,
-  createParser,
-  createReader,
+  reader,
 } from "~lib/remark";
 
 export type Post = {
@@ -18,6 +19,11 @@ export type Post = {
   description: string;
   date: string;
   tags: string[];
+  cover: {
+    url: string;
+    width?: number;
+    height?: number;
+  };
   path: string;
   folder: string;
   slug: string;
@@ -27,14 +33,23 @@ export interface HasPost {
   post: Post;
 }
 
-export const postSchema: Revalidator.JSONSchema<Post> = {
+export const postFrontmatterSchema: Revalidator.JSONSchema<any> = {
   properties: {
     title: { type: "string" },
     description: { type: "string" },
     date: { type: "string", format: "date", required: true },
     tags: { type: "array", uniqueItems: true, maxItems: 4 },
+    cover: {
+      type: "object",
+      properties: {
+        url: { type: "string", format: "url" },
+        icons: { type: "array" },
+      },
+    },
   },
 };
+
+export const postFolders = ["blog"];
 
 const trimPagesDir = (s: string) =>
   s.startsWith(dir.pages) ? s.substr(dir.pages.length + 1) : s;
@@ -49,46 +64,72 @@ export const getPostPath = (absPath: string) => {
   return { path: `/${folder}/${slug}`, folder, slug };
 };
 
+export const isPost = (folder: string, slug: string) =>
+  postFolders.includes(folder) && slug.length > 0;
+
+export const generatePostCover = (cover: any, title: string): Post["cover"] => {
+  if (cover && cover.url) return { url: cover.url };
+
+  const url = new URL(
+    encodeURIComponent(`${title}.jpg`),
+    "https://img.phuctm97.com/api/v2/"
+  );
+
+  const icons: string[] = (cover && cover.icons) || [];
+  for (let icon of icons) {
+    url.searchParams.append("icons", icon);
+  }
+
+  return {
+    url: url.toString(),
+    width: 1200,
+    height: 628,
+  };
+};
+
 export const postParser: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("Unknown file path.");
 
   const { path: relURL, folder, slug } = getPostPath(file.path);
-
-  let title = "";
-  let description = "";
-  let date = "";
-  let tags: string[] | undefined;
+  if (!isPost(folder, slug)) return file.message("Not a post, skip.");
 
   const data = getVFileData<Partial<HasFrontmatter & HasPost>>(file);
   const { frontmatter } = data;
+  if (!frontmatter) return file.fail("No frontmatter.");
+
+  const validation = revalidator.validate(frontmatter, postFrontmatterSchema);
+  if (!validation.valid)
+    return file.fail(
+      "Invalid frontmatter: " + JSON.stringify(validation.errors, null, 2)
+    );
+
+  let title: string;
+  let description: string;
 
   // Find title in frontmatter.title -> first h1.
-  if (frontmatter && frontmatter.title) {
+  if (frontmatter.title) {
     title = frontmatter.title;
   } else {
     const h1 = select("heading[depth=1]", tree);
-    if (h1) title = mdToString(h1);
+    if (!h1) return file.fail("Couldn't find title.");
+    title = mdToString(h1);
   }
 
   // Find description in frontmatter.description -> first p.
-  if (frontmatter && frontmatter.description) {
+  if (frontmatter.description) {
     description = frontmatter.description;
   } else {
     const p = select("paragraph", tree);
-    if (p) description = mdToString(p);
-  }
-
-  // Find other attributes.
-  if (frontmatter) {
-    date = frontmatter.date;
-    tags = frontmatter.tags;
+    if (!p) return file.fail("Couldn't find description.");
+    description = mdToString(p);
   }
 
   data.post = {
     title,
     description,
-    date,
-    tags: tags || [],
+    date: frontmatter.date,
+    tags: frontmatter.tags || [],
+    cover: generatePostCover(frontmatter.cover, title),
     path: relURL,
     folder,
     slug,
@@ -106,11 +147,8 @@ export const postExporter: Plugin = () => (tree, file) => {
   });
 };
 
-const mdParser = createParser(postSchema);
-const mdReader = createReader(mdParser);
-
 export const readPost = (absPath: string): Post | undefined => {
-  const file = mdReader().use(postParser).processSync(toVFile(absPath));
+  const file = reader().use(postParser).processSync(toVFile(absPath));
   const { post } = getVFileData<HasPost>(file);
   return post;
 };
