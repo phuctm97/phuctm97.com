@@ -3,13 +3,15 @@ import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { FaDev, FaMediumM } from "react-icons/fa";
 import { SiHashnode } from "react-icons/si";
 
+const username = "phuctm97";
+
 const socialLinks = [
-  "https://twitter.com/phuctm97",
-  "https://github.com/phuctm97",
-  "https://dev.to/phuctm97",
-  "https://phuctm97.medium.com",
-  "https://linkedin.com/in/phuctm97",
-  "https://hashnode.com/@phuctm97",
+  `https://twitter.com/${username}`,
+  `https://github.com/${username}`,
+  `https://dev.to/${username}`,
+  `https://${username}.medium.com`,
+  `https://linkedin.com/in/${username}`,
+  `https://hashnode.com/@${username}`,
 ];
 
 const iconSize = "1.3em";
@@ -30,7 +32,6 @@ const renderIcon = (link: string) => {
 };
 
 const getLabel = (link: string) => {
-  const username = "phuctm97";
   if (link.includes("twitter")) return `Twitter @${username}`;
   if (link.includes("dev.to")) return `DEV @${username}`;
   if (link.includes("github")) return `Github @${username}`;
