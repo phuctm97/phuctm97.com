@@ -16,6 +16,7 @@ export type Post = {
   title: string;
   description: string;
   date: string;
+  tags: string[];
   path: string;
   folder: string;
   slug: string;
@@ -46,16 +47,18 @@ export const postParser: Plugin = () => (tree, file) => {
   let title = "";
   let description = "";
   let date = "";
+  let tags: string[] | undefined;
 
   const data = getVFileData<Partial<HasFrontmatter & HasPost>>(file);
   const { frontmatter } = data;
 
   if (frontmatter) {
     date = frontmatter.date;
+    tags = frontmatter.tags;
   }
 
   // Find title in frontmatter.title -> first h1.
-  if (frontmatter && typeof frontmatter.title === "string") {
+  if (frontmatter && frontmatter.title) {
     title = frontmatter.title;
   } else {
     const h1 = select("heading[depth=1]", tree);
@@ -63,7 +66,7 @@ export const postParser: Plugin = () => (tree, file) => {
   }
 
   // Find description in frontmatter.description -> first p.
-  if (frontmatter && typeof frontmatter.description === "string") {
+  if (frontmatter && frontmatter.description) {
     description = frontmatter.description;
   } else {
     const p = select("paragraph", tree);
@@ -74,6 +77,7 @@ export const postParser: Plugin = () => (tree, file) => {
     title,
     description,
     date,
+    tags: tags || [],
     path: relURL,
     folder,
     slug,

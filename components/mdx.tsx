@@ -22,6 +22,7 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
           article: {
             publishedTime: new Date(post.date).toISOString(),
             authors: [packageJSON.author.url],
+            tags: post.tags,
           },
         }}
       />

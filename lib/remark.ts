@@ -20,7 +20,9 @@ export const parser = unified()
   .use(frontmatterParser, {
     properties: {
       title: { type: "string" },
+      description: { type: "string" },
       date: { type: "string", format: "date", required: true },
+      tags: { type: "array", uniqueItems: true, maxItems: 4 },
     },
   })
   .freeze();
