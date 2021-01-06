@@ -15,6 +15,13 @@ module.exports = {
           css: {
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
+            "h1:first-of-type": {
+              color: theme("colors.gray.900"),
+              fontSize: theme("fontSize.2xl"),
+              fontWeight: theme("fontWeight.extrabold"),
+              letterSpacing: theme("letterSpacing.tight"),
+              marginBottom: theme("spacing.8"),
+            },
             "h1 strong, h2 strong, h3 strong, h4 strong, h5 strong": {
               fontWeight: theme("fontWeight.extrabold"),
             },
@@ -24,11 +31,40 @@ module.exports = {
               borderStyle: "solid",
               borderColor: theme("colors.gray.200"),
             },
+            ".info img, .info p": {
+              marginTop: 0,
+              marginBottom: 0,
+            },
+            ".info p": {
+              color: theme("colors.gray.600"),
+              fontWeight: theme("fontWeight.light"),
+            },
+            ".info a": {
+              textDecoration: "none",
+            },
+          },
+        },
+        sm: {
+          css: {
+            "h1:first-of-type": {
+              fontSize: theme("fontSize.3xl"),
+              lineHeight: theme("lineHeight.none"),
+            },
+          },
+        },
+        md: {
+          css: {
+            "h1:first-of-type": {
+              fontSize: theme("fontSize.5xl"),
+            },
           },
         },
         dark: {
           css: {
             color: theme("colors.gray.300"),
+            "h1:first-of-type": {
+              color: theme("colors.gray.100"),
+            },
             "h1, h2, h3, h4, h5, h6, a, thead, :not(pre) code": {
               color: theme("colors.gray.100"),
             },
@@ -56,6 +92,9 @@ module.exports = {
             pre: {
               backgroundColor: theme("colors.gray.900"),
               borderColor: theme("colors.gray.700"),
+            },
+            ".info p": {
+              color: theme("colors.gray.500"),
             },
           },
         },

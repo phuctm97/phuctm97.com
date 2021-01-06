@@ -33,7 +33,7 @@ export interface HasPost {
   post: Post;
 }
 
-export const postFrontmatterSchema: Revalidator.JSONSchema<any> = {
+const frontmatterSchema: Revalidator.JSONSchema<any> = {
   properties: {
     title: { type: "string" },
     description: { type: "string" },
@@ -49,13 +49,13 @@ export const postFrontmatterSchema: Revalidator.JSONSchema<any> = {
   },
 };
 
-export const postFolders = ["blog"];
-
 const trimPagesDir = (s: string) =>
   s.startsWith(dir.pages) ? s.substr(dir.pages.length + 1) : s;
 
 const trimMDXExt = (s: string) =>
   s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
+
+export const isPost = (absPath: string) => absPath.startsWith(dir.blog);
 
 export const getPostPath = (absPath: string) => {
   const trimmed = trimPagesDir(trimMDXExt(absPath));
@@ -64,10 +64,8 @@ export const getPostPath = (absPath: string) => {
   return { path: `/${folder}/${slug}`, folder, slug };
 };
 
-export const isPost = (folder: string, slug: string) =>
-  postFolders.includes(folder) && slug.length > 0;
-
-export const generatePostCover = (cover: any, title: string): Post["cover"] => {
+export const generatePostCover = (frontmatter: any): Post["cover"] => {
+  const { cover, title } = frontmatter;
   if (cover && cover.url) return { url: cover.url };
 
   const url = new URL(
@@ -89,15 +87,17 @@ export const generatePostCover = (cover: any, title: string): Post["cover"] => {
 
 export const postParser: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("Unknown file path.");
+  if (!isPost(file.path)) return file.message("Not a post, skip.");
 
   const { path: relURL, folder, slug } = getPostPath(file.path);
-  if (!isPost(folder, slug)) return file.message("Not a post, skip.");
 
   const data = getVFileData<Partial<HasFrontmatter & HasPost>>(file);
+
   const { frontmatter } = data;
   if (!frontmatter) return file.fail("No frontmatter.");
 
-  const validation = revalidator.validate(frontmatter, postFrontmatterSchema);
+  // Validate frontmatter.
+  const validation = revalidator.validate(frontmatter, frontmatterSchema);
   if (!validation.valid)
     return file.fail(
       "Invalid frontmatter: " + JSON.stringify(validation.errors, null, 2)
@@ -129,7 +129,7 @@ export const postParser: Plugin = () => (tree, file) => {
     description,
     date: frontmatter.date,
     tags: frontmatter.tags || [],
-    cover: generatePostCover(frontmatter.cover, title),
+    cover: generatePostCover({ ...frontmatter, title }),
     path: relURL,
     folder,
     slug,
