@@ -36,7 +36,7 @@
     "build": "build:lib && build:app",
     "build:app": "next build",
     "build:lib": "tsc -p lib/tsconfig.json && tsc-alias -p lib/tsconfig.json",
-    "type:check": "tsc",
+    "type:check": "tsc && tsc -p lib/tsconfig.json --noEmit",
     "style:check": "prettier --check .",
     "style:format": "prettier --write ."
   },
