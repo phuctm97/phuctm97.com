@@ -1,4 +1,6 @@
-const typography = require("@tailwindcss/typography");
+const typography = require("@tailwindcss/typography")({
+  modifiers: ["sm"],
+});
 
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],
