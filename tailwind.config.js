@@ -15,6 +15,12 @@ module.exports = {
           css: {
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
+            "h1:first-of-type": {
+              color: theme("colors.gray.900"),
+              fontSize: theme("fontSize.2xl"),
+              fontWeight: theme("fontWeight.extrabold"),
+              letterSpacing: theme("letterSpacing.tight"),
+            },
             "h1 strong, h2 strong, h3 strong, h4 strong, h5 strong": {
               fontWeight: theme("fontWeight.extrabold"),
             },
@@ -23,6 +29,21 @@ module.exports = {
               borderWidth: 1,
               borderStyle: "solid",
               borderColor: theme("colors.gray.200"),
+            },
+          },
+        },
+        sm: {
+          css: {
+            "h1:first-of-type": {
+              fontSize: theme("fontSize.3xl"),
+              lineHeight: theme("lineHeight.none"),
+            },
+          },
+        },
+        md: {
+          css: {
+            "h1:first-of-type": {
+              fontSize: theme("fontSize.5xl"),
             },
           },
         },

@@ -27,7 +27,7 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
           images: [{ ...post.cover, alt: title }],
         }}
       />
-      <article className="prose prose-sm sm:prose dark:prose-dark">
+      <article className="prose prose-sm sm:prose md:prose-md dark:prose-dark">
         {children}
       </article>
     </>
