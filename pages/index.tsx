@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Emoji from "~components/emoji";
+import Subscribe from "~components/subscribe";
 import { Post, readBlog } from "~lib/post";
 
 type Props = {
@@ -20,7 +21,8 @@ const IndexPage = ({ blog }: Props) => (
       On this site, I document everything I learned and created. You may expect
       to see <strong>3 articles per week</strong>.
     </h3>
-    <section className="mt-10 md:mt-12">
+    <Subscribe className="mt-8" />
+    <section className="mt-10 md:mt-12 lg:mb-24">
       <h2 className="font-bold tracking-tight text-2xl text-gray-900 dark:text-gray-100 sm:text-3xl">
         Blog
       </h2>

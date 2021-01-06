@@ -3,6 +3,7 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Info from "~components/info";
 import Tags from "~components/tags";
+import Subscribe from "~components/subscribe";
 import { Post } from "~lib/post";
 import packageJSON from "~package.json";
 
@@ -48,6 +49,7 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
         <Tags tags={tags} />
         {content}
       </article>
+      <Subscribe className="mt-14 md:mt-16" />
     </>
   );
 };
