@@ -1,12 +1,32 @@
 {
   "name": "phuctm97.com",
   "version": "2.0.0",
+  "description": "🏚 Home on the Web — Everything I learned and created: software dev, programming tutorials, career, startups, and open-source.",
   "homepage": "https://phuctm97.com",
   "repository": "https://github.com/phuctm97/phuctm97.com",
   "author": {
     "name": "Minh-Phuc Tran",
     "email": "me@phuctm97.com",
     "url": "https://phuctm97.com"
+  },
+  "site": {
+    "title": "Minh-Phuc Tran — Software Engineer",
+    "openGraph": {
+      "type": "website",
+      "locale": "en_US",
+      "images": [
+        {
+          "url": "/static/og.png",
+          "width": 1200,
+          "height": 628
+        }
+      ]
+    },
+    "twitter": {
+      "handle": "@phuctm97",
+      "site": "@phuctm97",
+      "cardType": "summary_large_image"
+    }
   },
   "license": "MIT",
   "private": false,

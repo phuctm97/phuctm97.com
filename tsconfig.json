@@ -8,7 +8,8 @@
       "~styles/*": ["styles/*"],
       "~hooks/*": ["hooks/*"],
       "~utils/*": ["utils/*"],
-      "~lib/*": ["lib/*"]
+      "~lib/*": ["lib/*"],
+      "~package.json": ["package.json"]
     },
     "allowJs": false,
     "strict": true,
