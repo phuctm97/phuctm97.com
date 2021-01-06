@@ -42,6 +42,14 @@ module.exports = {
             ".info a": {
               textDecoration: "none",
             },
+            ".tags p": {
+              marginTop: 0,
+              marginBottom: theme("spacing.1"),
+              marginRight: theme("spacing.1"),
+            },
+            ".tags p:last-child": {
+              marginRight: 0,
+            },
           },
         },
         sm: {
