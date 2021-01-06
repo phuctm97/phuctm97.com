@@ -1,4 +1,4 @@
-interface Props extends React.HTMLAttributes<HTMLSpanElement> {
+interface Props extends React.HTMLProps<HTMLSpanElement> {
   label?: string;
   children: string;
 }
