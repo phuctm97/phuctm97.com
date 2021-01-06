@@ -1,7 +1,7 @@
 import fs from "fs";
 import { Node, Parent } from "unist";
 import { VFile } from "vfile";
-import unified, { Processor, Settings } from "unified";
+import unified, { FrozenProcessor, Processor, Settings } from "unified";
 import mdParser from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import frontmatterParser from "remark-parse-frontmatter";
@@ -14,20 +14,14 @@ export function fakeCompiler<P = Settings>(this: Processor<P>) {
   this.Compiler = () => "";
 }
 
-export const parser = unified()
-  .use(mdParser)
-  .use(frontmatter)
-  .use(frontmatterParser, {
-    properties: {
-      title: { type: "string" },
-      description: { type: "string" },
-      date: { type: "string", format: "date", required: true },
-      tags: { type: "array", uniqueItems: true, maxItems: 4 },
-    },
-  })
-  .freeze();
+const baseParser = unified().use(mdParser).use(frontmatter).freeze();
 
-export const reader = parser().use(fakeCompiler).freeze();
+export const createParser = (schema?: any) => {
+  return baseParser().use(frontmatterParser, schema).freeze();
+};
+
+export const createReader = (parser: FrozenProcessor) =>
+  parser().use(fakeCompiler).freeze();
 
 export const toVFile = (absPath: string): Partial<VFile> => ({
   cwd: process.cwd(),

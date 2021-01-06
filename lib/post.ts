@@ -6,10 +6,11 @@ import mdToString from "mdast-util-to-string";
 import dir from "~lib/dir";
 import {
   HasFrontmatter,
-  reader,
   toVFile,
   getVFileData,
   isParent,
+  createParser,
+  createReader,
 } from "~lib/remark";
 
 export type Post = {
@@ -25,6 +26,15 @@ export type Post = {
 export interface HasPost {
   post: Post;
 }
+
+export const postSchema = {
+  properties: {
+    title: { type: "string" },
+    description: { type: "string" },
+    date: { type: "string", format: "date", required: true },
+    tags: { type: "array", uniqueItems: true, maxItems: 4 },
+  },
+};
 
 const trimPagesDir = (s: string) =>
   s.startsWith(dir.pages) ? s.substr(dir.pages.length + 1) : s;
@@ -52,11 +62,6 @@ export const postParser: Plugin = () => (tree, file) => {
   const data = getVFileData<Partial<HasFrontmatter & HasPost>>(file);
   const { frontmatter } = data;
 
-  if (frontmatter) {
-    date = frontmatter.date;
-    tags = frontmatter.tags;
-  }
-
   // Find title in frontmatter.title -> first h1.
   if (frontmatter && frontmatter.title) {
     title = frontmatter.title;
@@ -71,6 +76,12 @@ export const postParser: Plugin = () => (tree, file) => {
   } else {
     const p = select("paragraph", tree);
     if (p) description = mdToString(p);
+  }
+
+  // Find other attributes.
+  if (frontmatter) {
+    date = frontmatter.date;
+    tags = frontmatter.tags;
   }
 
   data.post = {
@@ -95,8 +106,11 @@ export const postExporter: Plugin = () => (tree, file) => {
   });
 };
 
+const mdParser = createParser(postSchema);
+const mdReader = createReader(mdParser);
+
 export const readPost = (absPath: string): Post | undefined => {
-  const file = reader().use(postParser).processSync(toVFile(absPath));
+  const file = mdReader().use(postParser).processSync(toVFile(absPath));
   const { post } = getVFileData<HasPost>(file);
   return post;
 };
