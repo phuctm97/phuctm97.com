@@ -1,2 +1,5 @@
 # Next.js
 /.next/
+
+# Auto-generated data
+/data/
