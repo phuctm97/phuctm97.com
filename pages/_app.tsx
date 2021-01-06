@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 
 import Header from "~layouts/header";
 import Main from "~layouts/main";
+import Footer from "~layouts/footer";
 
 import { MDXProvider } from "@mdx-js/react";
 import * as MDXComponents from "components/mdx";
@@ -22,6 +23,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         <Main>
           <Component {...pageProps} />
         </Main>
+        <Footer />
       </MDXProvider>
     </ThemeProvider>
   </>

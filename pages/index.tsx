@@ -14,7 +14,7 @@ const IndexPage = ({ blog }: Props) => (
     </h1>
     <h2 className="mt-4 md:mt-6 text-sm sm:text-base">
       I'm a software engineer. Welcome to my digital garden{" "}
-      <Emoji label="Waving hand">👋🏻</Emoji>
+      <Emoji label="waving hand">👋🏻</Emoji>
     </h2>
     <h3 className="mt-2 text-sm sm:text-base">
       On this site, I document everything I learned and created. You may expect
