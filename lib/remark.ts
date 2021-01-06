@@ -1,7 +1,7 @@
 import fs from "fs";
 import { Node, Parent } from "unist";
 import { VFile } from "vfile";
-import unified, { FrozenProcessor, Processor, Settings } from "unified";
+import unified, { Processor, Settings } from "unified";
 import mdParser from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import frontmatterParser from "remark-parse-frontmatter";
@@ -14,14 +14,13 @@ export function fakeCompiler<P = Settings>(this: Processor<P>) {
   this.Compiler = () => "";
 }
 
-const baseParser = unified().use(mdParser).use(frontmatter).freeze();
+export const parser = unified()
+  .use(mdParser)
+  .use(frontmatter)
+  .use(frontmatterParser)
+  .freeze();
 
-export const createParser = <T = any>(schema?: Revalidator.JSONSchema<T>) => {
-  return baseParser().use(frontmatterParser, schema).freeze();
-};
-
-export const createReader = (parser: FrozenProcessor) =>
-  parser().use(fakeCompiler).freeze();
+export const reader = parser().use(fakeCompiler).freeze();
 
 export const toVFile = (absPath: string): Partial<VFile> => ({
   cwd: process.cwd(),

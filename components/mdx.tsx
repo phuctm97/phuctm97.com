@@ -24,6 +24,7 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
             authors: [packageJSON.author.url],
             tags: post.tags,
           },
+          images: [{ ...post.cover, alt: title }],
         }}
       />
       <article className="prose prose-sm sm:prose dark:prose-dark">
