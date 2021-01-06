@@ -15,6 +15,9 @@ module.exports = {
           css: {
             "blockquote p:first-of-type::before": false,
             "blockquote p:last-of-type::after": false,
+            "h1 strong, h2 strong, h3 strong, h4 strong, h5 strong": {
+              fontWeight: theme("fontWeight.extrabold"),
+            },
             pre: {
               backgroundColor: theme("colors.gray.50"),
               borderWidth: 1,
