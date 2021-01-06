@@ -27,7 +27,7 @@ export interface HasPost {
   post: Post;
 }
 
-export const postSchema = {
+export const postSchema: Revalidator.JSONSchema<Post> = {
   properties: {
     title: { type: "string" },
     description: { type: "string" },

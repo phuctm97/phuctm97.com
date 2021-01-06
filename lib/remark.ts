@@ -16,7 +16,7 @@ export function fakeCompiler<P = Settings>(this: Processor<P>) {
 
 const baseParser = unified().use(mdParser).use(frontmatter).freeze();
 
-export const createParser = (schema?: any) => {
+export const createParser = <T = any>(schema?: Revalidator.JSONSchema<T>) => {
   return baseParser().use(frontmatterParser, schema).freeze();
 };
 
