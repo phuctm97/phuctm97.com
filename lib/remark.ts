@@ -1,9 +1,14 @@
 import fs from "fs";
-import unified, { Processor, Settings } from "unified";
+import { Node, Parent } from "unist";
 import { VFile } from "vfile";
+import unified, { Processor, Settings } from "unified";
 import mdParser from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import frontmatterParser from "remark-parse-frontmatter";
+
+export interface HasFrontmatter {
+  frontmatter: { [key: string]: any };
+}
 
 export function fakeCompiler<P = Settings>(this: Processor<P>) {
   this.Compiler = () => "";
@@ -28,8 +33,6 @@ export const toVFile = (absPath: string): Partial<VFile> => ({
   contents: fs.readFileSync(absPath),
 });
 
-export interface MayHaveFrontmatter {
-  frontmatter?: { [key: string]: any };
-}
-
 export const getVFileData = <T = any>(file: VFile) => file.data as T;
+
+export const isParent = (node: Node): node is Parent => !!node.children;

@@ -4,7 +4,13 @@ import { Plugin } from "unified";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import dir from "~lib/dir";
-import { MayHaveFrontmatter, reader, toVFile, getVFileData } from "~lib/remark";
+import {
+  HasFrontmatter,
+  reader,
+  toVFile,
+  getVFileData,
+  isParent,
+} from "~lib/remark";
 
 export type Post = {
   title: string;
@@ -14,6 +20,10 @@ export type Post = {
   folder: string;
   slug: string;
 };
+
+export interface HasPost {
+  post: Post;
+}
 
 const trimPagesDir = (s: string) =>
   s.startsWith(dir.pages) ? s.substr(dir.pages.length + 1) : s;
@@ -28,11 +38,7 @@ export const getPostPath = (absPath: string) => {
   return { path: `/${folder}/${slug}`, folder, slug };
 };
 
-export interface MayHavePost {
-  post?: Post;
-}
-
-export const postExtracter: Plugin = () => (tree, file) => {
+export const postParser: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("Unknown file path.");
 
   const { path: relURL, folder, slug } = getPostPath(file.path);
@@ -41,13 +47,14 @@ export const postExtracter: Plugin = () => (tree, file) => {
   let description = "";
   let date = "";
 
-  const data = getVFileData<MayHaveFrontmatter & MayHavePost>(file);
+  const data = getVFileData<Partial<HasFrontmatter & HasPost>>(file);
   const { frontmatter } = data;
 
   if (frontmatter) {
     date = frontmatter.date;
   }
 
+  // Find title in frontmatter.title -> first h1.
   if (frontmatter && typeof frontmatter.title === "string") {
     title = frontmatter.title;
   } else {
@@ -55,6 +62,7 @@ export const postExtracter: Plugin = () => (tree, file) => {
     if (h1) title = mdToString(h1);
   }
 
+  // Find description in frontmatter.description -> first p.
   if (frontmatter && typeof frontmatter.description === "string") {
     description = frontmatter.description;
   } else {
@@ -72,9 +80,20 @@ export const postExtracter: Plugin = () => (tree, file) => {
   };
 };
 
+export const postExporter: Plugin = () => (tree, file) => {
+  const { post } = getVFileData<HasPost>(file);
+  if (!post) return file.message("Not a post, skip.");
+
+  if (!isParent(tree)) return file.fail("Tree is empty.");
+  tree.children.push({
+    type: "export",
+    value: `export const post = ${JSON.stringify(post)};`,
+  });
+};
+
 export const readPost = (absPath: string): Post | undefined => {
-  const file = reader().use(postExtracter).processSync(toVFile(absPath));
-  const { post } = getVFileData<MayHavePost>(file);
+  const file = reader().use(postParser).processSync(toVFile(absPath));
+  const { post } = getVFileData<HasPost>(file);
   return post;
 };
 
