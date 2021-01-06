@@ -31,10 +31,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "next dev",
+    "dev": "yarn build:lib && next dev",
+    "build": "yarn build:lib && next build",
     "start": "next start",
-    "build": "build:lib && build:app",
-    "build:app": "next build",
     "build:lib": "tsc -p lib/tsconfig.json && tsc-alias -p lib/tsconfig.json",
     "type:check": "tsc && tsc -p lib/tsconfig.json --noEmit",
     "style:check": "prettier --check .",
