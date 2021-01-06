@@ -31,6 +31,9 @@ module.exports = {
               borderStyle: "solid",
               borderColor: theme("colors.gray.200"),
             },
+            "pre > code": {
+              color: theme("colors.gray.800"),
+            },
             ".info img, .info p": {
               marginTop: 0,
               marginBottom: 0,
@@ -100,6 +103,9 @@ module.exports = {
             pre: {
               backgroundColor: theme("colors.gray.900"),
               borderColor: theme("colors.gray.700"),
+            },
+            "pre > code": {
+              color: theme("colors.gray.200"),
             },
             ".info p": {
               color: theme("colors.gray.500"),

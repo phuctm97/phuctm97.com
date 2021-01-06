@@ -1,7 +1,5 @@
-code[class*="language-"],
-code,
 pre[class*="language-"],
-pre {
+code[class*="language-"] {
   @apply text-gray-800 dark:text-gray-50;
 }
 
