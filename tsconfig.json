@@ -2,13 +2,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "~pages/*": ["pages/*"],
       "~components/*": ["components/*"],
       "~layouts/*": ["layouts/*"],
       "~styles/*": ["styles/*"],
       "~hooks/*": ["hooks/*"],
-      "~utils/*": ["utils/*"]
+      "~utils/*": ["utils/*"],
+      "~lib/*": ["lib/*"],
+      "~package.json": ["package.json"]
     },
-    "allowJs": true,
+    "allowJs": false,
     "strict": true,
     "alwaysStrict": true,
     "target": "esnext",

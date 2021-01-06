@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "js",
+    "baseUrl": ".",
+    "paths": {
+      "~lib/*": ["./*"]
+    }
+  },
+  "exclude": ["node_modules", ".next"],
+  "include": ["**/*.ts"]
+}

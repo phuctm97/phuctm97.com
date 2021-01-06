@@ -1,78 +1,61 @@
 code[class*="language-"],
-pre[class*="language-"] {
-  color: #ccc;
+code,
+pre[class*="language-"],
+pre {
+  @apply text-gray-800 dark:text-gray-50;
 }
 
 .token.comment,
-.token.block-comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #999;
+  @apply text-gray-700 dark:text-gray-300;
 }
 
 .token.punctuation {
-  color: #ccc;
-}
-
-.token.tag,
-.token.attr-name,
-.token.namespace,
-.token.deleted {
-  color: #e2777a;
-}
-
-.token.function-name {
-  color: #6196cc;
-}
-
-.token.boolean,
-.token.number,
-.token.function {
-  color: #f08d49;
+  @apply text-gray-700 dark:text-gray-300;
 }
 
 .token.property,
-.token.class-name,
+.token.tag,
+.token.boolean,
+.token.number,
 .token.constant,
-.token.symbol {
-  color: #f8c555;
+.token.symbol,
+.token.deleted {
+  @apply text-green-500;
 }
 
 .token.selector,
-.token.important,
-.token.atrule,
-.token.keyword,
-.token.builtin {
-  color: #cc99cd;
-}
-
+.token.attr-name,
 .token.string,
 .token.char,
-.token.attr-value,
-.token.regex,
-.token.variable {
-  color: #7ec699;
+.token.builtin,
+.token.inserted {
+  @apply text-purple-500;
 }
 
 .token.operator,
 .token.entity,
-.token.url {
-  color: #67cdcc;
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-500;
 }
 
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-blue-500;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-pink-500;
+}
+
+.token.regex,
 .token.important,
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-.token.inserted {
-  color: green;
+.token.variable {
+  @apply text-yellow-500;
 }

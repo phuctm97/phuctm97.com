@@ -1,16 +1,18 @@
+const frontmatter = require("remark-frontmatter");
+const frontmatterParser = require("remark-parse-frontmatter");
+const prism = require("@mapbox/rehype-prism");
+const a11yEmojis = require("rehype-accessible-emojis").rehypeAccessibleEmojis;
+const { postSchema, postParser, postExporter } = require("./lib/js/post");
+
 const withMDX = require("@next/mdx")({
   options: {
     remarkPlugins: [
-      require("remark-frontmatter"),
-      require("remark-parse-frontmatter"),
-      require("./scripts/mdx/remark-post-metadata"),
-      require("remark-unwrap-texts"),
-      require("./scripts/mdx/remark-post-layout"),
+      frontmatter,
+      [frontmatterParser, postSchema],
+      postParser,
+      postExporter,
     ],
-    rehypePlugins: [
-      require("rehype-accessible-emojis").rehypeAccessibleEmojis,
-      require("@mapbox/rehype-prism"),
-    ],
+    rehypePlugins: [prism, a11yEmojis],
   },
 });
 

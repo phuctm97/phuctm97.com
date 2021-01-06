@@ -1,4 +1,4 @@
-name: PR
+name: Commit
 
 on:
   push:

@@ -1,75 +1,57 @@
 import { GetStaticProps } from "next";
-import Header from "~layouts/header";
-import Footer from "~layouts/footer";
-import Main from "~layouts/main";
-import Prose from "~layouts/prose";
-import Subscribe from "~components/subscribe";
-import PostPreview from "~components/post-preview";
-
-import path from "path";
-import glob from "glob";
-import readPost from "~utils/read-post";
+import Link from "next/link";
+import Emoji from "~components/emoji";
+import { Post, readBlog } from "~lib/post";
 
 type Props = {
-  blogPosts: Array<{
-    title: string;
-    description: string;
-    path: string;
-  }>;
+  blog: Post[];
 };
 
-const HomePage = ({ blogPosts }: Props) => (
+const IndexPage = ({ blog }: Props) => (
   <>
-    <Header />
-    <Main>
-      <Prose>
-        <h1>Hey, I’m Minh-Phuc Tran</h1>
-        <p className="lead">
-          I'm a software engineer. On this site, I document my journey learning,
-          creating wealth, and living on my terms. You'll see at least{" "}
-          <strong>3 posts per week</strong>.
-        </p>
-        <section>
-          <h2>Newsletter</h2>
-          <p className="lead">
-            Every Sunday, I sent out my latest tech discovery and nuances that
-            is hardly found anywhere else.
-          </p>
-          <Subscribe />
-        </section>
-        <section>
-          <h2>Blog</h2>
-          <p className="lead">
-            My written documentary: 100% authentic, good for inspiration, not
-            evergreen.
-          </p>
-          {blogPosts.map((post) => (
-            <PostPreview key={post.path} {...post} />
-          ))}
-        </section>
-      </Prose>
-    </Main>
-    <Footer />
+    <h1 className="font-extrabold text-2xl tracking-tighter text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
+      Hey, I’m Minh-Phuc Tran
+    </h1>
+    <h2 className="mt-4 md:mt-6 text-sm sm:text-base">
+      I'm a software engineer. Welcome to my digital garden{" "}
+      <Emoji label="waving hand">👋🏻</Emoji>
+    </h2>
+    <h3 className="mt-2 text-sm sm:text-base">
+      On this site, I document everything I learned and created. You may expect
+      to see <strong>3 articles per week</strong>.
+    </h3>
+    <section className="mt-10 md:mt-12">
+      <h2 className="font-bold tracking-tight text-2xl text-gray-900 dark:text-gray-100 sm:text-3xl">
+        Blog
+      </h2>
+      <h3 className="mt-2 md:mt-3 text-sm sm:text-base">
+        Personal documentary: 100% authentic, good for inspiration, not
+        evergreen.
+      </h3>
+      {blog.map(({ title, description, path }) => (
+        <article key={path} className="mt-8">
+          <Link href={path}>
+            <a>
+              <h4 className="font-semibold text-lg leading-5 dark:text-gray-200 sm:text-xl">
+                {title}
+              </h4>
+              <div className="overflow-hidden">
+                <p className="mt-2 text-sm line-clamp-2 text-gray-500 sm:text-base">
+                  {description}
+                </p>
+              </div>
+            </a>
+          </Link>
+        </article>
+      ))}
+    </section>
   </>
 );
 
-export default HomePage;
+export default IndexPage;
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const blogPosts = glob
-    .sync("**/*.mdx", {
-      cwd: path.join(process.cwd(), "pages", "blog"),
-      absolute: true,
-    })
-    .map((filename) => readPost(filename))
-    .sort((a, b) => b.publishedTime - a.publishedTime)
-    .map((post) => ({
-      title: post.title,
-      description: post.description,
-      path: post.path,
-    }));
-
   return {
-    props: { blogPosts },
+    props: { blog: readBlog() },
   };
 };

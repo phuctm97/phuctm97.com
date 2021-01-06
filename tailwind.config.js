@@ -1,36 +1,58 @@
+const typography = require("@tailwindcss/typography")({
+  modifiers: ["sm"],
+});
+
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],
-  darkMode: "class", // or 'media' or 'class'
+  darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        sans:
-          'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+      colors: {
+        gray: { 950: "#111" },
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme("colors.gray.700"),
-            "h1, h2, h3, h4, h5, h6": {
-              color: theme("colors.black"),
+            "blockquote p:first-of-type::before": false,
+            "blockquote p:last-of-type::after": false,
+            pre: {
+              backgroundColor: theme("colors.gray.50"),
+              borderWidth: 1,
+              borderStyle: "solid",
+              borderColor: theme("colors.gray.200"),
             },
-            h1: {
-              fontWeight: theme("fontWeight.bold"),
-              letterSpacing: theme("letterSpacing.tighter"),
+          },
+        },
+        dark: {
+          css: {
+            color: theme("colors.gray.300"),
+            "h1, h2, h3, h4, h5, h6, a, thead, :not(pre) code": {
+              color: theme("colors.gray.100"),
             },
-            "h2, h3, h4, h5, h6": {
-              letterSpacing: theme("letterSpacing.tight"),
+            hr: { borderColor: theme("colors.gray.700") },
+            ol: {
+              li: {
+                "&:before": { color: theme("colors.gray.500") },
+              },
+            },
+            ul: {
+              li: {
+                "&:before": { backgroundColor: theme("colors.gray.500") },
+              },
+            },
+            strong: { color: theme("colors.gray.300") },
+            tbody: {
+              tr: {
+                borderBottomColor: theme("colors.gray.700"),
+              },
             },
             blockquote: {
               color: theme("colors.gray.500"),
-              fontWeight: theme("fontWeight.normal"),
-              fontStyle: "normal",
+              borderLeftColor: theme("colors.gray.700"),
             },
-            "blockquote p:first-of-type::before": {
-              content: '""',
-            },
-            "blockquote p:last-of-type::after": {
-              content: '""',
+            pre: {
+              backgroundColor: theme("colors.gray.900"),
+              borderColor: theme("colors.gray.700"),
             },
           },
         },
@@ -38,7 +60,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundOpacity: ["dark"],
+      typography: ["dark"],
+    },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [typography],
 };
