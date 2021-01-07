@@ -44,7 +44,7 @@ const Footer = () => (
   <>
     <footer className="text-sm bg-gray-50 dark:bg-gray-950 px-4 pt-10 pb-12 sm:pt-14 sm:pb-16 border-t border-gray-200 dark:border-gray-800 dark:text-gray-400 lg:px-0">
       <div className="max-w-xl mx-auto">
-        <p className="font-semibold text-gray-900 dark:text-gray-100">
+        <p className="font-semibold text-gray-800 dark:text-gray-100">
           About this place
         </p>
         <p className="mt-2">
