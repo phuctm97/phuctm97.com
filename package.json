@@ -37,7 +37,8 @@
     "build:lib": "tsc -p lib/tsconfig.json && tsc-alias -p lib/tsconfig.json",
     "type:check": "tsc && tsc -p lib/tsconfig.json --noEmit",
     "style:check": "prettier --check .",
-    "style:format": "prettier --write ."
+    "style:format": "prettier --write .",
+    "lighthouse": "lhci autorun"
   },
   "engines": {
     "node": "12.x"
@@ -72,6 +73,7 @@
     "vfile": "^4.2.1"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.6.1",
     "@tsconfig/node12": "^1.0.7",
     "@types/classnames": "^2.2.11",
     "@types/glob": "^7.1.3",
