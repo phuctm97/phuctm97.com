@@ -69,7 +69,7 @@ const Subscribe = ({
           onSubmit={onSubmit}
         >
           <input
-            className="px-2 sm:px-4 py-2 mt-1 outline-none focus:ring-2 focus:ring-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:cursor-not-allowed"
+            className="px-3 sm:px-4 py-2 mt-1 outline-none focus:ring-2 focus:ring-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:cursor-not-allowed"
             type="email"
             placeholder="your@email.com"
             autoComplete="email"
@@ -80,7 +80,7 @@ const Subscribe = ({
             disabled={isLoading}
           />
           <button
-            className="flex items-center justify-center absolute right-1 top-1 px-4 font-bold h-7 sm:h-8 rounded w-28 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:cursor-not-allowed"
+            className="flex items-center justify-center absolute right-1 top-1 px-4 font-bold h-7 sm:h-8 rounded w-24 sm:w-28 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:cursor-not-allowed"
             type="submit"
             disabled={isLoading}
           >
