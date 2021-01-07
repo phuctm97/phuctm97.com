@@ -30,28 +30,18 @@ const Subscribe = ({
       target="popupwindow"
       onSubmit={submitThroughPopup}
     >
-      <label className="hidden" htmlFor="email">
-        Email for newsletter
-      </label>
       <input
         className="px-4 py-2 mt-1 outline-none focus:ring-2 focus:ring-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-        id="email"
         name="email"
         type="email"
         placeholder="your@email.com"
         autoComplete="email"
         required
+        aria-label="Enter your email"
       />
-      <input
-        className="hidden"
-        id="embed"
-        name="embed"
-        type="hidden"
-        value="1"
-      />
+      <input className="hidden" name="embed" type="hidden" value="1" />
       <button
         className="flex items-center justify-center absolute right-1 top-1 px-4 font-bold h-7 sm:h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
-        id="submit"
         name="submit"
         type="submit"
       >
