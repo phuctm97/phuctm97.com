@@ -39,16 +39,9 @@ const Subscribe = ({
         required
         aria-label="Enter your email"
       />
-      <input
-        className="hidden"
-        id="embed"
-        name="embed"
-        type="hidden"
-        value="1"
-      />
+      <input className="hidden" name="embed" type="hidden" value="1" />
       <button
         className="flex items-center justify-center absolute right-1 top-1 px-4 font-bold h-7 sm:h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
-        id="submit"
         name="submit"
         type="submit"
       >
