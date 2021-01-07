@@ -70,10 +70,14 @@ jobs:
             ${{ hashFiles('**/yarn.lock') }}"
           restore-keys: |
             ${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: |
-          npm i -g @lhci/cli
-          lhci autorun
+      - name: Build production
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+      - name: Install Lighthouse
+        run: |
+          yarn global add @lhci/cli
+          echo "$(yarn global bin)" >> $GITHUB_PATH
+      - run: lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
