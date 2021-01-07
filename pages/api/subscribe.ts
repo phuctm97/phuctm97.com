@@ -29,7 +29,7 @@ const parseBDErrors = (res: any) => {
     if (err.includes("this address does not exist"))
       return {
         status: 400,
-        message: "Google told me that this address doesn't exist.",
+        message: "Google says that this email doesn't exist.",
       };
   }
 
