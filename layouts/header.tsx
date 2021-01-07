@@ -20,6 +20,7 @@ const Header = () => {
       {isMounted && (
         <button
           className="ml-auto p-2 rounded bg-gray-50 dark:bg-gray-950"
+          aria-label="Toggle Dark mode"
           onClick={onToggleDark}
         >
           {theme === "dark" ? <FiSun /> : <FiMoon className="fill-current" />}
