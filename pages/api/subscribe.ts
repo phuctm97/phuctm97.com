@@ -9,33 +9,30 @@ const unexpectedError =
   "There was an error subscribing, please try again later.";
 
 const parseBDErrors = (res: any) => {
-  if (isStringArray(res)) {
-    const bdErrors = res;
+  const bdErrors =
+    (isStringArray(res) && res) ||
+    (isMapOfStringArray(res) && flattenStringArray(res)) ||
+    [];
 
-    for (let err of bdErrors) {
-      if (err.includes("already subscribed"))
-        return {
-          status: 200,
-          message:
-            "Subscribed 🎉! Please check your inbox to confirm your email. That's it!",
-        };
-    }
-
-    if (bdErrors.length > 0)
+  for (let err of bdErrors) {
+    if (err.includes("already subscribed"))
+      return {
+        status: 200,
+        message:
+          "Subscribed 🎉. Please check your inbox to confirm your email and that's it!",
+      };
+    if (err.includes("this address does not exist"))
       return {
         status: 400,
-        message: bdErrors[0],
+        message: "Google is telling that this address does not exist.",
       };
   }
 
-  if (isMapOfStringArray(res)) {
-    const bdErrors = flattenStringArray(res);
-    if (bdErrors.length > 0)
-      return {
-        status: 400,
-        message: bdErrors[0],
-      };
-  }
+  if (bdErrors.length > 0)
+    return {
+      status: 400,
+      message: bdErrors[0],
+    };
 
   console.error("Unrecognized Buttondown response:", res);
   return { status: 500, message: unexpectedError };
@@ -72,7 +69,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({
       message:
-        "Subscribed 🎉! Please check your inbox to confirm your email and that's it!",
+        "Subscribed 🎉. Please check your inbox to confirm your email and that's it!",
     });
   } catch (err) {
     console.error("Internal error:", err);
