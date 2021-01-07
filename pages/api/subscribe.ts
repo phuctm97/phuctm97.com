@@ -21,10 +21,15 @@ const parseBDErrors = (res: any) => {
         message:
           "Subscribed 🎉. Please check your inbox to confirm your email and that's it!",
       };
+    if (err.includes("a valid email"))
+      return {
+        status: 400,
+        message: "Please enter a valid email address.",
+      };
     if (err.includes("this address does not exist"))
       return {
         status: 400,
-        message: "Google is telling that this address does not exist.",
+        message: "Google told me that this address doesn't exist.",
       };
   }
 
