@@ -59,7 +59,7 @@ const Subscribe = ({
         week and practical advices for you.
       </p>
       {result && result.success ? (
-        <p className="font-medium mt-5 mb-2 text-sm sm:text-base text-green-700">
+        <p className="font-medium mt-5 mb-2 text-sm sm:text-base text-green-700 dark:text-green-300">
           <CgCheckO className="inline-block -mt-1 fill-current" />{" "}
           {result.message}
         </p>
@@ -91,7 +91,7 @@ const Subscribe = ({
             )}
           </button>
           {result && !result.success && (
-            <p className="font-medium mt-3 text-sm sm:text-base text-red-700">
+            <p className="font-medium mt-3 text-sm sm:text-base text-red-700 dark:text-red-300">
               <CgDanger className="inline-block -mt-1 fill-current" />{" "}
               {result.message}
             </p>
