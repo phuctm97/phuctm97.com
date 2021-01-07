@@ -119,6 +119,7 @@ module.exports = {
     extend: {
       backgroundOpacity: ["dark"],
       typography: ["dark"],
+      cursor: ["disabled"],
     },
   },
   plugins: [typography],
