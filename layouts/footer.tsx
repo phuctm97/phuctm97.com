@@ -14,7 +14,7 @@ const socialLinks = [
   `https://hashnode.com/@${username}`,
 ];
 
-const iconSize = "1.3em";
+const iconSize = "1.4em";
 
 const renderIcon = (link: string) => {
   if (link.includes("twitter"))
@@ -42,9 +42,11 @@ const getLabel = (link: string) => {
 
 const Footer = () => (
   <>
-    <footer className="text-sm bg-gray-50 dark:bg-gray-950 px-4 pt-10 pb-12 border-t border-gray-200 dark:border-gray-800 dark:text-gray-400 lg:px-0">
+    <footer className="text-sm bg-gray-50 dark:bg-gray-950 px-4 pt-10 pb-12 sm:pt-14 sm:pb-16 border-t border-gray-200 dark:border-gray-800 dark:text-gray-400 lg:px-0">
       <div className="max-w-xl mx-auto">
-        <p className="font-medium dark:text-gray-100">About this place</p>
+        <p className="font-semibold text-gray-900 dark:text-gray-100">
+          About this place
+        </p>
         <p className="mt-2">
           Welcome to my digital garden <Emoji label="waving hand">👋🏻</Emoji>
         </p>
@@ -53,11 +55,11 @@ const Footer = () => (
           learned and created. You'll see about 3 articles per week.
         </p>
         <nav className="mt-6">
-          <p className="font-medium dark:text-gray-100">Social links</p>
-          <p className="mt-2">
-            Everywhere I'm online, you can find me @phuctm97
+          <p className="font-semibold text-gray-800 dark:text-gray-100">
+            Social links
           </p>
-          <div className="mt-3 flex flex-row space-x-4">
+          <p className="mt-2">Everywhere I'm online, I'm @phuctm97</p>
+          <div className="mt-4 flex flex-row space-x-5">
             {socialLinks.map((link) => (
               <a
                 key={link}
