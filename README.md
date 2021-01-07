@@ -4,7 +4,7 @@
 [![Checks status][checks status]][checks url]
 [![Dependabot status][dependabot status]][dependabot url]
 [![Code style][code style]][code style url]
-[![License info][license info]][license url]
+[![License][license badge]][license url]
 
 My home on the web — everything I learned and created: software dev, programming
 tutorials, career, startups, and open-source.
@@ -44,15 +44,14 @@ tutorials, career, startups, and open-source.
   https://img.shields.io/github/checks-status/phuctm97/phuctm97.com/master?logo=Github
 [dependabot status]:
   https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot
-[license info]: https://img.shields.io/github/license/phuctm97/phuctm97.com
+[license badge]: https://img.shields.io/github/license/phuctm97/phuctm97.com
 [code style]:
   https://img.shields.io/badge/code%20style-prettier-F7B93E?logo=Prettier
 [deployment url]:
   https://github.com/phuctm97/phuctm97.com/deployments/activity_log?environment=Production
 [checks url]:
-  https://github.com/phuctm97/phuctm97.com/actions?query=workflow%3APR+branch%3Amaster
-[dependabot url]:
-  https://github.com/phuctm97/phuctm97.com/blob/master/.github/dependabot.yml
+  https://github.com/phuctm97/phuctm97.com/actions?query=workflow%3ACommit+branch%3Amaster
+[dependabot url]: /.github/dependabot.yml
 [code style url]: /.prettierrc.json
 [license url]: /LICENSE
 
