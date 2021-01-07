@@ -73,3 +73,5 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn lighthouse
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
