@@ -72,6 +72,8 @@ jobs:
             ${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      - run: yarn lighthouse
+      - run: |
+          yarn global add @lhci/cli
+          yarn lighthouse
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
