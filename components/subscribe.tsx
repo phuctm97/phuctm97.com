@@ -32,14 +32,14 @@ const Subscribe = ({
     >
       <input
         className="px-4 py-2 mt-1 outline-none focus:ring-2 focus:ring-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-        id="email"
+        id="bd-email"
         name="email"
         type="email"
         placeholder="your@email.com"
         autoComplete="email"
         required
       />
-      <label className="hidden" htmlFor="email">
+      <label className="hidden" htmlFor="bd-email">
         Email for newsletter
       </label>
       <input
