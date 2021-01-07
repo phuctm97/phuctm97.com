@@ -72,7 +72,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({
       message:
-        "Subscribed 🎉! Please check your inbox to confirm your email. That's it!",
+        "Subscribed 🎉! Please check your inbox to confirm your email and that's it!",
     });
   } catch (err) {
     console.error("Internal error:", err);
