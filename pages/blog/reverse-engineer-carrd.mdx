@@ -1,0 +1,107 @@
+---
+tags: [nocode, webdev, architecture, softwaredesign]
+date: 2020-11-11
+---
+
+# Reverse-engineer A No-code Website Builder
+
+## What and why?
+
+No-code is becoming a big part of modern product development, it encourages an
+agile approach and accelerates iterations. Understanding how a no-code tool is
+built can be an advantage for a developer.
+
+In this article, I'm going to analyze Carrd.co, a service for building
+responsive one-page sites, break it down into components to briefly see how a
+similar product can be built.
+
+![Steps](https://cdn.hashnode.com/res/hashnode/image/upload/v1605068662795/GXu-pJFOX.png)
+
+---
+
+## The Output
+
+First, let's look at what can be made using Carrd.
+
+### Personal sites
+
+![Personal sites](https://cdn.hashnode.com/res/hashnode/image/upload/v1605069366980/_eSXvnwLn.png)
+
+### Landing pages
+
+![Landing pages](https://cdn.hashnode.com/res/hashnode/image/upload/v1605069347621/XfN4T8H5M.png)
+
+_(See in details at carrd.co/build)_
+
+Essentially, the output you can get from Carrd is simple yet beautiful and
+responsive personal sites and landing pages.
+
+---
+
+## Design Concept
+
+Every no-code builder has a design concept, which is basically how its outputs
+are structured so that they can be built, serialized (saved to disk), and
+reproduced (rendered on screen).
+
+For Carrd, there're 4 primary concepts:
+
+- **Site**: deployment configuration of a site such as title, description,
+  language, domain, SSL certificates, Google analytics, etc. In software
+  engineering, _Site_ is basically a configuration file for DevOps automation.
+
+  ![The image is taken from Carrd.co](https://cdn.hashnode.com/res/hashnode/image/upload/v1605074236780/mgr_Tpn22.png)
+
+- **Background**: each _Site_ has a _Background_ component, which sits behind
+  all of a site's elements. When rendering on browsers, _Background_ is
+  technically a mapping to CSS `background` property of HTML `body`, which can
+  be styled to show either a solid color, a gradient, an image, or a video.
+
+  ![Image taken from Carrd.co](https://cdn.hashnode.com/res/hashnode/image/upload/v1605074391623/lhue3ruZt.png)
+
+- **Page**: the container of all of a site's elements (except for _Background_).
+  _Page_ defines how a site's overall layout looks, how elements should be
+  aligned to each other. A _Page_ can also be styled and positioned to show like
+  a card or a window. When rendering on browsers, _Page_ is technically a
+  top-level `div`.
+
+  ![Image taken from Carrd.co](https://cdn.hashnode.com/res/hashnode/image/upload/v1605074572670/3Cx7OpTH_.png)
+
+- **Element**: a widget on a _Page_ such as _Text_, _Image_, _Button_, etc.
+  Carrd has about 18 different types of elements. Each element has several
+  properties that can be configured to change its behavior and look-and-feel.
+  When rendering on browsers, each element is technically a mapping to a set of
+  HTML elements and CSS styles.
+
+  ![Image taken from Carrd.co](https://cdn.hashnode.com/res/hashnode/image/upload/v1605074903425/NpNFGVTz1.png)
+
+---
+
+## Implementation Components
+
+If you've experienced enough with a component-based front-end framework (React,
+Vue, etc), you may already recognize that Carrd is essentially a components
+library and a builder UI tailor-made for it.
+
+Yeah, that's exactly it. However, to make it a full-blown product for
+non-developer users, we'll need a couple of other components. In a word, we'll
+need:
+
+- **Components Library and Compiler**: together define what elements are
+  available for uses, how they are compiled into HTML/CSS/JS (or other
+  presentations if you're building for platforms other than web).
+
+- **Builder**: a graphical user interface application that allows users to pull
+  elements together **visually**, instead of writing code.
+
+- **Serializer**: a service that writes what users built visually with _Builder_
+  into disks (database, text files, etc) and vice versa.
+
+- **Publisher**: a service that publishes a site's output along with its
+  configurations to a hosting or distribution channel (Amazon S3, Vercel, etc).
+
+- **Dashboard**: the UI for managing one's account, sites, and stuff other than
+  building.
+
+- **Homepage**: the website itself, including its logo, landing page, signup
+  page, etc.
