@@ -1,0 +1,333 @@
+---
+tags: [aws, database, cloud, devops]
+date: 2020-11-30
+---
+
+# Amazon DynamoDB - All You Need To Know About This AWS Service
+
+DynamoDB is a NoSQL database that delivers single-digit millisecond performance
+at scale.
+
+> "DynamoDB can manage upward of 10 trillion requests daily and can support
+> thresholds of more than 20 million requests per second" - AWS
+
+Having been using it for while, in this article, I'm going to summarize
+essential knowledge about Amazon DynamoDB that helps you: _Quickly understand
+and know its use cases_ -> _Get started using it_ -> _Know what to consider for
+best utilization_.
+
+It's a 10-minute read, but after reading it, you'll know how DynamoDB works,
+when you should use it, and how to best utilize it when it's necessary.
+
+---
+
+# Quickly Understand
+
+First of all, it's Amazon DynamoDB, not AWS DynamoDB. _(People understand it
+either way, it's respectful to call a thing correctly though)_
+
+## What is DynamoDB?
+
+Basically, DynamoDB is a database where you write and read your application
+data. Application data is the core information of your application like user
+profiles, user activities, transactions, etc. These data change very frequently
+and grow enormously large as your application grows. Using a database like
+DynamoDB, you don't need to work with physical disks, you simply ask the
+database to write and read data for you, it will make sure things work correctly
+under the hood.
+
+Technically, DynamoDB is a **fully-managed**, **NoSQL**, **key-value** and
+**document-based** database.
+
+- **Fully-managed**: AWS _fully manages_ it for you. DynamoDB scales seamlessly,
+  you don't maintain any server. AWS takes full responsibility for running,
+  managing servers, software updates, backing up, cluster scaling, and all other
+  ops. You use it by calling its APIs, just like how you'd use Stripe.
+
+- **NoSQL**, **key-value**: DynamoDB has neither relationship nor schema, which
+  means that you don't have to define what columns or fields an entry of data
+  has. DynamoDB consists of _tables_. Each table consists of _items_. Each item
+  has _a uniquely identifiable key_ and _other non-constraint attributes_. Each
+  attribute is a _pair of key and value_. A key is a string. A value can be
+  null, string, number, boolean, binary, list, or nested object. Except for the
+  unique key, items can have different attributes from each other.
+
+  ```json
+  // How data in DynamoDB is conceptually structured 👇🏻
+
+  "Table X": [
+    {
+       "key": "unique-key-1",
+       "a": "some-value",
+       "b": 1
+    },
+    {
+       "key": "unique-key-2",
+       "c": false,
+       "d": {
+          "it": "can have nested JSON",
+          "too": null
+       }
+    },
+
+    // other entries
+  ]
+
+  "Table Y": [
+    // ...
+  ]
+  ```
+
+  - **Document-based**: Each entry of data in DynamoDB is a JSON document,
+    a.k.a. JSON object. Every operation happens at the document level, which
+    means that an operation is either a document is retrieved, or a document is
+    created, or a document is replaced, or a document is deleted. There's no
+    operation at attribute level.
+
+## Pricing model
+
+DynamoDB offers 2 pricing models:
+
+- **Pay per request**: you pay for the number of writes and reads you requested.
+  DynamoDB automatically scales to accommodate traffic from your application. It
+  costs _$1.25 per million write_ request units and _$0.25 per million read_
+  request units (in Ohio region). This model is a good choice if you can't
+  predict how much traffic your application will receive and don't prioritize
+  cost optimization yet.
+
+- **Provisioned**: you specify and pay for a specified number of read units and
+  write units _per hour_. DynamoDB will be always ready to handle traffic at the
+  provisioned capacity, regardless of how much traffic your application is
+  actually receiving. This helps you set a predictable cost and performance for
+  your application. It's useful when you've already known the pattern. You can
+  change provisioned units every 24 hours.
+
+Additionally, when your application is growing steadily, you can buy _reserved
+units_, which can save over half the price if you pay upfront for a year.
+
+## Use cases
+
+> DynamoDB works best when you're searching for simplicity and scalability.
+
+Because of its serverless trait, DynamoDB helps you have (theoretically)
+infinitely scalable database infrastructure from day one with zero ops overhead
+in the future. When your application data grow to terabytes or petabytes, your
+database infrastructure stays the same, you simply provision and buy more
+capacity. This can be an advantage to keep your technical team lean.
+
+However, DynamoDB query ability is quite limited compared to most other database
+services, which makes it difficult and inefficient to query complex models and
+relationships.
+
+In my experience, DynamoDB is a great choice for microservices, where each
+service has 2-4 models, and their relationships can be detached and implemented
+in a NoSQL design.
+
+Netflix uses DynamoDB to build its A/B testing service that serves 125+ million
+users, while FanFight reported saving 50% of cost and achieving 4x revenue by
+migrating to DynamoDB.
+
+---
+
+# Get Started Using It
+
+Now, let's explore some essential concepts to get started using it.
+
+## Partitions
+
+DynamoDB slices your table up into smaller chunks of data called _partitions_,
+in order to speed up reads.
+
+Each table must have a partition key, which DynamoDB uses to decide which
+partition to put an item into.
+
+A partition is also logical isolation of a DynamoDB query. A DynamoDB query can
+only query data in a partition. If you need to query data in 2 different
+partitions, you'll need 2 queries or a full table scan.
+
+## Primary key
+
+A primary key is a way to uniquely identify an item in a table, it is the only
+attribute that you'll need to define before creating a DynamoDB table and
+starting to use it.
+
+There're 2 types of a primary key in DynamoDB:
+
+- **Single primary key**: the partition key - a single and always-unique
+  attribute, which is usually an ID, e.g. user ID, post ID, etc.
+
+- **Composite primary key**: the partition key and a sort key. The first key is
+  used for partitioning, the second key is used to sort items in the same
+  partition. The combined value of these two keys has to be unique across a
+  table.
+
+## 5 types of read
+
+In DynamoDB, there are 5 types of a read operation:
+
+- `GetItem`: read a single item by specifying its primary key.
+
+- `BatchGetItems`: send a request that groups up to 100 `GetItem` requests
+  together. Each request is executed separately and in parallel. It is possible
+  that some reads succeed whereas others fail.
+
+- `TransactGetItems`: all-or-nothing `BatchGetItems`. All operations must either
+  succeed or fail together. This costs twice as much as `BatchGetItems`.
+
+- `Query`: read multiple items in the same partition. You must specify the
+  partition key, and optionally a filter condition on the sort key.
+
+- `Scan`: read **all items** in a table.
+
+## Read consistency
+
+DynamoDB has 2 types of read consistency, which can be useful for different
+applications:
+
+- **Eventually read consistency**: you get your data the fastest, but not always
+  the latest. You'll usually receive the data 1 second ago.
+
+- **Strongly read consistency**: you always get the latest data, but the latency
+  may be higher and the reading cost is double.
+
+## Secondary indexes
+
+Every read operation except for a `Scan` must start with the partition key, to
+query on other attributes without scanning through the whole table, you'll need
+another tool - a secondary index.
+
+A secondary index is essentially an (automatic) copy of a table but has a
+different partition key and sort key so that you can query on these different
+keys.
+
+There're two types of a secondary index in DynamoDB:
+
+- **Global secondary index**: is a complete copy of a table, has its own
+  partition key and (optionally) a sort key. A partition key in a global
+  secondary index doesn't have to be unique. Global secondary index only
+  supports eventually consistent read.
+
+- **Local secondary index**: is a local copy of a partition sorted by another
+  key. A local secondary index shares the same partition key as the base table
+  but has a different sort key. Local secondary index supports both strongly and
+  eventually consistent read.
+
+After creating an index, you do all read operations on it as if you do on the
+base table.
+
+Creating a secondary index will cost you more for data storage and write
+operations. DynamoDB automatically updates the indexes when you update the base
+table and it will charge for all these updates as typical write operations.
+
+## 3 types of write
+
+In DynamoDB, there are 3 types of a write operation:
+
+- `PutItem`, `UpdateItem`, and `DeleteItem`: create, update and delete a single
+  item by specifying its primary key.
+
+- `BatchWriteItems`: send a request that groups up to 25 `PutItem` and
+  `DeleteItem` requests together. Each request is executed separately and in
+  parallel. It is possible that some writes succeed whereas others fail.
+
+- `TransactWriteItems`: all-or-nothing `BatchWriteItems`. All operations must
+  either succeed or fail together. This costs twice as much as
+  `BatchWriteItems`.
+
+---
+
+# Advice for best utilization
+
+### There're at most 3 related models
+
+Related models mean that these models have a direct relationship to each other.
+For example, a post belongs to a user, a post has multiple comments, a user can
+comment on multiple posts.
+
+When your app has more than 3 related models, it's highly a chance that SQL is a
+better choice because you have out-of-the-box extremely complex query features
+in SQL. Modeling relationships in SQL is much simpler. On the contrary, trying
+to model relationships in NoSQL is like trying to workaround its disadvantages.
+
+### Can I break my app into smaller apps?
+
+DynamoDB is best for microservices when your app is a combination of multiple
+smaller apps.
+
+Let's take the posts-comments-users example, can you break it into smaller apps?
+The answer is yes, you can make it 3 smaller apps:
+
+- _User directory app_: stores user profiles, credentials, etc, and
+  authenticates users.
+
+- _Blogging app_: stores and renders posts.
+
+- _Commenting app_: stores and shows comments.
+
+DynamoDB is the perfect database for these smaller apps because they have very
+simple and discrete data.
+
+**Pro-tip #1**: There's a high possibility that there're external services
+implemented for one of your smaller apps, e.g. Firebase for authentication,
+Disqus for commenting.
+
+**Pro-tip #2**: Because of this, DynamoDB is a great choice if you want to build
+micro-SaaS, which is on-trend in the current market 🤯.
+
+### 1 write = 40 reads
+
+Use this to decide whether you should create an index, duplicate, or cache some
+values to optimize for reads.
+
+When you create an index, duplicate, or cache a value, you need at least one
+more write which costs as much as 40 eventually consistent reads based on the
+DynamoDB pricing model.
+
+So, if a write operation that can reduce more than 40 reads, it's worthing
+implementing, otherwise, it isn't.
+
+### Avoid `Scan` and `FilterExpression`
+
+`Scan` reads all items every time you call it, which is both costly and
+time-consuming. You are usually able to create a secondary index to avoid
+scanning. If you can't avoid a scan, you may think about whether you should use
+DynamoDB.
+
+DynamoDB has a `FilterExpression` in `Query` and `Scan` for you to filter out
+results before returning. However, it isn't a filter condition on query
+operations. The filter is applied only after the query is executed, which only
+has value in saving network bandwidth.
+
+### Keep less than 5 secondary indexes
+
+If you create more than 5 secondary indexes, it means your application models
+and queries are becoming more complex than what DynamoDB may be best for. In
+this case, consider migrating to SQL or breaking your apps into smaller ones.
+
+---
+
+# Key takeaways
+
+Before summarizing, hey 👋🏻! Thank you for reading this far and I hope you learn
+how DynamoDB should work for you in the future 😉.
+
+- DynamoDB is a NoSQL document database, there's no relationship and schema, all
+  operations happen at the document level.
+
+- DynamoDB is fully-managed by AWS. You have a scalable database infrastructure
+  from day one with zero ops overhead.
+
+- You can _pay per request_ at the early stage. Later, you can buy _provisioned
+  and reserved units_ to save and set predictable cost + performance for your
+  app.
+
+- A primary key in DynamoDB is a partition key or a partition key and a sort
+  key. DynamoDB uses these keys to logically identify items and physically
+  isolate them for better read performance at scale.
+
+- All read operations except for `Scan` operates on a single partition. To query
+  on a different attribute, you'll need a secondary index.
+
+- DynamoDB works best when you're searching for simplicity and scalability. If
+  your application has more than 3 related models or 5 secondary indexes,
+  consider breaking it into smaller apps or migrating to a SQL database.
