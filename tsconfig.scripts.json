@@ -4,9 +4,10 @@
     "outDir": "js",
     "baseUrl": ".",
     "paths": {
-      "~lib/*": ["./*"]
+      "~lib/*": ["lib/*"],
+      "~utils/*": ["utils/*"]
     }
   },
   "exclude": ["node_modules", ".next"],
-  "include": ["**/*.ts"]
+  "include": ["lib/**/*.ts", "utils/**/*.ts", "scripts/**/*.ts"]
 }
