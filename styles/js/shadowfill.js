@@ -1,7 +1,7 @@
 const plugin = require("tailwindcss/plugin");
 const flattenColors = require("./flatten-colors");
 
-const shadowFill = plugin(
+const shadowfill = plugin(
   ({ addUtilities, variants, theme, e }) => {
     const colors = flattenColors(theme("colors"));
     const utils = Object.entries(colors).reduce(
@@ -20,4 +20,4 @@ const shadowFill = plugin(
   { variants: { shadowfill: [] } }
 );
 
-module.exports = shadowFill;
+module.exports = shadowfill;
