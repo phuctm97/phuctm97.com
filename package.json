@@ -16,9 +16,9 @@
       "locale": "en_US",
       "images": [
         {
-          "url": "/static/og.png",
+          "url": "/static/og.jpg",
           "width": 1200,
-          "height": 628
+          "height": 630
         }
       ]
     },

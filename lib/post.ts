@@ -81,7 +81,7 @@ export const generatePostCover = (frontmatter: any): Post["cover"] => {
   return {
     url: url.toString(),
     width: 1200,
-    height: 628,
+    height: 630,
   };
 };
 
