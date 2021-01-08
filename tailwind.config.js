@@ -2,6 +2,10 @@ const typography = require("@tailwindcss/typography")({
   modifiers: ["sm"],
 });
 
+const autofill = require("./styles/js/autofill");
+const textfill = require("./styles/js/textfill");
+const shadowfill = require("./styles/js/shadowfill");
+
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],
   darkMode: "class",
@@ -117,10 +121,12 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundOpacity: ["dark"],
       typography: ["dark"],
+      backgroundOpacity: ["dark"],
       cursor: ["disabled"],
     },
+    textfill: ["autofill", "dark"],
+    shadowfill: ["autofill", "dark"],
   },
-  plugins: [typography],
+  plugins: [typography, autofill, textfill, shadowfill],
 };

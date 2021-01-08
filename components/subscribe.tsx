@@ -69,7 +69,12 @@ const Subscribe = ({
           onSubmit={onSubmit}
         >
           <input
-            className="px-3 sm:px-4 py-2 mt-1 outline-none focus:ring-2 focus:ring-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:cursor-not-allowed"
+            className={classNames(
+              "px-3 sm:px-4 py-2 mt-1 block w-full rounded-md",
+              "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100",
+              "autofill:textfill-gray-900 autofill:shadowfill-white dark:autofill:shadowfill-gray-800 dark:autofill:textfill-gray-100",
+              "outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed"
+            )}
             type="email"
             placeholder="your@email.com"
             autoComplete="email"
