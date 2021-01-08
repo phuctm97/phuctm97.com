@@ -13,6 +13,8 @@ module.exports = {
     extend: {
       colors: {
         gray: { 950: "#111" },
+        green: { 250: "#88fdc5" },
+        indigo: { 550: "#513eea" },
       },
       typography: (theme) => ({
         DEFAULT: {
