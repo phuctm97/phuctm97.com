@@ -13,7 +13,7 @@
     @apply font-semibold;
   }
   *::selection {
-    @apply bg-green-250 text-gray-950 dark:bg-indigo-550 dark:text-gray-50;
+    @apply bg-green-250 text-gray-950 dark:bg-magenta dark:text-gray-50;
   }
 }
 

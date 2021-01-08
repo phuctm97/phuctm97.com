@@ -15,6 +15,7 @@ module.exports = {
         gray: { 950: "#111" },
         green: { 250: "#88fdc5" },
         indigo: { 550: "#513eea" },
+        magenta: "#ff0090",
       },
       typography: (theme) => ({
         DEFAULT: {
