@@ -124,9 +124,9 @@ module.exports = {
       typography: ["dark"],
       backgroundOpacity: ["dark"],
       cursor: ["disabled"],
+      textfill: ["autofill", "dark"],
+      shadowfill: ["autofill", "dark"],
     },
-    textfill: ["autofill", "dark"],
-    shadowfill: ["autofill", "dark"],
   },
   plugins: [typography, autofill, textfill, shadowfill],
 };
