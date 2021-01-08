@@ -1,0 +1,47 @@
+---
+tags: [go, programming, beginners, datastructure]
+date: 2020-11-14
+---
+
+# Go Struct And Stack Data Structure
+
+## Stack
+
+Stack is a **LIFO (last-in-first-out)** data structure. It's usually used to
+convert a recursive solution into an iterative solution.
+
+ℹ️ It is asked **a lot** during technical interviews at big tech companies.
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1605195413607/_ZtbbGD9Z.png)
+
+---
+
+## Golang implementation
+
+Interestingly enough, there's no built-in implementation of Stack in Go, you'll
+have to implement it based on a linked list.
+
+```go
+import "container/list" // import a package in Golang
+
+type Stack struct { // how a struct is defined
+    list *list.List // lowercase var/function is private
+}
+
+func (s *Stack) Push(val int) { // upperccase var/function is public
+    s.list.PushBack(val)
+}
+
+func (s *Stack) Pop() int { // how a struct's function is defined
+    item := s.list.Back()
+    val := item.Value.(int)
+    s.list.Remove(item)
+    return val
+}
+
+func (s *Stack) Clean() {
+    for s.list.Len() > 0 { // there's no 'while' in Golang, only 'for'
+        s.list.Remove(s.list.Back())
+    }
+}
+```
