@@ -1,0 +1,124 @@
+---
+tags: [programming, algorithm, concurrency]
+date: 2020-11-17
+---
+
+# Sync vs. Async vs. Concurrent vs. Parallel
+
+> “How do you distinguish between sync vs. async vs. concurrent vs. parallel?”
+
+It’s a question you’ll probably be asked in your first technical interview.
+
+Having witnessed a lot of answers from interviewees, I see that people know the
+terms, but they rarely understand what they conceptually are.
+
+Knowing the use cases is essential. However, just knowing the use cases also
+limits yourself to only those use cases. That’s why interviewers want to ask you
+this question⁠ - they want to see whether you’re able to introduce solutions for
+new use cases.
+
+Now, let’s break the code.
+
+![Image](https://cdn.hashnode.com/res/hashnode/image/upload/v1605595364190/9uu39gZuF.png)
+
+---
+
+# Sync vs. Async
+
+Sync and async are two different programming models, which refer to styles of
+programming - how you should write code and how your code will run.
+
+### Sync
+
+In the sync programming model, you write code as steps ⁠— your code is executed
+from top to bottom, step by step, and it only gets to the second step when it
+has finished the first step.
+
+```go
+func step1() { print("1") }
+func step2() { print("2") }
+
+func main() {
+    step1()
+    step2()
+}
+
+// result -> 12
+```
+
+Because of its predictable behavior, sync is also called a _predictable
+programming model_. Most programming languages use sync as its base programming
+model.
+
+### Async
+
+In an async programming model, you write code as tasks, which are then executed
+concurrently. Executing concurrently means that all the tasks are likely
+executed at the same time.
+
+```go
+func task1() { print("1") }
+func task2() { print("2") }
+
+func main() {
+    task1()
+    task2()
+}
+
+// result -> 12 or 21
+```
+
+As you can see in the result of the example, because tasks are executed at the
+same time you can not predict the result. And due to that behavior, async is
+also called an _unpredictable programming model_. It’s useful for use cases in
+which you do tasks that do not depend on each other and for which you don’t care
+about the execution order.
+
+---
+
+# Concurrent vs. Parallel
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1605596051556/KfHDzfWx8.png)
+
+We mentioned concurrent behaviors once when discussing the async programming
+model. In an async programming model, tasks are treated as a single step that
+runs multiple tasks, and they do not care about how those tasks are ordered or
+run to each other. They can be run simultaneously, or, in some cases, there’ll
+be some tasks that run first and then pause and other tasks that come in turns,
+etc. That behavior is called _concurrent_.
+
+Take an example in real life: There’s a challenge that requires you to both eat
+a whole huge cake and sing a whole song. You’ll win if you’re the fastest who
+sings the whole song and finishes the cake. So the rule is that you sing and eat
+concurrently. How you do that does not belong to the rule. You can eat the whole
+cake, then sing the whole song, or you can eat half a cake, then sing half a
+song, then do that again, etc.
+
+The same applies to computer science. There are two tasks executing
+concurrently, but those are run in a 1-core CPU, so the CPU will decide to run a
+task first and then the other task or run half a task and half another task,
+etc. It all depends on the system architecture.
+
+If we keep going with the same example, the rule is still singing and eating
+concurrently, but this time you play in a team of two. You probably will eat and
+let your friend sing (because she sings better and you eat better). So this
+time, the two tasks are really executed simultaneously, and it’s called
+_parallel_. Parallelism is a specific kind of concurrency where tasks are really
+executed simultaneously. In computer science, parallelism can only be achieved
+in multicore environments.
+
+---
+
+# Summary
+
+Sync and async are programming models.
+
+Concurrent and parallel are ways tasks are executed, where parallel is a narrow
+version of concurrent.
+
+In sync, you write code as steps that are executed in order, from top to bottom.
+There’s no concurrency or parallelism here.
+
+In async, you write code as tasks that are executed concurrently. You never know
+which tasks will be started first - it depends on the executing context, whether
+you run tasks in parallel or do a bit of one task then progress to another.
