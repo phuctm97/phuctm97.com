@@ -40,7 +40,7 @@ const Wrapper: React.FC<{ post: Post }> = ({ post, children }) => {
           images: [{ ...post.cover, alt: title }],
         }}
       />
-      <article className="prose prose-sm sm:prose md:prose-md dark:prose-dark">
+      <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
         {h1}
         <Info
           author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
