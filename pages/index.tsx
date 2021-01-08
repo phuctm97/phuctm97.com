@@ -37,11 +37,9 @@ const IndexPage = ({ blog }: Props) => (
               <h4 className="font-semibold text-lg leading-5 dark:text-gray-200 sm:text-xl">
                 {title}
               </h4>
-              <div className="overflow-hidden">
-                <p className="mt-2 text-sm line-clamp-2 text-gray-500 sm:text-base">
-                  {description}
-                </p>
-              </div>
+              <p className="mt-2 text-sm line-clamp-2 text-gray-500 sm:text-base">
+                {description}
+              </p>
             </a>
           </Link>
         </article>

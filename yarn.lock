@@ -482,6 +482,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@tailwindcss/line-clamp@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.1.0.tgz#202c3889fbf032034ee7fc3a531f98e5e1c81720"
+  integrity sha512-js+iq+EGiMb3LNi+Jnu9HGKJQp94d1aY/cngJ6llMfaNpXSG9olYtv0mrSNYUh5Z2PKYOdhZXZvxR6xwiJjRSg==
+
 "@tailwindcss/typography@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.3.1.tgz#253ce580c8e06b6163d9a288edd24f25e1d0dfee"
