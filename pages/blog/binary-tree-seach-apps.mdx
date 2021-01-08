@@ -1,0 +1,45 @@
+---
+tags: [algorithm, datastructure, beginners]
+date: 2020-11-15
+---
+
+# Binary Search Tree And Real-world Applications
+
+## Definition
+
+A binary search tree (BST) is a binary tree data structure that has
+
+- The left subtree of a node contains only nodes with values less than the
+  node's value.
+
+- The right subtree of a node contains only nodes with values greater than the
+  node's value.
+
+- The left and right subtree each is a binary search tree, too.
+
+![Binary Tree](https://cdn.hashnode.com/res/hashnode/image/upload/v1605279558566/Y2a0xjvoL.png)
+_(Image's source: GeeksForGeeks)_
+
+---
+
+## Real-world Applications
+
+### 3D game engines
+
+Almost every 3D engine uses BST to determine which objects should be rendered in
+a 3D world, which is basically buffering Z orders instead of recalculating
+complex 3D positioning on every render.
+
+It's famously used in Doom 1993 as the first time a BST had even been used in a
+game.
+
+![Doom](https://cdn.hashnode.com/res/hashnode/image/upload/v1605280414259/hUUT8S8tH.png)
+_(Image's source: Wikipedia)_
+
+### Compilers
+
+To efficiently parse syntax expressions (e.g. programming languages), compilers
+use a special BST called syntax tree.
+
+![Syntax tree](https://cdn.hashnode.com/res/hashnode/image/upload/v1605281114465/rI3Z3MKKD.jpeg)
+_(Image's source: Wikipedia)_
