@@ -7,6 +7,7 @@ const PlausibleScript = () => {
   return (
     <Head>
       <script
+        key="plausible-script"
         async
         defer
         data-domain={homepage.host}

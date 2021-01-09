@@ -2,7 +2,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
-import PlausibleScript from "~components/plausible";
+import PlausibleScript from "~components/plausible-script";
 import { isProd } from "~utils/env";
 
 import Header from "~layouts/header";
@@ -19,7 +19,11 @@ import "~styles/prism.css";
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta
+        key="meta-viewport"
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+      />
     </Head>
     <DefaultSeo
       {...packageJSON.site}
