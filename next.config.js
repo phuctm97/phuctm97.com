@@ -11,6 +11,31 @@ const withMDX = require("@next/mdx")({
   },
 });
 
-module.exports = withMDX({
-  pageExtensions: ["ts", "tsx", "mdx"],
-});
+const withPreact = (next = {}) =>
+  Object.assign({}, next, {
+    webpack(config, options) {
+      const { dev, isServer } = options;
+
+      // Use Preact only in client production bundle.
+      if (!dev && !isServer) {
+        Object.assign(config.resolve.alias, {
+          react: "preact/compat",
+          "react-dom": "preact/compat",
+          "create-react-class": "preact-compat/lib/create-react-class",
+          "react-dom-factories": "preact-compat/lib/react-dom-factories",
+        });
+      }
+
+      if (typeof next.webpack === "function") {
+        return next.webpack(config, options);
+      }
+
+      return config;
+    },
+  });
+
+module.exports = withPreact(
+  withMDX({
+    pageExtensions: ["ts", "tsx", "mdx"],
+  })
+);
