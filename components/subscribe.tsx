@@ -72,7 +72,7 @@ const Subscribe = ({
             className={classNames(
               "px-3 sm:px-4 py-2 mt-1 block w-full rounded-md",
               "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100",
-              "autofill:text-fill-gray-900 autofill:shadowfill-white dark:autofill:shadowfill-gray-800 dark:autofill:text-fill-gray-100",
+              "autofill:text-fill-gray-900 autofill:shadow-fill-white dark:autofill:shadow-fill-gray-800 dark:autofill:text-fill-gray-100",
               "outline-none focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed"
             )}
             type="email"
