@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-10 p-4 max-w-2xl mx-auto my-4 flex flex-row bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-50 backdrop-blur md:px-0 lg:max-w-3xl">
+    <nav className="sticky top-0 z-10 p-4 max-w-2xl mx-auto my-4 flex flex-row backdrop-blur md:px-0 lg:max-w-3xl">
       <h1 className="font-semibold text-gray-900 dark:text-gray-100">
         <Link href="/">Home</Link>
       </h1>
