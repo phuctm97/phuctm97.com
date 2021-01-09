@@ -2853,10 +2853,10 @@ findup-sync@^4.0.0:
     micromatch "^4.0.2"
     resolve-dir "^1.0.1"
 
-flatten-tailwindcss-theme@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/flatten-tailwindcss-theme/-/flatten-tailwindcss-theme-0.0.1.tgz#3f4b5337c30d7d1d14c8f739b16b6b1a72a412ac"
-  integrity sha512-9E/8c6/PTBlmV2TQrD4/N1ex8Bhz7VWqI23xDUb+cYI8ZT5o9KdAlT5e45BY20zQbLsfNJ7MTjfOoXdrIsecKA==
+flatten-tailwindcss-theme@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/flatten-tailwindcss-theme/-/flatten-tailwindcss-theme-0.1.1.tgz#c74a06aeb98e110b8f711ec26a973be74fc62a0b"
+  integrity sha512-H4VV6pXPVX+NZMy4Ddky+Ae3y8hRrDmYn1piauHx3nPWa/4YS6ufL2G4crxqisGawHGztSTJ5TjZkmiyTA035Q==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
@@ -6679,6 +6679,11 @@ supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
+
+tailwindcss-autofill@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-autofill/-/tailwindcss-autofill-0.1.0.tgz#ca5872c866bea13ac45fd1610c7b48199156702f"
+  integrity sha512-U7P+smNko8729EIe/FOXJvcoZt6LAzexevBuZ8pkrdoazAoabUGFdE/xOaGTb9P7rzkNp4OGH0WeE8Y8UvnDtw==
 
 tailwindcss@^2.0.2:
   version "2.0.2"

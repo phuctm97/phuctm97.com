@@ -2,7 +2,7 @@ const typography = require("@tailwindcss/typography")({
   modifiers: ["sm"],
 });
 const lineClamp = require("@tailwindcss/line-clamp");
-const autofill = require("./styles/js/autofill");
+const autofill = require("tailwindcss-autofill");
 const textfill = require("./styles/js/textfill");
 const shadowfill = require("./styles/js/shadowfill");
 
