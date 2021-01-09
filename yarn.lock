@@ -2853,6 +2853,11 @@ findup-sync@^4.0.0:
     micromatch "^4.0.2"
     resolve-dir "^1.0.1"
 
+flatten-tailwindcss-theme@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/flatten-tailwindcss-theme/-/flatten-tailwindcss-theme-0.0.1.tgz#3f4b5337c30d7d1d14c8f739b16b6b1a72a412ac"
+  integrity sha512-9E/8c6/PTBlmV2TQrD4/N1ex8Bhz7VWqI23xDUb+cYI8ZT5o9KdAlT5e45BY20zQbLsfNJ7MTjfOoXdrIsecKA==
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
