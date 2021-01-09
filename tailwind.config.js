@@ -3,7 +3,7 @@ const typography = require("@tailwindcss/typography")({
 });
 const lineClamp = require("@tailwindcss/line-clamp");
 const autofill = require("tailwindcss-autofill");
-const textfill = require("./styles/js/textfill");
+const textFill = require("tailwindcss-text-fill");
 const shadowfill = require("./styles/js/shadowfill");
 
 module.exports = {
@@ -127,9 +127,9 @@ module.exports = {
       typography: ["dark"],
       backgroundOpacity: ["dark"],
       cursor: ["disabled"],
-      textfill: ["autofill", "dark"],
+      textFill: ["autofill", "dark"],
       shadowfill: ["autofill", "dark"],
     },
   },
-  plugins: [typography, autofill, textfill, shadowfill, lineClamp],
+  plugins: [typography, autofill, textFill, shadowfill, lineClamp],
 };
