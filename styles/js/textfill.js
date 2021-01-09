@@ -1,9 +1,9 @@
 const plugin = require("tailwindcss/plugin");
-const flattenColors = require("./flatten-colors");
+const flatten = require("flatten-tailwindcss-theme");
 
 const textfill = plugin(
   ({ addUtilities, variants, theme, e }) => {
-    const colors = flattenColors(theme("colors"));
+    const colors = flatten(theme("colors"));
     const utils = Object.entries(colors).reduce(
       (res, [key, value]) =>
         Object.assign(res, {
