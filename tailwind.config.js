@@ -1,10 +1,10 @@
 const typography = require("@tailwindcss/typography")({
   modifiers: ["sm"],
 });
-const lineClamp = require("@tailwindcss/line-clamp");
 const autofill = require("tailwindcss-autofill");
 const textFill = require("tailwindcss-text-fill");
-const shadowfill = require("./styles/js/shadowfill");
+const shadowFill = require("tailwindcss-shadow-fill");
+const lineClamp = require("@tailwindcss/line-clamp");
 
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],
@@ -128,8 +128,8 @@ module.exports = {
       backgroundOpacity: ["dark"],
       cursor: ["disabled"],
       textFill: ["autofill", "dark"],
-      shadowfill: ["autofill", "dark"],
+      shadowFill: ["autofill", "dark"],
     },
   },
-  plugins: [typography, autofill, textFill, shadowfill, lineClamp],
+  plugins: [typography, autofill, textFill, shadowFill, lineClamp],
 };

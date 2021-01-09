@@ -6685,6 +6685,13 @@ tailwindcss-autofill@^0.1.0:
   resolved "https://registry.yarnpkg.com/tailwindcss-autofill/-/tailwindcss-autofill-0.1.0.tgz#ca5872c866bea13ac45fd1610c7b48199156702f"
   integrity sha512-U7P+smNko8729EIe/FOXJvcoZt6LAzexevBuZ8pkrdoazAoabUGFdE/xOaGTb9P7rzkNp4OGH0WeE8Y8UvnDtw==
 
+tailwindcss-shadow-fill@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-shadow-fill/-/tailwindcss-shadow-fill-0.1.0.tgz#25f1427639fae588aad6832e57e425a76ed0b000"
+  integrity sha512-td+BBkMQuHFdsUKXRGogk8YfS3ptCK84zZFuDrlhNgWls6UIGUI7w+GaMTKleL1PthTZJqf0L2xmQOUxuEEM0A==
+  dependencies:
+    flatten-tailwindcss-theme "^0.1.1"
+
 tailwindcss-text-fill@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/tailwindcss-text-fill/-/tailwindcss-text-fill-0.1.2.tgz#fe402971115fe5393aaf1992b8bb4cbacdd58ad9"
