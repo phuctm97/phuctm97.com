@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://phuctm97.com/sitemap.xml
