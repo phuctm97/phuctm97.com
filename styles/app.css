@@ -15,6 +15,11 @@
   *::selection {
     @apply bg-green-250 text-gray-950 dark:bg-magenta dark:text-gray-50;
   }
+  @supports (-moz-appearance: none) {
+    *::selection {
+      @apply bg-opacity-80 dark:bg-opacity-75;
+    }
+  }
 }
 
 @layer utilities {
