@@ -14,10 +14,20 @@ import packageJSON from "~package.json";
 import "~styles/app.css";
 import "~styles/prism.css";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      {isProd && (
+        <script
+          async
+          defer
+          data-domain="phuctm97.com"
+          src="https://plausible.io/js/plausible.js"
+        />
+      )}
     </Head>
     <DefaultSeo
       {...packageJSON.site}
