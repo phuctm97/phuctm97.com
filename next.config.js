@@ -37,5 +37,8 @@ const withPreact = (next = {}) =>
 module.exports = withPreact(
   withMDX({
     pageExtensions: ["ts", "tsx", "mdx"],
+    env: {
+      VERCEL_ENV: process.env.VERCEL_ENV,
+    },
   })
 );
