@@ -28,6 +28,9 @@
       "cardType": "summary_large_image"
     }
   },
+  "plausible": {
+    "scriptURL": "https://plausible.phuctm97.com/js/index.js"
+  },
   "license": "MIT",
   "private": false,
   "scripts": {
