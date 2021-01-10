@@ -4,7 +4,7 @@
 [![Checks status][checks status]][checks url]
 [![Dependabot status][dependabot status]][dependabot url]
 [![Code style][code style]][code style url]
-[![License][license badge]][license url]
+[![License][license type]][license url]
 
 My home on the web — everything I learned and created: software dev, programming
 tutorials, career, startups, and open-source.
@@ -45,7 +45,7 @@ tutorials, career, startups, and open-source.
   https://img.shields.io/github/checks-status/phuctm97/phuctm97.com/master?logo=Github
 [dependabot status]:
   https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot
-[license badge]: https://img.shields.io/github/license/phuctm97/phuctm97.com
+[license type]: https://img.shields.io/github/license/phuctm97/phuctm97.com
 [code style]:
   https://img.shields.io/badge/code%20style-prettier-F7B93E?logo=Prettier
 [deployment url]:
