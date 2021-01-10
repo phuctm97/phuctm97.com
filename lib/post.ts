@@ -14,6 +14,9 @@ import {
   reader,
 } from "~lib/remark";
 
+/**
+ * A blog post's model.
+ */
 export type Post = {
   title: string;
   description: string;
@@ -29,10 +32,16 @@ export type Post = {
   slug: string;
 };
 
+/**
+ * An object that has a blog post attached.
+ */
 export interface HasPost {
   post: Post;
 }
 
+/**
+ * Frontmatter schema of a Markdown-based blog post.
+ */
 const frontmatterSchema: Revalidator.JSONSchema<any> = {
   properties: {
     title: { type: "string" },
@@ -55,8 +64,16 @@ const trimPagesDir = (s: string) =>
 const trimMDXExt = (s: string) =>
   s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
 
+/**
+ * Checks if a file is a blog post.
+ * @param absPath Absolute path to the file
+ */
 export const isPost = (absPath: string) => absPath.startsWith(dir.blog);
 
+/**
+ * Gets URL path elements to a blog post from its absolute path on the file system.
+ * @param absPath Absolute path to the blog post's file
+ */
 export const getPostPath = (absPath: string) => {
   const trimmed = trimPagesDir(trimMDXExt(absPath));
   const folder = path.dirname(trimmed);
@@ -64,8 +81,12 @@ export const getPostPath = (absPath: string) => {
   return { path: `/${folder}/${slug}`, folder, slug };
 };
 
-export const generatePostCover = (frontmatter: any): Post["cover"] => {
-  const { cover, title } = frontmatter;
+/**
+ * Generates `cover` for a blog post based on its metadata.
+ * @param metadata The blog post's metadata, should has `title` and (optional) `cover`
+ */
+export const generatePostCover = (metadata: any): Post["cover"] => {
+  const { cover, title } = metadata;
   if (cover && cover.url) return { url: cover.url };
 
   const url = new URL(
@@ -85,6 +106,9 @@ export const generatePostCover = (frontmatter: any): Post["cover"] => {
   };
 };
 
+/**
+ * A unified/remark plugin that parses and extracts a blog post's metadata from its file (if applicable).
+ */
 export const postParser: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("Unknown file path.");
   if (!isPost(file.path)) return file.message("Not a post, skip.");
@@ -136,8 +160,11 @@ export const postParser: Plugin = () => (tree, file) => {
   };
 };
 
+/**
+ * A unified/remark plugin that exports `post` from a _parsed_ MDX blog post for dynamic rendering (if applicable).
+ */
 export const postExporter: Plugin = () => (tree, file) => {
-  const { post } = getVFileData<HasPost>(file);
+  const { post } = getVFileData<Partial<HasPost>>(file);
   if (!post) return file.message("Not a post, skip.");
 
   if (!isParent(tree)) return file.fail("Tree is empty.");
@@ -147,20 +174,34 @@ export const postExporter: Plugin = () => (tree, file) => {
   });
 };
 
+/**
+ * Reads a blog post from a file.
+ * @param absPath Absolute path to the blog post's file
+ */
 export const readPost = (absPath: string): Post | undefined => {
   const file = reader().use(postParser).processSync(toVFile(absPath));
-  const { post } = getVFileData<HasPost>(file);
+  const { post } = getVFileData<Partial<HasPost>>(file);
   return post;
 };
 
+/**
+ * Lists all blog posts' filenames (absolute paths).
+ */
 export const getBlogFiles = () =>
   glob.sync("**/*.mdx", {
     cwd: dir.blog,
     absolute: true,
   });
 
+/**
+ * Checks if a post is not nil (`null` or `undefined`).
+ * @param val A nullable blog post
+ */
 export const postIsntNil = (val: Post | undefined | null): val is Post => !!val;
 
+/**
+ * Reads all blog posts in chronological order.
+ */
 export const readBlog = (): Post[] =>
   getBlogFiles()
     .map(readPost)

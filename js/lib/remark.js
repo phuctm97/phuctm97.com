@@ -9,23 +9,45 @@ const unified_1 = __importDefault(require("unified"));
 const remark_parse_1 = __importDefault(require("remark-parse"));
 const remark_frontmatter_1 = __importDefault(require("remark-frontmatter"));
 const remark_parse_frontmatter_1 = __importDefault(require("remark-parse-frontmatter"));
+/**
+ * A fake unified/remark compiler that outputs nothing, is useful to run only parse and transform.
+ * @param this Unified processor
+ */
 function fakeCompiler() {
     this.Compiler = () => "";
 }
 exports.fakeCompiler = fakeCompiler;
+/**
+ * Default MDX parser.
+ */
 exports.parser = unified_1.default()
     .use(remark_parse_1.default)
     .use(remark_frontmatter_1.default)
     .use(remark_parse_frontmatter_1.default)
     .freeze();
+/**
+ * Default MDX reader (parse and transform).
+ */
 exports.reader = exports.parser().use(fakeCompiler).freeze();
+/**
+ * Reads a file and returns it as a `vfile`.
+ * @param absPath Absolute path to the file
+ */
 const toVFile = (absPath) => ({
     cwd: process.cwd(),
     path: absPath,
     contents: fs_1.default.readFileSync(absPath),
 });
 exports.toVFile = toVFile;
+/**
+ * Assumes that `file.data` is of a type and returns it.
+ * @param file A `vfile`
+ */
 const getVFileData = (file) => file.data;
 exports.getVFileData = getVFileData;
+/**
+ * Checks if a node is a parent tree (has children).
+ * @param node A unist node
+ */
 const isParent = (node) => !!node.children;
 exports.isParent = isParent;

@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const rootDir = process.cwd();
 const pagesDir = path_1.default.join(rootDir, "pages");
+/**
+ * Absolute paths to various project directories.
+ */
 const dir = {
     root: rootDir,
     public: path_1.default.join(rootDir, "public"),
