@@ -1,16 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "~pages/*": ["pages/*"],
-      "~components/*": ["components/*"],
-      "~layouts/*": ["layouts/*"],
-      "~styles/*": ["styles/*"],
-      "~hooks/*": ["hooks/*"],
-      "~utils/*": ["utils/*"],
-      "~lib/*": ["lib/*"],
-      "~package.json": ["package.json"]
-    },
+    "paths": { "~/*": ["./*"] },
     "allowJs": false,
     "strict": true,
     "alwaysStrict": true,

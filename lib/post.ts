@@ -5,14 +5,14 @@ import { Plugin } from "unified";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
-import dir from "~lib/dir";
+import dir from "~/lib/dir";
 import {
   HasFrontmatter,
   toVFile,
   getVFileData,
   isParent,
   reader,
-} from "~lib/remark";
+} from "~/lib/remark";
 
 /**
  * A blog post's model.

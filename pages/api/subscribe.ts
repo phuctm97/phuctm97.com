@@ -3,7 +3,7 @@ import {
   isStringArray,
   isMapOfStringArray,
   flattenStringArray,
-} from "~utils/array";
+} from "~/utils/array";
 
 const unexpectedError =
   "There was an error subscribing, please try again later.";

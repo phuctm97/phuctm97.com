@@ -1,5 +1,5 @@
 import Head from "next/head";
-import packageJSON from "~package.json";
+import packageJSON from "~/package.json";
 
 const homepage = new URL(packageJSON.homepage);
 

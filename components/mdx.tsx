@@ -1,11 +1,11 @@
 import { Children } from "react";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
-import Info from "~components/info";
-import Tags from "~components/tags";
-import Subscribe from "~components/subscribe";
-import { Post } from "~lib/post";
-import packageJSON from "~package.json";
+import Info from "~/components/info";
+import Tags from "~/components/tags";
+import Subscribe from "~/components/subscribe";
+import { Post } from "~/lib/post";
+import packageJSON from "~/package.json";
 
 const { homepage } = packageJSON;
 const me = {
