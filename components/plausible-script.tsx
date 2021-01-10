@@ -1,7 +1,7 @@
 import Head from "next/head";
 import packageJSON from "~/package.json";
 
-const homepage = new URL(packageJSON.homepage);
+const projectURL = new URL(packageJSON.homepage);
 
 const PlausibleScript = () => {
   return (
@@ -10,7 +10,7 @@ const PlausibleScript = () => {
         key="plausible-script"
         async
         defer
-        data-domain={homepage.host}
+        data-domain={projectURL.host}
         src={packageJSON.plausible.scriptURL}
       />
     </Head>
