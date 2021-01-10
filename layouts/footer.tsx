@@ -1,4 +1,4 @@
-import Emoji from "~components/emoji";
+import Emoji from "~/components/emoji";
 import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { FaDev, FaMediumM } from "react-icons/fa";
 import { SiHashnode } from "react-icons/si";

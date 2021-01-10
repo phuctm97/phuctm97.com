@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import glob from "glob";
 import prettier from "prettier";
-import dir from "~lib/dir";
+import dir from "~/lib/dir";
 
 const trimPagesDir = (s: string) =>
   s.startsWith(dir.pages) ? s.substr(dir.pages.length) : s;

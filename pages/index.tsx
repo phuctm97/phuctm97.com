@@ -1,8 +1,8 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import Emoji from "~components/emoji";
-import Subscribe from "~components/subscribe";
-import { Post, readBlog } from "~lib/post";
+import Emoji from "~/components/emoji";
+import Subscribe from "~/components/subscribe";
+import { Post, readBlog } from "~/lib/post";
 
 type Props = {
   blog: Post[];

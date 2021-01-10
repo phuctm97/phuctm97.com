@@ -10,8 +10,8 @@ const url_1 = require("url");
 const unist_util_select_1 = require("unist-util-select");
 const mdast_util_to_string_1 = __importDefault(require("mdast-util-to-string"));
 const revalidator_1 = __importDefault(require("revalidator"));
-const dir_1 = __importDefault(require("./dir"));
-const remark_1 = require("./remark");
+const dir_1 = __importDefault(require("../lib/dir"));
+const remark_1 = require("../lib/remark");
 /**
  * Frontmatter schema of a Markdown-based blog post.
  */
