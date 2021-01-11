@@ -3,8 +3,8 @@
   "compilerOptions": {
     "outDir": "js",
     "baseUrl": ".",
-    "paths": { "~/*": ["./*"] }
+    "paths": { "@/*": ["packages/*"], "~/*": ["./*"] }
   },
   "exclude": ["node_modules", ".next"],
-  "include": ["lib/**/*.ts", "utils/**/*.ts", "scripts/**/*.ts"]
+  "include": ["lib/**/*.ts", "scripts/**/*.ts"]
 }
