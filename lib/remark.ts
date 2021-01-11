@@ -1,5 +1,4 @@
 import fs from "fs";
-import { Node, Parent } from "unist";
 import { VFile } from "vfile";
 import unified from "unified";
 import mdParser from "remark-parse";
@@ -43,9 +42,3 @@ export const toVFile = (absPath: string): Partial<VFile> => ({
  * @param file A `vfile`
  */
 export const getVFileData = <T = any>(file: VFile) => file.data as T;
-
-/**
- * Checks if a node is a parent tree (has children).
- * @param node A unist node
- */
-export const isParent = (node: Node): node is Parent => !!node.children;
