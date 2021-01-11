@@ -5,7 +5,7 @@ import { Plugin } from "unified";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
-import dir from "~/lib/dir";
+import dir from "@/next-dir";
 import {
   HasFrontmatter,
   toVFile,
@@ -58,6 +58,8 @@ const frontmatterSchema: Revalidator.JSONSchema<any> = {
   },
 };
 
+const blogDir = path.join(dir.pages, "blog");
+
 const trimPagesDir = (s: string) =>
   s.startsWith(dir.pages) ? s.substr(dir.pages.length + 1) : s;
 
@@ -68,7 +70,7 @@ const trimMDXExt = (s: string) =>
  * Checks if a file is a blog post.
  * @param absPath Absolute path to the file
  */
-export const isPost = (absPath: string) => absPath.startsWith(dir.blog);
+export const isPost = (absPath: string) => absPath.startsWith(blogDir);
 
 /**
  * Gets URL path elements to a blog post from its absolute path on the file system.
@@ -189,7 +191,7 @@ export const readPost = (absPath: string): Post | undefined => {
  */
 export const getBlogFiles = () =>
   glob.sync("**/*.mdx", {
-    cwd: dir.blog,
+    cwd: blogDir,
     absolute: true,
   });
 

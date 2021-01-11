@@ -7,13 +7,13 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const glob_1 = __importDefault(require("glob"));
 const prettier_1 = __importDefault(require("prettier"));
-const dir_1 = __importDefault(require("../lib/dir"));
-const trimPagesDir = (s) => s.startsWith(dir_1.default.pages) ? s.substr(dir_1.default.pages.length) : s;
+const next_dir_1 = __importDefault(require("../packages/next-dir"));
+const trimPagesDir = (s) => s.startsWith(next_dir_1.default.pages) ? s.substr(next_dir_1.default.pages.length) : s;
 const trimPageExt = (s) => s.replace(/(index)?\.(tsx|mdx)$/g, "");
-const packageJSON = JSON.parse(fs_1.default.readFileSync(path_1.default.join(dir_1.default.root, "package.json"), "utf-8"));
+const packageJSON = JSON.parse(fs_1.default.readFileSync(path_1.default.join(next_dir_1.default.root, "package.json"), "utf-8"));
 const pages = glob_1.default
     .sync("**/*.@(tsx|mdx)", {
-    cwd: dir_1.default.pages,
+    cwd: next_dir_1.default.pages,
     absolute: true,
     ignore: ["**/_*", "**/api", "**/sitemap.xml.tsx"],
 })
@@ -25,4 +25,4 @@ const sitemap = prettier_1.default.format(`<?xml version="1.0" encoding="UTF-8"?
     .join("\n")}
 </urlset>
 `, { parser: "html" });
-fs_1.default.writeFileSync(path_1.default.join(dir_1.default.public, "sitemap.xml"), sitemap);
+fs_1.default.writeFileSync(path_1.default.join(next_dir_1.default.public, "sitemap.xml"), sitemap);

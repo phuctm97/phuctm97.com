@@ -2,16 +2,13 @@ import path from "path";
 
 const rootDir = process.cwd();
 
-const pagesDir = path.join(rootDir, "pages");
-
 /**
- * Absolute paths to various project directories.
+ * Absolute paths to various Next.js directories.
  */
 const dir = {
   root: rootDir,
   public: path.join(rootDir, "public"),
-  pages: pagesDir,
-  blog: path.join(pagesDir, "blog"),
+  pages: path.join(rootDir, "pages"),
 };
 
 export default dir;
