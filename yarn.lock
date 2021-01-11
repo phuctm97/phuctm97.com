@@ -320,13 +320,6 @@
   dependencies:
     colors "^1.3.3"
 
-"@jfonx/file-utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@jfonx/file-utils/-/file-utils-1.0.0.tgz#2d3d5d9978a23a05f8de6dc8164c2ee3b565149a"
-  integrity sha512-+gqUMbScweBpWKoQGlERJgqFH1jtWwVCqRMCpHLvJyHRTxxoNIdjdeQM+c/iv9ExRYNBU/mJgCjFYbCte6U9bw==
-  dependencies:
-    "@jfonx/console-utils" "^1.0.3"
-
 "@lhci/cli@^0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@lhci/cli/-/cli-0.6.1.tgz#12ff48c50ce3e4d5728305196952b3ca9353ce75"
@@ -573,6 +566,16 @@
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@types/revalidator/-/revalidator-0.3.7.tgz#cf649039a3b5fa231c16508bcaa8923b66d02cf9"
   integrity sha512-S5gOBlN3gZ2rkXSgtD5UQtF6eP9jLrF5iTNU0a46cXMHA3as81Bbvh1/qH0cJhi6xUWIWFEYdsLhNCOKlMX7Lw==
+
+"@types/strip-bom@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
+  integrity sha1-FKjsOVbC6B7bdSB5CuzyHCkK69I=
+
+"@types/strip-json-comments@0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
+  integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
 
 "@types/unist@*", "@types/unist@^2.0.0", "@types/unist@^2.0.2", "@types/unist@^2.0.3":
   version "2.0.3"
@@ -6557,12 +6560,17 @@ strip-ansi@^5.1.0:
   dependencies:
     ansi-regex "^4.1.0"
 
+strip-bom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
+  integrity sha1-IzTBjpx1n3vdVv3vfprj1YjmjtM=
+
 strip-eof@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
   integrity sha1-u0P/VZim6wXYm1n80SnJgzE2Br8=
 
-strip-json-comments@~2.0.1:
+strip-json-comments@^2.0.0, strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
@@ -6889,18 +6897,28 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
-tsc-alias@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/tsc-alias/-/tsc-alias-1.2.0.tgz#5fb35147d4452a0afda519e0200e8af78920e5c1"
-  integrity sha512-0ukUfVHR9ij4icfvPg7z6GOD/vRWTd67diEY5Nx9+kmSfanCoCInUFxjnglFiMjcav3N+Aoua3m/2+KbflA/bQ==
+tsc-alias@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/tsc-alias/-/tsc-alias-1.2.1.tgz#cddd99cbd9bf3334360313a95fefeb2b587d1c08"
+  integrity sha512-bo9h7GF/YazatWhsIpLNpaAGjzX3Ib8N8k4Zz/+h60wpteZAoIER96f5v+AoMinc1S5QND5hzdx34hA9KEtwFA==
   dependencies:
     "@jfonx/console-utils" "^1.0.3"
-    "@jfonx/file-utils" "^1.0.0"
     chokidar "^3.0.0"
     commander "^2.19.0"
     find-node-modules "^2.1.0"
     globby "^9.2.0"
     normalize-path "^3.0.0"
+    tsconfig "^7.0.0"
+
+tsconfig@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/tsconfig/-/tsconfig-7.0.0.tgz#84538875a4dc216e5c4a5432b3a4dec3d54e91b7"
+  integrity sha512-vZXmzPrL+EmC4T/4rVlT2jNVMWCi/O4DIiSj3UHg1OE5kCKbk4mfrXc6dZksLgRM/TZlKnousKH9bbTazUWRRw==
+  dependencies:
+    "@types/strip-bom" "^3.0.0"
+    "@types/strip-json-comments" "0.0.30"
+    strip-bom "^3.0.0"
+    strip-json-comments "^2.0.0"
 
 tslib@^1.9.0:
   version "1.14.1"
