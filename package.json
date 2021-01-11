@@ -78,6 +78,7 @@
     "tailwindcss-shadow-fill": "^0.1.0",
     "tailwindcss-text-fill": "^0.1.2",
     "unified": "^9.2.0",
+    "unist-util-is": "^4.0.4",
     "unist-util-select": "^3.0.4",
     "unist-util-visit": "^2.0.3",
     "vfile": "^4.2.1"
@@ -95,7 +96,7 @@
     "@types/unist": "^2.0.3",
     "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
-    "tsc-alias": "^1.2.1",
+    "tsc-alias": "^1.2.0",
     "typescript": "^4.1.3"
   }
 }

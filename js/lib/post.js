@@ -11,6 +11,7 @@ const unist_util_select_1 = require("unist-util-select");
 const mdast_util_to_string_1 = __importDefault(require("mdast-util-to-string"));
 const revalidator_1 = __importDefault(require("revalidator"));
 const next_constants_1 = require("../packages/next-constants");
+const unist_is_parent_1 = __importDefault(require("../packages/unist-is-parent"));
 const remark_1 = require("../lib/remark");
 /**
  * Frontmatter schema of a Markdown-based blog post.
@@ -128,7 +129,7 @@ const postExporter = () => (tree, file) => {
     const { post } = remark_1.getVFileData(file);
     if (!post)
         return file.message("Not a post, skip.");
-    if (!remark_1.isParent(tree))
+    if (!unist_is_parent_1.default(tree))
         return file.fail("Tree is empty.");
     tree.children.push({
         type: "export",

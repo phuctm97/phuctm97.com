@@ -6,13 +6,8 @@ import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
 import { PAGES_DIR } from "@/next-constants";
-import {
-  HasFrontmatter,
-  toVFile,
-  getVFileData,
-  isParent,
-  reader,
-} from "~/lib/remark";
+import isParent from "@/unist-is-parent";
+import { HasFrontmatter, toVFile, getVFileData, reader } from "~/lib/remark";
 
 /**
  * A blog post's model.
