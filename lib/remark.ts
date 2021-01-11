@@ -1,24 +1,17 @@
 import fs from "fs";
 import { Node, Parent } from "unist";
 import { VFile } from "vfile";
-import unified, { Processor, Settings } from "unified";
+import unified from "unified";
 import mdParser from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import frontmatterParser from "remark-parse-frontmatter";
+import fakeCompiler from "@/unified-fake-compiler";
 
 /**
  * An object that has `frontmatter` attached.
  */
 export interface HasFrontmatter {
   frontmatter: { [key: string]: any };
-}
-
-/**
- * A fake unified/remark compiler that outputs nothing, is useful to run only parse and transform.
- * @param this Unified processor
- */
-export function fakeCompiler<P = Settings>(this: Processor<P>) {
-  this.Compiler = () => "";
 }
 
 /**

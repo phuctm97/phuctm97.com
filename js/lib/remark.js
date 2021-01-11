@@ -3,20 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isParent = exports.getVFileData = exports.toVFile = exports.reader = exports.parser = exports.fakeCompiler = void 0;
+exports.isParent = exports.getVFileData = exports.toVFile = exports.reader = exports.parser = void 0;
 const fs_1 = __importDefault(require("fs"));
 const unified_1 = __importDefault(require("unified"));
 const remark_parse_1 = __importDefault(require("remark-parse"));
 const remark_frontmatter_1 = __importDefault(require("remark-frontmatter"));
 const remark_parse_frontmatter_1 = __importDefault(require("remark-parse-frontmatter"));
-/**
- * A fake unified/remark compiler that outputs nothing, is useful to run only parse and transform.
- * @param this Unified processor
- */
-function fakeCompiler() {
-    this.Compiler = () => "";
-}
-exports.fakeCompiler = fakeCompiler;
+const unified_fake_compiler_1 = __importDefault(require("../packages/unified-fake-compiler"));
 /**
  * Default MDX parser.
  */
@@ -28,7 +21,7 @@ exports.parser = unified_1.default()
 /**
  * Default MDX reader (parse and transform).
  */
-exports.reader = exports.parser().use(fakeCompiler).freeze();
+exports.reader = exports.parser().use(unified_fake_compiler_1.default).freeze();
 /**
  * Reads a file and returns it as a `vfile`.
  * @param absPath Absolute path to the file
