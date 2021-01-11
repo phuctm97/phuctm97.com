@@ -10,7 +10,7 @@ const url_1 = require("url");
 const unist_util_select_1 = require("unist-util-select");
 const mdast_util_to_string_1 = __importDefault(require("mdast-util-to-string"));
 const revalidator_1 = __importDefault(require("revalidator"));
-const next_dir_1 = __importDefault(require("../packages/next-dir"));
+const next_constants_1 = require("../packages/next-constants");
 const remark_1 = require("../lib/remark");
 /**
  * Frontmatter schema of a Markdown-based blog post.
@@ -30,14 +30,14 @@ const frontmatterSchema = {
         },
     },
 };
-const blogDir = path_1.default.join(next_dir_1.default.pages, "blog");
-const trimPagesDir = (s) => s.startsWith(next_dir_1.default.pages) ? s.substr(next_dir_1.default.pages.length + 1) : s;
+const BLOG_DIR = path_1.default.join(next_constants_1.PAGES_DIR, "blog");
+const trimPagesDir = (s) => s.startsWith(next_constants_1.PAGES_DIR) ? s.substr(next_constants_1.PAGES_DIR.length + 1) : s;
 const trimMDXExt = (s) => s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
 /**
  * Checks if a file is a blog post.
  * @param absPath Absolute path to the file
  */
-const isPost = (absPath) => absPath.startsWith(blogDir);
+const isPost = (absPath) => absPath.startsWith(BLOG_DIR);
 exports.isPost = isPost;
 /**
  * Gets URL path elements to a blog post from its absolute path on the file system.
@@ -150,7 +150,7 @@ exports.readPost = readPost;
  * Lists all blog posts' filenames (absolute paths).
  */
 const getBlogFiles = () => glob_1.default.sync("**/*.mdx", {
-    cwd: blogDir,
+    cwd: BLOG_DIR,
     absolute: true,
 });
 exports.getBlogFiles = getBlogFiles;
