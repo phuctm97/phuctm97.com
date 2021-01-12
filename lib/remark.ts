@@ -1,4 +1,3 @@
-import fs from "fs";
 import { VFile } from "vfile";
 import unified from "unified";
 import mdParser from "remark-parse";
@@ -26,16 +25,6 @@ export const parser = unified()
  * Default MDX reader (parse and transform).
  */
 export const reader = parser().use(fakeCompiler).freeze();
-
-/**
- * Reads a file and returns it as a `vfile`.
- * @param absPath Absolute path to the file
- */
-export const toVFile = (absPath: string): Partial<VFile> => ({
-  cwd: process.cwd(),
-  path: absPath,
-  contents: fs.readFileSync(absPath),
-});
 
 /**
  * Assumes that `file.data` is of a type and returns it.
