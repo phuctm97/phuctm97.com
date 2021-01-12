@@ -10,6 +10,7 @@ const url_1 = require("url");
 const unist_util_select_1 = require("unist-util-select");
 const mdast_util_to_string_1 = __importDefault(require("mdast-util-to-string"));
 const revalidator_1 = __importDefault(require("revalidator"));
+const to_vfile_1 = __importDefault(require("to-vfile"));
 const next_constants_1 = require("../packages/next-constants");
 const unist_is_parent_1 = __importDefault(require("../packages/unist-is-parent"));
 const remark_1 = require("../lib/remark");
@@ -142,7 +143,7 @@ exports.postExporter = postExporter;
  * @param absPath Absolute path to the blog post's file
  */
 const readPost = (absPath) => {
-    const file = remark_1.reader().use(exports.postParser).processSync(remark_1.toVFile(absPath));
+    const file = remark_1.reader().use(exports.postParser).processSync(to_vfile_1.default.readSync(absPath));
     const { post } = remark_1.getVFileData(file);
     return post;
 };
