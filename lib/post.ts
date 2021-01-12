@@ -6,9 +6,9 @@ import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
 import vfile from "to-vfile";
-import { PAGES_DIR } from "@/next-constants";
 import isParent from "@/unist-is-parent";
-import { HasFrontmatter, reader } from "~/lib/remark";
+import { HasFrontmatter, reader } from "@/md-with-frontmatter";
+import { PAGES_DIR } from "@/next-constants";
 
 /**
  * A blog post's model.
