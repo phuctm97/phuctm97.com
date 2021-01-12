@@ -34,10 +34,11 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "yarn build:scripts && next dev",
+    "dev": "yarn rebuild:scripts && next dev",
     "build": "next build",
     "start": "next start",
     "build:scripts": "tsc -p tsconfig.scripts.json && tsc-alias -p tsconfig.scripts.json",
+    "rebuild:scripts": "rm -rf js && yarn build:scripts",
     "type:check": "tsc -p tsconfig.json && tsc -p tsconfig.scripts.json --noEmit",
     "style:check": "prettier --check .",
     "style:format": "prettier --write .",

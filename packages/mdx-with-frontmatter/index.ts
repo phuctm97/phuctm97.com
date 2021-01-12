@@ -12,7 +12,7 @@ export interface HasFrontmatter {
 }
 
 /**
- * A Markdown parser with frontmatter enabled.
+ * A MDX parser with frontmatter enabled.
  */
 export const parser = unified()
   .use(parseMd)
@@ -21,6 +21,6 @@ export const parser = unified()
   .freeze();
 
 /**
- * A Markdown reader (parse and transform) with frontmatter enabled.
+ * A MDX reader (parse and transform) with frontmatter enabled.
  */
 export const reader = parser().use(compileNothing).freeze();

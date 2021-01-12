@@ -7,7 +7,7 @@ import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
 import vfile from "to-vfile";
 import isParent from "@/unist-is-parent";
-import { HasFrontmatter, reader } from "@/md-with-frontmatter";
+import { HasFrontmatter, reader } from "@/mdx-with-frontmatter";
 import { PAGES_DIR } from "@/next-constants";
 
 /**
