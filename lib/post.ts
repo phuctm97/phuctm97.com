@@ -6,9 +6,9 @@ import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
 import vfile from "to-vfile";
-import { PAGES_DIR } from "@/next-constants";
 import isParent from "@/unist-is-parent";
-import { HasFrontmatter, reader } from "~/lib/remark";
+import { HasFrontmatter, mdReader } from "@/md-processor";
+import { PAGES_DIR } from "@/next-constants";
 
 /**
  * A blog post's model.
@@ -177,7 +177,7 @@ export const postExporter: Plugin = () => (tree, file) => {
  * @param absPath Absolute path to the blog post's file
  */
 export const readPost = (absPath: string): Post | undefined => {
-  const file = reader().use(postParser).processSync(vfile.readSync(absPath));
+  const file = mdReader().use(postParser).processSync(vfile.readSync(absPath));
   const { post } = file.data as Partial<HasPost>;
   return post;
 };

@@ -11,9 +11,9 @@ const unist_util_select_1 = require("unist-util-select");
 const mdast_util_to_string_1 = __importDefault(require("mdast-util-to-string"));
 const revalidator_1 = __importDefault(require("revalidator"));
 const to_vfile_1 = __importDefault(require("to-vfile"));
-const next_constants_1 = require("../packages/next-constants");
 const unist_is_parent_1 = __importDefault(require("../packages/unist-is-parent"));
-const remark_1 = require("../lib/remark");
+const md_processor_1 = require("../packages/md-processor");
+const next_constants_1 = require("../packages/next-constants");
 /**
  * Frontmatter schema of a Markdown-based blog post.
  */
@@ -143,7 +143,7 @@ exports.postExporter = postExporter;
  * @param absPath Absolute path to the blog post's file
  */
 const readPost = (absPath) => {
-    const file = remark_1.reader().use(exports.postParser).processSync(to_vfile_1.default.readSync(absPath));
+    const file = md_processor_1.mdReader().use(exports.postParser).processSync(to_vfile_1.default.readSync(absPath));
     const { post } = file.data;
     return post;
 };
