@@ -6,34 +6,13 @@ import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
 import vfile from "to-vfile";
+
 import isParent from "@/unist-is-parent";
 import { HasFrontmatter, reader } from "@/mdx-with-frontmatter";
+import { HasPost, Post } from "@/next-blog/interfaces";
+import isPost from "@/next-blog/is-post";
+import getPostURLElements from "@/next-blog/get-url";
 import { PAGES_DIR } from "@/next-constants";
-
-/**
- * A blog post's model.
- */
-export type Post = {
-  title: string;
-  description: string;
-  date: string;
-  tags: string[];
-  cover: {
-    url: string;
-    width?: number;
-    height?: number;
-  };
-  path: string;
-  folder: string;
-  slug: string;
-};
-
-/**
- * An object that has a blog post attached.
- */
-export interface HasPost {
-  post: Post;
-}
 
 /**
  * Frontmatter schema of a Markdown-based blog post.
@@ -55,29 +34,6 @@ const frontmatterSchema: Revalidator.JSONSchema<any> = {
 };
 
 const BLOG_DIR = path.join(PAGES_DIR, "blog");
-
-const trimPagesDir = (s: string) =>
-  s.startsWith(PAGES_DIR) ? s.substr(PAGES_DIR.length + 1) : s;
-
-const trimMDXExt = (s: string) =>
-  s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
-
-/**
- * Checks if a file is a blog post.
- * @param absPath Absolute path to the file
- */
-export const isPost = (absPath: string) => absPath.startsWith(BLOG_DIR);
-
-/**
- * Gets URL path elements to a blog post from its absolute path on the file system.
- * @param absPath Absolute path to the blog post's file
- */
-export const getPostPath = (absPath: string) => {
-  const trimmed = trimPagesDir(trimMDXExt(absPath));
-  const folder = path.dirname(trimmed);
-  const slug = path.basename(trimmed);
-  return { path: `/${folder}/${slug}`, folder, slug };
-};
 
 /**
  * Generates `cover` for a blog post based on its metadata.
@@ -111,7 +67,7 @@ export const postParser: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("Unknown file path.");
   if (!isPost(file.path)) return file.message("Not a post, skip.");
 
-  const { path: relURL, folder, slug } = getPostPath(file.path);
+  const { path: relURL, folder, slug } = getPostURLElements(file.path);
 
   const data = file.data as Partial<HasFrontmatter & HasPost>;
 

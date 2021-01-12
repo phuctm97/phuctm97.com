@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readBlog = exports.postIsntNil = exports.getBlogFiles = exports.readPost = exports.postExporter = exports.postParser = exports.generatePostCover = exports.getPostPath = exports.isPost = void 0;
+exports.readBlog = exports.postIsntNil = exports.getBlogFiles = exports.readPost = exports.postExporter = exports.postParser = exports.generatePostCover = void 0;
 const path_1 = __importDefault(require("path"));
 const glob_1 = __importDefault(require("glob"));
 const url_1 = require("url");
@@ -13,6 +13,8 @@ const revalidator_1 = __importDefault(require("revalidator"));
 const to_vfile_1 = __importDefault(require("to-vfile"));
 const unist_is_parent_1 = __importDefault(require("../packages/unist-is-parent"));
 const mdx_with_frontmatter_1 = require("../packages/mdx-with-frontmatter");
+const is_post_1 = __importDefault(require("../packages/next-blog/is-post"));
+const get_url_1 = __importDefault(require("../packages/next-blog/get-url"));
 const next_constants_1 = require("../packages/next-constants");
 /**
  * Frontmatter schema of a Markdown-based blog post.
@@ -33,25 +35,6 @@ const frontmatterSchema = {
     },
 };
 const BLOG_DIR = path_1.default.join(next_constants_1.PAGES_DIR, "blog");
-const trimPagesDir = (s) => s.startsWith(next_constants_1.PAGES_DIR) ? s.substr(next_constants_1.PAGES_DIR.length + 1) : s;
-const trimMDXExt = (s) => s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
-/**
- * Checks if a file is a blog post.
- * @param absPath Absolute path to the file
- */
-const isPost = (absPath) => absPath.startsWith(BLOG_DIR);
-exports.isPost = isPost;
-/**
- * Gets URL path elements to a blog post from its absolute path on the file system.
- * @param absPath Absolute path to the blog post's file
- */
-const getPostPath = (absPath) => {
-    const trimmed = trimPagesDir(trimMDXExt(absPath));
-    const folder = path_1.default.dirname(trimmed);
-    const slug = path_1.default.basename(trimmed);
-    return { path: `/${folder}/${slug}`, folder, slug };
-};
-exports.getPostPath = getPostPath;
 /**
  * Generates `cover` for a blog post based on its metadata.
  * @param metadata The blog post's metadata, should has `title` and (optional) `cover`
@@ -78,9 +61,9 @@ exports.generatePostCover = generatePostCover;
 const postParser = () => (tree, file) => {
     if (!file.path)
         return file.fail("Unknown file path.");
-    if (!exports.isPost(file.path))
+    if (!is_post_1.default(file.path))
         return file.message("Not a post, skip.");
-    const { path: relURL, folder, slug } = exports.getPostPath(file.path);
+    const { path: relURL, folder, slug } = get_url_1.default(file.path);
     const data = file.data;
     const { frontmatter } = data;
     if (!frontmatter)
