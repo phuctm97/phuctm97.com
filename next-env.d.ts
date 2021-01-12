@@ -7,10 +7,12 @@ declare namespace NodeJS {
   }
 }
 declare module "to-vfile" {
-  import { VFile } from "vfile";
-  const vfile: {
+  import { VFile, VFileContents, VFileOptions } from "vfile";
+  interface ToVFile {
+    (input?: VFileContents | VFileOptions): VFile;
     readSync(path: string, encoding?: string): VFile;
-  };
+  }
+  const vfile: ToVFile;
   export default vfile;
 }
 declare module "@mdx-js/react" {
