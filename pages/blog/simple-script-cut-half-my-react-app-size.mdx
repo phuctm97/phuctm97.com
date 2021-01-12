@@ -1,0 +1,115 @@
+---
+description: >-
+  A very simple but mindblowing script that I did a couple of days ago in my
+  Next.js website that cut its bundle size from 90kb to 50kb.
+tags: [react, javascript, webdev, nextjs]
+date: 2021-01-12
+---
+
+# Simple Script Cut 50% Size Of My React Website
+
+Hi friends, it's [@phuctm97] again. It has been 3 days since my last post, it's
+my first week at my new job so things have been a little hectic 🤓. Anyway,
+today article is a very simple but kinda mindblowing script that I did a couple
+of days ago in [my Next.js/React website][my website] that cut my site's bundle
+size from 90kb to a little less than 50kb.
+
+Before:
+
+![Before][screenshot before]
+
+After:
+
+![After][screenshot after]
+
+So here is how.
+
+> Note: my site is built on top of Next.js (and React).
+
+## Preact
+
+It's all possible thanks to [Preact]. Preact is a 3kb alternative implementation
+of React that provides 100% compatible APIs to React, what it means is that
+Preact and React are interchangeable but Preact is
+[4kb](https://bundlephobia.com/result?p=preact@10.5.9) whereas the React is
+[40kb](https://bundlephobia.com/result?p=react-dom@17.0.1). You may be skeptical
+about whether it's stable, see this
+[list of companies](https://preactjs.com/about/we-are-using), you'll be
+confident using it.
+
+So, it's kinda no-brainer to use Preact. However, do keep in mind that the team
+implementing Preact and React are separate and we aren't sure about what will
+happen in the future. Also, Preact devtools support is currently quite limited
+in comparison to React.
+
+So, I figure the best way to use it:
+
+> Dev with React and simply swap React and Preact in production bundle, no
+> changes to my dependency tree - I got the best of both worlds, amazing
+> devtools and ecosystem of React and smallest bundle size of Preact for my
+> users 🔥.
+
+## Next.js plugin
+
+My website is powered by [Next.js], however the same concept is appliable to any
+other React-based project:
+
+```js
+const withPreact = (next = {}) =>
+  Object.assign({}, next, {
+    webpack(config, options) {
+      const { dev, isServer } = options;
+
+      // Use Preact only in client production bundle.
+      if (!dev && !isServer) {
+        Object.assign(config.resolve.alias, {
+          react: "preact/compat",
+          "react-dom": "preact/compat",
+          "create-react-class": "preact-compat/lib/create-react-class",
+          "react-dom-factories": "preact-compat/lib/react-dom-factories",
+        });
+      }
+
+      if (typeof next.webpack === "function") {
+        return next.webpack(config, options);
+      }
+
+      return config;
+    },
+  });
+
+const withMDX = require("@next/mdx")();
+
+module.exports = withPreact(
+  // Any other Next.js config. MDX is used as an example for compatibility here.
+  withMDX({
+    pageExtensions: ["ts", "tsx", "mdx"],
+  })
+);
+```
+
+You can see that I'm able to use other React-based technologies, too, ([MDX] in
+this case).
+
+Also, you'll need to have Preact installed in your `package.json`:
+
+```bash
+yarn add preact
+```
+
+Alright, that is it! I'm using it in [my website], it's really a no-brainer
+using Preact this way. Don't worry, I'll let you know whenever my website is not
+functioning correctly 😉.
+
+Hope it is simple and useful enough to help you save half of your site tomorrow,
+too!
+
+[@phuctm97]: https://twitter.com/phuctm97
+[my website]: /
+[preact]: https://preactjs.com
+[mdx]: https://mdxjs.com
+[next.js]: https://nextjs.org
+[screenshot before]:
+  /static/blog/simple-script-cut-half-my-react-app-size/screenshot1.png
+[screenshot after]:
+  /static/blog/simple-script-cut-half-my-react-app-size/screenshot2.png
