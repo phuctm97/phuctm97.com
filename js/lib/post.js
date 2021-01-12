@@ -81,7 +81,7 @@ const postParser = () => (tree, file) => {
     if (!exports.isPost(file.path))
         return file.message("Not a post, skip.");
     const { path: relURL, folder, slug } = exports.getPostPath(file.path);
-    const data = remark_1.getVFileData(file);
+    const data = file.data;
     const { frontmatter } = data;
     if (!frontmatter)
         return file.fail("No frontmatter.");
@@ -127,7 +127,7 @@ exports.postParser = postParser;
  * A unified/remark plugin that exports `post` from a _parsed_ MDX blog post for dynamic rendering (if applicable).
  */
 const postExporter = () => (tree, file) => {
-    const { post } = remark_1.getVFileData(file);
+    const { post } = file.data;
     if (!post)
         return file.message("Not a post, skip.");
     if (!unist_is_parent_1.default(tree))
@@ -144,7 +144,7 @@ exports.postExporter = postExporter;
  */
 const readPost = (absPath) => {
     const file = remark_1.reader().use(exports.postParser).processSync(to_vfile_1.default.readSync(absPath));
-    const { post } = remark_1.getVFileData(file);
+    const { post } = file.data;
     return post;
 };
 exports.readPost = readPost;

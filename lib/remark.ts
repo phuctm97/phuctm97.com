@@ -1,4 +1,3 @@
-import { VFile } from "vfile";
 import unified from "unified";
 import mdParser from "remark-parse";
 import frontmatter from "remark-frontmatter";
@@ -25,9 +24,3 @@ export const parser = unified()
  * Default MDX reader (parse and transform).
  */
 export const reader = parser().use(fakeCompiler).freeze();
-
-/**
- * Assumes that `file.data` is of a type and returns it.
- * @param file A `vfile`
- */
-export const getVFileData = <T = any>(file: VFile) => file.data as T;
