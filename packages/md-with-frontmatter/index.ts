@@ -2,7 +2,7 @@ import unified from "unified";
 import parseMd from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import parseFrontmatter from "remark-parse-frontmatter";
-import compileNothing from "@/unified-fake-compiler";
+import compileNothing from "@/unified-compile-nothing";
 
 /**
  * An object that has `frontmatter` attached.
