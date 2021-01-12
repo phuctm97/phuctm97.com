@@ -8,7 +8,7 @@ import revalidator from "revalidator";
 import vfile from "to-vfile";
 import { PAGES_DIR } from "@/next-constants";
 import isParent from "@/unist-is-parent";
-import { HasFrontmatter, getVFileData, reader } from "~/lib/remark";
+import { HasFrontmatter, reader } from "~/lib/remark";
 
 /**
  * A blog post's model.
@@ -113,7 +113,7 @@ export const postParser: Plugin = () => (tree, file) => {
 
   const { path: relURL, folder, slug } = getPostPath(file.path);
 
-  const data = getVFileData<Partial<HasFrontmatter & HasPost>>(file);
+  const data = file.data as Partial<HasFrontmatter & HasPost>;
 
   const { frontmatter } = data;
   if (!frontmatter) return file.fail("No frontmatter.");
@@ -162,7 +162,7 @@ export const postParser: Plugin = () => (tree, file) => {
  * A unified/remark plugin that exports `post` from a _parsed_ MDX blog post for dynamic rendering (if applicable).
  */
 export const postExporter: Plugin = () => (tree, file) => {
-  const { post } = getVFileData<Partial<HasPost>>(file);
+  const { post } = file.data as Partial<HasPost>;
   if (!post) return file.message("Not a post, skip.");
 
   if (!isParent(tree)) return file.fail("Tree is empty.");
@@ -178,7 +178,7 @@ export const postExporter: Plugin = () => (tree, file) => {
  */
 export const readPost = (absPath: string): Post | undefined => {
   const file = reader().use(postParser).processSync(vfile.readSync(absPath));
-  const { post } = getVFileData<Partial<HasPost>>(file);
+  const { post } = file.data as Partial<HasPost>;
   return post;
 };
 
