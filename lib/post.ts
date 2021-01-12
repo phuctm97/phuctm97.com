@@ -7,7 +7,7 @@ import mdToString from "mdast-util-to-string";
 import revalidator from "revalidator";
 import vfile from "to-vfile";
 import isParent from "@/unist-is-parent";
-import { HasFrontmatter, mdReader } from "@/md-processor";
+import { HasFrontmatter, reader } from "@/md-with-frontmatter";
 import { PAGES_DIR } from "@/next-constants";
 
 /**
@@ -177,7 +177,7 @@ export const postExporter: Plugin = () => (tree, file) => {
  * @param absPath Absolute path to the blog post's file
  */
 export const readPost = (absPath: string): Post | undefined => {
-  const file = mdReader().use(postParser).processSync(vfile.readSync(absPath));
+  const file = reader().use(postParser).processSync(vfile.readSync(absPath));
   const { post } = file.data as Partial<HasPost>;
   return post;
 };

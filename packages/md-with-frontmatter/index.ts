@@ -1,5 +1,5 @@
 import unified from "unified";
-import parse from "remark-parse";
+import parseMd from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import parseFrontmatter from "remark-parse-frontmatter";
 import compileNothing from "@/unified-fake-compiler";
@@ -14,8 +14,8 @@ export interface HasFrontmatter {
 /**
  * A Markdown parser with frontmatter enabled.
  */
-export const mdParser = unified()
-  .use(parse)
+export const parser = unified()
+  .use(parseMd)
   .use(frontmatter)
   .use(parseFrontmatter)
   .freeze();
@@ -23,4 +23,4 @@ export const mdParser = unified()
 /**
  * A Markdown reader (parse and transform) with frontmatter enabled.
  */
-export const mdReader = mdParser().use(compileNothing).freeze();
+export const reader = parser().use(compileNothing).freeze();
