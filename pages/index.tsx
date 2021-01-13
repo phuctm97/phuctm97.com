@@ -3,7 +3,7 @@ import Link from "next/link";
 import Emoji from "~/components/emoji";
 import Subscribe from "~/components/subscribe";
 import { Post } from "@/next-blog/interfaces";
-import { readBlog } from "~/lib/post";
+import readBlog from "@/next-blog/read-all";
 
 type Props = {
   blog: Post[];
