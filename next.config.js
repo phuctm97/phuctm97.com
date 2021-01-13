@@ -1,12 +1,19 @@
 const frontmatter = require("remark-frontmatter");
 const frontmatterParser = require("remark-parse-frontmatter");
 const prism = require("@mapbox/rehype-prism");
-const a11yEmojis = require("rehype-accessible-emojis").rehypeAccessibleEmojis;
-const { postParser, postExporter } = require("./js/lib/post");
+const {
+  rehypeAccessibleEmojis: a11yEmojis,
+} = require("rehype-accessible-emojis");
+const {
+  default: blogParser,
+} = require("./js/packages/next-blog/unified-parser");
+const {
+  default: blogExporter,
+} = require("./js/packages/next-blog/unified-exporter");
 
 const withMDX = require("@next/mdx")({
   options: {
-    remarkPlugins: [frontmatter, frontmatterParser, postParser, postExporter],
+    remarkPlugins: [frontmatter, frontmatterParser, blogParser, blogExporter],
     rehypePlugins: [prism, a11yEmojis],
   },
 });

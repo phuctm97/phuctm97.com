@@ -4,7 +4,7 @@ import Link from "next/link";
 import Info from "~/components/info";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { Post } from "~/lib/post";
+import { Post } from "@/next-blog/interfaces";
 import packageJSON from "~/package.json";
 
 const { homepage } = packageJSON;
