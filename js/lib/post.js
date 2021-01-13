@@ -3,10 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readBlog = exports.postIsntNil = exports.getBlogFiles = exports.readPost = exports.postExporter = exports.postParser = exports.generatePostCover = void 0;
+exports.readBlog = exports.postIsntNil = exports.getBlogFiles = exports.readPost = exports.postExporter = exports.postParser = void 0;
 const path_1 = __importDefault(require("path"));
 const glob_1 = __importDefault(require("glob"));
-const url_1 = require("url");
 const unist_util_select_1 = require("unist-util-select");
 const mdast_util_to_string_1 = __importDefault(require("mdast-util-to-string"));
 const revalidator_1 = __importDefault(require("revalidator"));
@@ -15,6 +14,7 @@ const unist_is_parent_1 = __importDefault(require("../packages/unist-is-parent")
 const mdx_with_frontmatter_1 = require("../packages/mdx-with-frontmatter");
 const is_post_1 = __importDefault(require("../packages/next-blog/is-post"));
 const get_url_1 = __importDefault(require("../packages/next-blog/get-url"));
+const generate_cover_1 = __importDefault(require("../packages/next-blog/generate-cover"));
 const next_constants_1 = require("../packages/next-constants");
 /**
  * Frontmatter schema of a Markdown-based blog post.
@@ -35,26 +35,6 @@ const frontmatterSchema = {
     },
 };
 const BLOG_DIR = path_1.default.join(next_constants_1.PAGES_DIR, "blog");
-/**
- * Generates `cover` for a blog post based on its metadata.
- * @param metadata The blog post's metadata, should has `title` and (optional) `cover`
- */
-const generatePostCover = (metadata) => {
-    const { cover, title } = metadata;
-    if (cover && cover.url)
-        return { url: cover.url };
-    const url = new url_1.URL(encodeURIComponent(`${title}.jpg`), "https://img.phuctm97.com/api/v2/");
-    const icons = (cover && cover.icons) || [];
-    for (let icon of icons) {
-        url.searchParams.append("icons", icon);
-    }
-    return {
-        url: url.toString(),
-        width: 1200,
-        height: 630,
-    };
-};
-exports.generatePostCover = generatePostCover;
 /**
  * A unified/remark plugin that parses and extracts a blog post's metadata from its file (if applicable).
  */
@@ -99,7 +79,7 @@ const postParser = () => (tree, file) => {
         description,
         date: frontmatter.date,
         tags: frontmatter.tags || [],
-        cover: exports.generatePostCover({ ...frontmatter, title }),
+        cover: generate_cover_1.default({ ...frontmatter, title }),
         path: relURL,
         folder,
         slug,

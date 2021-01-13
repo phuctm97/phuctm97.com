@@ -1,6 +1,5 @@
 import path from "path";
 import glob from "glob";
-import { URL } from "url";
 import { Plugin } from "unified";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
@@ -11,7 +10,8 @@ import isParent from "@/unist-is-parent";
 import { HasFrontmatter, reader } from "@/mdx-with-frontmatter";
 import { HasPost, Post } from "@/next-blog/interfaces";
 import isPost from "@/next-blog/is-post";
-import getPostURLElements from "@/next-blog/get-url";
+import getURLElements from "@/next-blog/get-url";
+import generateCover from "@/next-blog/generate-cover";
 import { PAGES_DIR } from "@/next-constants";
 
 /**
@@ -36,38 +36,13 @@ const frontmatterSchema: Revalidator.JSONSchema<any> = {
 const BLOG_DIR = path.join(PAGES_DIR, "blog");
 
 /**
- * Generates `cover` for a blog post based on its metadata.
- * @param metadata The blog post's metadata, should has `title` and (optional) `cover`
- */
-export const generatePostCover = (metadata: any): Post["cover"] => {
-  const { cover, title } = metadata;
-  if (cover && cover.url) return { url: cover.url };
-
-  const url = new URL(
-    encodeURIComponent(`${title}.jpg`),
-    "https://img.phuctm97.com/api/v2/"
-  );
-
-  const icons: string[] = (cover && cover.icons) || [];
-  for (let icon of icons) {
-    url.searchParams.append("icons", icon);
-  }
-
-  return {
-    url: url.toString(),
-    width: 1200,
-    height: 630,
-  };
-};
-
-/**
  * A unified/remark plugin that parses and extracts a blog post's metadata from its file (if applicable).
  */
 export const postParser: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("Unknown file path.");
   if (!isPost(file.path)) return file.message("Not a post, skip.");
 
-  const { path: relURL, folder, slug } = getPostURLElements(file.path);
+  const { path: relURL, folder, slug } = getURLElements(file.path);
 
   const data = file.data as Partial<HasFrontmatter & HasPost>;
 
@@ -107,7 +82,7 @@ export const postParser: Plugin = () => (tree, file) => {
     description,
     date: frontmatter.date,
     tags: frontmatter.tags || [],
-    cover: generatePostCover({ ...frontmatter, title }),
+    cover: generateCover({ ...frontmatter, title }),
     path: relURL,
     folder,
     slug,
