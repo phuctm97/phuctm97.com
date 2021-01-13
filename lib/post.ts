@@ -3,7 +3,6 @@ import glob from "glob";
 import { Plugin } from "unified";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
-import revalidator from "revalidator";
 import vfile from "to-vfile";
 
 import isParent from "@/unist-is-parent";
@@ -11,27 +10,9 @@ import { HasFrontmatter, reader } from "@/mdx-with-frontmatter";
 import { HasPost, Post } from "@/next-blog/interfaces";
 import isPost from "@/next-blog/is-post";
 import getURLElements from "@/next-blog/get-url";
+import validateFrontmatter from "@/next-blog/validate-frontmatter";
 import generateCover from "@/next-blog/generate-cover";
 import { PAGES_DIR } from "@/next-constants";
-
-/**
- * Frontmatter schema of a Markdown-based blog post.
- */
-const frontmatterSchema: Revalidator.JSONSchema<any> = {
-  properties: {
-    title: { type: "string" },
-    description: { type: "string" },
-    date: { type: "string", format: "date", required: true },
-    tags: { type: "array", uniqueItems: true, maxItems: 4 },
-    cover: {
-      type: "object",
-      properties: {
-        url: { type: "string", format: "url" },
-        icons: { type: "array" },
-      },
-    },
-  },
-};
 
 const BLOG_DIR = path.join(PAGES_DIR, "blog");
 
@@ -49,12 +30,7 @@ export const postParser: Plugin = () => (tree, file) => {
   const { frontmatter } = data;
   if (!frontmatter) return file.fail("No frontmatter.");
 
-  // Validate frontmatter.
-  const validation = revalidator.validate(frontmatter, frontmatterSchema);
-  if (!validation.valid)
-    return file.fail(
-      "Invalid frontmatter: " + JSON.stringify(validation.errors, null, 2)
-    );
+  validateFrontmatter(frontmatter);
 
   let title: string;
   let description: string;

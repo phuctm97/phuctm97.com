@@ -5,7 +5,7 @@ const url_1 = require("url");
  * Generates `cover` for a blog post based on its metadata.
  * @param metadata The blog post's metadata, should has `title` and (optional) `cover`
  */
-function generatePostCover(metadata) {
+function generateCover(metadata) {
     const { cover, title } = metadata;
     if (cover && cover.url)
         return { url: cover.url };
@@ -20,4 +20,4 @@ function generatePostCover(metadata) {
         height: 630,
     };
 }
-exports.default = generatePostCover;
+exports.default = generateCover;
