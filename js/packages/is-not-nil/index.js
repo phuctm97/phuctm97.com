@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function default_1(val) {
+/**
+ * Type-checks if a value is not nil (`null` or `undefined`).
+ */
+function isNotNil(val) {
     return !!val;
 }
-exports.default = default_1;
+exports.default = isNotNil;
