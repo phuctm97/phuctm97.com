@@ -1,6 +1,6 @@
 import { Plugin } from "unified";
 import { HasPost } from "@/next-blog/interfaces";
-import isParent from "@/unist-is-parent";
+import isParent from "~/utils/unist/is-parent";
 
 /**
  * A unified/remark plugin that exports `post` from a _parsed_ MDX blog post for dynamic rendering (if applicable).
