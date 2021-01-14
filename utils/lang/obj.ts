@@ -4,5 +4,5 @@ export type Record<T = unknown> = {
 
 export const notNil = <T>(val: T | undefined | null): val is T => !!val;
 
-export const isObject = (val: unknown): val is object =>
+export const isObject = (val: unknown): val is Record =>
   typeof val === "object" && val !== null;
