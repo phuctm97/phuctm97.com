@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
-const next_constants_1 = require("../next-constants");
-const trimPagesDir = (s) => s.startsWith(next_constants_1.PAGES_DIR) ? s.substr(next_constants_1.PAGES_DIR.length + 1) : s;
+const constants_1 = require("../../utils/constants");
+const trimPagesDir = (s) => s.startsWith(constants_1.PAGES_DIR) ? s.substr(constants_1.PAGES_DIR.length + 1) : s;
 const trimMDXExt = (s) => s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
 /**
  * Gets URL path elements to a blog post from its absolute path on the file system.

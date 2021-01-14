@@ -7,13 +7,13 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const glob_1 = __importDefault(require("glob"));
 const prettier_1 = __importDefault(require("prettier"));
-const next_constants_1 = require("../packages/next-constants");
-const trimPagesDir = (s) => s.startsWith(next_constants_1.PAGES_DIR) ? s.substr(next_constants_1.PAGES_DIR.length) : s;
+const constants_1 = require("../utils/constants");
+const trimPagesDir = (s) => s.startsWith(constants_1.PAGES_DIR) ? s.substr(constants_1.PAGES_DIR.length) : s;
 const trimPageExt = (s) => s.replace(/(index)?\.(tsx|mdx)$/g, "");
-const packageJSON = JSON.parse(fs_1.default.readFileSync(path_1.default.join(next_constants_1.ROOT_DIR, "package.json"), "utf-8"));
+const packageJSON = JSON.parse(fs_1.default.readFileSync(path_1.default.join(constants_1.ROOT_DIR, "package.json"), "utf-8"));
 const pages = glob_1.default
     .sync("**/*.@(tsx|mdx)", {
-    cwd: next_constants_1.PAGES_DIR,
+    cwd: constants_1.PAGES_DIR,
     absolute: true,
     ignore: ["**/_*", "**/api", "**/sitemap.xml.tsx"],
 })
@@ -25,4 +25,4 @@ const sitemap = prettier_1.default.format(`<?xml version="1.0" encoding="UTF-8"?
     .join("\n")}
 </urlset>
 `, { parser: "html" });
-fs_1.default.writeFileSync(path_1.default.join(next_constants_1.PUBLIC_DIR, "sitemap.xml"), sitemap);
+fs_1.default.writeFileSync(path_1.default.join(constants_1.PUBLIC_DIR, "sitemap.xml"), sitemap);
