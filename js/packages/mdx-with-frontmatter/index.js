@@ -8,7 +8,7 @@ const unified_1 = __importDefault(require("unified"));
 const remark_parse_1 = __importDefault(require("remark-parse"));
 const remark_frontmatter_1 = __importDefault(require("remark-frontmatter"));
 const remark_parse_frontmatter_1 = __importDefault(require("remark-parse-frontmatter"));
-const unified_compile_nothing_1 = __importDefault(require("../unified-compile-nothing"));
+const compile_nothing_1 = __importDefault(require("../../utils/unified/compile-nothing"));
 /**
  * A MDX parser with frontmatter enabled.
  */
@@ -20,4 +20,4 @@ exports.parser = unified_1.default()
 /**
  * A MDX reader (parse and transform) with frontmatter enabled.
  */
-exports.reader = exports.parser().use(unified_compile_nothing_1.default).freeze();
+exports.reader = exports.parser().use(compile_nothing_1.default).freeze();

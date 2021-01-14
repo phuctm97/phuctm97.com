@@ -3,7 +3,6 @@ import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import PlausibleScript from "~/components/plausible-script";
-import { isProd } from "~/utils/env";
 
 import Header from "~/layouts/header";
 import Main from "~/layouts/main";
@@ -12,7 +11,9 @@ import Footer from "~/layouts/footer";
 import { MDXProvider } from "@mdx-js/react";
 import * as MDXComponents from "components/mdx";
 
-import packageJSON from "~/package.json";
+import PKG_JSON from "~/package.json";
+import { IS_PRODUCTION } from "~/utils/const/common";
+
 import "~/styles/app.css";
 import "~/styles/prism.css";
 
@@ -22,18 +23,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
     <DefaultSeo
-      {...packageJSON.site}
-      canonical={packageJSON.homepage}
-      description={packageJSON.description}
+      {...PKG_JSON.site}
+      canonical={PKG_JSON.homepage}
+      description={PKG_JSON.description}
       openGraph={{
-        ...packageJSON.site.openGraph,
-        url: packageJSON.homepage,
-        title: packageJSON.site.title,
-        description: packageJSON.description,
-        images: packageJSON.site.openGraph.images.map((img) => ({
+        ...PKG_JSON.site.openGraph,
+        url: PKG_JSON.homepage,
+        title: PKG_JSON.site.title,
+        description: PKG_JSON.description,
+        images: PKG_JSON.site.openGraph.images.map((img) => ({
           ...img,
-          url: `${packageJSON.homepage}${img.url}`,
-          alt: packageJSON.site.title,
+          url: `${PKG_JSON.homepage}${img.url}`,
+          alt: PKG_JSON.site.title,
         })),
       }}
     />
@@ -46,7 +47,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         <Footer />
       </MDXProvider>
     </ThemeProvider>
-    {isProd && <PlausibleScript />}
+    {IS_PRODUCTION && <PlausibleScript />}
   </>
 );
 
