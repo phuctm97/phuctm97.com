@@ -2,7 +2,7 @@ import glob from "glob";
 import vfile from "to-vfile";
 
 import { reader } from "@/mdx-with-frontmatter";
-import notNil from "~/utils/lang/not-nil";
+import { notNil } from "~/utils/lang/obj";
 import { HasPost, Post } from "@/next-blog/interfaces";
 import parser from "@/next-blog/unified-parser";
 import { BLOG_DIR } from "@/next-blog/constants";

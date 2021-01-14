@@ -1,22 +1,10 @@
-export type MapOfStringArray = {
-  [key: string]: string[];
-};
+import { Record, isObject } from "~/utils/lang/obj";
 
 export const isStringArray = (obj: unknown): obj is string[] =>
   Array.isArray(obj) && obj.every((item) => typeof item === "string");
 
-export const isMapOfStringArray = (obj: unknown): obj is MapOfStringArray =>
-  typeof obj === "object" &&
-  obj !== null &&
-  Object.values(obj).every(isStringArray);
+export const isRecordOfStringArray = (obj: unknown): obj is Record<string[]> =>
+  isObject(obj) && Object.values(obj).every(isStringArray);
 
-export const flattenStringArray = (obj: MapOfStringArray): string[] => {
-  const vals = Object.values(obj);
-
-  let result: string[] = [];
-  for (let arr of vals) {
-    result = result.concat(arr);
-  }
-
-  return result;
-};
+export const flattenStringArray = (obj: Record<string[]>): string[] =>
+  Object.values(obj).reduce((acc, item) => acc.concat(item), []);

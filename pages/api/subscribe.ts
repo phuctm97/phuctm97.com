@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   isStringArray,
-  isMapOfStringArray,
+  isRecordOfStringArray,
   flattenStringArray,
 } from "~/utils/lang/string-array";
 
@@ -11,7 +11,7 @@ const unexpectedError =
 const parseBDErrors = (res: any) => {
   const bdErrors =
     (isStringArray(res) && res) ||
-    (isMapOfStringArray(res) && flattenStringArray(res)) ||
+    (isRecordOfStringArray(res) && flattenStringArray(res)) ||
     [];
 
   for (let err of bdErrors) {
