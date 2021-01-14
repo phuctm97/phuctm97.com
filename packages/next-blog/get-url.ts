@@ -1,5 +1,5 @@
 import path from "path";
-import { PAGES_DIR } from "~/utils/constants";
+import { PAGES_DIR } from "~/utils/const/server";
 
 const trimPagesDir = (s: string) =>
   s.startsWith(PAGES_DIR) ? s.substr(PAGES_DIR.length + 1) : s;
