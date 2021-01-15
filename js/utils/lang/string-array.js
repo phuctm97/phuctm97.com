@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.flattenStringArray = exports.isRecordOfStringArray = exports.isStringArray = void 0;
+const obj_1 = require("../../utils/lang/obj");
+const isStringArray = (obj) => Array.isArray(obj) && obj.every((item) => typeof item === "string");
+exports.isStringArray = isStringArray;
+const isRecordOfStringArray = (obj) => obj_1.isObject(obj) && Object.values(obj).every(exports.isStringArray);
+exports.isRecordOfStringArray = isRecordOfStringArray;
+const flattenStringArray = (obj) => Object.values(obj).reduce((acc, item) => acc.concat(item), []);
+exports.flattenStringArray = flattenStringArray;

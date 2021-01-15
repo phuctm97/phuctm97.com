@@ -14,5 +14,5 @@ export default function getURL(absPath: string) {
   const slug = syspath.basename(trimmed);
   const path = `/${folder}/${slug}`;
   const url = `${PKG_JSON.homepage}${path}`;
-  return { url, folder, slug, path };
+  return { url, path, folder, slug };
 }
