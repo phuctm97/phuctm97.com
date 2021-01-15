@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { NextSeo } from "next-seo";
-import { Content } from "~/utils/content/interfaces";
+import { Content } from "~/models";
 
-const Wrapper = ({ children, metadata }: React.PropsWithChildren<Content>) => {
+const Wrapper = ({ metadata, children }: React.PropsWithChildren<Content>) => {
   const { title, description, url } = metadata;
   return (
     <>

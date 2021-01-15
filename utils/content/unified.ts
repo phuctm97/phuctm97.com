@@ -2,7 +2,7 @@ import { Plugin } from "unified";
 import { Node } from "unist";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
-import { Metadata } from "~/utils/content/interfaces";
+import { Content } from "~/models";
 import getURL from "~/utils/content/get-url";
 import isParent from "~/utils/unist/is-parent";
 
@@ -21,7 +21,7 @@ const parseDescription = (tree: Node) => {
 const plugin: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("No file.path.");
 
-  const metadata: Metadata = {
+  const metadata: Content["metadata"] = {
     ...getURL(file.path),
     title: parseTitle(tree),
     description: parseDescription(tree),
