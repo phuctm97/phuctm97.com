@@ -13,9 +13,17 @@ const exporter = () => (tree, file) => {
         return file.message("Not a post, skip.");
     if (!is_parent_1.default(tree))
         return file.fail("Tree is empty.");
+    tree.children.unshift({
+        type: "import",
+        value: `import Layout from "../../layouts/${post.folder}";`,
+    });
     tree.children.push({
         type: "export",
-        value: `export const post = ${JSON.stringify(post)};`,
+        value: `export const metadata = ${JSON.stringify(post)};`,
+    }, {
+        type: "export",
+        default: true,
+        value: "export default Layout;",
     });
 };
 exports.default = exporter;

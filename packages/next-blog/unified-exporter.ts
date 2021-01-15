@@ -10,10 +10,21 @@ const exporter: Plugin = () => (tree, file) => {
   if (!post) return file.message("Not a post, skip.");
 
   if (!isParent(tree)) return file.fail("Tree is empty.");
-  tree.children.push({
-    type: "export",
-    value: `export const post = ${JSON.stringify(post)};`,
+  tree.children.unshift({
+    type: "import",
+    value: `import Layout from "~/layouts/${post.folder}";`,
   });
+  tree.children.push(
+    {
+      type: "export",
+      value: `export const metadata = ${JSON.stringify(post)};`,
+    },
+    {
+      type: "export",
+      default: true,
+      value: "export default Layout;",
+    }
+  );
 };
 
 export default exporter;
