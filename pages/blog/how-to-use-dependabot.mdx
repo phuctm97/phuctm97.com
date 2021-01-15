@@ -1,0 +1,97 @@
+---
+tags: [devops, github, devtool]
+cover:
+  icons: [Dependabot, Github]
+date: 2021-01-15
+---
+
+# How-to Keep Your Packages Always Up-to-date with Dependabot
+
+One of the ways that I do to keep myself up-to-date with the latest technologies
+is to configure automatic dependencies upgrade, which helps in 2 ways:
+
+- Keep my products/packages always up-to-date, especially avoid potential
+  vulnerability as soon as possible.
+
+- Remind me of the technologies I'm using that have introduced new features or
+  bug fixes. I can quickly look at it and learn what is newly possible.
+
+In this article, I'll walk you through how I did it very easily and
+conveniently.
+
+Last Sunday, there were quite a few packages updated in my products.
+
+![Screen Shot](https://dev-to-uploads.s3.amazonaws.com/i/4s9n7o969jm7z6ada4r2.png)
+
+## Dependabot
+
+[Dependabot] is a Github bot that automatically tracks and opens PRs to update
+dependencies for you. It used to be a separate product but was acquired by
+Github in 2020 and became available completely for free 🤯.
+
+### Basic configuration
+
+To configure it, you need just a couple of lines of code:
+
+- Create a file `.github/dependabot.yml` in your repository.
+
+- Add some configuration to instruct Dependabot what to update:
+
+```yaml
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+```
+
+Dependabot supports a lot of different package ecosystem including npm, Python,
+Go, Rust, Maven, Docker, etc, and also Github Actions recently.
+[Check out more here](https://dependabot.com/#languages).
+
+### Interval
+
+You can configure Dependabot to update daily, weekly, or at another specific
+interval. My experience with weekly updates is the best so far.
+
+### Workflow
+
+After commiting your `dependabot.yml` to your repository, Dependabot will help
+you update packages by opening PRs, which you can accept or reject. By receiving
+updates via PRs, you get a chance to make sure that all your tests/checks are
+passed before promoting to your live distribution.
+
+![Screen Shot](https://dev-to-uploads.s3.amazonaws.com/i/tzufrzpqwpjf5q05bdtl.png)
+
+Dependabot is also intelligent enough to automatically rebase PRs when you
+pushed new changes to `master` (or whatever branch you configured), so you don't
+always have to review and merge it right away. In fact, I often ignore it until
+late in the day, when my energy level is the lowest, then I review one or
+several of them.
+
+## Badge
+
+One little tip that I often do especially for an open-source package is to put a
+badge letting the users know that this package is configured to be automatically
+up-to-date.
+
+```md
+![dependabot status](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot)
+```
+
+![dependabot status](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot)
+
+That's it. Dependabot has been super convenient for me, especially for
+open-source packages that I've done implementing and don't want to think about
+maintaining its dependencies. I hope it will benefit you, too!
+
+<!-- Links -->
+
+[dependabot]:
+  https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/
