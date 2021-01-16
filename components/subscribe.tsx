@@ -33,7 +33,7 @@ const Subscribe = ({
 
       const { message } = await res.json();
       setResult({ success: res.ok, message });
-    } catch (err) {
+    } catch {
       setResult({
         success: false,
         message: "There was an error subscribing, please try again later.",
