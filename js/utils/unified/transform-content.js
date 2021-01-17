@@ -20,23 +20,33 @@ const parseDescription = (tree) => {
         throw new Error("No p.");
     return mdast_util_to_string_1.default(p);
 };
-const plugin = () => (tree, file) => {
+const transformContent = () => (tree, file) => {
     if (!file.path)
         return file.fail("No file.path.");
-    const frontmatter = get_frontmatter_1.default(file.data);
+    const { url, path, folder, slug } = get_url_1.default(file.path);
+    const frontmatter = get_frontmatter_1.default(file.data, folder);
     const metadata = {
+        ...frontmatter,
         title: frontmatter.title || parseTitle(tree),
         description: frontmatter.description || parseDescription(tree),
-        ...get_url_1.default(file.path),
+        url,
+        path,
+        folder,
+        slug,
     };
     if (!is_parent_1.default(tree))
         return file.fail("Tree is empty.");
+    tree.children.unshift({
+        type: "import",
+        value: `import Layout from "../../layouts/${metadata.folder}";`,
+    });
     tree.children.push({
         type: "export",
-        value: `export const frontmatter = ${JSON.stringify(frontmatter)};`,
+        value: `export const metadata = ${JSON.stringify(metadata)};`,
     }, {
         type: "export",
-        value: `export const metadata = ${JSON.stringify(metadata)};`,
+        default: true,
+        value: `export default Layout;`,
     });
 };
-exports.default = plugin;
+exports.default = transformContent;
