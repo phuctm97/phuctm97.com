@@ -3,7 +3,7 @@ import { Node } from "unist";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import { Content } from "~/models/content";
-import getURL from "~/utils/content/get-url";
+import getURL from "~/utils/content/url";
 import getFrontmatter from "~/utils/content/get-frontmatter";
 import isParent from "~/utils/unist/is-parent";
 
