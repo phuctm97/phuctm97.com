@@ -4,7 +4,7 @@ import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
 import { Content } from "~/models/content";
 import getURL from "~/utils/content/url";
-import getFrontmatter from "~/utils/content/get-frontmatter";
+import getFrontmatter from "~/utils/content/frontmatter";
 import isParent from "~/utils/unist/is-parent";
 
 const parseTitle = (tree: Node) => {
@@ -22,17 +22,12 @@ const parseDescription = (tree: Node) => {
 const transformContent: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("No file.path.");
 
-  const { url, path, folder, slug } = getURL(file.path);
-  const frontmatter = getFrontmatter(file.data, folder);
+  const frontmatter = getFrontmatter(file.data);
 
   const metadata: Content["metadata"] = {
-    ...frontmatter,
     title: frontmatter.title || parseTitle(tree),
     description: frontmatter.description || parseDescription(tree),
-    url,
-    path,
-    folder,
-    slug,
+    ...getURL(file.path),
   };
 
   if (!isParent(tree)) return file.fail("Tree is empty.");

@@ -1,5 +1,11 @@
 import { Record } from "~/utils/lang/obj";
 
+export interface Frontmatter {
+  title?: string;
+  description?: string;
+  [key: string]: unknown;
+}
+
 export interface Content<T extends object = Record> {
   metadata: {
     title: string;
