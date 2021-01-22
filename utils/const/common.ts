@@ -1,4 +1,3 @@
-import { URL } from "url";
 import PKG_JSON from "~/package.json";
 
 export { PKG_JSON };
