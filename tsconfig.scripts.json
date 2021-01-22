@@ -4,6 +4,7 @@
     "outDir": "js",
     "baseUrl": ".",
     "paths": { "@/*": ["packages/*"], "~/*": ["./*"] },
+    "lib": ["dom", "esnext"],
     "resolveJsonModule": true
   },
   "exclude": ["node_modules", ".next"],
