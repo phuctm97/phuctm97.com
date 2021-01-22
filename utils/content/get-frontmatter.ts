@@ -1,5 +1,5 @@
 import revalidator from "revalidator";
-import { Content } from "~/models";
+import { Content } from "~/models/content";
 import { isObject } from "~/utils/lang/obj";
 
 const schema: Revalidator.JSONSchema<Content["frontmatter"]> = {

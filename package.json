@@ -42,7 +42,7 @@
     "type:check": "tsc -p tsconfig.json && tsc -p tsconfig.scripts.json --noEmit",
     "style:check": "prettier --check .",
     "style:format": "prettier --write .",
-    "gen:sitemap": "yarn build:scripts && node js/scripts/generate-sitemap.js"
+    "gen:sitemap": "yarn rebuild:scripts && node js/scripts/generate-sitemap.js"
   },
   "engines": {
     "node": "12.x"
