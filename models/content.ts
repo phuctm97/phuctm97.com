@@ -17,6 +17,10 @@ export interface Content<T extends object = Record> {
   } & T;
 }
 
+export interface Plugin<T extends object = Record> {
+  (frontmatter: Frontmatter, content: Content): Content<T>;
+}
+
 export type BlogPost = Content<{
   date: string;
   tags: string[];

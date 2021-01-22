@@ -2,7 +2,7 @@ import { Plugin } from "unified";
 import { Node } from "unist";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
-import { Content } from "~/models/content";
+import compose from "~/utils/content/compose";
 import getURL from "~/utils/content/url";
 import getFrontmatter from "~/utils/content/frontmatter";
 import isParent from "~/utils/unist/is-parent";
@@ -19,27 +19,31 @@ const parseDescription = (tree: Node) => {
   return mdToString(p);
 };
 
+const applyPlugins = compose([]);
+
 const transformContent: Plugin = () => (tree, file) => {
   if (!file.path) return file.fail("No file.path.");
 
   const frontmatter = getFrontmatter(file.data);
 
-  const metadata: Content["metadata"] = {
-    title: frontmatter.title || parseTitle(tree),
-    description: frontmatter.description || parseDescription(tree),
-    ...getURL(file.path),
-  };
+  const content = applyPlugins(frontmatter, {
+    metadata: {
+      title: frontmatter.title || parseTitle(tree),
+      description: frontmatter.description || parseDescription(tree),
+      ...getURL(file.path),
+    },
+  });
 
   if (!isParent(tree)) return file.fail("Tree is empty.");
 
   tree.children.unshift({
     type: "import",
-    value: `import Layout from "~/layouts/${metadata.folder}";`,
+    value: `import Layout from "~/layouts/${content.metadata.folder}";`,
   });
   tree.children.push(
     {
       type: "export",
-      value: `export const metadata = ${JSON.stringify(metadata)};`,
+      value: `export const metadata = ${JSON.stringify(content.metadata)};`,
     },
     {
       type: "export",
