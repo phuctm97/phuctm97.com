@@ -8,6 +8,11 @@ export interface Content {
 }
 
 export interface BlogPost extends Content {
-  publishedDate: Date;
+  date: string;
   tags: string[];
+  cover: {
+    url: string;
+    width?: number;
+    height?: number;
+  };
 }

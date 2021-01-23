@@ -1,29 +1,23 @@
-import { Children } from "react";
 import { NextSeo } from "next-seo";
+import { BlogPost } from "~/interfaces/content";
 import Info from "~/components/info";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { Post } from "@/next-blog/interfaces";
-import PKG_JSON from "~/package.json";
+import { PKG_JSON } from "~/constants/shared";
 
-const { homepage } = PKG_JSON;
 const me = {
   ...PKG_JSON.author,
   avatarURL: "/static/avatar.jpg",
   twitter: PKG_JSON.site.twitter.handle.substr(1),
 };
 
-type Props = React.PropsWithChildren<{
-  metadata: Post;
-}>;
-
-const BlogLayout = ({ metadata, children }: Props) => {
-  const { description, tags, path } = metadata;
-  const title = `${metadata.title} | ${me.name}`;
-  const url = `${homepage}${path}`;
-  const date = new Date(metadata.date);
-
-  const [h1, ...content] = Children.toArray(children);
+const BlogLayout = ({
+  children,
+  ...props
+}: React.PropsWithChildren<BlogPost>) => {
+  const title = `${props.title} | ${me.name}`;
+  const date = new Date(props.date);
+  const { description, url, tags, cover } = props;
   return (
     <>
       <NextSeo
@@ -33,24 +27,24 @@ const BlogLayout = ({ metadata, children }: Props) => {
         openGraph={{
           type: "article",
           title,
-          url,
           description,
+          url,
           article: {
             publishedTime: date.toISOString(),
             authors: [me.url],
             tags: tags,
           },
-          images: [{ ...metadata.cover, alt: title }],
+          images: [{ ...cover, alt: title }],
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
-        {h1}
+        <h1>{title}</h1>
         <Info
           author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
           date={date}
         />
         <Tags tags={tags} />
-        {content}
+        {children}
       </article>
       <Subscribe className="mt-14 md:mt-16" />
     </>
