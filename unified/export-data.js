@@ -1,4 +1,5 @@
-const pushExports = (tree, data, attrs) => {
+module.exports = (attrs) => (tree, file) => {
+  const { data } = file;
   tree.children.push(
     ...attrs.map((attr) => ({
       type: "export",
@@ -6,5 +7,3 @@ const pushExports = (tree, data, attrs) => {
     }))
   );
 };
-
-module.exports = pushExports;
