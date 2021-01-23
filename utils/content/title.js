@@ -3,7 +3,7 @@ const toString = require("mdast-util-to-string");
 const extractFrontmatter = require("../vfile/extract-frontmatter");
 const remove = require("../unist/remove");
 
-const extractTitleFromContents = (tree, file) => {
+const extractFromContents = (tree, file) => {
   const h1 = select("heading[depth=1]", tree);
   if (!h1) return file.fail("No title.");
 
@@ -15,7 +15,7 @@ module.exports = () => (tree, file) => {
   extractFrontmatter(file, { title: { type: "string" } });
 
   const { data } = file;
-  if (!data.title) data.title = extractTitleFromContents(tree, file);
+  if (!data.title) data.title = extractFromContents(tree, file);
 
   tree.children.push({
     type: "export",

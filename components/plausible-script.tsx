@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { PKG_JSON, HOMEPAGE } from "~/utils/const/common";
+import { PKG_JSON, HOMEPAGE } from "~/constants/shared";
 
 const PlausibleScript = () => {
   return (
