@@ -9,20 +9,41 @@ const descriptionFromContents = require("./unified/description-from-contents");
 const urlElements = require("./unified/url-elements");
 const exportData = require("./unified/export-data");
 
-module.exports = require("@next/mdx")({
-  options: {
-    remarkPlugins: [
-      frontmatter,
-      parseFrontmatter,
-      [
-        extractFrontmatter,
-        { title: { type: "string" }, description: { type: "string" } },
-      ],
-      titleFromContents,
-      descriptionFromContents,
-      urlElements,
-      [exportData, ["title", "description", "url", "path", "folder", "slug"]],
+const makeMDXOpts = (info) => ({
+  remarkPlugins: [
+    frontmatter,
+    parseFrontmatter,
+    [
+      extractFrontmatter,
+      { title: { type: "string" }, description: { type: "string" } },
     ],
-    rehypePlugins: [prism, a11yEmojis],
-  },
+    titleFromContents,
+    descriptionFromContents,
+    urlElements,
+    [exportData, ["title", "description", "url", "path", "folder", "slug"]],
+  ],
+  rehypePlugins: [prism, a11yEmojis],
 });
+
+module.exports = (next = {}) => {
+  return Object.assign({}, next, {
+    webpack(config, options) {
+      config.module.rules.push({
+        test: /\.(md|mdx)$/,
+        use: (info) => [
+          options.defaultLoaders.babel,
+          {
+            loader: require.resolve("@mdx-js/loader"),
+            options: makeMDXOpts(info),
+          },
+        ],
+      });
+
+      if (typeof next.webpack === "function") {
+        return next.webpack(config, options);
+      }
+
+      return config;
+    },
+  });
+};
