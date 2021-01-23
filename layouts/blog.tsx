@@ -8,7 +8,7 @@ import { PKG } from "~/constants/common";
 const me = {
   ...PKG.author,
   avatarURL: "/static/avatar.jpg",
-  twitter: PKG.site.twitter.handle.substr(1),
+  twitterURL: `https://twitter.com/${PKG.site.twitter.handle.substr(1)}`,
 };
 
 const BlogLayout = ({
@@ -34,15 +34,12 @@ const BlogLayout = ({
             authors: [me.url],
             tags: tags,
           },
-          images: [{ ...cover, alt: title }],
+          images: [{ ...cover, alt: props.title }],
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
         <h1>{props.title}</h1>
-        <Info
-          author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
-          date={date}
-        />
+        <Info author={{ ...me, url: me.twitterURL }} date={date} />
         <Tags tags={tags} />
         {children}
       </article>
