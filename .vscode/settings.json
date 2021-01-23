@@ -10,6 +10,7 @@
   "css.validate": false,
 
   // Misc
+  "javascript.suggestionActions.enabled": false,
   "files.exclude": {
     "node_modules/": true,
     "yarn.lock": true,
