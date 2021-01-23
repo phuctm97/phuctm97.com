@@ -2,7 +2,7 @@ import { Plugin } from "unified";
 import { Node } from "unist";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
-import { Content } from "~/models/content";
+import { Content } from "~/interfaces/content";
 import getURL from "~/utils/content/get-url";
 import getFrontmatter from "~/utils/content/get-frontmatter";
 import isParent from "~/utils/unist/is-parent";
