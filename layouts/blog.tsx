@@ -3,12 +3,12 @@ import { BlogPost } from "~/interfaces/content";
 import Info from "~/components/info";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { PKG_JSON } from "~/constants/shared";
+import { PKG } from "~/constants/common";
 
 const me = {
-  ...PKG_JSON.author,
+  ...PKG.author,
   avatarURL: "/static/avatar.jpg",
-  twitter: PKG_JSON.site.twitter.handle.substr(1),
+  twitter: PKG.site.twitter.handle.substr(1),
 };
 
 const BlogLayout = ({
