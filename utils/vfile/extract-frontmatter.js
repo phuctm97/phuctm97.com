@@ -1,17 +1,20 @@
+const pick = require("lodash/pick");
 const revalidator = require("revalidator");
 
 const extractFrontmatter = (file, properties) => {
-  const frontmatter = file.data.frontmatter || {};
+  const { data } = file;
+  if (!data.frontmatter) return {};
+
+  const frontmatter = pick(data.frontmatter, ...Object.keys(properties));
 
   const validation = revalidator.validate(frontmatter, { properties });
   if (!validation.valid)
-    return file.fail(
+    file.fail(
       `Invalid frontmatter: ${JSON.stringify(validation.errors, null, 2)}.`
     );
 
-  for (let key of Object.keys(properties)) {
-    file.data[key] = frontmatter[key];
-  }
+  Object.assign(file.data, frontmatter);
+  return frontmatter;
 };
 
 module.exports = extractFrontmatter;
