@@ -1,4 +1,4 @@
-const pushExports = (tree, data, ...attrs) => {
+const pushExports = (tree, data, attrs) => {
   tree.children.push(
     ...attrs.map((attr) => ({
       type: "export",
