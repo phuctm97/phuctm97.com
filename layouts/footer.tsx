@@ -3,9 +3,9 @@ import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { FaDev, FaMediumM } from "react-icons/fa";
 import { SiHashnode } from "react-icons/si";
 
+const firstname = "Phuc";
 const username = "phuctm97";
-
-const socialLinks = [
+const socialURLs = [
   `https://twitter.com/${username}`,
   `https://github.com/${username}`,
   `https://dev.to/${username}`,
@@ -15,29 +15,28 @@ const socialLinks = [
 ];
 
 const iconSize = "1.4em";
-
-const renderIcon = (link: string) => {
-  if (link.includes("twitter"))
+const renderIcon = (url: string) => {
+  if (url.includes("twitter"))
     return <FiTwitter className="stroke-current" size={iconSize} />;
-  if (link.includes("dev.to"))
+  if (url.includes("dev.to"))
     return <FaDev className="fill-current" size={iconSize} />;
-  if (link.includes("github"))
+  if (url.includes("github"))
     return <FiGithub className="stroke-current" size={iconSize} />;
-  if (link.includes("medium"))
+  if (url.includes("medium"))
     return <FaMediumM className="stroke-current" size={iconSize} />;
-  if (link.includes("linkedin"))
+  if (url.includes("linkedin"))
     return <FiLinkedin className="stroke-current" size={iconSize} />;
-  if (link.includes("hashnode"))
+  if (url.includes("hashnode"))
     return <SiHashnode className="fill-current" size={iconSize} />;
 };
 
-const getLabel = (link: string) => {
-  if (link.includes("twitter")) return `Twitter @${username}`;
-  if (link.includes("dev.to")) return `DEV @${username}`;
-  if (link.includes("github")) return `Github @${username}`;
-  if (link.includes("medium")) return `Medium @${username}`;
-  if (link.includes("linkedin")) return `LinkedIn @${username}`;
-  if (link.includes("hashnode")) return `Hashnode @${username}`;
+const getLabel = (url: string) => {
+  if (url.includes("twitter")) return `Twitter @${username}`;
+  if (url.includes("dev.to")) return `DEV @${username}`;
+  if (url.includes("github")) return `Github @${username}`;
+  if (url.includes("medium")) return `Medium @${username}`;
+  if (url.includes("linkedin")) return `LinkedIn @${username}`;
+  if (url.includes("hashnode")) return `Hashnode @${username}`;
 };
 
 const Footer = () => (
@@ -51,24 +50,25 @@ const Footer = () => (
           Welcome to my digital garden <Emoji label="waving hand">👋🏻</Emoji>
         </p>
         <p className="mt-1">
-          I'm Phuc, a software engineer. On this site, I document everything I
-          learned and created. You'll see about 3 articles per week.
+          I'm {firstname}, a software engineer. On this site, I document
+          everything I learned and created. You'll see about 3 articles per
+          week.
         </p>
         <nav className="mt-6">
           <p className="font-semibold text-gray-800 dark:text-gray-100">
             Social links
           </p>
-          <p className="mt-2">Everywhere I'm online, I'm @phuctm97</p>
+          <p className="mt-2">Everywhere I'm online, I'm @{username}</p>
           <div className="mt-4 flex flex-row space-x-5">
-            {socialLinks.map((link) => (
+            {socialURLs.map((url) => (
               <a
-                key={link}
+                key={url}
                 className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
-                title={getLabel(link)}
-                aria-label={getLabel(link)}
-                href={link}
+                title={getLabel(url)}
+                aria-label={getLabel(url)}
+                href={url}
               >
-                {renderIcon(link)}
+                {renderIcon(url)}
               </a>
             ))}
           </div>
