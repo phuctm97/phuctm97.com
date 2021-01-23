@@ -11,6 +11,7 @@ const extractFrontmatter = require("./unified/extract-frontmatter");
 const titleFromContents = require("./unified/title-from-contents");
 const descriptionFromContents = require("./unified/description-from-contents");
 const urlElements = require("./unified/url-elements");
+const autogenCover = require("./unified/autogen-cover");
 const exportData = require("./unified/export-data");
 const exportLayout = require("./unified/export-layout");
 
@@ -45,8 +46,16 @@ const makeMDXOpts = ({ realResource }) => {
             uniqueItems: true,
             maxItems: 4,
           },
+          cover: {
+            type: "object",
+            properties: {
+              url: { type: "string", format: "url" },
+              icons: { type: "array", uniqueItems: true, maxItems: 3 },
+            },
+          },
         },
       ],
+      autogenCover,
       [exportPlugin[0], [...exportPlugin[1], "tags", "date", "cover"]],
       [exportLayout, "~/layouts/blog"]
     );

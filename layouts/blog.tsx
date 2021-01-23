@@ -38,7 +38,7 @@ const BlogLayout = ({
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
-        <h1>{title}</h1>
+        <h1>{props.title}</h1>
         <Info
           author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
           date={date}
