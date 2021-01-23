@@ -1,6 +1,5 @@
 const syspath = require("path");
-const pagesDir = syspath.join(__dirname, "pages");
-const blogDir = syspath.join(pagesDir, "blog");
+const { BLOG_DIR } = require("./constants/server");
 
 const frontmatter = require("remark-frontmatter");
 const parseFrontmatter = require("remark-parse-frontmatter");
@@ -30,7 +29,7 @@ const makeMDXOpts = ({ realResource }) => {
   ];
   const rehypePlugins = [prism, a11yEmojis];
 
-  if (realResource.startsWith(blogDir)) {
+  if (realResource.startsWith(BLOG_DIR)) {
     const [exportPlugin] = remarkPlugins.splice(remarkPlugins.length - 1, 1);
     remarkPlugins.push(
       [

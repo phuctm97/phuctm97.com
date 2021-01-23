@@ -1,4 +1,3 @@
-import path from "path";
 import glob from "glob";
 import vfile from "to-vfile";
 import unified from "unified";
@@ -6,7 +5,7 @@ import parse from "remark-parse";
 import frontmatter from "remark-frontmatter";
 import parseFrontmatter from "remark-parse-frontmatter";
 import { BlogPost } from "~/interfaces/content";
-import { PAGES_DIR } from "~/constants/server";
+import { BLOG_DIR } from "~/constants/server";
 
 const extractFrontmatter = require("~/unified/extract-frontmatter");
 const titleFromContents = require("~/unified/title-from-contents");
@@ -36,7 +35,7 @@ const readOne = (absPath: string): BlogPost => {
 export const all = (): BlogPost[] =>
   glob
     .sync("**/*.mdx", {
-      cwd: path.join(PAGES_DIR, "blog"),
+      cwd: BLOG_DIR,
       absolute: true,
     })
     .map(readOne);
