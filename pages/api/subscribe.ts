@@ -8,13 +8,13 @@ import {
 const unexpectedError =
   "There was an error subscribing, please try again later.";
 
-const parseBDErrors = (res: any) => {
-  const bdErrors =
-    (isStringArray(res) && res) ||
-    (isRecordOfStringArray(res) && flattenStringArray(res)) ||
+const parseButtondownErrors = (data: unknown) => {
+  const errors =
+    (isStringArray(data) && data) ||
+    (isRecordOfStringArray(data) && flattenStringArray(data)) ||
     [];
 
-  for (let err of bdErrors) {
+  for (let err of errors) {
     if (err.includes("already subscribed"))
       return {
         status: 200,
@@ -33,13 +33,13 @@ const parseBDErrors = (res: any) => {
       };
   }
 
-  if (bdErrors.length > 0)
+  if (errors.length > 0)
     return {
       status: 400,
-      message: bdErrors[0],
+      message: errors[0],
     };
 
-  console.error("Unrecognized Buttondown response:", res);
+  console.error("Unrecognized Buttondown's response:", data);
   return { status: 500, message: unexpectedError };
 };
 
@@ -47,28 +47,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.body;
 
   if (!email) {
-    return res.status(400).json({ error: "Email is required." });
+    return res.status(400).json({ message: "Email is required." });
   }
 
   try {
     const bdKey = process.env.BUTTONDOWN_API_KEY;
     const bdRes = await fetch(`https://api.buttondown.email/v1/subscribers`, {
-      body: JSON.stringify({ email }),
+      method: "POST",
       headers: {
         Authorization: `Token ${bdKey}`,
         "Content-Type": "application/json",
       },
-      method: "POST",
+      body: JSON.stringify({ email }),
     });
     const bdJSON = await bdRes.json();
 
     if (bdRes.status >= 500) {
       console.error("Buttondown's internal error:", bdJSON);
-      return res.status(500).json({ error: unexpectedError });
+      return res.status(500).json({ message: unexpectedError });
     }
 
     if (!bdRes.ok) {
-      const { status, message } = parseBDErrors(bdJSON);
+      const { status, message } = parseButtondownErrors(bdJSON);
       return res.status(status).json({ message });
     }
 
@@ -78,6 +78,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   } catch (err) {
     console.error("Internal error:", err);
-    return res.status(500).json({ error: unexpectedError });
+    return res.status(500).json({ message: unexpectedError });
   }
 };
