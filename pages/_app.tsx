@@ -2,17 +2,16 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
-import PlausibleScript from "~/components/plausible-script";
 
 import Header from "~/layouts/header";
 import Main from "~/layouts/main";
 import Footer from "~/layouts/footer";
 
 import { MDXProvider } from "@mdx-js/react";
-import * as MDXComponents from "components/mdx";
+import * as MDXComponents from "~/components/mdx";
 
-import PKG_JSON from "~/package.json";
-import { IS_PRODUCTION } from "~/utils/const/common";
+import PlausibleScript from "~/components/plausible-script";
+import { PKG_JSON, IS_PRODUCTION } from "~/utils/const/common";
 
 import "~/styles/app.css";
 import "~/styles/prism.css";
