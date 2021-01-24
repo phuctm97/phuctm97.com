@@ -1,7 +1,7 @@
 module.exports = (next = {}) =>
   Object.assign({}, next, {
-    webpack(config, options) {
-      const { dev, isServer } = options;
+    webpack(config, appOptions) {
+      const { dev, isServer } = appOptions;
 
       // Replace React with Preact in client production bundle.
       if (!dev && !isServer) {
@@ -12,7 +12,7 @@ module.exports = (next = {}) =>
       }
 
       if (typeof next.webpack === "function") {
-        return next.webpack(config, options);
+        return next.webpack(config, appOptions);
       }
 
       return config;
