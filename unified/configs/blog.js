@@ -1,4 +1,4 @@
-// Remark plugins.
+// This project's Remark plugins.
 const extractFrontmatter = require("../plugins/extract-frontmatter");
 const generatedCover = require("../plugins/generated-cover");
 const exportLayout = require("../plugins/export-layout");

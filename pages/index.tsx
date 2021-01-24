@@ -51,10 +51,6 @@ const IndexPage = ({ blog }: Props) => (
 
 export default IndexPage;
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  return {
-    props: {
-      blog: readBlog().sort((a, b) => Date.parse(b.date) - Date.parse(a.date)),
-    },
-  };
-};
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+  props: { blog: readBlog() },
+});

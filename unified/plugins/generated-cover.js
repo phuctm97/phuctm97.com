@@ -1,6 +1,6 @@
 const getCover = (file) => {
   const { title, cover } = file.data;
-  if (cover && cover.url) return { url: cover.url };
+  if (cover && cover.url) return cover;
 
   const url = new URL(
     encodeURIComponent(`${title}.jpg`),
