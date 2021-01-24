@@ -3,7 +3,7 @@ import { BlogPost } from "~/interfaces/content";
 import Published from "~/components/published";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { ME } from "~/constants/shared";
+import { PKG, ME } from "~/constants/shared";
 
 const BlogLayout = ({
   children,
@@ -27,7 +27,13 @@ const BlogLayout = ({
             authors: [ME.url],
             tags,
           },
-          images: [{ alt: `${title} | ${ME.name}`, ...cover }],
+          images: [
+            {
+              ...PKG.site.openGraph.image,
+              alt: `${title} | ${ME.name}`,
+              ...cover,
+            },
+          ],
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
