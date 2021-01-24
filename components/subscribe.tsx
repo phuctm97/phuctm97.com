@@ -4,7 +4,7 @@ import { CgCheckO, CgDanger, CgSpinner } from "react-icons/cg";
 import classNames from "classnames";
 
 type Result = {
-  success: boolean;
+  isSuccess: boolean;
   message: string;
 };
 
@@ -32,10 +32,10 @@ const Subscribe = ({
       });
 
       const { message } = await res.json();
-      setResult({ success: res.ok, message });
+      setResult({ isSuccess: res.ok, message });
     } catch {
       setResult({
-        success: false,
+        isSuccess: false,
         message: "There was an error subscribing, please try again later.",
       });
     } finally {
@@ -58,7 +58,7 @@ const Subscribe = ({
         Every Sunday, I write an email summarizing lessons I've learned that
         week and practical advices for you.
       </p>
-      {result && result.success ? (
+      {result && result.isSuccess ? (
         <p className="font-medium mt-5 mb-2 text-sm sm:text-base text-green-700 dark:text-green-300">
           <CgCheckO className="inline-block -mt-1 fill-current" />{" "}
           {result.message}
@@ -95,7 +95,7 @@ const Subscribe = ({
               "Subscribe"
             )}
           </button>
-          {result && !result.success && (
+          {result && !result.isSuccess && (
             <p className="font-medium mt-3 text-sm sm:text-base text-red-700 dark:text-red-300">
               <CgDanger className="inline-block -mt-1 fill-current" />{" "}
               {result.message}
