@@ -2,15 +2,15 @@ import Emoji from "~/components/emoji";
 import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { FaDev, FaMediumM } from "react-icons/fa";
 import { SiHashnode } from "react-icons/si";
+import { ME } from "~/constants/shared";
 
-const username = "phuctm97";
 const socialURLs = [
-  `https://twitter.com/${username}`,
-  `https://github.com/${username}`,
-  `https://dev.to/${username}`,
-  `https://${username}.medium.com`,
-  `https://linkedin.com/in/${username}`,
-  `https://hashnode.com/@${username}`,
+  `https://twitter.com/${ME.username}`,
+  `https://github.com/${ME.username}`,
+  `https://dev.to/${ME.username}`,
+  `https://${ME.username}.medium.com`,
+  `https://linkedin.com/in/${ME.username}`,
+  `https://hashnode.com/@${ME.username}`,
 ];
 
 const renderIcon = (url: string) => {
@@ -30,12 +30,12 @@ const renderIcon = (url: string) => {
 };
 
 const getLabel = (url: string) => {
-  if (url.includes("twitter")) return `Twitter @${username}`;
-  if (url.includes("dev.to")) return `DEV @${username}`;
-  if (url.includes("github")) return `Github @${username}`;
-  if (url.includes("medium")) return `Medium @${username}`;
-  if (url.includes("linkedin")) return `LinkedIn @${username}`;
-  if (url.includes("hashnode")) return `Hashnode @${username}`;
+  if (url.includes("twitter")) return `Twitter @${ME.username}`;
+  if (url.includes("dev.to")) return `DEV @${ME.username}`;
+  if (url.includes("github")) return `Github @${ME.username}`;
+  if (url.includes("medium")) return `Medium @${ME.username}`;
+  if (url.includes("linkedin")) return `LinkedIn @${ME.username}`;
+  if (url.includes("hashnode")) return `Hashnode @${ME.username}`;
 };
 
 const Footer = () => (
@@ -55,7 +55,7 @@ const Footer = () => (
         <p className="font-semibold text-gray-800 dark:text-gray-100">
           Social links
         </p>
-        <p className="mt-2">Everywhere I'm online, I'm @{username}.</p>
+        <p className="mt-2">Everywhere I'm online, I'm @{ME.username}.</p>
         <div className="mt-4 flex flex-row space-x-5">
           {socialURLs.map((url) => (
             <a
