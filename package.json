@@ -14,25 +14,21 @@
     "openGraph": {
       "type": "website",
       "locale": "en_US",
-      "images": [
-        {
-          "url": "/static/og.jpg",
-          "width": 1200,
-          "height": 630
-        }
-      ]
+      "image": {
+        "url": "/static/og.jpg",
+        "width": 1200,
+        "height": 630
+      }
     },
     "twitter": {
-      "handle": "@phuctm97",
-      "site": "@phuctm97",
-      "cardType": "summary_large_image"
+      "card": "summary_large_image"
+    },
+    "plausible": {
+      "scriptURL": "https://plausible.phuctm97.com/js/index.js"
     }
   },
-  "plausible": {
-    "scriptURL": "https://plausible.phuctm97.com/js/index.js"
-  },
   "license": "MIT",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "yarn rebuild:scripts && next dev",
     "build": "next build",

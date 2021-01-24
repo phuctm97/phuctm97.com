@@ -2,8 +2,6 @@ import PKG from "~/package.json";
 
 export { PKG };
 
-export const HOMEPAGE = new URL(PKG.homepage);
-
 export const ME = {
   ...PKG.author,
   username: "phuctm97",
