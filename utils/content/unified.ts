@@ -2,7 +2,6 @@ import { Plugin } from "unified";
 import { Node } from "unist";
 import { select } from "unist-util-select";
 import mdToString from "mdast-util-to-string";
-import { Content } from "~/interfaces/content";
 import getURL from "~/utils/content/get-url";
 import getFrontmatter from "~/utils/content/get-frontmatter";
 import isParent from "~/utils/unist/is-parent";
@@ -24,7 +23,7 @@ const plugin: Plugin = () => (tree, file) => {
 
   const frontmatter = getFrontmatter(file.data);
 
-  const metadata: Content["metadata"] = {
+  const metadata = {
     title: frontmatter.title || parseTitle(tree),
     description: frontmatter.description || parseDescription(tree),
     ...getURL(file.path),

@@ -1,31 +1,25 @@
-import { Children } from "react";
 import { NextSeo } from "next-seo";
+import { BlogPost } from "~/interfaces/content";
 import Published from "~/components/published";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { PKG, ME } from "~/constants/shared";
-import { Post } from "@/next-blog/interfaces"; // TODO: Remove this.
+import { ME } from "~/constants/shared";
 
-type Props = React.PropsWithChildren<{
-  metadata: Post;
-}>;
-
-const BlogLayout = ({ metadata, children }: Props) => {
-  const { description, tags, path } = metadata;
-  const title = `${metadata.title} | ${ME.name}`;
-  const url = `${PKG.homepage}${path}`;
-  const date = new Date(metadata.date);
-
-  const [h1, ...content] = Children.toArray(children);
+const BlogLayout = ({
+  children,
+  ...props
+}: React.PropsWithChildren<BlogPost>) => {
+  const { title, description, tags, cover, url } = props;
+  const date = new Date(props.date);
   return (
     <>
       <NextSeo
-        title={title}
+        title={`${title} | ${ME.name}`}
         description={description}
         canonical={url}
         openGraph={{
           type: "article",
-          title,
+          title: `${title} | ${ME.name}`,
           description,
           url,
           article: {
@@ -33,17 +27,17 @@ const BlogLayout = ({ metadata, children }: Props) => {
             authors: [ME.url],
             tags,
           },
-          images: [{ ...metadata.cover, alt: title }],
+          images: [{ alt: `${title} | ${ME.name}`, ...cover }],
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
-        {h1}
+        <h1>{title}</h1>
         <Published
           author={{ ...ME, url: `https://twitter.com/${ME.username}` }}
           date={date}
         />
-        <Tags tags={tags} />
-        {content}
+        {tags && <Tags tags={tags} />}
+        {children}
       </article>
       <Subscribe className="mt-14 md:mt-16" />
     </>
