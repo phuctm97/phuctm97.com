@@ -13,7 +13,7 @@ const formatDate = (date: Date) =>
     year: "numeric",
   });
 
-const Info = ({ author, date }: Props) => (
+const Published = ({ author, date }: Props) => (
   <div className="info flex flex-row items-center space-x-2">
     <Image
       className="rounded-full"
@@ -31,4 +31,4 @@ const Info = ({ author, date }: Props) => (
   </div>
 );
 
-export default Info;
+export default Published;

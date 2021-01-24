@@ -1,6 +1,6 @@
 import { Children } from "react";
 import { NextSeo } from "next-seo";
-import Info from "~/components/info";
+import Published from "~/components/published";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
 import { Post } from "@/next-blog/interfaces";
@@ -45,7 +45,7 @@ const BlogLayout = ({ metadata, children }: Props) => {
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
         {h1}
-        <Info
+        <Published
           author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
           date={date}
         />
