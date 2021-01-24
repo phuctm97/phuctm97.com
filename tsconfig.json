@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@/*": ["packages/*"], "~/*": ["./*"] },
+    "paths": { "~/*": ["./*"] },
     "allowJs": true,
     "strict": true,
     "alwaysStrict": true,
