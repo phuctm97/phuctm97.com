@@ -3,15 +3,8 @@ import { NextSeo } from "next-seo";
 import Published from "~/components/published";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { Post } from "@/next-blog/interfaces";
-import PKG_JSON from "~/package.json";
-
-const { homepage } = PKG_JSON;
-const me = {
-  ...PKG_JSON.author,
-  avatarURL: "/static/avatar.jpg",
-  twitter: PKG_JSON.site.twitter.handle.substr(1),
-};
+import { HOMEPAGE, ME } from "~/constants/shared";
+import { Post } from "@/next-blog/interfaces"; // TODO: Remove this.
 
 type Props = React.PropsWithChildren<{
   metadata: Post;
@@ -19,8 +12,8 @@ type Props = React.PropsWithChildren<{
 
 const BlogLayout = ({ metadata, children }: Props) => {
   const { description, tags, path } = metadata;
-  const title = `${metadata.title} | ${me.name}`;
-  const url = `${homepage}${path}`;
+  const title = `${metadata.title} | ${ME.name}`;
+  const url = `${HOMEPAGE}${path.substr(1)}`;
   const date = new Date(metadata.date);
 
   const [h1, ...content] = Children.toArray(children);
@@ -33,12 +26,12 @@ const BlogLayout = ({ metadata, children }: Props) => {
         openGraph={{
           type: "article",
           title,
-          url,
           description,
+          url,
           article: {
             publishedTime: date.toISOString(),
-            authors: [me.url],
-            tags: tags,
+            authors: [ME.url],
+            tags,
           },
           images: [{ ...metadata.cover, alt: title }],
         }}
@@ -46,7 +39,7 @@ const BlogLayout = ({ metadata, children }: Props) => {
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
         {h1}
         <Published
-          author={{ ...me, url: `https://twitter.com/${me.twitter}` }}
+          author={{ ...ME, url: `https://twitter.com/${ME.username}` }}
           date={date}
         />
         <Tags tags={tags} />
