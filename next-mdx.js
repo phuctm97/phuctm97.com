@@ -1,31 +1,33 @@
 const syspath = require("path");
 
-const presets = {
-  default: require("./unified/presets/default"),
-  blog: require("./unified/presets/blog"),
+const configs = {
+  default: require("./unified/configs/default"),
+  blog: require("./unified/configs/blog"),
 };
+
 const dirs = {
   blog: syspath.join(__dirname, "pages", "blog"),
 };
-const exportPlugin = require("./unified/plugins/export-data");
+
+const exportData = require("./unified/plugins/export-data");
 
 const makeMDXOptions = ({ realResource }) => {
   const extraRemarkPlugins = [];
   const extraRehypePlugins = [];
-  const extraExportAttrs = [];
+  const extraExports = [];
 
   if (realResource.startsWith(dirs.blog)) {
-    extraRemarkPlugins.push(...presets.blog.extraRemarkPlugins);
-    extraExportAttrs.push(...presets.blog.extraExportAttrs);
+    extraRemarkPlugins.push(...configs.blog.extraRemarkPlugins);
+    extraExports.push(...configs.blog.extraExports);
   }
 
   return {
     remarkPlugins: [
-      ...presets.default.remarkPlugins,
+      ...configs.default.remarkPlugins,
       ...extraRemarkPlugins,
-      [exportPlugin, [...presets.default.exportAttrs, ...extraExportAttrs]],
+      [exportData, [...configs.default.exports, ...extraExports]],
     ],
-    rehypePlugins: [...presets.default.rehypePlugins, ...extraRehypePlugins],
+    rehypePlugins: [...configs.default.rehypePlugins, ...extraRehypePlugins],
   };
 };
 
