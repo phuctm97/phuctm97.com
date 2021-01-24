@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
-const server_1 = require("../../utils/const/server");
+const server_1 = require("../../constants/server");
 const trimPagesDir = (s) => s.startsWith(server_1.PAGES_DIR) ? s.substr(server_1.PAGES_DIR.length + 1) : s;
 const trimMDXExt = (s) => s.endsWith(".mdx") ? s.substring(0, s.length - 4) : s;
 /**

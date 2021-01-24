@@ -7,7 +7,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const glob_1 = __importDefault(require("glob"));
 const prettier_1 = __importDefault(require("prettier"));
-const server_1 = require("../utils/const/server");
+const server_1 = require("../constants/server");
 const trimPagesDir = (s) => s.startsWith(server_1.PAGES_DIR) ? s.substr(server_1.PAGES_DIR.length) : s;
 const trimPageExt = (s) => s.replace(/(index)?\.(tsx|mdx)$/g, "");
 const packageJSON = JSON.parse(fs_1.default.readFileSync(path_1.default.join(server_1.ROOT_DIR, "package.json"), "utf-8"));
