@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import glob from "glob";
 import prettier from "prettier";
-import { ROOT_DIR, PAGES_DIR, PUBLIC_DIR } from "~/utils/const/server";
+import { ROOT_DIR, PAGES_DIR, PUBLIC_DIR } from "~/constants/server";
 
 const trimPagesDir = (s: string) =>
   s.startsWith(PAGES_DIR) ? s.substr(PAGES_DIR.length) : s;

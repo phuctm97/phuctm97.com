@@ -11,7 +11,7 @@ import { MDXProvider } from "@mdx-js/react";
 import * as MDXComponents from "~/components/mdx";
 
 import PlausibleScript from "~/components/plausible-script";
-import { PKG_JSON, IS_PRODUCTION } from "~/utils/const/common";
+import { PKG, IS_PRODUCTION } from "~/constants/shared";
 
 import "~/styles/app.css";
 import "~/styles/prism.css";
@@ -22,18 +22,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
     <DefaultSeo
-      {...PKG_JSON.site}
-      canonical={PKG_JSON.homepage}
-      description={PKG_JSON.description}
+      {...PKG.site}
+      canonical={PKG.homepage}
+      description={PKG.description}
       openGraph={{
-        ...PKG_JSON.site.openGraph,
-        url: PKG_JSON.homepage,
-        title: PKG_JSON.site.title,
-        description: PKG_JSON.description,
-        images: PKG_JSON.site.openGraph.images.map((img) => ({
+        ...PKG.site.openGraph,
+        url: PKG.homepage,
+        title: PKG.site.title,
+        description: PKG.description,
+        images: PKG.site.openGraph.images.map((img) => ({
           ...img,
-          url: `${PKG_JSON.homepage}${img.url}`,
-          alt: PKG_JSON.site.title,
+          url: `${PKG.homepage}${img.url}`,
+          alt: PKG.site.title,
         })),
       }}
     />

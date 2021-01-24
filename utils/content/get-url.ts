@@ -1,5 +1,5 @@
 import syspath from "path";
-import { PAGES_DIR } from "~/utils/const/server";
+import { PAGES_DIR } from "~/constants/server";
 import PKG_JSON from "~/package.json";
 
 const trimPagesDir = (s: string) =>
