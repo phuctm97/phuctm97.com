@@ -1,12 +1,10 @@
 const withMDX = require("./next-mdx");
 
-const withPreact = require("./next-preact");
+// TODO: Use Preact when it's compatible with `next-seo`.
 
-module.exports = withPreact(
-  withMDX({
-    pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-    env: {
-      VERCEL_ENV: process.env.VERCEL_ENV,
-    },
-  })
-);
+module.exports = withMDX({
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+  env: {
+    VERCEL_ENV: process.env.VERCEL_ENV,
+  },
+});
