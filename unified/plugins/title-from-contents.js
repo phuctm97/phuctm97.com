@@ -9,5 +9,4 @@ module.exports = () => (tree, file) => {
   if (!h1) file.fail("No h1.");
 
   data.title = toString(h1);
-  tree.children.splice(tree.children.indexOf(h1), 1); // Remove title, delegate rendering title to layout.
 };

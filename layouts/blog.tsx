@@ -1,3 +1,4 @@
+import { Children } from "react";
 import { NextSeo } from "next-seo";
 import { BlogPost } from "~/interfaces/content";
 import Published from "~/components/published";
@@ -11,6 +12,8 @@ const BlogLayout = ({
 }: React.PropsWithChildren<BlogPost>) => {
   const { title, description, tags, cover, url } = props;
   const date = new Date(props.date);
+
+  const [h1, ...contents] = Children.toArray(children);
   return (
     <>
       <NextSeo
@@ -37,13 +40,13 @@ const BlogLayout = ({
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
-        <h1>{title}</h1>
+        {h1}
         <Published
           author={{ ...ME, url: `https://twitter.com/${ME.username}` }}
           date={date}
         />
         {tags && <Tags tags={tags} />}
-        {children}
+        {contents}
       </article>
       <Subscribe className="mt-14 md:mt-16" />
     </>
