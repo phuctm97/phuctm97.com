@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": { "@/*": ["packages/*"], "~/*": ["./*"] },
-    "allowJs": false,
+    "allowJs": true,
     "strict": true,
     "alwaysStrict": true,
     "target": "esnext",
@@ -22,5 +22,5 @@
     "noUnusedParameters": true
   },
   "exclude": ["node_modules", ".next"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 }

@@ -1,15 +1,14 @@
 import revalidator from "revalidator";
-import { Content } from "~/interfaces/content";
-import { isObject } from "~/utils/lang/obj";
+import { Record, isObject } from "~/utils/lang/obj";
 
-const schema: Revalidator.JSONSchema<Content["frontmatter"]> = {
+const schema: Revalidator.JSONSchema<Record> = {
   properties: {
     title: { type: "string" },
     description: { type: "string" },
   },
 };
 
-export default function getFrontmatter(data: unknown): Content["frontmatter"] {
+export default function getFrontmatter(data: unknown): Record {
   if (!isObject(data)) return {};
 
   const frontmatter = data.frontmatter;

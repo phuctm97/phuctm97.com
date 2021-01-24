@@ -1,23 +1,25 @@
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { Content } from "~/interfaces/content";
+import { ME } from "~/constants/shared";
 
-const Wrapper = ({ metadata, children }: React.PropsWithChildren<Content>) => {
-  const { title, description, url } = metadata;
+const Wrapper = ({ children, ...props }: React.PropsWithChildren<Content>) => {
+  const { title, description, url } = props;
   return (
     <>
       <NextSeo
-        title={title}
+        title={`${title} | ${ME.name}`}
         description={description}
         canonical={url}
         openGraph={{
           type: "article",
-          title,
+          title: `${title} | ${ME.name}`,
           description,
           url,
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
+        <h1>{title}</h1>
         {children}
       </article>
     </>
