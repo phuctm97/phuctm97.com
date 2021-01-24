@@ -1,15 +1,15 @@
 import Head from "next/head";
-import { PKG, HOMEPAGE } from "~/constants/shared";
+import { PKG } from "~/constants/shared";
 
 const PlausibleScript = () => {
   return (
     <Head>
       <script
         key="plausible-script"
-        src={PKG.plausible.scriptURL}
+        src={PKG.site.plausible.scriptURL}
         async
         defer
-        data-domain={HOMEPAGE.host}
+        data-domain={new URL(PKG.homepage).host}
       />
     </Head>
   );

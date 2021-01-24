@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo";
 import Published from "~/components/published";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { HOMEPAGE, ME } from "~/constants/shared";
+import { PKG, ME } from "~/constants/shared";
 import { Post } from "@/next-blog/interfaces"; // TODO: Remove this.
 
 type Props = React.PropsWithChildren<{
@@ -13,7 +13,7 @@ type Props = React.PropsWithChildren<{
 const BlogLayout = ({ metadata, children }: Props) => {
   const { description, tags, path } = metadata;
   const title = `${metadata.title} | ${ME.name}`;
-  const url = `${HOMEPAGE}${path.substr(1)}`;
+  const url = `${PKG.homepage}${path}`;
   const date = new Date(metadata.date);
 
   const [h1, ...content] = Children.toArray(children);

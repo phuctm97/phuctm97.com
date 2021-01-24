@@ -11,7 +11,7 @@ import { MDXProvider } from "@mdx-js/react";
 import * as MDXComponents from "~/components/mdx";
 
 import PlausibleScript from "~/components/plausible-script";
-import { PKG, IS_PRODUCTION } from "~/constants/shared";
+import { PKG, ME, IS_PRODUCTION } from "~/constants/shared";
 
 import "~/styles/app.css";
 import "~/styles/prism.css";
@@ -22,19 +22,29 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
     <DefaultSeo
-      {...PKG.site}
-      canonical={PKG.homepage}
+      title={PKG.site.title}
       description={PKG.description}
+      canonical={PKG.homepage}
       openGraph={{
-        ...PKG.site.openGraph,
-        url: PKG.homepage,
         title: PKG.site.title,
         description: PKG.description,
-        images: PKG.site.openGraph.images.map((img) => ({
-          ...img,
-          url: `${PKG.homepage}${img.url}`,
-          alt: PKG.site.title,
-        })),
+        url: PKG.homepage,
+        type: PKG.site.openGraph.type,
+        locale: PKG.site.openGraph.locale,
+        images: [
+          {
+            ...PKG.site.openGraph.image,
+            url: `${PKG.homepage}${PKG.site.openGraph.image.url}`,
+            alt: PKG.site.title,
+          },
+        ],
+        defaultImageWidth: PKG.site.openGraph.image.width,
+        defaultImageHeight: PKG.site.openGraph.image.height,
+      }}
+      twitter={{
+        site: `@${ME.username}`,
+        handle: `@${ME.username}`,
+        cardType: PKG.site.twitter.card,
       }}
     />
     <ThemeProvider attribute="class" enableSystem={false}>
