@@ -1,0 +1,140 @@
+---
+date: 2021-01-25
+tags: [nextjs, webdev, analytics, vercel]
+cover:
+  icons: [Next.js, Vercel, Plausible]
+---
+
+# How-to Integrate Plausible Analytics With Next.js and Vercel
+
+[Plausible] is a privacy-focused analytics solution for modern websites. It and
+[Fathom] are probably 2 biggest names in the space. I chose Plausible because
+its pricing is more beginner-friendly and it is also open-source.
+
+This article is a quick snippnet that I wrote to properly enable Plausible for
+[my Next.js + Vercel website][my website].
+
+## Plausible Script component
+
+To enable Plausible, you'll need place a `script` tag in `head` of your HTML
+document. To achieve that in Next.js, I create a component for easier
+maintainance:
+
+```tsx
+// ~/components/plausbile-script.tsx
+import Head from "next/head";
+import PKG from "~/package.json"; // Load configuration from package.json.
+
+const PlausibleScript = () => (
+  <Head>
+    <script
+      key="plausible-script"
+      src={PKG.site.plausible.scriptURL}
+      async
+      defer
+      data-domain={new URL(PKG.homepage).host}
+    />
+  </Head>
+);
+export default PlausibleScript;
+```
+
+Then render it in my `pages/_app.(jsx|tsx)`:
+
+```tsx
+// ~/pages/_app.tsx
+import PlausibleScript from "~/components/plausible-script";
+
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      {/* Other head elements */}
+    </Head>
+    <PlausibleScript />
+    <Component {...pageProps} />
+  </>
+);
+```
+
+## Put configuration in `package.json`
+
+You may realize that my `PlausibleScript` doesn't directly define script `src`,
+instead it references values from `package.json`. Personally, `package.json` is
+a great place to put configuration for a site or package _(the name said it,
+right?)_, `package.json` isn't just for npm.
+
+```json
+// ~/package.json
+{
+  // ...
+  "description": "🏚 Home on the Web — Everything I learned and created: software dev, programming tutorials, career, startups, and open-source.",
+  "homepage": "https://phuctm97.com",
+  "site": {
+    "title": "Minh-Phuc Tran - Software Engineer",
+    "plausible": {
+      "scriptURL": "https://plausible.phuctm97.com/js/index.js"
+    }
+  }
+  // Other values...
+  // Keep configuration in package.json is also a great way to separate implementation details and configurations.
+}
+```
+
+Doing this way I can also reuse standard npm values , in this case, it is
+`homepage`.
+
+## Enable only in production
+
+Finally, I don't want views on my local and preview environment to be counted,
+Plausible should only be enabled in production. To achieve that, I simply update
+my `_app.tsx`:
+
+```tsx
+// ~/pages/_app.tsx
+import PlausibleScript from "~/components/plausible-script";
+import { IS_PRODUCTION } from "~/constants";
+
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      {/* Other head elements */}
+    </Head>
+    {IS_PRODUCTION && <PlausibleScript />}
+    <Component {...pageProps} />
+  </>
+);
+```
+
+Because I'm hosting my site on [Vercel], `IS_PRODUCTION` is:
+
+```ts
+// ~/constants.ts
+export const IS_PRODUCTION =
+  process.env.NODE_ENV === "production" &&
+  process.env.VERCEL_ENV === "production";
+```
+
+`VERCEL_ENV` is a system environment variable defined by Vercel while building
+and running your applications for specific environments (`preview` and
+`production`). To be able to reference it client-side in a Next.js application,
+you'll need to modify your `next.config.js`:
+
+```js
+module.exports = {
+  // Other configurations.
+  env: {
+    VERCEL_ENV: process.env.VERCEL_ENV,
+  },
+};
+```
+
+That's it 🤟🏻!
+
+<!-- Links -->
+
+[my website]: /
+[plausible]: https://plausible.io
+[fathom]: https://usefathom.com
+[vercel]: https://vercel.com
