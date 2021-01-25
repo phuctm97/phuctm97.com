@@ -2,7 +2,7 @@ import Emoji from "~/components/emoji";
 import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { FaDev, FaMediumM } from "react-icons/fa";
 import { SiHashnode } from "react-icons/si";
-import { ME } from "~/constants/shared";
+import { ME } from "~/constants/share";
 
 const socialURLs = [
   `https://twitter.com/${ME.username}`,

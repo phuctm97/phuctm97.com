@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { PKG } from "~/constants/shared";
+import { PKG } from "~/constants/share";
 
 const PlausibleScript = () => {
   return (

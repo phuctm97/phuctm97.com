@@ -11,7 +11,7 @@ import { MDXProvider } from "@mdx-js/react";
 import * as MDXComponents from "~/components/mdx";
 
 import PlausibleScript from "~/components/plausible-script";
-import { PKG, ME, IS_PRODUCTION } from "~/constants/shared";
+import { PKG, ME, IS_PRODUCTION } from "~/constants/share";
 
 import "~/styles/app.css";
 import "~/styles/prism.css";

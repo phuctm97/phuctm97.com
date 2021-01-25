@@ -4,7 +4,7 @@ import { BlogPost } from "~/interfaces/content";
 import Published from "~/components/published";
 import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
-import { PKG, ME } from "~/constants/shared";
+import { PKG, ME } from "~/constants/share";
 
 const BlogLayout = ({
   children,
