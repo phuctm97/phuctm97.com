@@ -403,10 +403,10 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@tailwindcss/line-clamp@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.1.0.tgz#202c3889fbf032034ee7fc3a531f98e5e1c81720"
-  integrity sha512-js+iq+EGiMb3LNi+Jnu9HGKJQp94d1aY/cngJ6llMfaNpXSG9olYtv0mrSNYUh5Z2PKYOdhZXZvxR6xwiJjRSg==
+"@tailwindcss/line-clamp@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.2.0.tgz#7f30f26ed3835d64d1eb5a9b0d60cf5291dd2a3b"
+  integrity sha512-+jXSdRK3/9V/BCPCr+iNpMMhxWMMv62vn/AS2b3/ClmueGuhCijW3bUwO1IiHnE7uCaF74Sli8jUCv9djwvpLg==
 
 "@tailwindcss/typography@^0.4.0":
   version "0.4.0"
