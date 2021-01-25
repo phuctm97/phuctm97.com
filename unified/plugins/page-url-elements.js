@@ -1,10 +1,10 @@
 const syspath = require("path");
-
 const pkg = require("../../package.json");
-const pagesdir = syspath.join(process.cwd(), "pages");
+
+const pagesDir = syspath.join(process.cwd(), "pages");
 
 const trimPagesDir = (path) =>
-  path.startsWith(pagesdir) ? path.substr(pagesdir.length + 1) : path;
+  path.startsWith(pagesDir) ? path.substr(pagesDir.length + 1) : path;
 
 const trimMDXExt = (path) =>
   (path.endsWith(".mdx") && path.substring(0, path.length - 4)) ||
