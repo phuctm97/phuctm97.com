@@ -6,14 +6,11 @@ import Tags from "~/components/tags";
 import Subscribe from "~/components/subscribe";
 import { PKG, ME } from "~/constants/share";
 
-const BlogLayout = ({
-  children,
-  ...props
-}: React.PropsWithChildren<BlogPost>) => {
+const BlogLayout = (props: React.PropsWithChildren<BlogPost>) => {
   const { title, description, tags, cover, url } = props;
   const date = new Date(props.date);
 
-  const [h1, ...contents] = Children.toArray(children);
+  const [h1, ...contents] = Children.toArray(props.children);
   return (
     <>
       <NextSeo
