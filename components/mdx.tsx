@@ -19,7 +19,6 @@ const Wrapper = ({ children, ...props }: React.PropsWithChildren<Content>) => {
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
-        <h1>{title}</h1>
         {children}
       </article>
     </>
