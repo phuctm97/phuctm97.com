@@ -9,7 +9,7 @@ module.exports = {
   plugins: [
     parse,
     ...configs.default.remarkPlugins,
-    ...configs.blog.extraRemarkPlugins.slice(0, 2), // Only use plugins that manipulates data.
+    ...configs.blog.extraRemarkPlugins.slice(0, 2), // Use only plugins that manipulates data.
     compileNothing,
   ],
 };
