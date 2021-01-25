@@ -1,12 +1,12 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
+import { BlogPost } from "~/interfaces/content";
 import Emoji from "~/components/emoji";
 import Subscribe from "~/components/subscribe";
-import { Post } from "@/next-blog/interfaces";
-import readBlog from "@/next-blog/read-all";
+import { readBlog } from "~/utils/content/read-blog";
 
 type Props = {
-  blog: Post[];
+  blog: BlogPost[];
 };
 
 const IndexPage = ({ blog }: Props) => (
@@ -51,8 +51,6 @@ const IndexPage = ({ blog }: Props) => (
 
 export default IndexPage;
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  return {
-    props: { blog: readBlog() },
-  };
-};
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+  props: { blog: readBlog() },
+});
