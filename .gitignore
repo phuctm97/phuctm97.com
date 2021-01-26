@@ -6,6 +6,9 @@ yarn-error.log*
 
 # Next.js
 /.next/
+/public/sitemap.xml
+/public/sitemap-*.xml
+/public/robots.txt
 
 # Misc
 .DS_Store
