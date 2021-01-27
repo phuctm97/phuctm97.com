@@ -16,3 +16,13 @@ export interface BlogPost extends Content {
     height?: number;
   };
 }
+
+export interface Cheatsheet extends Content {
+  icon: {
+    title: string;
+    hex: string;
+    source: string;
+    svg: string;
+    path: string;
+  };
+}

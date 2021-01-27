@@ -3,14 +3,17 @@ const syspath = require("path");
 const configs = {
   base: require("./unified/configs/base"),
   blog: require("./unified/configs/blog"),
+  cheatsheet: require("./unified/configs/cheatsheet"),
 };
 
-const dirs = {
+const folders = {
   blog: syspath.join(__dirname, "pages", "blog"),
+  cheatsheet: syspath.join(__dirname, "pages", "cheatsheets"),
 };
 
 const configureMDX = ({ realResource }) => {
-  if (realResource.startsWith(dirs.blog)) return configs.blog();
+  if (realResource.startsWith(folders.blog)) return configs.blog();
+  if (realResource.startsWith(folders.cheatsheet)) return configs.cheatsheet();
   return configs.base();
 };
 
