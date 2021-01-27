@@ -1,6 +1,7 @@
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import CheatsheetItem from "~/components/cheatsheet-item";
+import Subscribe from "~/components/subscribe";
 import { SiGit, SiPrettier } from "react-icons/si";
 
 const title = "Cheatsheets";
@@ -37,6 +38,7 @@ const CheatsheetsPage = () => (
         </Link>
       ))}
     </div>
+    <Subscribe className="mt-12 md:mt-16" />
   </>
 );
 

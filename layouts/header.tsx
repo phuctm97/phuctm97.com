@@ -4,6 +4,11 @@ import { FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "next-themes";
 import { BsCircle } from "react-icons/bs";
 
+const navigations = [
+  { href: "/blog", name: "Blog" },
+  { href: "/cheatsheets", name: "Cheatsheets" },
+];
+
 const Header = () => {
   const [isMounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -16,11 +21,13 @@ const Header = () => {
       <h1 className="font-semibold text-gray-900 dark:text-gray-100">
         <Link href="/">Home</Link>
       </h1>
-      <Link href="/cheatsheets">
-        <a className="ml-4 sm:ml-6 md:ml-8 text-gray-900 dark:text-gray-100">
-          Cheatsheets
-        </a>
-      </Link>
+      {navigations.map(({ href, name }) => (
+        <Link key={href} href={href}>
+          <a className="ml-4 sm:ml-6 md:ml-8 text-gray-900 dark:text-gray-100">
+            {name}
+          </a>
+        </Link>
+      ))}
       <button
         className="ml-auto p-2 rounded bg-gray-50 dark:bg-gray-950"
         aria-label="Toggle Dark mode"
