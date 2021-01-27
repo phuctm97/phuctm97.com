@@ -4,7 +4,7 @@ import vfile from "to-vfile";
 import { Content } from "~/interfaces/content";
 import { PAGES_DIR } from "~/constants/server";
 
-const defaultPreset = require("~/unified/presets/read-default");
+const defaultPreset = require("~/unified/presets/base-read");
 const defaultProcessor = unified().use(defaultPreset);
 
 export const readOne = <T extends Content = Content>(
