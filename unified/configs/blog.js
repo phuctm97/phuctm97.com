@@ -1,5 +1,5 @@
 const generatedCover = require("../plugins/generated-cover");
-const defaultExport = require("../plugins/export-layout");
+const defaultExport = require("../plugins/default-export");
 const config = require("./base");
 
 module.exports = () =>
@@ -25,6 +25,6 @@ module.exports = () =>
         },
       },
     },
-    extraExports: ["date", "tags", "cover"],
+    extraNamedExports: ["date", "tags", "cover"],
     extraRemarkPlugins: [generatedCover, [defaultExport, "~/layouts/blog"]],
   });
