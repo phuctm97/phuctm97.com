@@ -3,6 +3,7 @@ import Link from "next/link";
 import CheatsheetItem from "~/components/cheatsheet-item";
 import Subscribe from "~/components/subscribe";
 import { SiGit, SiPrettier } from "react-icons/si";
+import { ME } from "~/constants/share";
 
 const title = "Cheatsheets";
 const description = `A handful of snippets, hacks, tips, and cheatsheets I've used repeatedly and found useful.`;
@@ -24,7 +25,7 @@ const items = [
 
 const CheatsheetsPage = () => (
   <>
-    <NextSeo title={`${title} | Minh-Phuc Tran`} description={description} />
+    <NextSeo title={`${title} | ${ME.name}`} description={description} />
     <h1 className="font-extrabold text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
       {title}
     </h1>

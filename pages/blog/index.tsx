@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BlogPost } from "~/interfaces/content";
 import Subscribe from "~/components/subscribe";
 import { readBlog } from "~/utils/content/read-blog";
+import { ME } from "~/constants/share";
 
 type Props = {
   blog: BlogPost[];
@@ -14,7 +15,7 @@ const description = `Personal documentary: 100% authentic, good for inspiration,
 
 const BlogPage = ({ blog }: Props) => (
   <>
-    <NextSeo title={`${title} | Minh-Phuc Tran`} description={description} />
+    <NextSeo title={`${title} | ${ME.name}`} description={description} />
     <h1 className="font-extrabold text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
       {title}
     </h1>
