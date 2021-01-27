@@ -3,9 +3,9 @@ import { BlogPost } from "~/interfaces/content";
 import {
   readOne as readOneContent,
   readMultiple as readMultipleContent,
-} from "~/utils/content/read-content";
+} from "~/utils/content/read-base";
 
-const preset = require("~/unified/presets/read-blog");
+const preset = require("~/unified/presets/blog-read");
 const processor = unified().use(preset);
 
 export const readOne = (filepath: string) =>

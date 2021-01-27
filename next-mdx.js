@@ -1,7 +1,7 @@
 const syspath = require("path");
 
 const configs = {
-  default: require("./unified/configs/default"),
+  base: require("./unified/configs/base"),
   blog: require("./unified/configs/blog"),
 };
 
@@ -9,26 +9,9 @@ const dirs = {
   blog: syspath.join(__dirname, "pages", "blog"),
 };
 
-const exportData = require("./unified/plugins/export-data");
-
-const makeMDXOptions = ({ realResource }) => {
-  const extraRemarkPlugins = [];
-  const extraRehypePlugins = [];
-  const extraExports = [];
-
-  if (realResource.startsWith(dirs.blog)) {
-    extraRemarkPlugins.push(...configs.blog.extraRemarkPlugins);
-    extraExports.push(...configs.blog.extraExports);
-  }
-
-  return {
-    remarkPlugins: [
-      ...configs.default.remarkPlugins,
-      ...extraRemarkPlugins,
-      [exportData, [...configs.default.exports, ...extraExports]],
-    ],
-    rehypePlugins: [...configs.default.rehypePlugins, ...extraRehypePlugins],
-  };
+const configureMDX = ({ realResource }) => {
+  if (realResource.startsWith(dirs.blog)) return configs.blog();
+  return configs.base();
 };
 
 module.exports = (next = {}) =>
@@ -40,7 +23,7 @@ module.exports = (next = {}) =>
           appOptions.defaultLoaders.babel,
           {
             loader: require.resolve("@mdx-js/loader"),
-            options: makeMDXOptions(info),
+            options: configureMDX(info),
           },
         ],
       });
