@@ -1,7 +1,7 @@
 const parse = require("remark-parse");
 const compileNothing = require("../plugins/compile-nothing");
-const { remarkPlugins } = require("../configs/default");
+const config = require("../configs/base");
 
 module.exports = {
-  plugins: [parse, ...remarkPlugins, compileNothing],
+  plugins: [parse, ...config().remarkPlugins, compileNothing],
 };
