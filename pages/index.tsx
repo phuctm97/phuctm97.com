@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import { BlogPost } from "~/interfaces/content";
+import SEO from "~/components/seo";
 import Emoji from "~/components/emoji";
 import Subscribe from "~/components/subscribe";
 import { readBlog } from "~/utils/content/read-blog";
@@ -11,6 +12,7 @@ type Props = {
 
 const IndexPage = ({ blog }: Props) => (
   <>
+    <SEO />
     <h1 className="font-extrabold text-2xl tracking-tighter text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
       Hey, I’m Minh-Phuc Tran
     </h1>

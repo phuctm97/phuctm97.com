@@ -1,9 +1,8 @@
-import { NextSeo } from "next-seo";
 import Link from "next/link";
+import SEO from "~/components/seo";
 import CheatsheetItem from "~/components/cheatsheet-item";
 import Subscribe from "~/components/subscribe";
 import { SiGit, SiPrettier } from "react-icons/si";
-import { ME } from "~/constants/share";
 
 const title = "Cheatsheets";
 const description = `A handful of snippets, hacks, tips, and cheatsheets I've used repeatedly and found useful.`;
@@ -25,7 +24,7 @@ const items = [
 
 const CheatsheetsPage = () => (
   <>
-    <NextSeo title={`${title} | ${ME.name}`} description={description} />
+    <SEO title={title} description={description} />
     <h1 className="font-extrabold text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
       {title}
     </h1>
