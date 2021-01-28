@@ -41,7 +41,7 @@ module.exports = {
             "pre > code": {
               color: theme("colors.gray.800"),
             },
-            ".code-toolbar": {
+            "div.code-toolbar": {
               position: "relative",
               "& > .toolbar": {
                 position: "absolute",
