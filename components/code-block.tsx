@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import copy from "copy-to-clipboard";
+import { SECONDS } from "~/constants/share";
 
-const delayCopied = 5000;
+const delayCopied = 5 * SECONDS;
 
 const CodeBlock = (props: React.HTMLProps<HTMLPreElement>) => {
   const ref = useRef<HTMLPreElement>(null);
