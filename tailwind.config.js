@@ -41,6 +41,35 @@ module.exports = {
             "pre > code": {
               color: theme("colors.gray.800"),
             },
+            "div.code-toolbar": {
+              position: "relative",
+              "& > .toolbar": {
+                position: "absolute",
+                top: 0,
+                right: 0,
+                marginTop: theme("spacing[0.5]"),
+                marginRight: theme("spacing[1.5]"),
+                opacity: 0,
+                transition: "opacity 0.2s ease-in-out",
+                "button.copy": {
+                  fontSize: theme("fontSize.sm"),
+                  paddingLeft: theme("spacing.1"),
+                  paddingRight: theme("spacing.1"),
+                  borderRadius: theme("borderRadius"),
+                  opacity: 0.7,
+                  "&:hover": {
+                    opacity: 1,
+                  },
+                  "&:disabled": {
+                    cursor: "not-allowed",
+                    opacity: 0.7,
+                  },
+                },
+              },
+              "&:hover > .toolbar": {
+                opacity: 1,
+              },
+            },
             ".info img, .info p": {
               marginTop: 0,
               marginBottom: 0,

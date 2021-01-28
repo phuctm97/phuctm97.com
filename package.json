@@ -49,6 +49,7 @@
     "@tailwindcss/typography": "^0.4.0",
     "autoprefixer": "^10.2.3",
     "classnames": "^2.2.6",
+    "copy-to-clipboard": "^3.3.1",
     "flatten-tailwindcss-theme": "^0.1.1",
     "glob": "^7.1.6",
     "lodash": "^4.17.20",

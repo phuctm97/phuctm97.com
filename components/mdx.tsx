@@ -35,3 +35,4 @@ const Anchor = ({ href, ...htmlAttrs }: React.HTMLProps<HTMLAnchorElement>) =>
   );
 
 export { Wrapper as wrapper, Anchor as a };
+export { default as pre } from "~/components/code-block";
