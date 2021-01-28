@@ -1,23 +1,12 @@
-import { NextSeo } from "next-seo";
 import { Cheatsheet } from "~/interfaces/content";
+import SEO from "~/components/seo";
 import Subscribe from "~/components/subscribe";
-import { ME } from "~/constants/share";
 
 const CheatsheetLayout = (props: React.PropsWithChildren<Cheatsheet>) => {
-  const { title, description, url, icon, children } = props;
+  const { title, description, icon, children } = props;
   return (
     <>
-      <NextSeo
-        title={`${title} | ${ME.name}`}
-        description={description}
-        canonical={url}
-        openGraph={{
-          type: "article",
-          title: `${title} | ${ME.name}`,
-          description,
-          url,
-        }}
-      />
+      <SEO title={title} description={description} />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
         <svg
           role="img"
