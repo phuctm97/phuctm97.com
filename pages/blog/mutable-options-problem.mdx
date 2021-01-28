@@ -1,0 +1,231 @@
+---
+date: 2021-01-28
+tags: [webdev, mdx, nextjs, javascript]
+cover:
+  icons: [Markdown, Webpack]
+---
+
+# MDX (Unified) Mutating Options Object Cost Me 2 Hours
+
+A couple of days ago, I got into a very annoying issue while using [MDX] in [my
+Next.js website][my website]. It cost me almost 2 hours to resolve.
+
+## Context
+
+First, let's quickly go through some technical concepts in case you didn't work
+with MDX and Next.js a lot:
+
+- MDX is essentially a set of [unified] plugins. [unified] is a generic
+  interface for processing content as structured data. Thanks to this, I was
+  able to write granular plugins to customize how I use MDX quite extensively.
+
+- Next.js is built on top of Webpack and loads MDX from a Webpack loader
+  (`@mdx-js/loader`).
+
+- I have different plugins and configurations for different MDX documents based
+  on their file paths so that I can have custom syntaxes for different types of
+  documents.
+
+In order to achieve that I have a custom Next.js plugin that will resolve into
+different MDX options for different documents:
+
+```js
+const configureMDX = ({ realResource }) => {
+  if (realResource.startsWith(folders.blog)) return configs.blog;
+  if (realResource.startsWith(folders.cheatsheet)) return configs.cheatsheet;
+  return configs.base;
+};
+
+module.exports = (next = {}) =>
+  Object.assign({}, next, {
+    webpack(config, appOptions) {
+      config.module.rules.push({
+        test: /\.(md|mdx)$/,
+        use: (info) => [
+          appOptions.defaultLoaders.babel,
+          {
+            loader: require.resolve("@mdx-js/loader"),
+            options: configureMDX(info),
+          },
+        ],
+      });
+
+      if (typeof next.webpack === "function") {
+        return next.webpack(config, appOptions);
+      }
+
+      return config;
+    },
+  });
+```
+
+`configs.base`, `configs.blog`, and `configs.cheatsheet` are just typical MDX
+options:
+
+```js
+// configs.base
+module.exports = {
+  remarkPlugins: [
+    frontmatter,
+    parseFrontmatter,
+    [
+      extractFrontmatter,
+      {
+        title: { type: "string" },
+        description: { type: "string" },
+      },
+    ],
+    unwrapTexts,
+    titleFromContents,
+    descriptionFromContents,
+    pageURLElements,
+    [namedExports, ["title", "description", "url", "path", "folder", "slug"]],
+  ],
+  rehypePlugins: [prism, a11yEmojis],
+};
+```
+
+```js
+// configs.blog
+module.exports = {
+  remarkPlugins: [
+    frontmatter,
+    parseFrontmatter,
+    [
+      extractFrontmatter,
+      {
+        title: { type: "string" },
+        description: { type: "string" },
+        date: { type: "string", format: "date", required: true },
+        tags: {
+          type: "array",
+          items: { type: "string", minLength: 1, required: true },
+          uniqueItems: true,
+          maxItems: 4,
+        },
+        cover: {
+          type: "object",
+          properties: {
+            url: { type: "string", format: "url" },
+            icons: {
+              type: "array",
+              items: { type: "string", minLength: 1, required: true },
+              uniqueItems: true,
+              maxItems: 3,
+            },
+          },
+        },
+      },
+    ],
+    unwrapTexts,
+    titleFromContents,
+    descriptionFromContents,
+    pageURLElements,
+    generatedCover,
+    [
+      namedExports,
+      [
+        "title",
+        "description",
+        "url",
+        "path",
+        "folder",
+        "slug",
+        "date",
+        "tags",
+        "cover",
+      ],
+    ],
+    [defaultExport, "~/layouts/blog"],
+  ],
+  rehypePlugins: [prism, a11yEmojis],
+};
+```
+
+It's quite natural, right? Indeed, it worked just fine with Next.js dev server.
+It only failed when bulding for production.
+
+## The issue
+
+Basically, I used the plugin `extractFrontmatter` to both validate and expose
+attributes from frontmatter as props to my layout component. Only blog documents
+required `date` attribute. Nonetheless, when I built for production, all
+documents required all attributes from different configurations combined! It was
+as if someone merged all the configurations together before executing the build
+process, despite the fact that the configuration code I wrote are completely
+side-effect free - all functions are pure and just return values without
+modifying anything.
+
+I started to look into `@mdx-js/loader` code, then `@mdx-js/mdx` code, and they
+all looked just fine.
+
+So, I had to debug further to see when the options got modified (I actually just
+did `console.log`).
+
+All values returned from my `configureMDX` are correct, so there was nothing
+wrong here. These values will then be sent to `@mdx-js/loader` invocations and
+it was magically modified somehow right at the beginning of `@mdx-js/loader`.
+
+I really had no idea how it worked this time and just did tons of different
+guesses, made changes upon and saw how it turned out 😥.
+
+## The fix
+
+Thanks god! After ~2 hours, I had (probably) a correct guess and managed to fix
+the issue.
+
+Webpack code didn't look like modifying anything (although the logs showed
+changes happened right at the beginning of a Webpack loader), MDX code didn't
+look like modifying anything either, so I guessed Unified did it. I jumped into
+[unified repository](https://github.com/unifiedjs/unified/blob/8f135d052c9d9e5b2c4c2217815c672012e71707/index.js#L228-L240),
+and... yeah, it mutated the plugin options 🥶.
+
+```js
+function addPlugin(plugin, value) {
+  var entry = find(plugin);
+
+  if (entry) {
+    if (plain(entry[1]) && plain(value)) {
+      value = extend(entry[1], value); // this equals Object.assign(...)
+    }
+
+    entry[1] = value;
+  } else {
+    attachers.push(slice.call(arguments));
+  }
+}
+```
+
+But really? All returned values from my `configureMDX` are correct, when this
+mutation takes place? I'm still not sure, at this time, I realy just want to fix
+the issue and get rid of it.
+
+So, to avoid the mutation, I simply changed my configuration code from objects
+to functions returning the object, this way all mutations will be discarded:
+
+```js
+const configureMDX = ({ realResource }) => {
+  if (realResource.startsWith(folders.blog)) return configs.blog();
+  if (realResource.startsWith(folders.cheatsheet)) return configs.cheatsheet();
+  return configs.base();
+};
+```
+
+My guess was that Next.js or Webpack resolves configurations for every file
+before invoking loaders, this way all values returned by `configureMDX` are
+correct before going into loaders, then right after the first loader execution,
+it got mutated.
+
+## Final thought
+
+This post isn't to blame anyone, I really enjoy using the Unified and MDX so
+far, and I appreciate the authors' works a lot. This post is just a rare story
+that I think other developer folks may find interesting. The lesson from this is
+to **implement your code in a way that as side-effect free as possible**,
+because it makes the flow crystal clear and intuitive, side effects make
+debugging very hard! When you can't avoid side effects, make sure to document
+and highlight it!
+
+[my website]: /
+[mdx]: https://mdxjs.com
+[unified]: https://unifiedjs.com
