@@ -162,16 +162,16 @@ all looked just fine.
 So, I had to debug further to see when the options got modified (I actually just
 did `console.log`).
 
-All values returned from my `configureMDX` are correct, so there was nothing
+All values returned from my `configureMDX` is correct, so there was nothing
 wrong here. These values will then be sent to `@mdx-js/loader` invocations and
 it was magically modified somehow right at the beginning of `@mdx-js/loader`.
 
 I really had no idea how it worked this time and just did tons of different
-guesses, made changes upon and saw how it turned out 😥.
+guesses, made changes upon, and saw how it turned out 😥.
 
 ## The fix
 
-Thanks god! After ~2 hours, I had (probably) a correct guess and managed to fix
+Thank god! After ~2 hours, I had (probably) a correct guess and managed to fix
 the issue.
 
 Webpack code didn't look like modifying anything (although the logs showed
@@ -197,8 +197,8 @@ function addPlugin(plugin, value) {
 ```
 
 But really? All returned values from my `configureMDX` are correct, when this
-mutation takes place? I'm still not sure, at this time, I realy just want to fix
-the issue and get rid of it.
+mutation takes place? I'm still not sure, at this time, I really just want to
+fix the issue and get rid of it.
 
 So, to avoid the mutation, I simply changed my configuration code from objects
 to functions returning the object, this way all mutations will be discarded:
