@@ -43,7 +43,7 @@ arcordingly.
 
 ### Subscribe to `onscroll` using hook
 
-```ts
+```tsx:header.tsx
 const Header = () => {
   useEffect(() => {
     const handler = () => {
@@ -64,7 +64,7 @@ function when the component is unmounted to avoid memory leaks.
 
 ### Check for scroll position
 
-```ts
+```tsx:header.tsx
 const Header = () => {
   const [isShrunk, setShrunk] = useState(false);
 

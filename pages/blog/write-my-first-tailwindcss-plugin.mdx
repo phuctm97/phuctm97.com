@@ -48,7 +48,7 @@ with TailwindCSS is:
 
 So, I wrote a variant to support it. It turned out to be quite simple:
 
-```js
+```js:tailwindcss-autofill.js
 const plugin = require("tailwindcss/plugin");
 
 const autofill = plugin(({ addVariant, e }) => {
@@ -84,7 +84,7 @@ more][tailwindcss-autofill].
 Now, what I needed to do is to just add this plugin into `plugins` in my
 **tailwind.config.js**.
 
-```js
+```js:tailwind.config.js
 module.exports = {
   // ...
   plugins: [
@@ -121,7 +121,7 @@ utilities are classes to conveniently style elements like `text-gray-100`,
 
 Here is the code of one of them:
 
-```js
+```js:tailwindcss-text-fill.js
 const plugin = require("tailwindcss/plugin");
 const flatten = require("flatten-tailwindcss-theme");
 

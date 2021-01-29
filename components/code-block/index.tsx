@@ -1,10 +1,16 @@
 import { useRef, useState } from "react";
 import copy from "copy-to-clipboard";
+import WithTitle from "~/components/code-block/with-title";
+import NoTitle from "~/components/code-block/no-title";
 import { SECONDS } from "~/constants/share";
 
 const delayCopied = 5 * SECONDS;
 
-const CodeBlock = (props: React.HTMLProps<HTMLPreElement>) => {
+interface Props extends React.HTMLProps<HTMLPreElement> {
+  "data-title"?: string;
+}
+
+const CodeBlock = ({ "data-title": title, ...props }: Props) => {
   const ref = useRef<HTMLPreElement>(null);
   const [isCopied, setCopied] = useState(false);
 
@@ -18,15 +24,15 @@ const CodeBlock = (props: React.HTMLProps<HTMLPreElement>) => {
     setTimeout(() => setCopied(false), delayCopied);
   };
 
+  const Container = title ? WithTitle : NoTitle;
   return (
-    <div className="code-toolbar">
+    <Container
+      title={title || ""}
+      isCopied={isCopied}
+      onClickCopy={onClickCopy}
+    >
       <pre ref={ref} {...props} />
-      <div className="toolbar">
-        <button className="copy" onClick={onClickCopy} disabled={isCopied}>
-          {isCopied ? "Copied" : "Copy"}
-        </button>
-      </div>
-    </div>
+    </Container>
   );
 };
 
