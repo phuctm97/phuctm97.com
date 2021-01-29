@@ -56,7 +56,7 @@ So, I figure the best way to use it:
 My website is powered by [Next.js], however the same concept is appliable to any
 other React-based project:
 
-```js
+```js:next.config.js
 const withPreact = (next = {}) =>
   Object.assign({}, next, {
     webpack(config, options) {

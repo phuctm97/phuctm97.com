@@ -20,8 +20,7 @@ To enable Plausible, you'll need place a `script` tag in `head` of your HTML
 document. To achieve that in Next.js, I create a component for easier
 maintainance:
 
-```tsx
-// ~/components/plausbile-script.tsx
+```tsx:components/plausible-script.tsx
 import Head from "next/head";
 import PKG from "~/package.json"; // Load configuration from package.json.
 
@@ -41,8 +40,7 @@ export default PlausibleScript;
 
 Then render it in my `pages/_app.(jsx|tsx)`:
 
-```tsx
-// ~/pages/_app.tsx
+```tsx:pages/_app.tsx
 import PlausibleScript from "~/components/plausible-script";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
@@ -64,8 +62,7 @@ instead it references values from `package.json`. Personally, `package.json` is
 a great place to put configuration for a site or package _(the name said it,
 right?)_, `package.json` isn't just for npm.
 
-```json
-// ~/package.json
+```json:package.json
 {
   // ...
   "description": "🏚 Home on the Web — Everything I learned and created: software dev, programming tutorials, career, startups, and open-source.",
@@ -90,8 +87,7 @@ Finally, I don't want views on my local and preview environment to be counted,
 Plausible should only be enabled in production. To achieve that, I simply update
 my `_app.tsx`:
 
-```tsx
-// ~/pages/_app.tsx
+```tsx:pages/_app.tsx
 import PlausibleScript from "~/components/plausible-script";
 import { IS_PRODUCTION } from "~/constants";
 
@@ -109,8 +105,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
 
 Because I'm hosting my site on [Vercel], `IS_PRODUCTION` is:
 
-```ts
-// ~/constants.ts
+```ts:constants.ts
 export const IS_PRODUCTION =
   process.env.NODE_ENV === "production" &&
   process.env.VERCEL_ENV === "production";
@@ -121,9 +116,9 @@ and running your applications for specific environments (`preview` and
 `production`). To be able to reference it client-side in a Next.js application,
 you'll need to modify your `next.config.js`:
 
-```js
+```js:next.config.js
 module.exports = {
-  // Other configurations.
+  // Other configurations...
   env: {
     VERCEL_ENV: process.env.VERCEL_ENV,
   },

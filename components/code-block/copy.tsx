@@ -5,23 +5,21 @@ type Props = {
   onClickCopy: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const iconStyles = {
-  className: "fill-current",
-  size: "1.2em",
-};
+const Copy = ({ isCopied, onClickCopy }: Props) => {
+  const label = isCopied ? "Copied" : "Copy";
+  const Icon = isCopied ? MdDone : MdContentCopy;
 
-const Copy = ({ isCopied, onClickCopy }: Props) => (
-  <button
-    className="opacity-70 hover:opacity-100 disabled:opacity-100 disabled:cursor-default"
-    onClick={onClickCopy}
-    disabled={isCopied}
-  >
-    {isCopied ? (
-      <MdDone aria-label="Copied" {...iconStyles} />
-    ) : (
-      <MdContentCopy aria-label="Copy" {...iconStyles} />
-    )}
-  </button>
-);
+  return (
+    <button
+      className="opacity-70 hover:opacity-100 disabled:opacity-100 disabled:cursor-default"
+      onClick={onClickCopy}
+      disabled={isCopied}
+      title={label}
+      aria-label={label}
+    >
+      <Icon className="fill-current" size="1.2em" />
+    </button>
+  );
+};
 
 export default Copy;

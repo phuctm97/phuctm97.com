@@ -62,8 +62,7 @@ module.exports = (next = {}) =>
 `configs.base`, `configs.blog`, and `configs.cheatsheet` are just typical MDX
 options:
 
-```js
-// configs.base
+```js:configs/base.js
 module.exports = {
   remarkPlugins: [
     frontmatter,
@@ -85,8 +84,7 @@ module.exports = {
 };
 ```
 
-```js
-// configs.blog
+```js:configs/blog.js
 module.exports = {
   remarkPlugins: [
     frontmatter,
@@ -180,7 +178,7 @@ look like modifying anything either, so I guessed Unified did it. I jumped into
 [unified repository](https://github.com/unifiedjs/unified/blob/8f135d052c9d9e5b2c4c2217815c672012e71707/index.js#L228-L240),
 and... yeah, it mutated the plugin options 🥶.
 
-```js
+```js:unified/index.js
 function addPlugin(plugin, value) {
   var entry = find(plugin);
 
@@ -203,7 +201,7 @@ fix the issue and get rid of it.
 So, to avoid the mutation, I simply changed my configuration code from objects
 to functions returning the object, this way all mutations will be discarded:
 
-```js
+```js:next.config.js
 const configureMDX = ({ realResource }) => {
   if (realResource.startsWith(folders.blog)) return configs.blog();
   if (realResource.startsWith(folders.cheatsheet)) return configs.cheatsheet();

@@ -70,7 +70,7 @@ useful for personal site/portfolio (I use it on my website) and business blogs.
 
 ### App Link
 
-[img-nodejs-dwkvo.ondigitalocean.app](https://img-nodejs-dwkvo.ondigitalocean.app)
+[img.phuctm97.com](https://img-nodejs-dwkvo.ondigitalocean.app)
 
 It's an API service, so there's no UI, the API is served at `/api/v1` and
 `/api/v2`, the URL above will redirect you to [the Github
@@ -84,26 +84,26 @@ each URL on your browser to see it yourself.
 #### With title and brands' logos
 
 ```
-https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean
+https://img.phuctm97.com/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean
 ```
 
-![Image 1](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean)
+![Image 1](https://img.phuctm97.com/api/v2/%F0%9F%97%BE%20**Imagegen**%20as%20a%20Service?&icons=Node.js&icons=Docker&icons=DigitalOcean)
 
 #### With Markdown and brands' logos
 
 ```
-https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to
+https://img.phuctm97.com/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to
 ```
 
-![Image 2](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi!**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to)
+![Image 2](https://img.phuctm97.com/api/v2/%F0%9F%91%8B%F0%9F%8F%BB**Hi!**%20This%20is%20a%20_generated%20image_%20with%20**Markdown**%20support?icons=dev.to)
 
 #### With Dark mode
 
 ```
-https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert
+https://img.phuctm97.com/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert
 ```
 
-![Image 3](https://img-nodejs-dwkvo.ondigitalocean.app/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert)
+![Image 3](https://img.phuctm97.com/api/v2/%F0%9F%8C%99%20**Dark%20mode**%20is%20supported,%20too!?theme=dark&icons=dev.to&colors=invert)
 
 ### Link to Source Code
 
@@ -169,7 +169,7 @@ See [img-nodejs#API](https://github.com/phuctm97/img-nodejs#api).
 To be able to render dynamic images, I used [Puppeteer] to render HTML in a
 headless Chrome, then take screenshots and render them back to clients.
 
-```ts
+```ts:pages/api/v1.ts
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const props = parseRequest(req);
   const html = getHTML(props);
@@ -198,7 +198,7 @@ need to install and configure a Chrome instance yourself. So, to make it easier
 for others, I made a Docker image to prepare everything for you 🥳. Security was
 also taken care of.
 
-```dockerfile
+```dockerfile:Dockerfile
 FROM alpine:3.12
 
 # Install dependencies to run Puppeteer in Alpine.
