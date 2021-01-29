@@ -14,6 +14,9 @@ const namedExports = require("../plugins/named-exports");
 const prism = require("@mapbox/rehype-prism");
 const a11yEmojis = require("rehype-accessible-emojis").rehypeAccessibleEmojis;
 
+// This project's Rehype plugins.
+const preTitles = require("../plugins/pre-titles");
+
 const defaultOpts = {
   extraFrontmatterAttrs: {},
   extraNamedExports: [],
@@ -59,6 +62,6 @@ module.exports = (opts) => {
         ],
       ],
     ],
-    rehypePlugins: [prism, a11yEmojis, ...extraRehypePlugins],
+    rehypePlugins: [preTitles, prism, a11yEmojis, ...extraRehypePlugins],
   };
 };

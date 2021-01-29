@@ -29,7 +29,7 @@ with MDX and Next.js a lot:
 In order to achieve that I have a custom Next.js plugin that will resolve into
 different MDX options for different documents:
 
-```js
+```js:next.config.js
 const configureMDX = ({ realResource }) => {
   if (realResource.startsWith(folders.blog)) return configs.blog;
   if (realResource.startsWith(folders.cheatsheet)) return configs.cheatsheet;

@@ -5,6 +5,7 @@ const autofill = require("tailwindcss-autofill");
 const textFill = require("tailwindcss-text-fill");
 const shadowFill = require("tailwindcss-shadow-fill");
 const lineClamp = require("@tailwindcss/line-clamp");
+const { em } = require("./styles/utils");
 
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],
@@ -41,33 +42,12 @@ module.exports = {
             "pre > code": {
               color: theme("colors.gray.800"),
             },
-            "div.code-toolbar": {
-              position: "relative",
-              "& > .toolbar": {
-                position: "absolute",
-                top: 0,
-                right: 0,
-                marginTop: theme("spacing[0.5]"),
-                marginRight: theme("spacing[1.5]"),
-                opacity: 0,
-                transition: "opacity 0.2s ease-in-out",
-                "button.copy": {
-                  fontSize: theme("fontSize.sm"),
-                  paddingLeft: theme("spacing.1"),
-                  paddingRight: theme("spacing.1"),
-                  borderRadius: theme("borderRadius"),
-                  opacity: 0.7,
-                  "&:hover": {
-                    opacity: 1,
-                  },
-                  "&:disabled": {
-                    cursor: "default",
-                    opacity: 0.7,
-                  },
-                },
-              },
-              "&:hover > .toolbar": {
-                opacity: 1,
+            ".code-title": {
+              marginTop: em(24, 14),
+              "& > pre": {
+                marginTop: 0,
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
               },
             },
             ".info img, .info p": {
@@ -155,6 +135,8 @@ module.exports = {
     extend: {
       typography: ["dark"],
       backgroundOpacity: ["dark"],
+      textOpacity: ["disabled", "dark"],
+      opacity: ["disabled"],
       cursor: ["disabled"],
       textFill: ["autofill", "dark"],
       shadowFill: ["autofill", "dark"],
