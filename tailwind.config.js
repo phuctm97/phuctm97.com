@@ -61,7 +61,7 @@ module.exports = {
                     opacity: 1,
                   },
                   "&:disabled": {
-                    cursor: "not-allowed",
+                    cursor: "default",
                     opacity: 0.7,
                   },
                 },
