@@ -2,8 +2,10 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import { BlogPost } from "~/interfaces/content";
 import SEO from "~/components/seo";
+import Headings from "~/components/headings";
 import Emoji from "~/components/emoji";
 import Subscribe from "~/components/subscribe";
+import { ME } from "~/constants/share";
 import { readBlog } from "~/utils/content/read-blog";
 
 type Props = {
@@ -13,17 +15,17 @@ type Props = {
 const IndexPage = ({ blog }: Props) => (
   <>
     <SEO />
-    <h1 className="font-extrabold text-2xl tracking-tighter text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
-      Hey, I’m Minh-Phuc Tran
-    </h1>
-    <h2 className="mt-4 md:mt-6 text-sm sm:text-base">
-      I'm a software engineer. Welcome to my digital garden{" "}
-      <Emoji label="waving hand">👋🏻</Emoji>
-    </h2>
-    <h3 className="mt-2 text-sm sm:text-base">
-      On this site, I document everything I learned and created. You may expect
-      to see <strong>3 articles per week</strong>.
-    </h3>
+    <Headings>
+      <Headings.H1 isTighter>Hey, I’m {ME.name}</Headings.H1>
+      <Headings.H2>
+        I'm a software engineer. Welcome to my digital garden{" "}
+        <Emoji label="waving hand">👋🏻</Emoji>
+      </Headings.H2>
+      <Headings.H3>
+        On this site, I document everything I learned and created. You may
+        expect to see <strong>3 articles per week</strong>.
+      </Headings.H3>
+    </Headings>
     <Subscribe className="mt-8" />
     <section className="mt-10 md:mt-12 lg:mb-24">
       <h2 className="font-bold tracking-tight text-2xl text-gray-900 dark:text-gray-100 sm:text-3xl">

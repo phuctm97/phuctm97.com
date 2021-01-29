@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SEO from "~/components/seo";
+import Headings from "~/components/headings";
 import CheatsheetItem from "~/components/cheatsheet-item";
 import Subscribe from "~/components/subscribe";
 import { SiGit, SiPrettier } from "react-icons/si";
@@ -25,10 +26,10 @@ const items = [
 const CheatsheetsPage = () => (
   <>
     <SEO title={title} description={description} />
-    <h1 className="font-extrabold text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
-      {title}
-    </h1>
-    <h2 className="mt-4 md:mt-6">{description}</h2>
+    <Headings>
+      <Headings.H1>{title}</Headings.H1>
+      <Headings.H2>{description}</Headings.H2>
+    </Headings>
     <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
       {items.map(({ slug, ...item }) => (
         <Link key={slug} href={`/cheatsheets/${slug}`}>

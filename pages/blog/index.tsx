@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import { BlogPost } from "~/interfaces/content";
 import SEO from "~/components/seo";
+import Headings from "~/components/headings";
 import Subscribe from "~/components/subscribe";
 import { readBlog } from "~/utils/content/read-blog";
 
@@ -15,10 +16,10 @@ const description = `Personal documentary: 100% authentic, good for inspiration,
 const BlogPage = ({ blog }: Props) => (
   <>
     <SEO title={title} description={description} />
-    <h1 className="font-extrabold text-2xl tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl md:text-5xl">
-      {title}
-    </h1>
-    <h2 className="mt-4 md:mt-6">{description}</h2>
+    <Headings>
+      <Headings.H1>{title}</Headings.H1>
+      <Headings.H2>{description}</Headings.H2>
+    </Headings>
     {blog.map(({ title, description, path }) => (
       <article key={path} className="mt-8 md:mt-10">
         <Link href={path}>
