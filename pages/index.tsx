@@ -5,6 +5,7 @@ import SEO from "~/components/seo";
 import Headings from "~/components/headings";
 import Emoji from "~/components/emoji";
 import Subscribe from "~/components/subscribe";
+import { ME } from "~/constants/share";
 import { readBlog } from "~/utils/content/read-blog";
 
 type Props = {
@@ -15,7 +16,7 @@ const IndexPage = ({ blog }: Props) => (
   <>
     <SEO />
     <Headings>
-      <Headings.H1 isTighter>Hey, I’m Minh-Phuc Tran</Headings.H1>
+      <Headings.H1 isTighter>Hey, I’m {ME.name}</Headings.H1>
       <Headings.H2>
         I'm a software engineer. Welcome to my digital garden{" "}
         <Emoji label="waving hand">👋🏻</Emoji>
