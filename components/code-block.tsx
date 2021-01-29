@@ -23,7 +23,7 @@ const CodeBlock = (props: React.HTMLProps<HTMLPreElement>) => {
       <pre ref={ref} {...props} />
       <div className="toolbar">
         <button className="copy" onClick={onClickCopy} disabled={isCopied}>
-          {isCopied ? "Copied!" : "Copy"}
+          {isCopied ? "Copied" : "Copy"}
         </button>
       </div>
     </div>
