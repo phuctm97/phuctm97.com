@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FiSun, FiMoon } from "react-icons/fi";
-import { useTheme } from "next-themes";
 import { BsCircle } from "react-icons/bs";
+import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
+import classNames from "classnames";
 
-const navigations = [
+const navigation = [
+  { href: "/", name: "Home" },
   { href: "/blog", name: "Blog" },
   { href: "/cheatsheets", name: "Cheatsheets" },
 ];
@@ -16,14 +19,20 @@ const Header = () => {
   const { theme, setTheme } = useTheme();
   const onClickToggleDark = () => setTheme(theme === "dark" ? "light" : "dark");
 
+  const { pathname } = useRouter();
   return (
     <nav className="sticky top-0 z-10 p-4 max-w-2xl mx-auto my-4 flex flex-row items-center backdrop-blur md:px-0 lg:max-w-3xl">
-      <h1 className="font-semibold text-gray-900 dark:text-gray-100">
-        <Link href="/">Home</Link>
-      </h1>
-      {navigations.map(({ href, name }) => (
+      {navigation.map(({ href, name }, index) => (
         <Link key={href} href={href}>
-          <a className="ml-4 sm:ml-6 md:ml-8 text-gray-900 dark:text-gray-100">
+          <a
+            className={classNames(
+              "sm:ml-6 md:ml-8 text-gray-900 dark:text-gray-100",
+              {
+                "ml-4": index > 0,
+                "font-semibold cursor-not-allowed": pathname === href,
+              }
+            )}
+          >
             {name}
           </a>
         </Link>
