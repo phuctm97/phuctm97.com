@@ -25,7 +25,7 @@ module.exports = {
             "blockquote p:last-of-type::after": false,
             "h1:first-of-type": {
               color: theme("colors.gray.900"),
-              fontSize: theme("fontSize.2xl"),
+              fontSize: theme("fontSize.3xl[0]"),
               fontWeight: theme("fontWeight.extrabold"),
               letterSpacing: theme("letterSpacing.tight"),
               marginBottom: theme("spacing.8"),
@@ -50,7 +50,7 @@ module.exports = {
         sm: {
           css: {
             "h1:first-of-type": {
-              fontSize: theme("fontSize.3xl"),
+              fontSize: theme("fontSize.2xl[0]"),
               lineHeight: theme("lineHeight.none"),
             },
             ".code-block": {
@@ -61,7 +61,7 @@ module.exports = {
         md: {
           css: {
             "h1:first-of-type": {
-              fontSize: theme("fontSize.5xl"),
+              fontSize: theme("fontSize.5xl[0]"),
             },
           },
         },
