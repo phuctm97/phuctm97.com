@@ -22,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
-    <ThemeProvider attribute="class" enableSystem={false}>
+    <ThemeProvider attribute="class" enableSystem={true}>
       <MDXProvider components={MDXComponents}>
         <Header />
         <Main>

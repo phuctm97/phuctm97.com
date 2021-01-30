@@ -9,9 +9,18 @@ const delayCopied = 4 * SECONDS;
 
 interface Props extends React.HTMLProps<HTMLPreElement> {
   "data-title"?: string;
+  "data-icon"?: string;
 }
 
-const CodeBlock = ({ "data-title": title, className, ...props }: Props) => {
+const getLang = (className?: string) =>
+  className?.startsWith("language-") ? className.substr(9) : "code";
+
+const CodeBlock = ({
+  "data-title": title,
+  "data-icon": icon,
+  className,
+  ...props
+}: Props) => {
   const ref = useRef<HTMLPreElement>(null);
 
   const [isCopied, setCopied] = useState(false);
@@ -27,7 +36,7 @@ const CodeBlock = ({ "data-title": title, className, ...props }: Props) => {
   const copyProps = { isCopied, onClickCopy };
 
   return title ? (
-    <WithTitle title={title} {...copyProps}>
+    <WithTitle title={title} icon={icon || getLang(className)} {...copyProps}>
       <pre ref={ref} className={classNames("content", className)} {...props} />
     </WithTitle>
   ) : (
