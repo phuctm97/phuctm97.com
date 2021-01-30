@@ -50,17 +50,6 @@ module.exports = {
                 borderTopRightRadius: 0,
               },
             },
-            ".info img, .info p": {
-              marginTop: 0,
-              marginBottom: 0,
-            },
-            ".info p": {
-              color: theme("colors.gray.600"),
-              fontWeight: theme("fontWeight.light"),
-            },
-            ".info a": {
-              textDecoration: "none",
-            },
             ".tags p": {
               marginTop: 0,
               marginBottom: theme("spacing.1"),
@@ -122,9 +111,6 @@ module.exports = {
             },
             "pre > code": {
               color: theme("colors.gray.200"),
-            },
-            ".info p": {
-              color: theme("colors.gray.500"),
             },
           },
         },

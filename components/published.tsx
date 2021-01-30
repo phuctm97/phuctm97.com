@@ -14,17 +14,17 @@ const formatDate = (date: Date) =>
   });
 
 const Published = ({ author, date }: Props) => (
-  <div className="info flex flex-row items-center space-x-2">
+  <div className="published">
     <Image
-      className="rounded-full"
+      className="avatar"
       src={author.avatarURL}
       alt={author.name}
       width={24}
       height={24}
     />
-    <p>
+    <p className="paragraph">
       <Link href={author.url}>
-        <a className="tracking-tight">{author.name}</a>
+        <a className="author-name">{author.name}</a>
       </Link>{" "}
       on {formatDate(date)}
     </p>

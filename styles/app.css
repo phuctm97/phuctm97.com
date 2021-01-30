@@ -17,6 +17,21 @@
   }
 }
 
+@layer components {
+  .published {
+    @apply flex flex-row items-center space-x-2;
+  }
+  .published .paragraph {
+    @apply my-0 font-light text-gray-600 dark:text-gray-500;
+  }
+  .published .avatar {
+    @apply rounded-full;
+  }
+  .published .author-name {
+    @apply no-underline tracking-tight;
+  }
+}
+
 @layer utilities {
   @supports (backdrop-filter: none) {
     .backdrop-blur {
