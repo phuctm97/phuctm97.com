@@ -25,12 +25,14 @@ const BlogLayout = (props: React.PropsWithChildren<BlogPost>) => {
         }}
       />
       <article className="prose prose-sm mx-auto sm:prose md:prose-md dark:prose-dark">
-        {h1}
-        <Published
-          author={{ ...ME, url: `https://twitter.com/${ME.username}` }}
-          date={date}
-        />
-        {tags && <Tags className="mt-2 sm:mt-3 mb-8 md:mb-10" tags={tags} />}
+        <hgroup className="mb-8 md:mb-10">
+          {h1}
+          <Published
+            author={{ ...ME, url: `https://twitter.com/${ME.username}` }}
+            date={date}
+          />
+          {tags && <Tags className="mt-2 sm:mt-3" tags={tags} />}
+        </hgroup>
         {contents}
       </article>
       <Subscribe className="mt-14 md:mt-16" />
