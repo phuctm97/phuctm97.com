@@ -12,7 +12,7 @@ interface Props extends React.HTMLProps<HTMLPreElement> {
   "data-icon"?: string;
 }
 
-const getLang = (className?: string) =>
+const getLangIcon = (className?: string) =>
   className?.startsWith("language-") ? className.substr(9) : "code";
 
 const CodeBlock = ({
@@ -36,7 +36,11 @@ const CodeBlock = ({
   const copyProps = { isCopied, onClickCopy };
 
   return title ? (
-    <WithTitle title={title} icon={icon || getLang(className)} {...copyProps}>
+    <WithTitle
+      title={title}
+      icon={icon || getLangIcon(className)}
+      {...copyProps}
+    >
       <pre ref={ref} className={classNames("content", className)} {...props} />
     </WithTitle>
   ) : (
