@@ -5,7 +5,7 @@ const autofill = require("tailwindcss-autofill");
 const textFill = require("tailwindcss-text-fill");
 const shadowFill = require("tailwindcss-shadow-fill");
 const lineClamp = require("@tailwindcss/line-clamp");
-const { em } = require("./styles/utils");
+const { em } = require("./styles/utilities");
 
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],

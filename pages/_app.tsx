@@ -12,7 +12,9 @@ import * as MDXComponents from "~/components/mdx";
 import PlausibleScript from "~/components/plausible-script";
 import { IS_PRODUCTION } from "~/constants/share";
 
-import "~/styles/app.css";
+import "~/styles/base.css";
+import "~/styles/components.css";
+import "~/styles/utilities.css";
 import "~/styles/prism.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (

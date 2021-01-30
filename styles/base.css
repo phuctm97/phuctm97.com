@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply antialiased bg-white dark:bg-black text-gray-700 dark:text-gray-300;
+  }
+  strong {
+    @apply font-semibold;
+  }
+  *::selection {
+    @apply bg-green-250 bg-opacity-80 text-gray-950 dark:bg-magenta dark:bg-opacity-75 dark:text-gray-50;
+  }
+}
