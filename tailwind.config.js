@@ -42,13 +42,8 @@ module.exports = {
             "pre > code": {
               color: theme("colors.gray.800"),
             },
-            ".code-title": {
+            ".code-block": {
               marginTop: em(24, 14),
-              "& > pre": {
-                marginTop: 0,
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-              },
             },
           },
         },
@@ -57,6 +52,9 @@ module.exports = {
             "h1:first-of-type": {
               fontSize: theme("fontSize.3xl"),
               lineHeight: theme("lineHeight.none"),
+            },
+            ".code-block": {
+              marginTop: em(20, 12),
             },
           },
         },

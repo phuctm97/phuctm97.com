@@ -21,4 +21,8 @@
   .tags .tag:last-child {
     @apply mr-0;
   }
+
+  .code-block > pre.content {
+    @apply mt-0 rounded-t-none;
+  }
 }
