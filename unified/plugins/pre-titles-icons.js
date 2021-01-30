@@ -1,7 +1,18 @@
 const visit = require("unist-util-visit");
 
-const getIcon = (title, icon) => {
-  if (icon) return icon;
+const langNames = {
+  js: "JavaScript",
+  ts: "TypeScript",
+  html: "HTML5",
+  jsx: "JSX",
+  tsx: "TSX",
+  md: "Markdown",
+  css: "CSS3",
+};
+
+const getTitle = (lang) => langNames[lang];
+
+const getIcon = (title) => {
   switch (title) {
     case "next.config.js":
       return "next.js";
@@ -25,8 +36,9 @@ const visitor = (node, index, parent) => {
 
     // Extra metadata from class.
     const meta = className.substr(9).split(":");
-    const [lang, title] = meta;
-    const icon = getIcon(title, meta[2]);
+    const [lang] = meta;
+    const title = meta[1] || getTitle(lang);
+    const icon = meta[2] || getIcon(title);
 
     // Mutate nodes' properties.
     classNames[i] = `language-${lang}`;
