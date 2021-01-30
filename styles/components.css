@@ -1,0 +1,28 @@
+@layer components {
+  .published {
+    @apply flex flex-row items-center space-x-2;
+  }
+  .published .avatar {
+    @apply rounded-full;
+  }
+  .published .text {
+    @apply my-0 font-light text-gray-600 dark:text-gray-500;
+  }
+  .published .author-name {
+    @apply no-underline tracking-tight;
+  }
+
+  .tags {
+    @apply flex flex-row flex-wrap text-xs sm:text-sm;
+  }
+  .tags .tag {
+    @apply font-medium px-2 py-1 rounded mt-0 mb-1 mr-1 bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-400;
+  }
+  .tags .tag:last-child {
+    @apply mr-0;
+  }
+
+  .code-block > pre.content {
+    @apply mt-0 rounded-t-none;
+  }
+}

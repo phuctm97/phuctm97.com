@@ -5,7 +5,7 @@ const autofill = require("tailwindcss-autofill");
 const textFill = require("tailwindcss-text-fill");
 const shadowFill = require("tailwindcss-shadow-fill");
 const lineClamp = require("@tailwindcss/line-clamp");
-const { em } = require("./styles/utils");
+const { em } = require("./styles/utilities");
 
 module.exports = {
   purge: ["pages/**/*.tsx", "components/**/*.tsx", "layouts/**/*.tsx"],
@@ -25,7 +25,7 @@ module.exports = {
             "blockquote p:last-of-type::after": false,
             "h1:first-of-type": {
               color: theme("colors.gray.900"),
-              fontSize: theme("fontSize.2xl"),
+              fontSize: theme("fontSize.3xl[0]"),
               fontWeight: theme("fontWeight.extrabold"),
               letterSpacing: theme("letterSpacing.tight"),
               marginBottom: theme("spacing.8"),
@@ -42,47 +42,26 @@ module.exports = {
             "pre > code": {
               color: theme("colors.gray.800"),
             },
-            ".code-title": {
+            ".code-block": {
               marginTop: em(24, 14),
-              "& > pre": {
-                marginTop: 0,
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-              },
-            },
-            ".info img, .info p": {
-              marginTop: 0,
-              marginBottom: 0,
-            },
-            ".info p": {
-              color: theme("colors.gray.600"),
-              fontWeight: theme("fontWeight.light"),
-            },
-            ".info a": {
-              textDecoration: "none",
-            },
-            ".tags p": {
-              marginTop: 0,
-              marginBottom: theme("spacing.1"),
-              marginRight: theme("spacing.1"),
-            },
-            ".tags p:last-child": {
-              marginRight: 0,
             },
           },
         },
         sm: {
           css: {
             "h1:first-of-type": {
-              fontSize: theme("fontSize.3xl"),
+              fontSize: theme("fontSize.2xl[0]"),
               lineHeight: theme("lineHeight.none"),
+            },
+            ".code-block": {
+              marginTop: em(20, 12),
             },
           },
         },
         md: {
           css: {
             "h1:first-of-type": {
-              fontSize: theme("fontSize.5xl"),
+              fontSize: theme("fontSize.5xl[0]"),
             },
           },
         },
@@ -98,12 +77,12 @@ module.exports = {
             hr: { borderColor: theme("colors.gray.700") },
             ol: {
               li: {
-                "&:before": { color: theme("colors.gray.500") },
+                "&::before": { color: theme("colors.gray.500") },
               },
             },
             ul: {
               li: {
-                "&:before": { backgroundColor: theme("colors.gray.500") },
+                "&::before": { backgroundColor: theme("colors.gray.500") },
               },
             },
             strong: { color: theme("colors.gray.300") },
@@ -122,9 +101,6 @@ module.exports = {
             },
             "pre > code": {
               color: theme("colors.gray.200"),
-            },
-            ".info p": {
-              color: theme("colors.gray.500"),
             },
           },
         },

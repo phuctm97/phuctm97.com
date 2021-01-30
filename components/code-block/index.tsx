@@ -1,16 +1,17 @@
 import { useRef, useState } from "react";
-import copy from "copy-to-clipboard";
 import WithTitle from "~/components/code-block/with-title";
 import NoTitle from "~/components/code-block/no-title";
+import copy from "copy-to-clipboard";
+import classNames from "classnames";
 import { SECONDS } from "~/constants/share";
 
-const delayCopied = 5 * SECONDS;
+const delayCopied = 4 * SECONDS;
 
 interface Props extends React.HTMLProps<HTMLPreElement> {
   "data-title"?: string;
 }
 
-const CodeBlock = ({ "data-title": title, ...props }: Props) => {
+const CodeBlock = ({ "data-title": title, className, ...props }: Props) => {
   const ref = useRef<HTMLPreElement>(null);
 
   const [isCopied, setCopied] = useState(false);
@@ -27,11 +28,11 @@ const CodeBlock = ({ "data-title": title, ...props }: Props) => {
 
   return title ? (
     <WithTitle title={title} {...copyProps}>
-      <pre ref={ref} {...props} />
+      <pre ref={ref} className={classNames("content", className)} {...props} />
     </WithTitle>
   ) : (
     <NoTitle {...copyProps}>
-      <pre ref={ref} {...props} />
+      <pre ref={ref} className={classNames("content", className)} {...props} />
     </NoTitle>
   );
 };
