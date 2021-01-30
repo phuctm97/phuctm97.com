@@ -22,7 +22,7 @@ const Published = ({ author, date }: Props) => (
       width={24}
       height={24}
     />
-    <p className="paragraph">
+    <p className="text">
       <Link href={author.url}>
         <a className="author-name">{author.name}</a>
       </Link>{" "}

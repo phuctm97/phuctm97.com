@@ -30,7 +30,7 @@ const BlogLayout = (props: React.PropsWithChildren<BlogPost>) => {
           author={{ ...ME, url: `https://twitter.com/${ME.username}` }}
           date={date}
         />
-        {tags && <Tags tags={tags} />}
+        {tags && <Tags className="mt-2 sm:mt-3 mb-6 sm:mb-8" tags={tags} />}
         {contents}
       </article>
       <Subscribe className="mt-14 md:mt-16" />
