@@ -12,8 +12,8 @@ interface Props extends React.HTMLProps<HTMLPreElement> {
 
 const CodeBlock = ({ "data-title": title, ...props }: Props) => {
   const ref = useRef<HTMLPreElement>(null);
-  const [isCopied, setCopied] = useState(false);
 
+  const [isCopied, setCopied] = useState(false);
   const onClickCopy = () => {
     if (isCopied) return;
 
@@ -23,16 +23,16 @@ const CodeBlock = ({ "data-title": title, ...props }: Props) => {
     setCopied(true);
     setTimeout(() => setCopied(false), delayCopied);
   };
+  const copyProps = { isCopied, onClickCopy };
 
-  const Container = title ? WithTitle : NoTitle;
-  return (
-    <Container
-      title={title || ""}
-      isCopied={isCopied}
-      onClickCopy={onClickCopy}
-    >
+  return title ? (
+    <WithTitle title={title} {...copyProps}>
       <pre ref={ref} {...props} />
-    </Container>
+    </WithTitle>
+  ) : (
+    <NoTitle {...copyProps}>
+      <pre ref={ref} {...props} />
+    </NoTitle>
   );
 };
 
