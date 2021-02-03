@@ -16,5 +16,5 @@
     "yarn.lock": true,
     ".next/": true
   },
-  "cSpell.words": ["linkedin"]
+  "cSpell.words": ["vercel", "linkedin", "vfile"]
 }
