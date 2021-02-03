@@ -11,7 +11,7 @@ type Props = {
 };
 
 const title = "Blog";
-const description = `Personal documentary: 100% authentic, good for inspiration, not evergreen.`;
+const description = `Personal documentary: 100% authentic, good for inspiration.`;
 
 const BlogPage = ({ blog }: Props) => (
   <>

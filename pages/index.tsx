@@ -22,8 +22,9 @@ const IndexPage = ({ blog }: Props) => (
         <Emoji label="waving hand">👋🏻</Emoji>
       </Headings.H2>
       <Headings.H3>
-        On this site, I document everything I learned and created. You may
-        expect to see <strong>3 articles per week</strong>.
+        On this site, I document everything I learned and created. I release{" "}
+        <strong>new article every Wednesday</strong> and occasionally other
+        days.
       </Headings.H3>
     </Headings>
     <Subscribe className="mt-8" />
@@ -32,8 +33,7 @@ const IndexPage = ({ blog }: Props) => (
         Blog
       </h2>
       <h3 className="mt-2 md:mt-3 text-sm sm:text-base">
-        Personal documentary: 100% authentic, good for inspiration, not
-        evergreen.
+        Personal documentary: 100% authentic, good for inspiration.
       </h3>
       {blog.map(({ title, description, path }) => (
         <article key={path} className="mt-8">
