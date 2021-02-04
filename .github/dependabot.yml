@@ -5,7 +5,11 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    commit-message:
+      prefix: "🔼"
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    commit-message:
+      prefix: "🔼"
