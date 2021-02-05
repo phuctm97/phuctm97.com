@@ -6,10 +6,10 @@ updates:
     schedule:
       interval: weekly
     commit-message:
-      prefix: "🔼"
+      prefix: 🔼
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
     commit-message:
-      prefix: "🔼"
+      prefix: 🔼
