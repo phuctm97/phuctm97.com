@@ -53,7 +53,7 @@
     "flatten-tailwindcss-theme": "^0.1.1",
     "glob": "^7.1.6",
     "lodash": "^4.17.20",
-    "mdast-util-to-markdown": "^0.6.2",
+    "mdast-util-to-markdown": "^0.6.5",
     "mdast-util-to-string": "^2.0.0",
     "next": "^10.0.6",
     "next-seo": "^4.19.0",
