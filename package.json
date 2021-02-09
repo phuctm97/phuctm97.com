@@ -63,7 +63,7 @@
     "preact": "^10.5.12",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0",
+    "react-icons": "^4.2.0",
     "rehype-accessible-emojis": "^0.3.2",
     "remark-frontmatter": "^2.0.0",
     "remark-parse": "^8.0.3",
