@@ -2854,10 +2854,10 @@ simple-get@^4.0.0:
     once "^1.3.1"
     simple-concat "^1.0.0"
 
-simple-icons@^4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-4.10.0.tgz#673b70f50a2720dad8a76ac1aecf80ddf9531408"
-  integrity sha512-RCM8gASHSdmVxjgPuxMzyHBer7qIB3KSf35S4IxB/FHevYHlwxL1iU/JYkVT2zQ3BVe9thvch77P3j54HxFBYA==
+simple-icons@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-4.11.0.tgz#1f7fe8dfa337bc34b3c25de44fe0234a53dc9253"
+  integrity sha512-nZbwEnaop+/z5kkMLvmpKPfJTblZNSb1nuP5bv9GX0g1M+C0yDWLRI5XfIP/VE159GsTmxcinCsvSD3EZT1DBA==
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
