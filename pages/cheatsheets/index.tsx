@@ -28,7 +28,9 @@ const CheatsheetsPage = () => (
     <SEO title={title} description={description} />
     <Headings>
       <Headings.H1>{title}</Headings.H1>
-      <Headings.H2>{description}</Headings.H2>
+      <Headings.H2>
+        {description} <em>(working in progress)</em>
+      </Headings.H2>
     </Headings>
     <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
       {items.map(({ slug, ...item }) => (

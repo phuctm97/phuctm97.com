@@ -55,8 +55,8 @@ const Subscribe = ({
         Subscribe to the newsletter <FiMail className="ml-1.5" size="1.2em" />
       </h4>
       <p className="mt-2 text-sm sm:text-base text-gray-800 dark:text-gray-200">
-        Every Sunday, I write an email summarizing lessons I've learned that
-        week and practical advices for you.
+        Get emails from me about software development, SaaS, and early access to
+        new articles.
       </p>
       {result && result.isSuccess ? (
         <p className="font-medium mt-5 mb-2 text-sm sm:text-base text-green-700 dark:text-green-300">
