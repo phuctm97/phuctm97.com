@@ -18,13 +18,16 @@ const IndexPage = ({ blog }: Props) => (
     <Headings>
       <Headings.H1 isTighter>Hey, I’m {ME.name}</Headings.H1>
       <Headings.H2>
-        I'm a software engineer. Welcome to my digital garden{" "}
-        <Emoji label="waving hand">👋🏻</Emoji>
+        I'm a software engineer. I love building SaaS for makers and developers{" "}
+        <Emoji label="heart">💚</Emoji>.{" "}
+        <a className="underline" href="https://twitter.com/phuctm97">
+          I share my journey daily on Twitter
+        </a>
+        .
       </Headings.H2>
       <Headings.H3>
-        On this site, I document everything I learned and created. I release{" "}
-        <strong>new article every Wednesday</strong> and occasionally other
-        days.
+        On this site, I occasionally write programming tutorials and lessons I
+        learned from bootstrapping SaaS.
       </Headings.H3>
     </Headings>
     <Subscribe className="mt-8" />
