@@ -48,8 +48,8 @@ const Footer = () => (
         Welcome to my digital garden <Emoji label="waving hand">👋🏻</Emoji>
       </p>
       <p className="mt-1">
-        I'm Phuc, a software engineer. On this site, I write new article every
-        Wednesday and occasionally other days.
+        I'm Phuc, a software engineer. On this site, I occasionally write
+        programming tutorials and lessons I learned from bootstrapping SaaS.
       </p>
       <nav className="mt-6">
         <p className="font-semibold text-gray-800 dark:text-gray-100">
