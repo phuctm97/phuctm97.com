@@ -92,6 +92,6 @@
     "@types/revalidator": "^0.3.7",
     "@types/unist": "^2.0.3",
     "prettier": "^2.2.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.2.3"
   }
 }
