@@ -1852,10 +1852,10 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
-matcher@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/matcher/-/matcher-3.0.0.tgz#bd9060f4c5b70aa8041ccc6f80368760994f30ca"
-  integrity sha512-OkeDaAZ/bQCxeFAozM55PKcKU0yJMPGifLwV4Qgjitu+5MoAfSQN4lsLJeXZ1b8w0x+/Emda6MZgXS1jvsapng==
+matcher@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/matcher/-/matcher-4.0.0.tgz#a42a05a09aaed92e2d241eb91fddac689461ea51"
+  integrity sha512-S6x5wmcDmsDRRU/c2dkccDwQPXoFczc5+HpQ2lON8pnvHlnvHAHj5WlLVvw6n6vNyHuVugYrFohYxbS+pvFpKQ==
   dependencies:
     escape-string-regexp "^4.0.0"
 
@@ -2000,13 +2000,13 @@ next-seo@^4.20.0:
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-4.20.0.tgz#54b629abf93c7c051919802db011882f67004249"
   integrity sha512-N3NIISxOV+6XatPdZWRt8L/PkdxX4qpl6s2uQVMYTkteo8hgpHDgs6XZkDzuHaPi10neSZoqQiytsxohTCyEvw==
 
-next-sitemap@^1.5.6:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-1.5.6.tgz#0e269b630122b052e631a0b7df7b550a380170f7"
-  integrity sha512-BU96b0ZbztC+IAEGTMDJkwOaH7oMF5Mtx/XA/MeUfdZawVQgTMku6Fj+stdBVrexEoJrzX18ne6prhpRqaQ9aQ==
+next-sitemap@^1.5.16:
+  version "1.5.16"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-1.5.16.tgz#d0db72307468d3739dbfee7e874a141a52807e1d"
+  integrity sha512-MQ527OpEV5Jg7dH8gdyYJd4JN/VajeMzjmbOFis6UX7EIuJ067JgIrGoo/pwNlKTIsQ76eekPxaO9ThBIa1llA==
   dependencies:
     "@corex/deepmerge" "^2.5.3"
-    matcher "^3.0.0"
+    matcher "^4.0.0"
     minimist "^1.2.5"
 
 next-themes@^0.0.10:
