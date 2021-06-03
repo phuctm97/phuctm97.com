@@ -78,7 +78,7 @@
     "to-vfile": "^6.1.0",
     "unified": "^9.2.1",
     "unist-util-is": "^4.0.4",
-    "unist-util-select": "^3.0.4",
+    "unist-util-select": "^4.0.0",
     "unist-util-visit": "^2.0.3",
     "vfile": "^4.2.1"
   },
