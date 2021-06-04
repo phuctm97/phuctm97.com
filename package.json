@@ -80,7 +80,7 @@
     "unist-util-is": "^4.0.4",
     "unist-util-select": "^3.0.4",
     "unist-util-visit": "^2.0.3",
-    "vfile": "^4.2.1"
+    "vfile": "^5.0.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
