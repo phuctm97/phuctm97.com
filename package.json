@@ -79,7 +79,7 @@
     "unified": "^9.2.1",
     "unist-util-is": "^4.0.4",
     "unist-util-select": "^3.0.4",
-    "unist-util-visit": "^2.0.3",
+    "unist-util-visit": "^3.1.0",
     "vfile": "^4.2.1"
   },
   "devDependencies": {
