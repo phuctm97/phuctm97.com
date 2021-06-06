@@ -57,7 +57,7 @@
     "mdast-util-to-string": "^2.0.0",
     "next": "^10.0.7",
     "next-seo": "^4.24.0",
-    "next-sitemap": "^1.6.95",
+    "next-sitemap": "^1.6.102",
     "next-themes": "^0.0.14",
     "postcss": "^8.3.0",
     "preact": "^10.5.13",
@@ -91,7 +91,7 @@
     "@types/react-dom": "^17.0.6",
     "@types/revalidator": "^0.3.7",
     "@types/unist": "^2.0.3",
-    "prettier": "^2.3.0",
+    "prettier": "^2.3.1",
     "typescript": "^4.3.2"
   }
 }
