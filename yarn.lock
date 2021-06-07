@@ -2786,10 +2786,10 @@ remark-mdx@1.6.22:
     remark-parse "8.0.3"
     unified "9.2.0"
 
-remark-parse-frontmatter@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/remark-parse-frontmatter/-/remark-parse-frontmatter-1.0.2.tgz#f62e33ea77ef83495f30bd89f306324affb9900d"
-  integrity sha512-qvGOyGOM536ynaIjwFkIOj6zKVzKMEGuOu+86NOc27qYAalRWpv0Df4aaZx8+wkC1wgA1aWyyONb4+EdT1Jfbw==
+remark-parse-frontmatter@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-parse-frontmatter/-/remark-parse-frontmatter-1.0.3.tgz#121f0b1b3bfc644fb7b58916ef803d794e083381"
+  integrity sha512-2hqW4Nod8pEkP4kdui7jOvCwcTfYBfgAb3XJhYYTZGrTMBcxFzQ7h7ay6OwmpJME5BOhORpZ7eY5+K4OHHIh4Q==
   dependencies:
     revalidator "^0.3.1"
     unist-util-find "^1.0.2"
