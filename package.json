@@ -42,7 +42,7 @@
     "node": "12.x"
   },
   "dependencies": {
-    "@mapbox/rehype-prism": "^0.6.0",
+    "@mapbox/rehype-prism": "^0.7.0",
     "@mdx-js/loader": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@tailwindcss/line-clamp": "^0.2.1",
@@ -91,7 +91,7 @@
     "@types/react-dom": "^17.0.6",
     "@types/revalidator": "^0.3.7",
     "@types/unist": "^2.0.3",
-    "prettier": "^2.3.1",
+    "prettier": "^2.3.2",
     "typescript": "^4.3.2"
   }
 }
