@@ -57,7 +57,7 @@
     "mdast-util-to-string": "^2.0.0",
     "next": "^10.2.3",
     "next-seo": "^4.26.0",
-    "next-sitemap": "^1.6.102",
+    "next-sitemap": "^1.6.140",
     "next-themes": "^0.0.15",
     "postcss": "^8.3.5",
     "preact": "^10.5.14",
