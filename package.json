@@ -67,7 +67,7 @@
     "rehype-accessible-emojis": "^0.3.2",
     "remark-frontmatter": "^2.0.0",
     "remark-parse": "^8.0.3",
-    "remark-parse-frontmatter": "^1.0.2",
+    "remark-parse-frontmatter": "^1.0.3",
     "remark-unwrap-texts": "^1.0.3",
     "revalidator": "^0.3.1",
     "simple-icons": "^4.25.0",
