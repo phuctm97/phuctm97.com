@@ -3007,10 +3007,10 @@ shell-quote@1.7.2:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
-simple-icons@^4.25.0:
-  version "4.25.0"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-4.25.0.tgz#9420fc556f21bd4793718b211ac6d2b1f1069cca"
-  integrity sha512-bnQccBJXKaWECSFKV4jdSDOvJb0om1yNqHf+lSXiE+hTk/R3L1Mz+EfQRgkmVjED2dSZhbZWxGzdC8+cQzSoaA==
+simple-icons@^5.8.1:
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-5.8.1.tgz#9a841df98a79ab71e8ae3c974ae4dfd06181c66a"
+  integrity sha512-ZPnijbV6Ksygkx3NffNuBDR274MExsiXvbKs5OpOBKLHWa2PBpnQ1dO7Znb1MJY7ZvHTA9cVofYNZUqIw/rrxA==
 
 simple-swizzle@^0.2.2:
   version "0.2.2"
