@@ -70,7 +70,7 @@
     "remark-parse-frontmatter": "^1.0.2",
     "remark-unwrap-texts": "^1.0.3",
     "revalidator": "^0.3.1",
-    "simple-icons": "^4.25.0",
+    "simple-icons": "^7.6.0",
     "tailwindcss": "^2.2.4",
     "tailwindcss-autofill": "^0.1.0",
     "tailwindcss-shadow-fill": "^0.1.0",
