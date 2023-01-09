@@ -38,7 +38,7 @@ jobs:
         id: get-yarn-cache-dir
         run: echo "::set-output name=path::$(yarn cache dir)"
       - name: Cache Yarn dependencies
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.2.3
         with:
           path: ${{ steps.get-yarn-cache-dir.outputs.path }}
           key: "${{ runner.os }}-node-${{ env.NODE_VERSION }}-yarn-\
